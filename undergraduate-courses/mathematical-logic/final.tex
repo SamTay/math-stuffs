@@ -1,0 +1,171 @@
+\documentclass[11pt]{hmcpset}
+
+\newenvironment{problem2}[1]{\noindent {\bf (#1}}
+{\medskip}
+
+\newenvironment{problem1}[1]{\noindent {\bf Problem #1}}
+{\medskip}
+
+\newenvironment{theorem}[1]{\noindent {\bf Theorem #1:}}
+{\medskip}
+
+\newenvironment{claim}{\noindent {\bf Claim:}}
+{\medskip}
+
+\newenvironment{lemma}[1]{\noindent {\bf Lemma #1:}}
+{\medskip}
+
+\newenvironment{definition}[1]{\noindent {\bf Definition #1:}}
+{\medskip}
+
+\newenvironment{proof}{\noindent {\bf Proof:} \\}{\hfill
+\rule{1mm}{3mm} \bigskip}
+
+\newenvironment{proofi}{\noindent {\bf Informal Proof:} \\}{\hfill
+\rule{1mm}{3mm} \bigskip}
+
+%\newenvironment{solution}{\noindent {\bf Solution:} \\}{\hfill
+%\rule{1mm}{3mm} \bigskip}
+
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\name{Sam Tay}
+\class{Professor Milnikel}
+\assignment{Final Take-Home}
+\duedate{05/10/2011}
+
+
+\begin{document}
+
+
+\begin{problem1}{1} Let $\mathcal{L}_{NT}=\{0,S,+,\cdot,<\}$, and let $A=\mathbb{N}\cup\{a,b\}$ for some objects $a$ and $b$. Let $\mathfrak{A}$ be a structure with universe $A$ with the following interpretations of the symbols of  $\mathcal{L}_{NT}$:
+$$0^\mathfrak{A}=0\in\mathbb{N}$$ $$S^\mathfrak{A}x=\begin{cases}x+1 & \text{if $x\in\mathbb{N}$}\\x & \text{if $x$ is $a$ or $b$}\end{cases}$$ $$x+^\mathfrak{A}y=\begin{cases}x+y & \text{if $x,y\in\mathbb{N}$}\\x & \text{if $x$ is $a$ or $b$}\\y & \text{if $x\in\mathbb{N}$ and $y$ is $a$ or $b$}\end{cases}$$ $$x\cdot^\mathfrak{A}y=\begin{cases}x\cdot y &\text{if $x,y\in\mathbb{N}$, or if $y=0$}\\x & \text{if $x$ is $a$ or $b$ and $y\ne 0$}\\y & \text{if $x\in\mathbb{N}, x\ne 0$ and $y$ is $a$ or $b$}\end{cases}$$ $$<^\mathfrak{A}\text{ is defined by }\begin{cases}x<y & \text{if $x,y\in\mathbb{N}$}\\n<^\mathfrak{A}a, n<^\mathfrak{A}b & \text{if $n\in\mathbb{N}$}\\a<^\mathfrak{A}b, a<^\mathfrak{A}a, b<^\mathfrak{A}b\end{cases}.$$
+
+Note that any function or relation above without a specifying structural exponent is implied to be the interpretation of standard structure $\mathfrak{N}$. We see from the definition of $x^\mathfrak{A}$ that + is not commutative in this structure, since $a+^\mathfrak{A}b=a$ yet $b+^\mathfrak{A}a=b$. Since $\mathfrak{A}\vDash N$, we have shown that $N$ does not prove commutativity, otherwise Soundness would cause a contradiction. We will show that $\mathfrak{A}\vDash\{N2, N6\}$.
+
+Axiom $N2$ asserts that for all $x,y$, if $Sx=Sy$, then $x=y$. This holds for all natural numbers $x,y$, since we have defined $S^\mathfrak{A}$ to be the standard interpretation for natural numbers. We also know that since $S^\mathfrak{A}a=a$ and $S^\mathfrak{A}b=b$, there is no way for $Sx=Sn$ or $Sn=Sy$ when $x,y$ is $a$ or $b$ and $n\in\mathbb{N}$, so this axiom is vacuously true in this case. This also implies that $Sx=Sy$ will never be true when $x$ is $a$ and $y$ is $b$ or vice versa, since $a\ne b$. And clearly this is true when $x,y$ are both $a$ or $x,y$ are both $b$. This accounts for all cases, so $\mathfrak{A}\vDash N2$. 
+
+Axiom $N6$ asserts that for all $x,y$, $x\cdot Sy=(x\cdot y)+x$. There are a few cases to consider. If $x,y\in\mathbb{N}$, this is true since we've defined $\cdot^\mathfrak{A}$ and $S^\mathfrak{A}$ to be standard interpretations when dealing with natural numbers. If $x$ is $a$ or $b$ and $y\in\mathbb{N}$, then $S^\mathfrak{A}y\in\mathbb{N}\setminus \{0\}$, so by definition of $\cdot^\mathfrak{A}$, $x\cdot Sy=x$. On the right hand side, we have two subcases: $y=0$ or $y\ne 0$. If $y=0$, then $x\cdot y=0$ such that $(x\cdot y)+x =x$, which matches the left side of the equation. If $y\ne 0$, $x\cdot y=x$, and by definition of +, $(x\cdot y)+x=x+x=x$. Thus in either subcase the formula holds. Suppose $x\in\mathbb{N}$ and $y$ is $a$ or $b$. Then $Sy$ is $a$ or $b$ and again we have two subcases $x=0$ or $x\ne 0$. If $x=0$, then $x\cdot Sy=0$, and on the right hand side, $(x\cdot y)+x=0$. If $x\ne 0$, then $x\cdot Sy$ is $y$. On the right hand side, $(x\cdot y)+x=y+x=y$. We have four more cases.
+
+If $x=a$ and $y=a$, then $x\cdot Sy=a\cdot a=a$, and $(x\cdot y) +x=a+a=a$. If $x=a$ and $y=b$, then $(x\cdot Sy)=a\cdot b=a$ and $(x\cdot y) + x=(a\cdot b) +a=a+a=a$. If $x=b$ and $y=a$, then $(x\cdot Sy)=b\cdot a=b$ and $(x\cdot y) + x=b+b=b$. Finally, if $x=b$ and $y=b$, we have $(x\cdot Sy)=b\cdot b=b$ and $(x\cdot y)+x=(b\cdot b)+b=b+b=b$. Thus our structure satisfies $N6$ as well. We believe it satisfies the rest of them as well, but fortunately we are not required to prove this.
+\end{problem1}
+
+\begin{problem1}{2(a)} Let $\sigma_3$ be the sentence $$\exists v_1\exists v_2\exists v_3 (v_1\ne v_2 \land v_1\ne v_3 \land v_2\ne v_3).$$ Then $\sigma_3$ asserts the existence of three distinct elements.
+\end{problem1}
+
+\begin{problem2}{b)} We extend the sentence from part (a) to $\sigma_n$ defined to be $$\exists v_1 \exists v_2\cdots\exists v_n(v_1\ne v_2 \land\cdots\land v_1\ne v_n\land v_2\ne v_3\land\cdots\land v_2\ne v_n\land\cdots\land v_{n-1}\ne v_n).$$ Now let $\Sigma=\bigcup_{n\in\mathbb{N}}\sigma_n$. The collection of sentences $\Sigma$ asserts the existence of infinitely many distinct elements.
+\end{problem2}
+
+\begin{problem2}{c)} If $\Gamma$ is a set of sentences in any language with arbitrarily large finite models, then $\Gamma$ must have an infinite model as well.\\
+\begin{proof}\indent Suppose $\Gamma$ is a set of sentences with arbitrarily large finite models. Consider the set of sentences $\Gamma\cup\Sigma$, where $\Sigma$ is defined as in part (b). If a structure $\mathfrak{M}$ satisfies $\Gamma\cup\Sigma$, then $\mathfrak{M}$ satisfies $\Sigma$, so by part (b) we know that $|\mathfrak{M}|$ is infinite. Then $\mathfrak{M}$ will be an infinite model for $\Gamma$. We will show by applying the Compactness Theorem that there is such a model.
+
+Consider any finite subset $\Theta_0$ of $\Gamma\cup\Sigma$. There will be finitely many sentences from $\Gamma$ and finitely many sentences from $\Sigma$, such that $\Theta_0$ is a subset of $\Gamma \cup \bigcup_{i=1}^n\{\sigma_i\}$ for some $n\in\mathbb{N}$. Since $\bigcup_{i=1}^n\{\sigma_i\}$ only asserts that there exist $n$ distinct elements, and $\Gamma$ has arbitrarily large finite models, we know that there exists a model with at least $n$ elements in its universe satisfying the set $\Gamma \cup \bigcup_{i=1}^n\{\sigma_i\}$. Since $\Theta_0$ is contained in this set, this model must also satisfy $\Theta_0$. Thus all finite subsets of $\Gamma\cup\Sigma$ are satisfiable and by the Compactness Theorem, $\Gamma\cup\Sigma$ is satisfiable. This means there must exists some structure $\mathfrak{M}$ such that $\mathfrak{M}\vDash\Gamma\cup\Sigma$, and as stated earlier, this implies that $\mathfrak{M}\vDash\Gamma$ and $|\mathfrak{M}|$ is infinite. Thus any set of sentences with arbitrarily large finite models must have an infinite model.
+\end{proof}
+\end{problem2}
+
+\begin{problem2}{d)} There is no finite set of sentences $\Phi=\{\varphi_1,\varphi_2,\ldots,\varphi_n\}$ such that $\mathfrak{A}\vDash\Phi$ if and only if $|\mathfrak{A}|$ is infinite.\\
+\begin{proof}\indent Suppose for contradiction that there does exist a finite set of sentences $\Phi=\{\varphi_1,\varphi_2,\ldots,\varphi_n\}$ such that $\mathfrak{A}\vDash\Phi$ if and only if $|\mathfrak{A}|$ is infinite. Then $\varphi_1\land \varphi_2\land\ldots\land\varphi_n$ asserts that the universe contains infinitely many elements, so the negation $\neg(\varphi_1\land\varphi_2\land\ldots\land\varphi_n)$ will assert that the universe contains finitely many elements. One might consider the case in which only the sentences $\{\varphi_1,\varphi_2,\ldots,\varphi_{n-1}\}$ are needed to assert the existence of infinitely many elements, in which case the negated sentence we just constructed would either assert that there are finitely many elements, or $\neg\varphi_n$. If $\varphi_n$ were a tautology, then $\neg\varphi_n$ would never be satisfied, so the sentence we constructed would still assert that there are finitely many elements. If $\varphi_n$ were not a tautology, there would exist some structures that satisfy it and some that did not, regardless of whether the structure is infinite or not; this would contradict the assumption that $\mathfrak{A}\vDash\Phi$ if and only if $|\mathfrak{A}|$ is infinite, since there can be infinite structures in which $\varphi_n$ is false. Therefore the sentence $\neg(\varphi_1\land\varphi_2\land\ldots\land\varphi_n)$ does indeed assert that there are only finitely many elements in the universe. Furthermore, this sentence has arbitrarily large finite models; if there were some limit $n$ on the number of elements in the model, then $\Phi$ would only be insisting that there exist at least $n$ elements. Therefore by part (c), $\neg(\varphi_1\land\varphi_2\land\ldots\land\varphi_n)$ has an infinite model, and this model clearly does not satisfy $\Phi$. We conclude by contradiction that there is no finite set of sentences $\Phi$ such that $\mathfrak{A}\vDash\Phi$ if and only if $|\mathfrak{A}|$ is infinite.
+\end{proof}
+\end{problem2}
+
+\begin{problem1}{3(a)} If $\alpha$ is a formula in which variable $y$ is substitutable for variable $x$ and in which $y$ does not occur free, then $(\alpha_y^x)_x^y$ is simply $\alpha$.\\
+\begin{proofi}\indent Let $\alpha$ be a formula satisfying the conditions above. Then $\alpha$ can contain any number (possibly zero) of $\forall x$'s and $\forall y$'s. First, the formula $\alpha_y^x$ just replaces the free occurrences of $x$ with $y$. Note that since $y$ is substitutable for $x$ in $\alpha$, by Definition 7.1.4, $x$ cannot be free within the scope of a $\forall y$. So the $y$'s going in for the free $x$'s are also free themselves in $\alpha_y^x$. Recall that since $y$ was not free in $\alpha$, the only free occurrences of $y$ in $\alpha_y^x$ will be the ones that just replaced the free occurrences of $x$. Then $(\alpha_y^x)_x^y$ will just replace the free occurrences of $y$ back with $x$, and as we've just said, the free occurrences of $y$ in $\alpha_y^x$ are exactly where the free occurrences of $x$ are in $\alpha$. Thus, $(\alpha_y^x)_x^y$ is just $\alpha$.
+\end{proofi}
+\end{problem1}
+
+\begin{problem2}{b)} If $\varphi$ is any formula in which variable $y$ does not occur free and in which $y$ is substitutable for variable $x$, $$\vdash x=y\to(\varphi\to\varphi_y^x).$$
+\begin{proof}\indent We proceed by induction on the depth of $\varphi$. In the base case when $\varphi$ is atomic, $\vdash x=y\to(\varphi\to\varphi_y^x)$ because it is an instance of Bialniuk's Axiom 8, as $\varphi$ is atomic and $\varphi_y^x$ is $\varphi$ with $x$'s typographically replaced by $y$'s.
+
+Assume for induction that for any formula $\alpha$ such that $depth(\alpha)<n$, for any variables $x,y$, if $y$ is substitutable for $x$ in $\alpha$ and $y$ does not occur free in $\alpha$, then $\vdash x=y\to(\alpha\to\alpha_y^x)$. Let $\varphi$ have depth $n$ such that variable $y$ is substitutable for variable $x$ in $\varphi$ and $y$ does not occur free in $\varphi$.
+
+Suppose $\varphi$ is $\neg\alpha$. Then we need to show $\vdash x=y\to(\neg\alpha\to(\neg\alpha)_y^x)$. By Definition 7.2.2, $(\neg\alpha)_y^x$ is just $(\neg\alpha_y^x)$. Also, since $y$ is substitutable for $x$ and does not occur free in $\neg\alpha$, the same is true for $\alpha$, and as mentioned in part (a), this implies that $x$ is substitutable for $y$ and does not occur free in $\alpha_y^x$. Also note that $depth(\alpha_y^x)<n$ and consider the deduction below.\\\\
+\begin{tabular}{rll}
+1. & $y=x\to(\alpha_y^x\to(\alpha_y^x)_x^y)$ & Induction Hypothesis\\
+2. & $x=y\to y=x$  & Problem 7.5.4\\
+3. & $x=y\to(\alpha_y^x\to(\alpha_y^x)_x^y)$   &  Example 3.2, 1,2\\
+4. & $x=y\to(\alpha_y^x\to\alpha)$  &  Part (a)\\
+5. & $(\alpha_y^x\to\alpha)\to(\neg\alpha\to\neg\alpha_y^x)$   &    Problem 3.9.4\\
+6. & $x=y\to(\neg\alpha\to\neg\alpha_y^x)$   &   Example 3.2, 4,5\end{tabular}\\\\
+Therefore $\vdash x=y\to(\varphi\to\varphi_y^x)$.
+
+Suppose $\varphi$ is $\alpha\land\beta.$ Since $y$ is substitutable for $x$ and does not occur free in $\varphi$, the same must be true for $\alpha$ and $\beta$. Also, it must be the case that $depth(\alpha),depth(\beta)<n$. Consider the deduction below.\\\\
+\begin{tabular}{rll}
+1. & $y=x\to(\alpha\to\alpha_y^x)$ & Induction Hypothesis\\
+2. & $y=x\to(\beta\to\beta_y^x)$ & Induction Hypothesis\\
+3. & $x=y\to(\alpha\land\beta\to\alpha_y^x\land\beta_y^x)$   &  PC 1,2\\
+4. & $x=y\to(\alpha\land\beta\to(\alpha\land\beta)_y^x)$   &  Definition 7.2\end{tabular}\\\\
+Therefore $\vdash x=y\to(\varphi\to\varphi_y^x)$.
+
+Suppose $\varphi$ is $\forall z\alpha$. There are three cases: $z=x, z=y$, and $(z\ne x, z\ne y).$ So let's first suppose $z=x$. Then $(\forall z\alpha)_y^x$ is just $\forall z\alpha$ by Definition 7.2.4a, so $\forall z\alpha\to(\forall z\alpha)_y^x$ is a tautology and thus follows by Propositional Consequence. Clearly then, either by Propositional Consequence or Bialniuk's Axiom 1, we can deduce $x=y\to(\forall z\alpha\to(\forall z\alpha)_y^x)$. Next suppose $z=y$. Since $y$ is substitutable for $x$ in $\varphi$, and in this case $\varphi$ is $\forall y\alpha$, by Definition 7.1.4 it must be the case that $x$ does not occur free in $\varphi$. Then $(\forall y\alpha)_y^x$ is just $\forall y\alpha$, so again by Propositional Consequence, and the fact that $z=y$, we can deduce $x=y\to(\forall z\alpha\to(\forall z\alpha)_y^x)$. Finally suppose $z\ne x$ and $z\ne y$. Then by Definition 7.2.4b, $\varphi_y^x$ is $\forall z\alpha_y^x$. Since $y$ is substitutable for $x$ and does not occur free in $\forall z\alpha$, the same is true for $\alpha$. Since $depth(\alpha)<n$, by the induction hypothesis we have $\vdash x=y\to(\alpha\to\alpha_y^x)$, and by the Deduction Theorem, $\{x=y\}\vdash\alpha\to\alpha_y^x$. Then by the Generalization Theorem, since $z$ does not occur in $x=y$, $\{x=y\}\vdash\forall z (\alpha\to\alpha_y^x).$ With an application of Bialniuk's Axiom 5, we then know that $\{x=y\}\vdash(\forall z\alpha\to\forall z\alpha_y^x)$, and we've already stated above that in this case $\varphi_y^x$ is $\forall z\alpha_y^x$. Therefore, again by the Deduction Theorem, $ \vdash x=y\to(\varphi\to\varphi_y^x)$.
+
+Therefore by induction on the depth of $\varphi$, if $\varphi$ is a formula in which $y$ is substitutable for $x$ and in which $y$ does not occur free, then $ \vdash x=y\to(\varphi\to\varphi_y^x)$.
+\end{proof}
+\end{problem2}
+
+\begin{problem2}{c)} $\{\forall y\forall z(y=z\to(\psi(y)\to\psi(z))), \psi(\overline{a})\}\vdash\forall z(z=\overline{a}\to\psi(z)).$\\
+\begin{proof}\indent Since $z$ does not occur free in $\{\forall y\forall z(y=z\to(\psi(y)\to\psi(z))), \psi(\overline{a})\}$, by the Generalization Theorem it is sufficient to prove $\{\forall y\forall z(y=z\to(\psi(y)\to\psi(z))), \psi(\overline{a})\}\vdash(z=\overline{a}\to\psi(z)).$ Consider the (informal) deduction below.\\\\
+\begin{tabular}{rll}
+1. & $\psi(\overline{a})$ & Premiss\\
+2. & $\forall y\forall z(y=z\to(\psi(y)\to\psi(z)))$ & Premiss\\
+3. & $\overline{a}=z\to(\psi(\overline{a})\to\psi(z))$   &  L4, 2\\
+4. & $\overline{a}=z\to\psi(z)$   &  PC 1, 3\\
+5. & $z=\overline{a}\to\psi(z)$ & Problem 7.5.4, 4\end{tabular}\\\\
+Now by the Generalization Theorem, we have $\{\forall y\forall z(y=z\to(\psi(y)\to\psi(z))), \psi(\overline{a})\}\vdash\forall z(z=\overline{a}\to\psi(z)).$ However, we see that $\psi(y)\to\psi(z)$ is a replacement of the free variable $y$ with $z$, and if we make sure that the conditions in part (b) are met, we have already shown that $\vdash y=z\to(\psi(y)\to\psi(z))$, so by applying the Generalization Theorem we have $\vdash \forall y\forall z(y=z\to(\psi(y)\to\psi(z)))$. Therefore $\{\psi(\overline{a})\}\vdash\forall z(z=\overline{a}\to\psi(z)).$
+\end{proof}
+\end{problem2}
+
+\begin{problem1}{4} A set of formulas $A$ in $\mathcal{L}_{NT}$ is said to be $\omega$-inconsistent if there is a formula $\varphi(x)$ such that $A\vdash \exists x\varphi(x)$ but for each natural number $n$, $A\vdash\neg\varphi(\overline{n})$. Otherwise, $A$ is $\omega$-consistent.
+\end{problem1}
+
+\begin{problem2}{a)} If $A$ is $\omega$-consistent, then $A$ is consistent.\\
+\begin{proof}\indent Suppose $A$ is inconsistent. Then $A$ proves anything, so $A\vdash\exists x\varphi(x)$ and $A\vdash\neg\varphi(\overline{n})$ for all $n\in\mathbb{N}$ and for any formula $\varphi(x)$. Then by definition, $A$ is $\omega$-inconsistent.
+\end{proof}
+\end{problem2}
+
+\begin{problem2}{b)} Recall from Problem 1 the structure $\mathfrak{A}$. We know that the theory of any structure is consistent, so $Th(\mathfrak{A})$ is consistent. However, consider the formula $\exists x x<x$. Since $a<^\mathfrak{A}a$, $\mathfrak{A}\vDash\exists xx<x$ so $Th(\mathfrak{A})\vdash\exists xx<x$. However, we also defined $<^\mathfrak{A}$ to have the standard interpretation when dealing with natural numbers, and since this is obviously not the case for any natural number, $Th(\mathfrak{A})\vdash\neg\overline{n}<\overline{n}$ for all natural numbers $n$. Therefore $Th(\mathfrak{A})$ is consistent but not $\omega$-consistent.
+\end{problem2}
+
+\begin{problem2}{c)} If $A$ is an $\omega$-consistent recursive set of axioms extending $N$, then $A$ is incomplete.\\
+\begin{proof}\indent Since $A$ is $\omega$-consistent, we know from part (a) that $A$ is consistent. Since $A$ is consistent, recursive, and extends $N$, we have the result from Theorem 5.3.3 that there exists a sentence $\theta$ such that $\mathfrak{N}\vDash\theta$, but $A\nvdash\theta$. Recall that $\theta$ was generated by the Self-Reference Lemma, such that $N\vdash\left[\theta\longleftrightarrow\neg Thm_A\left(\overline{\ulcorner\theta\urcorner}\right)\right]$. With the added restriction that $A$ is $\omega$-consistent, we'll show that $A\nvdash\neg\theta$.
+
+Assume for contradiction that $A\vdash\neg\theta$. Since $A$ extends $N$, $A\vdash\left[\theta\longleftrightarrow\neg Thm_A\left(\overline{\ulcorner\theta\urcorner}\right)\right]$, and thus $A\vdash Thm_A\left(\overline{\ulcorner\theta\urcorner}\right)$. Then by definition of the formula $Thm_A(x)$, we have $A\vdash \exists x Deduction_A(x,\overline{\ulcorner\theta\urcorner})$. This is where $\omega$-consistency comes in; it is entirely possible that $A\vdash \exists x Deduction_A(x,\overline{\ulcorner\theta\urcorner})$ where $x$ is some nonstandard element, in such a way that this is true and yet $A\nvdash\theta$. However, since $A$ is $\omega$-consistent, we know that there must exist some natural number $n$ for which $A\vdash Deduction_A(\overline{n},\overline{\ulcorner\theta\urcorner})$. Since $A$ is consistent, it must be the case that $A\nvdash \neg Deduction_A(\overline{n},\overline{\ulcorner\theta\urcorner})$. Since $A$ is recursive, we know that $Deduction_A(x,f)$ is a $\Delta$-formula representing the set $ \textsc{Deduction}_A$ in $A$, and thus by the contrapositive of the implication in Definition 4.3.1, we know that $(n,\ulcorner\theta\urcorner) \in\textsc{Deduction}_A$. This means that $n$ codes a deduction of $\theta$ from $A$. Therefore $A\vdash\theta$, yet we've assumed that $A\vdash\neg\theta$ and that $A$ is consistent. Thus, we conclude by contradiction that $A\nvdash\neg\theta$, and since we have already shown that $A\nvdash\theta$, by definition $A$ is incomplete.
+\end{proof}
+\end{problem2}
+
+\begin{problem1}{5}
+\indent The Completeness Theorem and the Incompleteness Theorem may sound contradictory, but they are actually referring to different things. The Completeness Theorem that you see on my cool t-shirt is referring to the completeness of the first-order logic system. The first-order logic system entails Bialniuk's eight axioms and the one rule of inference Modus Ponens (there are other equivalent first order logic systems, like the one used in the textbook that we used to study the Incompleteness Theorem, but the proof of Completeness would be different for each system).
+
+We were very happy with the Completeness Theorem-it is a profound achievement. Given that something is semantically implied, where we define this semantic implication in a formal way although these formal definitions fit exactly with logical human reasoning\footnote{When I say logical human reasoning, I mean reasoning with justification dating back to Aristotle. You can rest assured that this is how everyday life works for bivalent logic.}, we constructed a formal system consisting of pure syntax and mechanical operations that captures the semantical implication. Anything that is semantically implied is formally deducible with Bialniuk's eight axioms and Modus Ponens. This is a deep result; think about it. Something that is semantically implied is just implied by reasoning. If you're given a set of sentences $\Sigma$ and there is some sentence $\phi$ such that $\Sigma$ semantically implies $\phi$, this basically means that if we considered each sentence of $\Sigma$ to be true, intuitive human reasoning would tell us $\phi$ must also be true. Now I'm telling you that I proved this semester that given \emph{any} set of sentences $\Sigma$ in a first order language, if a sentence $\phi$ is semantically implied by $\Sigma$, then I can find you a deduction from $\Sigma$. Keep in mind that first-order logic is not a weak system- it is sufficient for almost all fields of mathematics, which is a strong statement.
+
+On the other hand, the Incompleteness Theorem is also a profound result, but we weren't necessarily ``happy" about it, as it is not exactly as positive of a result as the Completeness Theorem, as you can probably tell by their titles. The word incompleteness here is not referring to the logical system, as we are still working in first-order logic and it is still as complete as ever. The incompleteness theorem is referring to a set of sentences. A set of sentences $\Sigma$ is said to be complete if for every sentence of the first order language, $\Sigma$ proves the sentence is true or false. We can have complete sets of sentences- that's not hard. However, a natural desire for every mathematician is to have a finite set of sentences $N$ such that in the first order language of number theory, $N$ proves a sentence $\phi$ if and only if $\phi$ is true of the natural numbers, and $N$ proves $\neg\phi$ if and only if $\phi$ is false of the natural numbers. If we could achieve this, $N$ would axiomatize the theory of natural numbers. Think about how great that would be! Do you wanna find out if something is true without doing a direct proof? Let's deduce it from $N$! Or better yet, let's have a computer deduce it from $N$-that's the true power of our mechanical system. Robot mathematicians.
+
+But as you have probably guessed, this is not the case. G\"odel's First Incompleteness Theorem proves that given any consistent, recursive set of sentences $\Sigma$ where $\Sigma$ only proves true statements about the natural numbers and is strong enough to prove many elementary things, there will be a sentence true in the theory of natural numbers that $\Sigma$ cannot prove. When I say consistent, this just means that the set of sentences does not prove a contradiction, in which case the set is essentially useless. The word recursive basically means that you can tell if a sentence is in the set or not. Otherwise you could let the theory of natural numbers be your set of sentences-not very useful though is it? Alas, all hope is gone of recursively axiomatizing the theory.
+
+As if it couldn't get any worse, we have G\"odel's Second Incompleteness Theorem, which is about Peano Arithmetic. Peano Arithmetic is a set of twelve sentences $PA$ that are very, very strong. Almost all of mathematics is provable from Peano Arithmetic. There is another natural desire of mathematicians, imbedded in our blood- this is the desire to prove the consistency of mathematics. However, we have the Second Incompleteness Theorem to shatter our dreams: if Peano Arithmetic (or any extension of it) is consistent, it cannot prove its own consistency.  Thus we can never have a self-contained proof of consistency.
+
+I think this about sums up the ideas, and I hope it's clearer now. If you're not confused enough, I'll let you ponder the most unintuitive thing which follows immediately from the Second Incompleteness Theorem: if we supposed that Peano Arithmetic were consistent, then Peano Arithmetic along with the sentence claiming "Peano Arithmetic is inconsistent" is also consistent. That might hurt your brain, but it's a cool result.
+
+\end{problem1}
+\end{document}
+
+
+%, and since $\varphi_n$ is clearly not needed for model to be finite, e
+%\begin{flushright}Induction Hypothesis\end{flushright}\\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

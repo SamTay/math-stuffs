@@ -1,0 +1,420 @@
+\documentclass[12pt]{article}
+
+\pagestyle{empty}
+
+\newcommand{\spifff}{\qquad\text{iff}\qquad}
+\newcommand{\spand}{\qquad\text{ and }\qquad}
+\newcommand{\forward}{\noindent ($\Longrightarrow$) \,\,}
+\newcommand{\back}{\noindent ($\Longleftarrow$) \,\,}
+\newcommand{\R}{\mathbb R} %REALS
+\newcommand{\C}{\mathbb C} %COMPLEX
+\newcommand{\N}{\mathbb N} %NATURAL NUMBERS
+\newcommand{\Q}{\mathbb Q} %RATIONALS
+\newcommand{\Z}{\mathbb Z} %INTEGERS
+\newcommand{\e}{\epsilon} %epsilon
+\newcommand{\dr}{d_{Rome}}
+\newcommand{\x}{\vec{x}} 
+\newcommand{\y}{\vec{y}} 
+\newcommand{\z}{\vec{z}}
+\newcommand{\vz}{\vec{0}}
+\newcommand{\ints}{\mathcal{I}nt(S)}
+\newcommand{\ran}{\mathcal{R}an}
+
+
+\newenvironment{lemma}[1]{\noindent {\bf Lemma #1: }}{\medskip}
+\newenvironment{problem}[1]{\noindent {\bf Problem #1: }}{\medskip}
+\newenvironment{ppart}[1]{\noindent {\bf (#1) }}{\medskip}
+\newenvironment{solution}{\noindent {\bf Solution: }}{\hfill \rule{1mm}{3mm} \bigskip}
+\newenvironment{proof}{\noindent {\bf Proof: }}{\hfill
+\rule{1mm}{3mm} \bigskip}
+
+\usepackage{amsmath}
+%\usepackage{amsthm}
+\usepackage{graphicx}  
+\usepackage{amssymb}   
+\usepackage{enumerate}
+
+\newcommand{\sing}[1]{\{#1\}}
+\newcommand{\comp}[1]{#1^{\cal C}}
+\newcommand{\ray}[1]{\overrightarrow{#1}}
+\renewcommand{\line}[1]{\stackrel{\longleftrightarrow}{#1}}
+\renewcommand{\deg}{^{\circ}}
+\newcommand{\seg}[1]{\overline{#1}}
+
+
+\usepackage{easyeqn}
+\usepackage{amsmath}
+%\usepackage{amsthm}
+\usepackage{graphicx}  
+\usepackage{amssymb}   
+\usepackage{enumerate}
+
+\begin{document}
+
+\begin{center}
+{\bf Takehome Midterm}\\
+Sam Chong Tay\\
+Real Analysis 1\\
+Fall, 2012
+\end{center}
+
+
+
+\begin{problem}{1} (15 points)
+
+Let $S$ and $T$ be non-empty subsets of $\R$ that are bounded above.  Define a new set $$S+T:=\{s+t:s\in S\textrm{ and }t\in T\}.$$  Prove that $S+T$ is bounded above and that $\sup(S+T)=\sup(S)+\sup(T)$. \end{problem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problem 1
+\begin{proof} Let $S$ and $T$ be non-empty subsets of $\R$ that are bounded above and define the set $S+T$ as above. By Axiom III we know there exist least upper bounds for each set $S$ and $T$, so let ${\bf s}=\sup(S)$ and ${\bf t}=\sup(T)$. %To show that ${\bf s} + {\bf t}$ is an upper bound for $S+T$, note that for any $s+t \in S+T$, we have $s\leq {\bf s}$ and $t\leq{\bf t}$ so that $$s+t\leq {\bf s} +{\bf t}.$$ Therefore ${\bf s}+{\bf t}$ is an upper bound for $S+T$.
+
+To show that $\sup(S+T)=\sup(S)+\sup(T)={\bf s}+{\bf t}$, we will use Theorem 1.4.4. Let $\e>0$. Then $\frac{\e}{2} > 0 $ as well, and by Theorem 1.4.4 we know that there exist $s\in S$ and $t\in T$ such that $$|s-{\bf s}| < \frac{\e}{2} \spand |t-{\bf t}| < \frac{\e}{2},$$ so that
+\begin{align*} |s+t- ({\bf s}+{\bf t})|\  = \ |s+t-{\bf s}-{\bf t}| & \ \leq \  |s-{\bf s}| + |t-{\bf t}|\\
+										&< \  \frac{\e}{2} + \frac{\e}{2}\\
+										&= \ \e.
+\end{align*} Therefore again by Theorem 1.4.4, we have $\sup(S+T) = {\bf s} + {\bf t} = \sup(S)+\sup(T).$ (Of course, this also proves that $S+T$ is bounded above.)						
+\end{proof}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Problem 2 (a)
+
+\begin{problem}{2} (18 points) (All roads lead to Rome.)  Define the following function $d_\textrm{Rome}:\R^2\times\R^2\to\R$ as follows.  For $\vec{x}=(x_1,x_2)$ and $\vec{y}=(y_1,y_2)$, 
+\begin{displaymath}
+   d_\textrm{Rome}(\vec{x},\vec{y}) := \left\{
+     \begin{array}{lcl}
+       d(\vec{x},\vec{y}) & : &\textrm{if there exists a } t\in\R\textrm{ such that }\vec{x}=t\cdot \vec{y}\\
+       d(\vec{x},\vec{0}) + d(\vec{0},\vec{y}) & : & \textrm{otherwise}
+     \end{array}
+   \right\} ,
+\end{displaymath}
+
+where $d(\vec{x},\vec{y})=d((x_1,x_2),(y_1,y_2))=\sqrt{(y_1-x_1)^2+(y_2-x_2)^2}$ is the usual (Euclidean) metric on $\R^2$.\\
+\end{problem}
+
+\begin{ppart}{a} Prove that the function $d_\textrm{Rome}$ is a metric on $\R^2$. \end{ppart}
+  
+  \begin{proof} We need to show four conditions hold, namely that $d_{Rome}$ is positive, positive definite, symmetric, and satisfies the triangle inequality. Let $\x,\y,\z \in \R^2.$\\
+
+\noindent(Positive) We have by definition that $$\dr(\x,\y) = d(\x,\y) \quad\text{or}\quad \dr(\x,\y) = d(\x,\vec{0}) + d(\vec{0},\y),$$ and in either case since $d$ is positive, we have $\dr(\x,\y)\ge 0$. Therefore $\dr$ is positive as well.\\
+
+\noindent(Positive Definite) \forward If $\x=\y$ then there exists $1\in\R$ such that $\x=1(\y)$. Then $\dr(\x,\y) = d(\x,\y)=0 $ because $d$ is positive definite.\\ 
+
+\back If $\dr(\x,\y)=0$ then we have two cases.
+\begin{enumerate}[(a)]
+\item{If \ $0=\dr(\x,\y)=d(\x,\y),$ then since $d$ is positive definite, we have $\x=\y.$}
+\item{If \  $0=\dr(\x,\y)=d(\x,\vec{0}) + d(\vz, \y)$, note that since $d$ is positive, it must be the case that both $$d(\x,\vz)=0\spand d(\vz,\y)=0.$$ From here, since $d$ is positive definite we conclude that $\x=\vz=\y.$}
+\end{enumerate}
+
+The previous two cases show that \ $\dr(\x,\y) = 0$ \  implies \ $\x=\y$. Therefore $\dr(\x,\y) = 0$ if and only if $\x=\y$, so $\dr$ is positive definite.\\
+
+
+\noindent(Symmetric) If \ $\x=\y$ \ then we have $1\in\R$ such that $\x=1(\y)$ and $\y=1(\x)$. Therefore since $d$ is symmetric we have $$\dr(\x,\y)=d(\x,\y) = d(\y,\x) =\dr(\y,\x).$$ So suppose $\x\ne\y$. We will consider the separate cases as in the piecewise definition of $\dr$. 
+\begin{enumerate}[(a)]
+\item{Suppose there exists $t\in\R$ such that $\x=t\y$. Then $\dr(\x,\y)=d(\x,\y).$ Of course we have $\x=\vz$ \ or \ $\x\ne\vz$, which yields two subcases.}
+\begin{enumerate}[(i)]
+\item{If $\x\ne\vz$ then it must be the case that $t\ne0$. Therefore there exists $t^{-1}\in\R$ and $\x=t\y$ implies $\y=t^{-1}\x$, so $$\dr(\y,\x)=d(\y,\x)=d(\x,\y)=\dr(\x,\y),$$ which follows because $d$ is symmetric.}
+\item{If $\x=\vz$ then since $\x\ne\y$ we have $\y\ne0$. Thus in considering $\dr(\y,\x),$ we see that there is no $t' \in \R$ such that $\y = t' \x$; we can never multiply $\vz$ by a real number to get a nonzero vector $\y$. Hence 
+\begin{align*} \dr(\y,\x)&=d(\y,\vz) + d(\vz, \x)\\
+				&= d(\y, \x) + d( \vz, \vz) = d(\x,\y) = \dr(\x,\y),
+\end{align*}}
+where again the penultimate equality follows because $d$ is both symmetric and positive definite.
+\end{enumerate}
+\item{Next suppose that there is no $t\in\R$ such that $\x=t\y$. Then $\dr(\x,\y)=d(\x,\vz)+d(\vz,\y).$ In considering $\dr(\y,\x)$, we again have two subcases from the piecewise definition of $\dr$.
+\begin{enumerate}[(i)]
+\item{Suppose there is a $t\in\R$ such that $\y=t\x$, so that $\dr(\y,\x)=d(\y,\x)$. If $t\ne0$ then there would exist $t^{-1}\in\R$ such that $\x=t^{-1}\y$, which we are assuming is {\em not} the case. Hence $t=0$ so that $\y = t\x = 0$ and
+\begin{align*} \dr(\y,\x) = d(\y,\x) = d(\vz, \x) &= d(\x, \vz)\\
+								&=d(\x,\vz) + d(\vz, \vz)\\
+								&=d(\x,\vz) + d(\vz, \y)\\
+								&=\dr(\x,\y).
+\end{align*}}
+\item{If instead there is no $t\in\R$ such that $\y=t\x$ then 
+\begin{align*}
+\dr(\y,\x)&=d(\y,\vz) + d(\vz, \x)\\
+		&= d(\x, \vz) + d(\vz, \y)\\
+		&= \dr(\x,\y).
+\end{align*}}
+\end{enumerate}}
+\end{enumerate}
+Therefore  $\dr$ is symmetric.\\
+
+\noindent(Triangle Inequality) We have two overall cases as given in the piecewise definition of $\dr$.
+\begin{enumerate}[(a)]
+\item{Suppose there exists $t\in\R$ such that $\x = t\z$, so that $\dr(\x,\z)=d(\x,\z).$ Now note that by definition of $\dr$ one of the following must be true:
+\begin{enumerate}[(1)]
+\item{$\dr(\x,\y)+\dr(\y,\z) =d(\x,\y) +d(\y,\z),$ }
+\item{$\dr(\x,\y)+\dr(\y,\z) =d(\x,\y) + d(\y,\vz) + d(\vz, \z)$, }
+\item{$\dr(\x,\y)+\dr(\y,\z) =d(\x,\vz)+d(\vz,\y) + d(\y,\vz) + d(\vz, \z),$}
+
+or
+
+\item{$\dr(\x,\y)+\dr(\y,\z) =d(\x,\vz)+d(\vz,\y) + d(\y,\z).$}
+\end{enumerate}
+Since $d$ satisfies the triangle inequality we have
+\begin{align} \dr(\x,\z)=d(\x,\z) &\leq d(\x,\y) + d(\y,\z) \\
+						&\leq d(\x,\y) + d(\y,\vz) + d(\vz, \z)\\
+						&\leq d(\x,\vz)+d(\vz,\y) + d(\y,\vz) + d(\vz, \z)
+\end{align}
+Also
+\begin{EQA}[rl] \dr(\x,\z)=d(\x,\z) &\leq d(\x,\y) + d(\y,\z) \\
+						&\leq d(\x,\vz)+d(\vz,\y) + d(\y,\z)
+						\label[(4)]
+\end{EQA}
+The inequalities (1)-(4) altogether imply that $$\dr(\x,\z)\leq\dr(\x,\y)+\dr(\y,\z).$$}
+
+\item{Next suppose there is no $t\in\R$ such that $\x=t\z$. Then $\dr(\x,\z) = d(\x,\vz)+d(\vz,\z)$. Now we have two subcases.
+\begin{enumerate}[(i)] 
+
+\item{Suppose first that there does exist $t\in\R$ such that $\x=t\y$, so that $\dr(\x,\y)=d(\x,\y).$ In this case there cannot be any $t'\in\R$ such that $\y=t'\z$, otherwise there would be $tt'\in\R$ such that $\x = t\y = (tt')\z$, which we are assuming (in case (b)) is not the case. Thus $\dr(\y,\z)=d(\y,\vz)+d(\vz,\z)$ so that
+\begin{align*} \dr(\x,\z) &= d(\x,\vz) + d(\vz, \z)\\
+				 &\leq (d(\x,\y)+d(\y,\vz)) + d(\vz,\z)\\
+				&=d(\x,\y) + (d(\y,\vz)+d(\vz,\z))\\
+				&=\dr(\x,\y)+\dr(\y,\z).
+\end{align*}}
+
+\item{Finally, suppose that there is no $t\in\R$ such that $\x=t\y$. Then $\dr(\x,\y)=d(\x,\vz)+d(\vz,\y)$ and as earlier, it must be the case that either
+\begin{enumerate}[(1)]
+\item{$\dr(\x,\y) + \dr(\y,\z) = d(\x,\vz)+d(\vz,\y) + d(\y,\z), $ \ or }
+\item{$\dr(\x,\y) + \dr(\y,\z) = d(\x,\vz)+d(\vz,\y) + d(\y,\vz) + d(\vz, \z)$.} 
+\end{enumerate}
+We then have
+\begin{EQA}[rl]
+\dr(\x,\z)&=d(\x,\vz)+d(\vz,\z)\\
+	&\leq d(\x,\vz)+ d(\vz,\y) + d(\y,\z) \label[(1)]\\
+	&\leq d(\x,\vz) + d(\vz,\y) + d(\y,\vz) + d(\vz, \z)\label[(2)],
+\end{EQA}
+and of course from the reasoning above, the two inequalities (1)-(2) ensure that $$\dr(\x,\z)\leq\dr(\x,\y)+\dr(\y,\z).$$}
+\end{enumerate}
+}
+\end{enumerate}
+Therefore $\dr$ satisfies the triangle inequality. We have now shown that $\dr$ is a metric.
+\end{proof}\\
+\newpage
+  
+\begin{ppart}{b} Draw carefully labeled pictures of open balls of radius 3 about the points $(0,0)$, $(2,2)$, and $(3,0)$. \end{ppart}
+
+
+
+$$B_3((0,0)) $$
+
+\begin{center} \includegraphics[width=4in]{grid.png}\\ \end{center}
+\newpage
+$$B_3((2,2))$$
+
+\begin{center} \includegraphics[width=4in]{grid.png}\\ \end{center}
+\newpage
+$$B_3((3,0))$$
+
+\begin{center} \includegraphics[width=4in]{grid.png}\\ \end{center}
+
+
+
+
+
+% INCLUDE PICS OF OPEN BALLS FOR DROME
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%look thru above and shorten (distinct)
+
+\begin{problem}{3} (15 points) Let $X$ be a metric space.  Prove that every set $S\subseteq X$ can be written as the intersection of a collection of open sets in $X$.\\ \end{problem}
+
+\begin{lemma}{1} Let $S$ be a proper subset of $X$. If $x\notin S$, then there exists an open set $U$ of $X$ such that $S\subseteq U$ and $x\notin U$.\end{lemma}
+
+\begin{proof} Let $S\subset X$ and choose $x\in X\setminus S$. We have shown that $\comp{\{x\}}$ is an open set, and clearly for any $s\in S$, we have $s\ne x$ so that $s\in\comp{\{x\}}$. Therefore for any $x\notin S$ there is an open set $\comp{\{x\}}$ such that $S\subseteq\comp{\{x\}}$ and $x\notin\comp{\{x\}}$.
+\end{proof}\\
+
+
+\noindent Next we show that every set $S\subseteq X$ is an intersection of a collection of open sets in $X$.\\
+
+\begin{proof} First, we have already shown in Exercise 3.1.6 that the improper subset $S=X$ is an open set of the metric space $X$. So suppose that $S\subset X$ is a proper subset, and let $\hat{S}$ be the intersection of all open sets $U$ containing $S$. Note that the open set $X$ contains $S$, so this intersection is in fact nonempty. By construction then, it is evident that $S\subseteq \hat{S}$. If $x\in \hat{S}$, then $x$ is in every open set containing $S$. Hence by the contrapositive of Lemma 1, $x\in S$. This shows $\hat{S}\subseteq S$, so we conclude that $S=\hat{S}$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1cm}
+
+\begin{problem}{4} (18 points) Let $X$ be a metric space and $S$ a subset of $X$.  A point $x\in S$ is called an \textbf{interior point} of $S$ if there exists an open ball about $x$ that is contained in $S$.  (That is, this open ball is a subset of $S$.)  The set of all interior points of $S$ is called the \textbf{interior} of $S$, and is denoted by $\mathcal{I}nt(S)$. \end{problem}
+
+
+\begin{ppart}{a} Give an example of a set $S\subseteq \R^2$ such that $\mathcal{I}nt(S)\neq \emptyset$ and $\mathcal{I}nt(S)\neq S$.  Draw a carefully labelled picture of the sets $S$ and $\mathcal{I}nt(S)$. \end{ppart}
+
+Let $S=\{(x,y) : x^2+y^2 \le 1\}.$ First to show that $\ints\ne\emptyset$, note that the point $(0,0)\in S$ and $$B_1((0,0))=\{(x,y): x^2+y^2 < 1\} \subseteq S,$$
+so $(0,0) \in\ints$ and we conclude $\ints\ne\emptyset$.\\
+
+To show that $\ints \ne S$, consider the point $(0,1)\in S$. For any $r>0$ we see that the point $(0,1+\frac{r}{2}) \in B_r((0,1))$ because
+
+\begin{align*}
+d\bigg( \Big(0,1\Big),\Big(0,1+\frac{r}{2}\Big)\bigg) &= \sqrt{\bigg(1- \Big(1+\frac{r}{2}\Big)\bigg)^2}\\
+						&= \sqrt{ \frac{r^2}{2^2} } = \frac{|r|}{2} = \frac{r}{2} < r.
+\end{align*}
+
+However since $$(0)^2+\Big(1+\frac{r}{2}\Big)^2 \ =  \ 1 + r + \frac{r^2}{4} \ > \ 1,$$ we have $(0,1+\frac{r}{2}) \notin S$. Thus for the point $(0,1)\in S$ we have found that no open ball $B_r((0,1))$ is contained in $S$, so $(0,1)$ is not an interior point of $S$. Therefore $\ints\ne S$.
+
+\begin{center}$$S=\{(x,y) : x^2+y^2 \le 1\}$$
+\includegraphics[width=3in]{grid.png}\\
+\newpage
+$$\ints = \{(x,y) : x^2+y^2 < 1\}$$
+\includegraphics[width=3in]{grid.png}\\\end{center}
+
+
+\begin{ppart}{b} Prove that $\mathcal{I}nt(S)$ is an open set.\end{ppart}
+
+\begin{proof} We will use the characterization in Theorem 3.1.7.2 to prove that $\ints$ is an open set; specifically we will show that for any $x\in\ints$, there exists $r>0$ such that $B_r(x) \subseteq \ints$.
+
+So let $x\in \ints$. By definition, there exists $r>0$ such that $B_r(x) \subseteq S$. However, we must show that $B_r(x)\subseteq \ints$, which will amount to showing that any $y$ in this open ball is an interior point of $S$. Let $y\in B_r(x)$ and pick $\e = r - d(x,y)$. Note that $\e$ is positive because $y\in B_r(x)$, so $d(x,y)< r$. Now for any $z\in B_\e ( y)$ we have
+\begin{align*}
+d(z,x) &\le d(z,y) + d(x,y)\\
+	& < \e + d(x,y)\\
+	&= r - d(x,y) + d(x,y)\\
+	&= r.
+\end{align*} Hence $z\in B_r(x)\subseteq S$. This shows that $B_\e(y)\subseteq S$ and we conclude $y$ is an interior point of $S$. Since $y$ was arbitrarily chosen from $B_r(x)$, we have $B_r(x) \subseteq \ints$. Finally by Theorem 3.1.7.2 we conclude that $\ints$ is an open set.
+\end{proof}
+
+
+\begin{ppart}{c} Prove that $S$ is open if and only if $S=\mathcal{I}nt(S)$.\end{ppart}
+
+\begin{proof} Note that by definition, every interior point of $S$ is in $S$ itself, so we will always have $\ints\subseteq S$. Thus the proof will be complete if we can show that $S$ is open if and only if $S\subseteq \ints$. Well by Theorem 3.1.7.2 we know $S$ is open if and only if for every $x\in S$ there exists $r>0$ such that $B_r(x)\subseteq S$. By definition, this means precisely that every $x\in S$ is an interior point of $S$, which of course is equivalent to $S\subseteq \ints$. Thus we conclude that $S$ is open if and only if $S\subseteq \ints$, and as noted above it follows that $S$ is open if and only if $S=\ints$.\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{2cm}
+
+\begin{problem}{5} (15 points) Consider the sequence $(s_n)=\left(\frac{10n-3}{n}\right)_{n=1}^\infty$.  Does this sequence converge or diverge?\\\end{problem}
+
+\noindent This sequences converges to 10.
+
+\begin{proof} Define $(s_n)$ as above. To show that $s_n\to 10$, let $\e>0$. Invoking the Archimedean property of $\R$, pick $N\in\N$ so that $N> \frac{3}{\e}.$ This implies that $\e > \frac{3}{N}$. We see then for $n>N$,
+\begin{align*}
+d\left(\frac{10n-3}{n},\  10\right) &= \left|\frac{10n-3}{n} - 10\right|\\
+ 						&= \left| \frac{10n-3-10n}{n}\right|\\
+						&=\left|\frac{-3}{n}\right|\\
+						&=\frac{3}{n} \ < \ \frac{3}{N} \ < \ \e.
+\end{align*} Therefore $(s_n)$ converges to 10.
+\end{proof}
+
+\vspace{2cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{problem}{6 (a)}Construct a sequence of real numbers that has subsequences converging to every rational number.\end{problem}
+
+\begin{proof} We know that $\Q$ is countable from Foundations, so let $b:\N\to\Q$ be a bijection. Then $b(n)=(b_n)$ is a sequence with range $\Q$.
+
+Let $q\in\Q$ and $r>0$. We proved in class that $q$ is a limit point of $\Q$; we present that argument again for the sake of completeness (and grading). By Theorem 3.5.1.4 it is sufficient to show that for all $r>0$, $B_r(q)$ contains an element of $\Q\setminus\{q\}$. This will follow from Problem 1.4.8.d: since $q$ and $q-r$ are real numbers and $q-r<q$, we know there exists $p\in\Q$ satisfying $$q-r<p<q.$$ Thus $p\ne q$ and of course this also implies that $$q-r<p<q+r.$$ By Theorem 1.3.8.8 this means that $$|q-p|<r,$$ so $p\in B_r(q)$ where $p\in\Q\setminus\{q\}$. This shows that $q$ is a limit point of $\Q$.
+
+Now from the characterization in Theorem 3.5.1.3 we have that for all \ $r>0$, $B_r(q)$ contains infinitely many elements of $\Q$. Recall that the rational numbers are precisely the terms of $(b_n)$ so it must be the case that every open ball $B_r(q)$ about $q$ contains infinitely many terms of the sequence $(b_n)$. %\footnote{Note that this is not as trivial as it seems; however supposing $B_r(q)$ has only a finite number of terms from $(b_i)$ quickly yields a contradiction, as this would imply that $B_r(q)$ contains only a finite (possibly less) number of elements of $\ran(b_i),$ which is contrary to the previous assertion.}
+ Therefore by Problem 3.3.8.a we conclude that $(b_n)$ has a subsequence converging to $q$. Of course since $q$ was arbitrary, this sequence has subsequences converging to every rational number.
+\end{proof}
+
+
+\begin{ppart}{b}Let $x\in\R$.  For the sequence you constructed in part (a), describe how you can find a subsequence that converges to $x$.\end{ppart}
+
+In part (a) we restricted ourselves to considering $q\in\Q$ as a limit point of $\Q$, but really the proof does not require $q\in\Q$; in fact every real number $x\in\R$ is a limit point of $\Q$. To be sure, let's run through the argument once more.
+
+This time, let $x\in\R$ and $r>0$. As before, it is sufficient to show that $B_r(x)$ contains an element of $\Q\setminus\{x\}.$ Again using Problem 1.4.8.d, since $x$ and $x-r$ are real numbers and $x-r<x$, we know there exists $p\in\Q$ such that $$x-r < p < x,$$ and the same reasoning reasoning above allows us to conclude that $p \in B_r(x)$ where $p\in\Q\setminus\sing{x}$. This shows that $x$ is a limit point of $\Q$.
+
+Following the same argument above, by Theorem 3.5.1.3 we know that every open ball $B_r(x)$ about $x$ contains infinitely many rational numbers. Since the rational numbers are precisely the terms of the sequence $(b_n)$, we infer that any ball $B_r(x)$ about $x$ must contain infinitely many terms of the sequence $(b_n)$. Again by Problem 3.3.8.a we conclude that there is some subsequence $(b_{n_k})$ converging to $x$, for any real number $x$.
+
+This shows that such a sequence exists. For the skeptics (such as a professor grading this paper), I will describe how one might find such a sequence. Recall from above that since any $x\in\R$ is a limit point of $\Q$, by Theorem 3.5.1.3 we know that the intersection $$B_r(x) \cap \Q$$ is infinite for any $r>0$. %Now recall that $(b_n)$ has range $\Q$. 
+To construct the subsequence converging to $x$, let $r_k=\frac{1}{k}$ and follow the outline below:
+\begin{enumerate}
+\item From above we can pick a rational number $q_1$ from $B_{r_1}(x)$. Since $b(n)$ is onto $\Q$, we know $q_1=b_j$ for some $j\in\N$. Let $n_1=j$ so that $$b_{n_1} = b_j \spand b_{n_1} \in B_{\frac{1}{1}}(x).$$
+
+\item From above there are infinitely many rational numbers in the ball $B_{r_2}(x)$. Therefore there are infinitely many terms of the sequence $(b_n)$ in $B_{r_2}(x)$. Thus there {\em must} be some $b_m\in B_{r_2}(x)$ such that $m>n_1.$ To see this, note that if there were no such $m>n_1$, that is if all terms $b_m \in B_{r_2}(x)$ were such that $m\le n_1$, then this ball would only have at most $n_1$ terms of the sequence $(b_i)$, which of course means that this ball would have at most $n_1$ rational numbers. Hence the set $$B_{r_2}(x) \cap \Q$$ would be finite, contradicting that $x$ is a limit point of $\Q$! Thus there must be some $b_m\in B_{r_2}(x)$ such that $m>n_1$. We let $n_2=m$ so that $$n_1< n_2 \spand b_{n_2}\in B_{\frac{1}{2}}(x).$$ 
+
+$$\vdots$$
+
+
+\item[$k$.] Just as in step 2, there are infinitely many rational numbers in the ball $B_{r_k}(x)$, and thus infinitely many terms of the sequence $(b_n)$. By the same reasoning above, there must be some $b_m\in B_{r_k}(x)$ where $m>n_{k-1}.$ So we let $n_k=m$ so that $$n_{k-1} < n_k \spand b_{n_k} \in B_{\frac{1}{k}}(x).$$ 
+\end{enumerate}
+
+It is clear from construction that the sequence $(n_k)$ is a strictly increasing sequence of natural numbers, which means that $(b_{n_k})$ is indeed a subsequence of $(b_n)$. Also by construction, for all $k\in\N$ we have $$b_{n_k} \in B_{\frac{1}{k}}(x),$$ so by Problem 3.3.1\footnote{Of course, this is relying on the fact (discussed in gross detail in class) that the subsequence $(b_{n_k})$ is also a sequence; namely a function of $k$ with domain $\N$.} we conclude that $$b_{n_k} \to x.$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+%% 6 b
+To begin, I will show that in general for a metric space $X$,  if $x$ is a limit point of the set $S$, then for all $r>0$ there are infinitely many elements in the intersection $$B_r(x) \ \cap \ (S\setminus\sing{x}).$$ This is immediate from the characterization in Theorem 3.5.1.3. We know that there are infinitely many elements in the intersection $B_r(x) \cap S$; note that if  \ $B_r(x) \ \cap \ (S\setminus\sing{x})$ were finite, say of cardinality $n$, then the set $B_r(x) \cap S$ would have either $n$ or $n+1$ elements, contradicting the fact that this intersection is infinite.
+
+Therefore since we have shown that any $x\in\R$ is a limit point of $\Q$, we can conclude that for any $r>0$, $$B_r(x) \ \cap \ (\Q\setminus\sing{x})$$ is infinite. Also it will be helpful to realize that, evidently, $$B_r(x) \ \cap \ (\Q\setminus\sing{x}) \ = \ (B_r(x)\setminus\sing{x}) \ \cap \ \Q.$$
+
+
+
+
+%poseef
+\back If $\x\ne\y$ then we have two cases.
+\begin{enumerate}[(a)]
+\item{If \ $\dr(\x,\y)=d(\x,\y),$ then since $d$ is positive definite, we have $$\dr(\x,\y)=d(\x,\y)\ne 0.$$}
+\item{If \  $\dr(\x,\y)=d(\x,\vec{0}) + d(\vz, \y)$, note that for $\x\ne\vz$, we have $d(\x,\vz)>0$ since $d$ is positive definite and $d(\vz, \y) \ge 0$ since $d$ is positive, so we can conclude $$\dr(\x,\y)=d(\x,\vz)+d(\vz,\y) > 0.$$ If instead $\x=\vz$, then since \ $\x\ne\y$ \ we have \ $\y\ne\vz$. By the same reasoning we have $d(\vz,\y) > 0$ and $d(\x,\vz)\ge 0$ so that again $$\dr(\x,\y)=d(\x,\vz)+d(\vz,\y) > 0.$$}
+\end{enumerate}
+The previous two cases show that \ $\x\ne\y$ \  implies \ $\dr(\x,\y) \ne 0$.
+
+traditional proof for 4c
+
+\forward Suppose $S$ is open. If $x\in S$, then by Theorem 3.1.7.2 there exists $r>0$ such that $B_r(x)\subseteq S$. Hence $x$ is an interior point of $S$, so we have $S\subseteq\ints$. Also by definition an interior point of $S$ is in $S$, so $\ints \subseteq S$. Therefore $S=\ints$.\\
+
+
+\back Conversely, suppose $S=\ints$. Then every $x\in S$ is an interior point of $S$. This of course means that if $x\in S$, there exists $r>0$ such that $B_r(x)\subseteq S$. Therefore by Theorem 3.1.7.2 we conclude that $S$ is open.
+
+
+%%triangle inequality
+irst we will consider the easy case where the three elements $\x,\y,\z$ are not distinct; that is, at least one pair of them is equal. If $\x=\z$ then of course since $\dr$ is both positive and positive definite, $$\dr(\x,\z) \ = \ 0 \ \leq \ \dr(\x,\y) + \dr(\y,\z).$$ If $\x=\y$ then $$\dr(\x,\z) = \dr(\y,\z) \ \leq \ \dr(\x,\y) + \dr(\y,\z).$$ If $\y=\z$ then similarly $$\dr(\x,\z) = \dr (\x, \y) \ \leq \ \dr(\x,\y) + \dr(\y,\z).$$
+%% Determine if this is necessary at all
+Thus for the rest of the proof, we will consider the more interesting case where $\x,\y,\z$ are distinct. 
+
+
+
+
+ORIGINAL CASE B
+\item{Next suppose there is no $t\in\R$ such that $\x=t\z$. Then $\dr(\x,\z) = d(\x,\vz)+d(\vz,\z)$. In this case we must have $\x\ne\vz$, otherwise $t=0$ would satisfy $\x=t\z$. Now we have two subcases: $\y=\vz$ or $\y\ne\vz$.
+\begin{enumerate}[(i)] 
+\item{If $\y=\vz$ then recall $\x\ne\vz$. Thus there is no $t\in\R$ such that $\x=t\y$, so that $\dr(\x,\y)=d(\x,\vz)+d(\vz,\y).$ Also we are assuming that $\x,\y,$ and $\z$ are distinct, so we must have $\z\ne\vz$ as well and by the same reasoning $\dr(\y,\z)=d(\y,\vz)+d(\vz,\z)$. Therefore
+\begin{align*}\dr(\x,\z)&=d(\x,\vz) + d(\vz, \z) +0+0\\
+				&= d(\x,\vz)+d(\vz,\z) + d(\vz,\y) + d(\y, \vz)\\
+				&= d(\x,\vz) + d(\vz,\y) +d(\y,\vz)+ d(\vz,\z)\\
+				&= \dr(\x,\y)+\dr(\y,\z).
+\end{align*}}
+\item{If instead $y\ne\vz$, we have yet again two subcases
+\begin{enumerate}[(a)]
+\item{Suppose first that there does exist $t\in\R$ such that $\x=t\y$, so that $\dr(\x,\y)=d(\x,\y).$ In this case there cannot be any $t'\in\R$ such that $\y=t'\z$, otherwise there would be $tt'\in\R$ such that $\x = t\y = (tt')\z$, which we are assuming (in case B) is not the case. Thus $\dr(\y,\z)=d(\y,\vz)+d(\vz,\z)$ so that
+\begin{align*} \dr(\x,\z) &= d(\x,\vz) + d(\vz, \z)\\
+				 &\leq (d(\x,\y)+d(\y,\vz)) + d(\vz,\z)\\
+				&=d(\x,\y) + (d(\y,\vz)+d(\vz,\z))\\
+				&=\dr(\x,\y)+\dr(\y,\z).
+\end{align*}}
+\item{Finally, suppose that there is no $t\in\R$ such that $\x=t\y$. Then $\dr(\x,\y)=d(\x,\vz)+d(\vz,\y)$ and as earlier, it must be the case that either
+\begin{enumerate}[(1)]
+\item{$\dr(\x,\y) + \dr(\y,\z) = d(\x,\vz)+d(\vz,\y) + d(\y,\z), $ \ or }
+\item{$\dr(\x,\y) + \dr(\y,\z) = d(\x,\vz)+d(\vz,\y) + d(\y,\vz) + d(\vz, \z)$.} 
+\end{enumerate}
+We then have
+\begin{EQA}[rl]
+\dr(\x,\z)&=d(\x,\vz)+d(\vz,\z)\\
+	&\leq d(\x,\vz)+ d(\vz,\y) + d(\y,\z) \label[(1)]\\
+	&\leq d(\x,\vz) + d(\vz,\y) + d(\y,\vz) + d(\vz, \z)\label[(2)],
+\end{EQA}
+and of course from the reasoning above, the two inequalities (1)-(2) ensure that $$\dr(\x,\z)\leq\dr(\x,\y)+\dr(\y,\z).$$}
+\end{enumerate}}
+\end{enumerate}
+}
+
+
+
+
+

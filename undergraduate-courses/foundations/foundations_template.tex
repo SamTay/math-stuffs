@@ -1,0 +1,68 @@
+\documentclass[11pt]{hmcpset}
+
+\newenvironment{problem2}[1]{\noindent {\bf (#1}}
+{\medskip}
+
+\newenvironment{problem1}[1]{\noindent {\bf Problem #1}}
+{\medskip}
+
+\newenvironment{theorem}[1]{\noindent {\bf Theorem #1:}}
+{\medskip}
+
+\newenvironment{claim}{\noindent {\bf Claim:}}
+{\medskip}
+
+\newenvironment{lemma}[1]{\noindent {\bf Lemma #1:}}
+{\medskip}
+
+\newenvironment{definition}[1]{\noindent {\bf Definition #1:}}
+{\medskip}
+
+\newenvironment{proof}{\noindent {\bf Proof:} \\}{\hfill
+\rule{1mm}{3mm} \bigskip}
+
+%\newenvironment{solution}{\noindent {\bf Solution:} \\}{\hfill
+%\rule{1mm}{3mm} \bigskip}
+
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\name{Sam Tay}
+\class{Professor Holdener}
+\assignment{Final Exam}
+\duedate{05/9/2011}
+
+
+\begin{document}
+
+
+\begin{problem1}{1} \\
+\indent\indent\indent\indent If I don't dive to the bottom or if I come back up at some point,\\
+\indent\indent\indent\indent then the river isn't whiskey or I'm not a duck.\\
+\indent\indent\indent\indent Since I don't play jack o diamonds or I don't trust my luck,\\
+\indent\indent\indent\indent the river is whiskey or I'm a duck.
+\end{problem1}\\
+
+\begin{problem1}{2} Let $A$, $B$, and $C$ be sets. Then $A\times (B\cup C)=(A\times B)\cup(A\times C).$\\
+\begin{proof}
+\indent Let $A,B,$ and $C$ be sets, and let $(x,y)\in(B\cup C)$. Then $x\in A$ and $y\in B\cup C$, which means $y\in B$ or $y\in C$. If $y\in B$, then $(x,y)\in A\times B$, so certainly $(x,y)\in (A\times B) \cup (A\times C)$. Similarly if $y\in C$, then $(x,y)\in A\times C$, so certainly $(x,y)\in (A\times B) \cup (A\times C)$. Therefore $A\times (B\cup C)\subseteq(A\times B)\cup(A\times C).$
+
+Let $(x,y)\in (A\times B)\cup(A\times C)$. Then $(x,y)\in (A\times B)$ or $x\in(A\times C)$.
+\end{proof}
+\end{problem1}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+%\overline

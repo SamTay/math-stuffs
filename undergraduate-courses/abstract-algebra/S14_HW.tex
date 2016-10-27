@@ -1,0 +1,187 @@
+
+\documentclass{article}
+\newenvironment{problem2}[1]{\noindent {\bf (#1}}
+{\medskip}
+
+\newenvironment{problem1}[1]{\noindent {\bf Problem #1:}}
+{\medskip}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,graphicx,url,colordvi}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\makeatletter
+\def\imod#1{\allowbreak\mkern8mu{\operator@font mod}\,\,#1}
+\def\pimod#1{\allowbreak\mkern10mu{(\operator@font mod}\,\,#1)}
+\makeatother
+
+\usepackage{hyperref}
+\usepackage{amssymb}
+%\usepackage{fullpage}
+\hypersetup{pdfborder={0 0 0}}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\ran}{Ran}
+
+
+\title{Math 327: Final Take-home Solutions}
+\author{by Sam Tay}
+\date{\today}
+
+\begin{document}
+%\maketitle
+\begin{flushright}Sam Tay\\ Professor Milnikiel \\ Math 335 \\ Section 14: 2, 10, 24, 25, 34\\ 1/4/11
+\end{flushright}
+
+
+I'm going to be a little redundant in answering these problems, because I see a couple of ways to go about them. Let me know if you have any suggestions for how to think about the computational problems. I didn't really have any problem with them, but I don't feel too comfortable with the end of Section 14. It's not any specific part I don't understand, but it's just hard to keep everything in my mind at once (FHT for instance). Again, there are some unstarred problems listed at the end.\\
+
+\begin{problem1}{2} Find the order of $(\mathbb{Z}_4 \times \mathbb{Z}_{12}) / ( \langle 2 \rangle \times \langle 2 \rangle )$.\\
+
+Well $\phi: (\mathbb{Z}_4 \times \mathbb{Z}_{12}) \to (\mathbb{Z}_2 \times \mathbb{Z}_2)$ defined by $\phi(x,y)=(x\imod{2},y\imod{2})$ is a homomorphism with $\ker\phi=\langle 2 \rangle \times \langle 2 \rangle$. Clearly $\phi$ is onto, so by the Fundamental Homomorphism Theorem,
+ $$(\mathbb{Z}_4 \times \mathbb{Z}_{12}) / ( \langle 2 \rangle \times \langle 2 \rangle ) \cong \phi[\mathbb{Z}_4 \times \mathbb{Z}_{12}]=\mathbb{Z}_2 \times \mathbb{Z}_2,$$ which has order 4.
+ 
+ On the other hand, since $| \langle 2 \rangle | = 2 $ in $\mathbb{Z}_4$ and $| \langle 2 \rangle | = 6 $ in $\mathbb{Z}_{12}$, we see that the subgroup $\langle 2 \rangle \times \langle 2 \rangle$ has order $2\cdot6=12$. Therefore the order of the factor group above, which is the number of cosets of $\langle 2 \rangle \times \langle 2 \rangle $, is just the index $$  \big(\mathbb{Z}_4 \times \mathbb{Z}_{12}: \langle 2 \rangle \times \langle 2 \rangle\big ) = (4\cdot12)/12=4.$$
+\end{problem1}
+
+\begin{problem1}{10} To find the order of $26+\langle 12 \rangle$ in $\mathbb{Z}_{60}/\langle12\rangle$, we will use the Fundamental Homomorphism Theorem. We construct the homomorphism $\phi$ of $\mathbb{Z}_{60}$ onto $\mathbb{Z}_{12}$ defined by $\phi(n)=n\imod{12}$. The kernel is evidently $\langle 12\rangle $, so $$\mathbb{Z}_{60}/\langle12\rangle \cong \phi[\mathbb{Z}_{60}]=\mathbb{Z}_{12}$$ via the group isomorphism $\mu$.\footnote{This is the function $\mu:G/H\to \phi[G]$ that Fraleigh defines as $\mu(gH)=\phi(g)$ in the Fundamental Homomorphism Theorem.} Since $$\mu\big(26+\langle 12\rangle)=\phi(26)=2$$ has order 6 in $\mathbb{Z}_{12}$, we know that the coset $26 + \langle 12 \rangle $ has order 6 in the factor group above.
+
+We can also try to find the least $n\in\mathbb{Z}^+$ such that $$n(26+\langle12\rangle)=n26+\langle12\rangle=\langle12\rangle,$$ which occurs when $n26\in\langle12\rangle=\{0,12,24,36,48\},$ or when $12\vert n26.$ Then the least such positive integer is $$n=\frac{\lcm(12,26)}{26}=\frac{156}{26}=6,$$ as we see that $6(26)=36\in\langle 12 \rangle.$
+\end{problem1}
+
+
+\begin{problem1}{24} Show that $A_n$ is a normal subgroup of $S_n$ and compute $S_n/A_n.$\\
+
+If $n=1$ then both $A_1$ and $S_1$ are trivial, and therefore $S_1/A_1$ is unquestionably trivial. For $n\ge2$, Theorem 9.20 states that $A_n\le S_n$ where $|A_n|=\frac{n!}{2}=\frac{|S_n|}{2},$ and thus $(S_n:A_n)=2$. From Exercise 10.39 we know $A_n$ is normal. As in Example 13.3, we have a homomorphism $\phi: S_n\to \mathbb{Z}_2$ given by $$\phi(\sigma)=\begin{cases} 0 &\text{ if $\sigma$ even}\\ 1 &\text{ if $\sigma$ odd } \end{cases}.$$ Obviously $\ker\phi=A_n$, and from the Fundamental Homomorphism Theorem we have $$A_n/S_n\cong \phi[S_n]=\mathbb{Z}_2.$$
+
+\end{problem1}
+
+
+\begin{problem1}{25} Show that if $H\le G$ and left coset multiplication $(aH)(bH)=(ab)H$ is well defined, then $Ha\subseteq aH$.
+\begin{proof} Let $x\in Ha$. Then $x= h_1a$ for some $h_1\in H$, so $x^{-1}=a^{-1}h_1^{-1}\in a^{-1}H$. Since the cosets partition $G$, this means $x^{-1}H=a^{-1}H$, so $$H=eH=(a^{-1}a)H=(a^{-1}H)(aH)=(x^{-1}H)(aH)=(x^{-1}a)H.$$
+It must be the case that $x^{-1}a\in H$ and because $H$ is a group, $(x^{-1}a)^{-1}=a^{-1}x=h_2$  for some $h_2\in H$. Hence $x=ah_2$ and $x\in aH$.
+\end{proof}
+\end{problem1}
+
+\begin{problem1}{34} If $G$ is finite and $H$ is the only subgroup of a given order $m\in\mathbb{Z}^+$, then $H$ is normal.
+\begin{proof} As above, suppose that $G$ is finite and $H$ is the only subgroup of order $m$. Since $i_g:G\to G$ is a homomorphism, it follows from Theorem 13.12.3 that $i_g[H]$ is a subgroup of $G$. Noting that $i_g$ is one-to-one and clearly $i_g: H \to i_g[H]$ is onto, $i_g[H]$ also has order $m$ and is thus equal to $H$ for all $g\in G$. Therefore $H$ is invariant and by Theorem 14.13, $H$ is normal.
+\end{proof}
+\end{problem1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{center}\textbf{Questions from the Unstarred Problems}\\\end{center}
+
+
+\begin{problem1}{1} Find the order of $\mathbb{Z}_6/\langle 3 \rangle$.\\
+
+First note that the homomorphism $\phi:\mathbb{Z}_6\to\mathbb{Z}_3$ given by $\phi(n)=n\imod{3}$ has kernel $\{0,3\}=\langle 3 \rangle$. Since $\phi$ is onto, by the Fundamental Homomorphism Theorem we have $$\mathbb{Z}_6/\langle 3 \rangle \cong \phi[\mathbb{Z}_6]=\mathbb{Z}_3,$$ and therefore this factor group has order 3.
+
+On the other hand, since $| \langle 3 \rangle |=2$, each coset has order 2 and the number of distinct cosets is exactly the index $(\mathbb{Z}_6 : \langle 3 \rangle ) = 6 / 2 = 3.$
+\end{problem1}
+
+
+\begin{problem1}{13} Find the order of $(3,1)+\langle (0,2) \rangle$ in $(\mathbb{Z}_4\times\mathbb{Z}_8)/\langle(0,2)\rangle$.\\
+
+We need the least $n\in\mathbb{Z}^+$ such that $n(3,1) \in \langle (0,2) \rangle.$ We see that $3n\equiv_40$ when $4|n$ and $1n\equiv_20$ when $2|n$, so the order $n=4$ and $$4[(3,1)+\langle(0,2)\rangle]=(0,4)+\langle(0,2)\rangle=\langle(0,2)\rangle.$$ 
+
+\end{problem1}
+
+
+
+\begin{problem1}{14}\footnote{Do you know a faster why to solve these than tediously computing and checking $(aH)^n$ for all divisors $n|(G:H)$ to find the order of $aH$? I like trying to find homomorphisms with kernel $H$, but it is a bit difficult sometimes- is that what I should be trying to do?} Find the order of $(3,3)+\langle (1,2) \rangle$ in $(\mathbb{Z}_4\times\mathbb{Z}_8)/\langle(1,2)\rangle$.\\
+
+First note that since $|\mathbb{Z}_4\times\mathbb{Z}_8|=4\cdot8=32$ and $| \langle(1,2)\rangle|=4$, the factor group has order $$\big|(\mathbb{Z}_4\times\mathbb{Z}_8)/\langle(1,2)\rangle \big|=\big((\mathbb{Z}_4\times\mathbb{Z}_8):\langle(1,2)\rangle\big)=32/4=8.$$ By Theorem 10.12, we know that the order of the coset $(3,3)+\langle (1,2) \rangle$ is a divisor of 8. We can check in increasing order to find that 
+
+$$1(3,3)=(3,3)\notin\langle(1,2)\rangle $$
+$$2(3,3)=(2,6)\notin\langle(1,2)\rangle $$
+$$4(3,3)=(0,4)\notin\langle(1,2)\rangle, $$
+and from here we can conclude by process of elimination that the order is 8.
+
+\end{problem1}
+
+
+\begin{problem1}{15} Find the order of $(2,0)+\langle (4,4) \rangle$ in $(\mathbb{Z}_6\times\mathbb{Z}_8)/\langle(4,4)\rangle$.\\
+
+Noting that $(2,0) \in \langle(4,4)\rangle$, we see that the order is 1.
+\end{problem1}
+
+\begin{problem1}{21(a)} The teacher expects to find nonsense because although it is not incorrect to call $a$ and $b$ elements of $G/H$, it will be much harder to write clearly with those definitions. Instead, since the elements of $G/H$ are the cosets of $H$, it is better to write $aH, bH\in G/H$ where $a,b\in G$.
+\end{problem1}
+
+
+
+\begin{problem2}{b)} If $H$ is a normal subgroup of an abelian group $G$, then $G/H$ is abelian.
+\begin{proof} By Theorem 14.9, there exists the homomorphism $\gamma:G\to G/H$ defined by $\gamma(x)=xH$. This homomorphism is certainly onto, and by Example 13.2, $G/H$ is also abelian. To reassure ourselves, let $aH,bH\in G/H$. Then $$(aH)(bH)=(ab)H=(ba)H=(bH)(aH).$$
+\end{proof}
+\end{problem2}
+
+
+\begin{problem1}{23}
+\end{problem1}
+
+\begin{problem2}{a)} True
+\end{problem2}
+
+\begin{problem2}{b)} True
+\end{problem2}
+
+\begin{problem2}{c)} True
+\end{problem2}
+
+\begin{problem2}{d)} True
+\end{problem2}
+
+\begin{problem2}{e)} True
+\end{problem2}
+
+\begin{problem2}{f)} False: $\mathbb{Z}$ is torsion free and the factor group $\mathbb{Z}/n\mathbb{Z}\cong \mathbb{Z}_n$, which is not torsion free.
+\end{problem2}
+
+\begin{problem2}{g)} True
+\end{problem2}
+
+\begin{problem2}{h)} False: For any nonabelian group $G$, the improper yet normal subgroup forms the factor group $G/G$ which is trivially abelian.
+\end{problem2}
+
+\begin{problem2}{i)} True
+\end{problem2}
+
+\begin{problem2}{j)} False: $\{nr:r\in\mathbb{R}\}=\mathbb{R}$ for all $n$. Thus $\mathbb{R}/n\mathbb{R}$ is cyclic but of order 1 for all $n$.
+\end{problem2}
+
+
+\begin{problem1}{38} Let $h=\{h\in G : hgh^{-1}=g \text{ for all } x\in G\}$. For $h_1,h_2\in H$, $$(h_1h_2)g(h_1h_2)^{-1}=(h_1h_2)g(h_2^{-1}h_1^{-1})=h_1(h_2gh_2^{-1})h_1^{-1}=h_1gh_1^{-1}=g,$$ so $H$ is closed. Clearly $e\in H$ and for any $h\in H$, $h^{-1}xh=(hx^{-1}h^{-1})^{-1}=(x^{-1})^{-1}=x,$ so $h^{-1}\in H$. We have shown that $H$ is a subgroup; to see normality, let $g\in G$ and $h\in H$. Then \begin{align*} ghg^{-1}&=(hgh^{-1})h(hgh^{-1})^{-1}\\ &=(hgh^{-1})h(h^{-1}g^{-1}h)\\ &=hg(h^{-1}h)h^{-1}g^{-1}h\\ &=hgh^{-1} g^{-1}h=(hgh^{-1})g^{-1}h\\ &=gg^{-1}h=h\end{align*} and thus $ghg^{-1}\in H$. By Theorem 14.13, $H$ is normal.
+\end{problem1}
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

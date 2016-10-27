@@ -1,0 +1,716 @@
+\documentclass[11pt,titlepage]{article}
+
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage[leqno,easyold]{easyeqn}
+% [fleqn,leqno]
+
+
+\newcommand{\cC}{\cal{C}}
+\newcommand{\cF}{\cal{F}}
+\newcommand{\spifff}{\qquad\text{iff}\qquad}
+\newcommand{\spand}{\qquad\text{ and }\qquad}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\ifff}{\Leftrightarrow}
+%\newcommand{\ker}{\text{ker}}
+\newcommand{\hull}{\text{hull}\,}
+\newcommand{\Lan}{\mathcal{L}}
+
+\newcommand{\forward}{\noindent ($\Longrightarrow$) \,\,}
+\newcommand{\back}{\noindent ($\Longleftarrow$) \,\,}
+\newcommand{\R}{\mathbb R} %REALS
+\newcommand{\C}{\mathbb C} %COMPLEX
+\newcommand{\N}{\mathbb N} %NATURAL NUMBERS
+\newcommand{\Q}{\mathbb Q} %RATIONALS
+\newcommand{\Z}{\mathbb Z} %INTEGERS
+
+
+\theoremstyle{definition}
+
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{question}[definition]{Question to Ponder}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{remark}[definition]{Remark}
+\newtheorem{example}[definition]{Example}
+\newtheorem{exercise}[definition]{Exercise}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{proposition}[definition]{Proposition}
+
+\renewcommand{\qedsymbol}{\rule{1mm}{3mm}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%starting document
+
+\begin{document}
+
+\input{title.tex}
+
+\begin{abstract}
+The purpose of this paper is to gain insight to mathematical logic through an algebraic perspective. Although readers with a working knowledge of mathematical logic will see very familiar concepts, the only prerequisite to this paper is an undergraduate level course in abstract algebra. We begin by defining a propositional language and proving a few simple theorems, to be followed by an introduction to boolean algebra and its consistency with the propositional calculus. We will then show how common notions in propositional logic, such as the soundness and completeness theorems, can be viewed as algebraic notions.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+    \section*{Preface}
+      \addcontentsline{toc}{section}{Preface}
+      
+Students of mathematics learn early on the rules of logic by which we can write rigorous proofs. It is quite arguable that the axioms and rules of inference of a particular mathematical theory are the most important parts, as they constitute the foundation of the theory. As mathematicians are wont to do, we ask ourselves how these concepts generalize -- that is, given an axiomatic system and rules of inference, aside from particular theorems that can be proven within the system, what can we say about the system itself? The question is metamathematical, and it is quite an important exploration. Previous work in the 20th century, such as G\"odel's Incompleteness Theorems, tells us that there are certain limitations on different axiomatic systems. In particular those theorems tell us that there is no complete axiomatic system describing simple arithmetic of natural numbers, which means there will be statements that are not provably true or false. However, as we will show in this paper, the propositional calculus is complete.
+
+The final results of this paper are theorems about the propositional calculus, and while they are important results, they can be proven directly from the definitions given in Section~\ref{intro_prop} without much difficulty. It might take an undergraduate level class all of two weeks to build up enough theory to prove these results. However, the importance of this paper does not lie in the theorems themselves, but in their proofs. After introducing Boolean algebra in Section~\ref{intro_ba} and building algebraic machinery in Section~\ref{struct}, the common theorems of propositional calculus in Section~\ref{app_alg} can be proven by viewing the propositional calculus algebraically. The connections are very enlightening, and quite elegant as well.
+
+(A note on methodology: at the beginning of each section, I describe from which source the definitions and theorems may be found. For the most part, the proofs are my own work, as many of the theorems are stated as problems in~\cite{Bell}. The few proofs that rely on arguments from my sources are cited accordingly. The theorems in Section 4, as already stated, are common in the study of mathematical logic. The algebraic proofs however, are solely my own. I worked backwards to find the algebraic results needed, and wrote Section 3 accordingly.)
+
+\section{Introduction to Propositional Calculus}\label{intro_prop}
+
+
+The propositional calculus is very formally the study of particular strings of letters, made up of a certain alphabet. To build up such a study, there are copious necessary definitions. The definitions used in this first section are from~\cite{Halmos}. For those who are familiar with these concepts, the first section may be skipped or perhaps skimmed, to become familiar with the notation used throughout this paper. After Section 1, we assume a basic knowledge of set theoretic notions.
+
+\subsection{Definitions}
+
+Let $\Lan$ denote the propositional language, which consists of an alphabet, from which we can construct sentences. The alphabet has six letters, namely $$\neg, \imp, p, +, (, ).$$
+\begin{definition} The first two letters $\neg$ and $\imp$, which we pronounce as ``not" and ``implies" respectively, are \emph{propositional connectives}. \end{definition}
+\begin{definition}The letter $p$ followed by any finite number of occurrences of $+$, such as $$p\,, \;p^+,\;p^{+++++++},$$ is a {\em propositional variable}.\end{definition}
+\begin{definition} A {\em sentence} of $\Lan$ is defined inductively as follows:
+\begin{enumerate}
+	\item[(i)]{The propositional variables $p\,, \;p^+,\;p^{++},\ldots$ are sentences.}
+	\item[(ii)]{If $x$ is a sentence, then so is $(\neg x)$.}
+	\item[(iii)]{If $x$ and $y$ are sentences, then so is $(x\imp y)$.}
+\end{enumerate}
+The sentence $(\neg x)$ is called the {\em negation} of $x$, and the sentence $(x\imp y)$ is called the {\em implication} of the sentence $y$ from $x$.\end{definition}
+
+With these very formal definitions in place we can unambiguously introduce some abbreviations. The first natural abbreviation is to denote propositional variables $p\,, \;p^+,$ and $p^{++},$ as English letters such as $p, q,$ and $r$. We also introduce the new connective symbols $\lor$ and $\land$, defined so that $$(x\lor y) \ = \ ((\neg x)\imp y)$$ and 
+$$ (x\land y) = (\neg (x \imp (\neg y ))).$$ These symbols are pronounced ``or" and ``and" respectively. From here we also introduce the connective symbol $\ifff$ pronounced ``if and only if" and defined as $$ (x\ifff y) \ = \ ( (x\imp y) \land (y\imp x) ).$$ Of course these new connective symbols could have been included in the formal alphabet, but many formal definitions, such as those of sentences and deductions, are much more concise when only needing to deal with two formal connectives. Lastly, as with many areas in mathematics, we will allow the omission of parentheses in scenarios that lead to no ambiguities. One example is the outermost parentheses of $(x\imp y)$, which are not necessary in describing the sentence itself. As with typical conventions, we allow precedence of negation over all other operations. Also among binary operations, $\lor$ and $\land$ take precedence over $\imp$ and $\ifff$. For example in the definition of $\land$ above, we have $$ x\land y\ =\ \neg (x \imp \neg y ).$$
+
+\subsection{Deductions}
+
+There is a certain type of sentence of $\Lan$ called a {\em theorem}. We will describe these in full shortly, but first we describe a particular kind of theorem called an axiom. If $x, y,$ and $z$ are sentences, then each of the sentences 
+%%%%%HOW do I make T1 all the way to the left?
+\begin{EQA}[c]
+	x\lor x\imp x
+		\label[A1]\\
+	x \imp x\lor y
+		\label[A2]\\
+	x\lor y \imp y\lor x
+		\label[A3]\\
+	(x\imp y)\imp (z \lor x \imp z\lor y)
+		\label[A4]
+\end{EQA}
+are axioms, and all axioms are one of these.
+
+In order to completely describe the set of theorems, we specify a ``rule of inference" called {\em modus ponens}. This rule states that whenever $x$ and $y$ are sentences such that $x$ and $x\imp y$ are theorems, then $y$ is also a theorem.
+\begin{definition}\label{def_thm} We say that $y$ is a {\em theorem} and write $$\vdash y$$ if and only if there is a finite sequence of sentences, whose last term is $y$, such that each sentence in the sequence is either (i) an axiom, or (ii) the result of applying modus ponens to some pair of preceding sentences in the sequence. The finite sequence just described is a {\em deduction} of $y$. \end{definition}
+
+\begin{example}\label{taut.pf} The following is a deduction of the theorem $x \imp x$ as in the previous definition, where the justifications in parentheses are not actually part of the sequence.
+\begin{EQA}[llr]
+&x\imp x\lor x  \qquad\qquad\qquad &\text{(A2)}\\
+&x\lor x \imp x\qquad\qquad\qquad &\text{(A1)}\\
+&(x\lor x\imp x)\imp((x\imp x\lor x)\imp (x\imp x))\qquad\qquad\qquad &\text{(A4)}\\
+&(x\imp x\lor x)\imp (x\imp x)\qquad\qquad\qquad &\text{(MP 2,3)}\\
+&x\imp x\qquad\qquad\qquad &\text{(MP 1,4)}
+\end{EQA}
+\end{example}
+
+
+\begin{definition} \label{propded} Let $A$ be a set of sentences of $\Lan$. We say that a sentence $y$ is {\em deducible} from $A$ and write $$A\vdash y$$ if and only if there is a finite sequence of sentences, whose last term is $y$, such that each sentence in the sequence is either (i) an axiom, (ii) in $A$, or (iii) the result of applying modus ponens to some pair of preceding sentences in the sequence. The finite sequence just described is a deduction of $y$ from $A$.\end{definition}
+
+\begin{definition} \label{consistent} A set of sentences $A$ of $\Lan$ is said to be {\em inconsistent} if $A\vdash x\land \neg x$ for some sentence $x$. A set of sentences is {\em consistent} if it is not inconsistent.
+\end{definition}
+
+\subsection{Semantic Interpretations}
+
+All of the definitions thus far are purely syntactical, built mechanically from certain strings of symbols of $\Lan$. Next we have {\em semantic} definitions.
+\begin{definition}\label{tv} A {\em truth valuation} for $\Lan$ is a particular mapping $v$ assigning each sentence of $\Lan$ to a member of the set $\{0, 1\}$. We define such a truth valuation inductively. First let $v_0$ be any function from the set of propositional variables into the set $\{0,1\}$. Then we extend $v_0$ uniquely into a function $v$ with a domain that is the set of all sentences of $\Lan$, such that for all sentences $x$ and $y$, 
+\begin{EQA}[lcl]
+	v(\neg x) = 1 & \qquad \text{if and only if} \qquad & v(x)=0 \\
+	v(x \imp y) = 1 & \qquad \text{if and only if} \qquad & v(x)=0 \quad\text{ or } \quad v(y)=1.
+\end{EQA} If these conditions are met, then $v$ is a truth valuation.
+\end{definition}
+We can think of these two numbers as truth values, where $0$ is false and $1$ is true.
+\begin{definition} If $x$ is a sentence such that $v(x)=1$ for all possible truth valuations $v$, then we call $x$ a {\em tautology} and write \ $\vDash x.$\end{definition}
+\begin{definition} If $y$ is a sentence such that $v(y)=0$ for all possible truth valuations $v$, then we call $y$ a {\em contradiction}.\end{definition} It is immediate from the definition of truth valuation that if $y$ is a contradiction, then $\neg y$ is a tautology. Hence, in this case we write $\ \vDash \neg y$.
+\begin{definition} A set of sentences $S$ of $\Lan$ is {\em satisfiable} if there is some truth valuation $v$ such that $v(x)=1$ for all $x\in S$. In this case we say $v$ satisfies $S$.\end{definition}
+\begin{definition}\label{s_c} Let $y$ be a sentence and $S$ be a set of sentences of $\Lan$. If for all truth valuations $v$ satisfying $S$, that is for all $v$ such that $v[S]=\{1\}$, it is also the case that $v(y)=1$, then we say that $y$ is a {\em semantic consequence} of $S$  and write $S\vDash y$.\end{definition}
+
+We have now set the stage completely for propositional logic. Of course, what we would like is for the semantic and syntactic concepts to coincide; this is the whole point of defining such a language, to put our intuitive logical reasoning (semantic) into a consistent, purely mechanical form (syntactic). We will consider these questions through algebraic means later on, but first we need to make note of a few properties of the propositional calculus.
+
+
+\subsection{Important Properties of $\Lan$}\label{lan.prop}
+We end this section with the following theorems of $\Lan$.
+\begin{EQA}[llll]
+	T1& \quad x\lor y \ifff y \lor x &\qquad T2 &\quad x\land y \Leftrightarrow y\land x \\
+	T3&\quad x\lor (y\lor z)\Leftrightarrow (x\lor y)\lor z&\qquad T4 &\quad x\land (y\land z)\Leftrightarrow (x\land y)\land z\\
+	T5&\quad (x\lor y)\land y\Leftrightarrow y&\qquad T6 &\quad (x\land y)\lor y\Leftrightarrow y\\
+	T7&\quad (x\lor y)\land z\Leftrightarrow (x\land z)\lor (y\land z)&\qquad T8 &\quad (x\land y)\lor z \Leftrightarrow (x\lor z) \land (y \lor z)\\
+	T9&\quad x\land (y\lor \neg y)\Leftrightarrow x&\qquad T10 &\quad x\lor (y\land \neg y)\Leftrightarrow x
+\end{EQA}
+
+There is really nothing deep in formal deductions, and for the purpose of this paper they are more cumbersome than enlightening. Thus we omit them here and refer the skeptics to~\cite{Halmos}.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction to Boolean Algebra}\label{intro_ba}
+The following section will deal with Boolean algebra in a very general setting, with definitions,  examples, and propositions from \cite[Ch.~4 \S1-2]{Bell}. It is a lengthy excursion from the propositional calculus, but we will see many familiar notions from Section 1 disguised in algebraic notation.
+
+\subsection{Defining a Boolean Algebra}\label{ba.def}
+\begin{definition} A {\em lattice} is a non-empty partially ordered set $\langle L, \leq \rangle$ in which each $x,y\in L$ has a supremum (join) $x\lor y$ and an infimum (meet) $x\land y$.\end{definition} An obvious characterization that will be used frequently is the fact that $$x\leq y\qquad\text{iff}\qquad x\lor y = y \qquad\text{iff}\qquad x\land y= x.$$ As it turns out, Boolean algebra was first defined with sets as elements, so the following example has historical significance.
+
+\begin{example}\label{sets} Let $Y$ be a set. We have the power set under inclusion $\langle \mathcal{P}(Y), \subseteq\rangle$ as a lattice, where $$A\lor B = A \cup B \qquad\text{and}\qquad A\land B=A\cap B.$$ It should be clear that this is a lattice; it is certainly obvious from set theoretic facts that $\subseteq$ is a partial ordering on $\mathcal{P}(Y)$. To see that $A\cup B$ is in fact the supremum of $A$ and $B$, note that of course $A\subseteq A \cup B$ and $B\subseteq A\cup B$. If $A\subseteq C$ and $B\subseteq C$, it follows that $A\cup B\subseteq C$. Hence $A\lor B = A\cup B$. The meet of $A$ and $B$ is similarly seen to be their intersection.
+\end{example}
+
+A first glimpse at the connection to propositional calculus is seen in the following proposition.
+
+\begin{proposition}\label{3B} The following properties hold for any elements $x,y,z$ of a lattice $L$:
+\begin{EQA}[ll]
+	x\lor y = y \lor x &\qquad x\land y = y\land x
+		\label[B1]\\
+	x\lor (y\lor z)=(x\lor y)\lor z &\qquad x\land (y\land z)=(x\land y)\land z
+		\label[B2]\\
+	(x\land y) \lor y = y & \qquad(x\lor y) \land y = y
+		\label[B3]
+\end{EQA} \end{proposition}
+\begin{proof} B1 is rather obvious when we consider $$x\lor y \;=\; \sup\{x,y\}\;=\;\sup\{y, x\} \;=\; y\lor x,$$ and similarly $$x\land y \;=\; \inf\{x,y\}\; =\; \inf\{y,x\} \;=\; y\land x.$$ For B2 we have $$x\leq x \lor (y\lor z)$$ and $$ (y\lor z) \leq x\lor (y\lor z),$$ from which we also have $$y\leq x \lor (y\lor z) \spand z\leq x\lor(y\lor z).$$ The fact that $x\leq x \lor (y\lor z)$ and $y\leq x \lor (y\lor z)$ together imply that $$(x\lor y)\leq x\lor (y\lor z).$$ In the same way, since $z\leq x\lor(y\lor z)$ we have $$(x\lor y) \lor z \ \leq\  x \lor (y\lor z).$$ An identical argument shows that $x \lor (y\lor z) \ \leq \ (x\lor y) \lor z $, and we conclude $x\lor (y\lor z)=(x\lor y)\lor z$. The proof for $x\land (y\land z)=(x\land y)\land z $ is very similar. For B3, we know immediately that $$y\leq y \lor (x\land y).$$ We also have $$y\leq y\spand (x\land y)\leq y,$$ which together imply that $y\lor (x\land y) \leq y$. Hence by antisymmetry we conclude $(x\land y) \lor y = y.$ For the counterpart of B3, we have immediately that $$(x\lor y)\land y \leq y,$$ and of course $$y\leq y \spand y\leq(x\lor y).$$ The two previous inequalities imply that $$y\leq (x\lor y)\land y,$$ and again by antisymmetry we conclude $(x\lor y)\land y= y$.\end{proof}
+
+\begin{definition} A lattice $L$ is \emph{distributive} if for all $x,y,z\in L$,
+$$x\land (y\lor z) = (x\land y)\lor(x\land z),$$$$ x\lor (y\land z) =(x\lor y)\land(x\lor z).$$\end{definition}
+
+Curiously, each of the two distributive properties above implies the other~\cite{Bell}. To show this, suppose the first condition holds. Then
+\begin{EQA}[cl]
+(x\lor y) \land (x\lor z) &= [ (x\lor y) \land x] \lor [(x\lor y)\land z]\\
+				&= [ (x\lor y) \land x] \lor [(x\land z)\lor (y\land z)]\\
+				&= x \lor [(x\land z)\lor (y\land z)]\\
+				&= [x\lor (x\land z) ] \lor (y\land z)\\
+				&= x \lor (y\land z).
+\end{EQA}
+The first three equalities follow from the first distributive property and the last two follow from Proposition~\ref{3B}. The converse is proved similarly.
+
+\begin{definition} A lattice $L$ is \emph{complemented} if there exist both least and greatest elements in $L$, denoted 0 and 1 respectively, and if for each $x\in L$ there exists $y\in L$ such that $$x \lor y =1 \spand x\land y=0.$$
+\end{definition}
+
+\begin{proposition} The only complemented lattice that is totally ordered is trivial~\cite{Bell}.\end{proposition}
+
+ \begin{proof} Let $L$ be a totally ordered and complemented lattice, and let $x\in L$. Then $x$ has a complement $y$ such that $x\lor y=1$ and $x\land y=0$. We know that either $x\leq y$ or $y\leq x$. In the first case, if $x\leq y$ we must have $x\lor y = y$ and $x\land y=x$, which of course means that $y=1$ and $x=0$. If instead $y\leq x$ then $x\lor y = x$ and $x\land y=y$, so that $x=1$ and $y=0$. Hence in any case we have $L=\{0,1\}$.
+ \end{proof}
+ 
+ \begin{proposition} An element of a distribute lattice has at most one complement. \end{proposition}
+ \begin{proof} Let $L$ be a distributive lattice with a 0 and a 1, and suppose $y$ and $y'$ are both complements of an element $x\in L$. Then we have
+ \begin{EQA}
+x\lor y =1,\qquad& x\lor y'=1,\\
+x\land y=0, \qquad& x\land y' =0,
+ \end{EQA} and 
+ 
+ \begin{EQA}[cl]
+ y= y \lor 0 = y \lor (x\land y')& = (y\lor x) \land (y\lor y')\\
+ 					&= 1 \land (y\lor y')\\
+					&= y\lor y',
+ \end{EQA} so that $y' \leq y$. Identically, 
+  \begin{EQA}[cl]
+ y'= y' \lor 0 = y' \lor (x\land y) &= (y'\lor x) \land (y'\lor y)\\
+ 					&= 1 \land (y'\lor y)\\
+					&= y'\lor y,
+ \end{EQA} so that $y \leq y'$. Therefore $y=y'$, so that the complement of $x$ is indeed unique.\end{proof} Of course this means that in a complemented distributive lattice, each element $x$ has a unique complement, which we will denote by $x^*$.
+ \begin{definition} A {\em Boolean algebra} is a complemented distributive lattice.\end{definition}
+
+\subsection{Properties of a Boolean algebra}\label{ba.prop}
+By the results and definitions in Section~\ref{ba.def}, the following hold for any $x,y,z$ in a Boolean algebra:
+\begin{EQA}[ll]
+	x\lor y = y \lor x &\qquad x\land y = y\land x
+		\label[B1]\\
+	x\lor (y\lor z)=(x\lor y)\lor z &\qquad x\land (y\land z)=(x\land y)\land z
+		\label[B2]\\
+	(x\land y) \lor y = y & \qquad(x\lor y) \land y = y
+		\label[B3]\\
+	x\land (y\lor z) = (x\land y)\lor(x\land z) &\qquad x\lor (y\land z) =(x\lor y)\land(x\lor z)
+		\label[B4]\\
+	x\lor x^*=1 &\qquad x\land x^*=0.
+		\label[B5]
+\end{EQA}
+
+\begin{theorem}\label{ba.char} Let $\langle B, \lor, \land,\! \phantom{i}^*, 0, 1\rangle$ be a structure consisting of a set $B$, two binary operations $\lor, \land,$ one unary operation$\phantom{i}^*$, and two designated elements $0,1\in B$. Suppose the identities B1-B5 hold in this structure and define a relation $\leq$ on $B$ by $$x\leq y\spifff x\land y=x.$$ Then $\langle B, \leq \rangle$ is a Boolean algebra \cite{Bell}.\end{theorem}
+\begin{proof} First we must show that $\langle B, \leq \rangle$ is a lattice; to show that $\leq$ as defined above is actually an order relation, first consider reflexivity:
+  \begin{EQA}[clr]
+			      x &= x\land (x\lor x^*) & \mbox{by B3}\\
+				&= (x\land x) \lor (x\land x^*) & \mbox{by B4} \\
+				&= (x\land x) \lor 0 & \mbox{by B5}\\
+				&= (x\land x) \lor [(x\land x) \land (x\land x)^*] & \mbox{by B5}\\
+				&=[(x\land x) \lor (x\land x)] \land [(x\land x)\lor (x\land x)^*] & \mbox{by B4}\\
+				&=\Big((x\land x) \land  [(x\land x)\lor (x\land x)^*]\Big)\lor \Big((x\land x) \land  [(x\land x)\lor (x\land x)^*]\Big) & \mbox{by B4} \\
+				&= (x\land x) \lor (x\land x) & \mbox{by B3}\\
+				&= [(x\land x)\lor x] \land [(x\land x)\lor x] & \mbox{by B4} \\
+				&=x\land x & \mbox{by B3}
+\end{EQA}
+Therefore we have $x\leq x$. For antisymmetry, suppose that $x\leq y$ and $y\leq x$. Then we have two equations $x\land y= x$ and $y\land x = y$. Of course from B1, we have $$x = x\land y = y\land x = y,$$ so $\leq$ is indeed antisymmetric. Finally for transitivity suppose that $x\leq y$ and $y\leq z$. Then $x\land y =x $ and $y\land z =y$, so $$x\land z = (x\land y) \land z = x\land (y\land z) = x\land y = x,$$ and we conclude $x\leq z$. So $\langle B, \leq \rangle$ is a partially ordered set; since we are guaranteed $0,1\in B$ we know that $B$ is nonempty. Next we must show that any two elements $x,y \in B$ have both a supremum and infimum, namely $x\lor y$ and $x\land y$ respectively. To see that $x\land y$ is a lower bound for $\{x,y\}$, recall first that in the proof of reflexivity, we showed $x\land x = x$. Hence by B1 and B2, $$(x\land y)\land x = x\land (x\land y) = (x\land x)\land y = x\land y,$$ so $x\land y \leq x.$ Obviously $$(x\land y)\land y = x\land (y\land y) = x\land y$$ as well, so that $x\land y\leq y$ and therefore $x\land y$ is a lower bound for $\{x,y\}$. To see that it is the infimum, suppose $z\in B$ is any lower bound for $\{x,y\}$. This means that $z\leq x$ and $z\leq y$, so we have the two equations $z=x\land z$ and $z=y \land z$. We wish to show that $z\leq x\land y$, which follows easily: $$z\land (x\land y) = (z\land x) \land y = z \land y = z,$$ or equivalently $z\leq x\land y.$ Therefore $x\land y = \inf\{x,y\}$. The proof that $x\lor y=\sup\{x,y\}$ is very similar, so we omit it for the sake of brevity. We have now shown that $\langle B, \leq \rangle$ is a lattice. The fact that this lattice is distributive follows from B4. All that remains is to show that this lattice is complemented. This requires least and greatest elements, which are predictably going to be the designated elements 0 and 1. For any $z\in B$, recall that by reflexivity, $z=z\land z$. Then
+\begin{EQA}[llr]
+0 \land z &= (z\land z^*) \land z \quad\quad\quad\quad\quad& \mbox{by B5}\\
+				&=z\land (z\land z^*)  & \mbox{by B1}\\
+				&=(z\land z) \land z^* & \mbox{by B2}\\
+				&=z\land z^* & \mbox{by reflexivity}\\
+				&=0 & \mbox{by B5}
+\end{EQA} 
+so $0\leq z$ for all $z\in B$. Also
+\begin{EQA}[llr]
+z \land 1 &= z \land (z\lor z^*) \quad\quad\quad\quad\quad\quad\quad\quad& \mbox{by B5}\\
+		&=z & \mbox{by B3}
+\end{EQA} 
+shows that $z\le 1$ for all $z\in B$. The unary operator will yield complements: for any $z\in B$ we have the element $z^*$ such that $z\lor z^* =1$ and $z\land z^*=0$, directly from B5. Therefore $\langle B, \leq \rangle$ is a complemented distributive lattice which is of course a Boolean algebra.
+\end{proof}
+
+The characterization in Theorem~\ref{ba.char} will be used frequently, and will be the key to viewing the propositional calculus as an algebraic structure. We can also see from the symmetry in this characterization the {\em principle of duality}, which is the observation that if a statement {\bf P} is true about all Boolean algebras, then the \emph{dual} of {\bf P} which is obtained from {\bf P} by interchanging $\land$ with $\lor$, and 0 with 1, is also true. We can see that the structure described in Theorem~\ref{ba.char} would obviously remain the same if the two columns describing B1-B5 were swapped. This effectively allows us to cut the number of our theorems in half!
+
+\begin{theorem} The principle of duality holds in all Boolean algebras. \end{theorem}
+
+\begin{proof} This proof closely follows the argument in~\cite{Bell}. Suppose a statement {\bf P} holds in all Boolean algebras, and let $\langle B, \leq \rangle$ be any such Boolean algebra. We will define a new relation $\leq'$ on $B$, such that $$x\leq' y\spifff y\leq x.$$ This is evidently another partial ordering on $B$, where the join (meet) of $x$ and $y$ with respect to $\leq'$ is precisely their meet (join) with respect to $\leq$. We will show one of these facts to illustrate: to show that the new join $x \lor' y$ is precisely the meet $x\land y$, first note that $x\lor' y=x\land y$ is in fact an upper bound for $\{x,y\}$ with respect to $\leq'$. We have $ x\land y\leq x$ and $ x\land y\leq y,$ so that $x\leq' x\land y=x\lor ' y$ and $y\leq ' x\land y=x\lor' y$. Next let $z$ be any upper bound for $\{x,y\}$ with respect to $\leq'$. Then we have $x\leq' z$ and $y\leq' z$, which of course means that $z\leq x$ and $z\leq y$. So $z$ is a lower bound for $\{x,y\}$ with respect to $\leq$, so we must have that $z\leq x\land y$. Then $x\lor'y=x\land y \leq' z$, so in fact $\lor' = \land$ is well defined as a join operator with respect to $\leq '$. A similar argument shows that $\land' = \lor$ is well defined as a new meet operator with respect to $\leq'$. Also since $0\leq z \leq 1$ for all $z\in B$, we have $1\leq' z\leq ' 0$, so that 1 and 0 are now the least and greatest elements with respect to $\leq'$, so we may as well call them $0'$ and $1'$ respectively. Complementation remains the same; from B5 we have the least element $0'=1 = x\lor x^* = x\land' x^*$, and the greatest element $1'=0=x\land x^*=x\lor' x^*$.
+
+Since {\bf P} was assumed to hold in all Boolean algebras, it must hold in $\langle B, \leq' \rangle$. But the coinciding of $\lor' =\land$, $\land'=\lor$, $0'=1,$and $1'=0$ means that the dual of {\bf P} must also hold in $\langle B, \leq \rangle$.
+\end{proof}
+
+To illustrate the convenience of duality, we will prove the following small yet useful fact.
+
+\begin{proposition}\label{duality_ex} For any elements $x$ and $y$ of a Boolean algebra $B$, $$ (x\land y)^*=x^*\lor y^*.$$\end{proposition}
+\begin{proof} We have 
+\begin{EQA}[llr] (x^*\lor y^*)\land (x\land y) &= [ x^*\land (x\land y) ] \lor [y^*\land (x\land y)]\\
+								&=[(x^*\land x)\land y]\lor [(y^*\land y)\land x]\\
+								&=[0\land y] \lor [ 0 \land x]\\
+								&= 0\lor 0\\
+				 				&=0.
+\end{EQA} Also
+\begin{EQA}[ll] (x^*\lor y^*)\lor (x\land y) &= [ (x^*\lor y^*) \lor x ] \land [(x^*\lor y^*)\lor  y]\\
+								&=[(x^*\lor x)\lor y^*]\land [x^* \lor (y^*\lor y)]\\
+								&=[1\lor y^*] \land [ x^* \lor 1]\\
+								&= 1\land 1\\
+				 				&=1.
+\end{EQA}
+Since complements in $B$ are unique, we have $(x\land y)^*=x^*\lor y^*.$
+\end{proof}
+\begin{corollary} For any elements $x$ and $y$ of a Boolean algebra $B$, $$ (x\lor y)^*=x^*\land y^*.$$\end{corollary} This follows immediately from Proposition~\ref{duality_ex} and the principle of duality. For the remainder of this paper we will refer to duality very frequently; for those who may be unsatisfied with the above proof of this principle, refer to \cite[Ch. 22]{Halmos} for a more detailed discussion.
+
+\subsection{Examples of Boolean Algebras}
+
+We have already seen that the power set $\mathcal{P}(X)$ of a set $X$ under set inclusion is a lattice; it is not too difficult to see that it is also a Boolean algebra.
+\begin{example} The power set lattice $\langle \mathcal{P}(X), \subseteq\rangle$ is a Boolean algebra, where
+\begin{EQA}[rclrcl]
+A\lor B &=& A\cup B, \qquad &A \land B &=& A \cap B,\\
+0 &=& \emptyset,  & 1&=&X,\end{EQA}
+$$A^*=X\setminus A.$$
+Distribution of intersection over union and union over intersection are well known set-theoretic facts. Complements of sets are also readily seen as consistent with complementation as defined for a Boolean algebra.\end{example} 
+
+\begin{example} Define a total ordering $\leq$ on the two-element set ${\bf 2}=\{0,1\}$ by $$0\leq 0,\quad 0\leq 1,\quad 1\leq 1.$$ Then $\langle {\bf 2}, \leq\rangle$ is a Boolean algebra called the {\em minimal algebra}. This minimal algebra will come up quite often in our talk of homomorphisms later on; in fact, this ``trivial" algebra is fundamental in our connection of Boolean algebra to propositional calculus.
+\end{example}
+
+Finally, the most important example:
+\begin{example}\label{lb.ex} Let $\Lan$ be the propositional language described in Section~\ref{intro_prop} and let $S$ be the set of all sentences of $\Lan$. Define the relation $\equiv$ such that for $x,y\in S$, $$x\equiv y \spifff \vdash x\ifff y.$$ Then $\equiv$ is easily seen to be an equivalence relation: reflexivity follows from the tautology $x\imp x$; symmetry follows from T2 by considering $x\ifff y = (x\imp y) \land (y\imp x)$; transitivity follows directly from A4.
+
+For each $x\in S$, let $|x|$ denote the $\equiv$-class of $x$, and let $B=\{|x|:x\in S\}$ be the set of all $\equiv$-classes. Define the relation $\leq$ on $B$ by $$|x|\leq |y| \spifff \vdash x\imp y,$$ and define join, meet, and complementation as follows: $$|x|\lor |y| = |x\lor y|, \qquad |x|\land |y|=|x\land y|, $$ $$ |x|^*=|\neg x|.$$ Assign the values $1=|x|$ for any theorem $x$ and $0=|y|$ for any $y$ such that $\neg y$ is a theorem. Note that above, although the symbols are identical, the first instances of $\lor$ and $\land$ are newly defined, acting as join and meet on $B$, while the second occurrences are the propositional connectives defined in Section~\ref{intro_prop}. We will show that these operations and assignments are well defined in the following theorem. As an aside, the fact that these operations are well defined is similar to saying that $\equiv$ is a congruence relation, and thus $B$ is a quotient algebra. The only reason this is not exactly the case is because the set of all sentences isn't originally endowed with the Boolean operations and ordering, so to say elements in the equivalence classes are congruent with respect to those operations is not a properly stated sentence; however, the equivalence classes themselves now act as the elements of a Boolean algebra, as stated in the following theorem.
+\end{example}
+
+\begin{theorem}The set $B$ with relations and operations defined above is a Boolean algebra, called the \emph{Lindenbaum algebra}\footnote{The Lindenbaum algebra, or Lindenbaum-Tarski algebra is named for logicians Adolf Lindenbaum and Alfred Tarski. It was first introduced by Tarski in 1935 as a device to establish correspondence between classical propositional calculus and Boolean algebras. The Lindenbaum-Tarski algebra is considered the origin of the modern algebraic logic [5].} of $\mathcal{L}$~\cite{Bell}. \end{theorem}
+\begin{proof} We hope the reader is satisfied with the informal argument of $\equiv$ being an equivalence relation; to be sure, a rigorous proof would actually rely on formal deductions as in Section~\ref{intro_prop}, which as we've already mentioned are usually more tedious than enlightening. With that fact in hand, the next step in this proof is to show that $\leq$ is well defined. This means that if $x_2 \in |x_1|$ and $y_2\in |y_1|$, then $$|x_1|\leq |y_1|\quad\text{implies}\quad|x_2|\leq|y_2|,$$ or as we defined the relation above, $$\vdash x_1\imp y_1 \quad\text{implies}\quad \vdash x_2\imp y_2.$$ But here, $x_1 \equiv x_2$ means precisely that $\vdash x_1 \ifff x_2,$ and similarly $\vdash y_1 \ifff y_2.$ Again, technically a formal proof is necessary, but we will be informal for the sake of brevity. From A4 we can obtain $$\vdash(x_1\imp y_1) \imp \big( (x_2\imp x_1)\imp (x_2\imp y_1) \big),$$ from which a few applications of modus ponens yields \ $\vdash x_2 \imp y_1.$ Again an instance of A4 is $$\vdash (y_1\imp y_2)\imp \big( (x_2\imp y_1 ) \imp (x_2\imp y_2)\big),$$ and it follows from modus ponens that $\vdash x_2\imp y_2$. Therefore $|x_2|\leq |y_2|$ and we conclude that $\leq$ is well defined.
+
+Next we must show that the join operation is well defined. As above, suppose that $x_1\equiv x_2$ and $y_1\equiv y_2.$ We must show that $x_1\lor y_1 \equiv x_2\lor y_2.$ Again this is equivalent to showing that if $x_1\ifff x_2$ and $y_1\ifff y_2$ are theorems, then so is $x_1\lor y_1 \ifff x_2\lor y_2.$ As a few instances of A4 we have $$\vdash(y_1\imp y_2) \imp \big( (x_2 \lor y_1) \imp (x_2\lor y_2)\big),$$$$\vdash(x_1\imp x_2)\imp \big((y_1\lor x_1)\imp (y_1\lor x_2)\big),$$$$\vdash\big( (x_2 \lor y_1) \imp (x_2\lor y_2)\big) \imp\big[ \big((x_1\lor y_1)\imp (x_2\lor y_1)\big) \imp\big((x_1\lor y_1)\imp (x_2\lor y_2)\big)\big].$$  Multiple applications of modus ponens and the commutativity in T1 will yield that $\vdash x_1\lor y_1 \imp x_2\lor y_2$. Switching around the indices in this argument will also show that $\vdash x_2\lor y_2 \imp x_1\lor y_1$, so that $$\vdash x_1\lor y_1 \ifff x_2\lor y_2$$ which means $x_1 \lor y_1 \equiv x_2\lor y_2$, so $\lor$ is well defined.
+
+
+To show that complementation is well defined, suppose $x\equiv y$. Then $\vdash x\ifff y$, and it follows from A3 that
+\begin{EQA}[ll] x\imp y &= \neg x \lor y\\
+				&\imp y \lor \neg x\\
+%					\label[by T1]\\
+				&=\neg y \imp \neg x,\\
+		    y\imp x &= \neg y \lor x\\
+		    		&\imp x \lor \neg y\\
+				&= \neg x \imp \neg y,
+\end{EQA} and therefore from $x\ifff y$ it can be deduced that $\neg x\ifff \neg y$. This means that $x\equiv y$ if and only if $\neg x \equiv \neg y$, so that $|x|^* = |\neg x|$ is well defined.
+
+
+To show that the meet operation is well defined, we rely on the fact that $\land$ can be defined in terms of $\lor$ and $\neg$ in the propositional calculus. As above, suppose that $x_1\equiv x_2$ and $y_1\equiv y_2.$ From above we know that $\neg x_1\equiv\neg x_2$ and $\neg y_1\equiv \neg y_2,$ and also $$\neg x_1 \lor \neg y_1 \equiv \neg x_2 \lor \neg y_2.$$ By definition this means $$x_1 \imp \neg y_1 \equiv x_2 \imp \neg y_2.$$ Finally, again since complementation is well defined, $$\neg(x_1 \imp \neg y_1) \equiv \neg(x_2 \imp \neg y_2),$$ which by definition of $\land$ over sentences means precisely that $$x_1\land y_1 \equiv x_2\land y_2.$$ We conclude that meet is also well defined.
+
+Next we consider the definitions for the least and greatest element of $B$. To show that these are well defined, we must prove that for any theorems $x$ and $y$, $\vdash x\ifff y$. This shows that the greatest element is defined, and from this and the fact that complementation is well defined, we can infer that the least element is also well defined. First note that the axioms A2 and A3 together imply that $\vdash x \imp (y\imp x)$ for any sentence $x$. Thus for any theorems $x$ and $y$,
+$$\vdash x \imp (y\imp x),$$$$\vdash y \imp (x\imp y),$$ $$\vdash x,$$ $$\vdash y,$$ and a few applications of modus ponens will show that $\vdash x\ifff y$, so that $|x|=|y|$. As mentioned above, it follows that both the least and greatest elements are well defined.
+
+Now that we know the definitions given in Example~\ref{lb.ex} are valid, we will use Theorem~\ref{ba.char} to show that these operations form a Boolean algebra on $B$. Note that the theorems proven in Section~\ref{lan.prop} coincide directly with the properties B1-B4 from Theorem~\ref{ba.char}. For example the fact that T1 is a theorem shows that $x\lor y\equiv y\lor x$, so that $$|x\lor y| = |y\lor x|$$ and thus $$|x|\lor |y| = |y| \lor |x|.$$ In this way, the properties B1-B4 are immediate. We know from Example~\ref{taut.pf} that \ $\vdash \neg x \lor x$, and from above we have $$1=|\neg x \lor x| = |x|^*\lor |x| =|x|\lor |x|^*  .$$ Also note that since $x \imp x$ is a theorem for any sentence $x$, replacing $\neg x$ for $x$ shows that $ \neg x \imp \neg x$ is also a theorem. Hence $$0=|\neg(\neg  x\imp \neg x)|= |\neg x \land  x|  = | x|^* \land | x|=|x|\land| x|^* .$$ Therefore B5 is also satisfied, so $B$ is a Boolean algebra.\end{proof}
+
+Although the formalities in the syntax of propositional language may be opaque, the coinciding of propositional connectives ``or," ``and," and ``not" with the algebraic operations join, meet, and complementation should be intuitive. For instance, the familiar notion of double negation in a logic setting would lead us to believe (or at least hope) that \ $\vdash \neg\neg x \ifff x$. Although a formal proof could show this, the construction would be much more difficult than such a small result deserves. However, this notion is rather obvious when we think of sentences (to be precise, equivalence classes of provably equivalent sentences) in the Lindenbaum algebra. Of course since complementation is unique in any Boolean algebra $B$, we must have $x^{**}=x$ for any $x\in B$. In the Lindenbaum algebra this means that $|x|^{**}=|x|$, which is true if and only if $\ \vdash \neg \neg x \ifff x$. So, while the proof above may have seemed so terribly cumbersome, this result really does allow us to use significant machinery from algebra to simplify the concepts in a formal propositional calculus.
+
+Another familiar notion is the fact that anything is implied from a false hypothesis. Formally, we might conjecture that $ \ \vdash (x\land\neg x) \imp y$ for any sentences $x$ and $y$. Of course, since $0=|x|\land|x|^*= |x\land \neg x|$ and $0\leq |y|$ for all $|y| \in B$, we see that the conjecture is true. These facts not only satisfy the craving of shorter and more elegant proofs, but also they help assure us that we defined the propositional calculus correctly.
+
+We are almost in a position to further explore the properties of the propositional calculus. The next section will again be in a general Boolean algebra setting, and then we will return to the Lindenbaum algebra in Section~4.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Structure of a Boolean Algebra}\label{struct}
+
+For this section, let $B$ be any Boolean algebra. 
+\subsection{Homomorphisms}
+
+The following are familiar definitions in any study of algebra.
+
+%\begin{definition} A {\em Boolean subalgebra} of $B$ is a subset $A$ of $B$ that is also a Boolean algebra under the induced operations from $B$. \end{definition}
+
+\begin{definition} A {\em Boolean homomorphism} is a function $h: B\to B'$ for Boolean algebras $B$ and $B'$ such that for all $x,y\in B$, $$h(x\lor y)=h(x)\lor h(y),$$ $$h( x \land y)=h(x)\land h(y),$$ and $$h(x^*) =  h(x)^*.$$
+\end{definition} Be sure to recognize that we have used the universal Boolean symbols for join, meet, and complementation, but really $B$ and $B'$ could be defined with different operations. Thus in the definition above, the operations on $x$ and $y$ are in $B$ and those on $h(x)$ and $h(y)$ are in $B'$.
+
+\begin{definition} The {\em kernel} of a Boolean homomorphism $f$ is the set $$\ker f = f^{-1}[\{0\}].$$ In words, the kernel is the subset of the domain that maps to the least element in the codomain of $f$. We also define the {\em hull} of $f$ as the set $$\hull f= f^{-1}[\{1\}].$$ Note that these two definitions are dual to one another. That is, if something is true about the set of elements mapping to the least element in the codomain of $f$, then there will be a parallel result for the set of elements mapping to the greatest element in the codomain of $f$.\end{definition}
+
+%The principle of duality gives a nice symmetry for the roles of kernel and hull in our exploration.
+\begin{proposition} \label{1.1}A homomorphism $f: B \to B'$ is one-to-one  if and only if either the kernel of $f$ is trivial or the hull of $f$ is trivial.\end{proposition}
+\begin{proof} First note that we must have $0\in\ker f$, because for any $x\in B$, $$f(0)=f(x\land x^*) = f(x)\land f(x)^* = 0.$$ Also we see as a result from the dualism between kernels and hulls that $x\in\ker f$ \ if and only if \ $x^*\in\hull f$, because $$f(x)=0 \spifff f(x)^*=0^* \spifff f(x^*)=1.$$ Thus we see that since $0$ is always in the kernel of a homomorphism, 1 is always in the hull. Furthermore, this shows that the kernel of $f$ is trivial if and only if the hull of $f$ is trivial.
+
+\forward Of course if $f$ is one-to-one then there will only be one element in the kernel, namely 0. Moreover 1 will be the only element in the hull.
+
+ \back Conversely, suppose $\ker f =\{0\}$. As argued above, this implies $\hull f =\{1\}.$ Then if $f(a)=f(b),$ we have $$0=f(a) \land f(a)^* = f(a)\land f(b)^*=f(a\land b^*),$$ and it must be the case that $a\land b^*=0$. Similarly $$1=f(a)\lor f(a)^*= f(a)\lor f(b)^*=f(a\lor b^*),$$ so we have $a\lor b^* =1$ as well. Thus $b^*$ is the complement of $a$ and since complements are unique, we must have $a=b$ so that $f$ is one-to-one.
+\end{proof}
+
+
+\subsection{Ideals and Filters}\label{filterintro}
+
+The definitions in this section are mostly from~\cite{Halmos}. A few useful and equivalent definitions from~\cite{Bell} are noted as well.
+\begin{definition} A {\em Boolean ideal} is a subset $I$ of $B$ such that \begin{enumerate}[(i)]	
+\item{$0\in I$,}
+\item{if $x\in I$ and $y\in I$, then $x\lor y\in I$,}
+\item{if $x\in I$ and $y\in B$, then $x\land y\in I$.}
+\end{enumerate} \end{definition}
+
+\begin{definition} We define the dual concept of an ideal, called a {\em Boolean filter} as a subset $F$ of $B$ such that \begin{enumerate}[(i)]
+\item{$1\in F$,}
+\item{if $x\in F$ and $y\in F$, then $x\land y\in F$,}
+\item{if $x\in F$ and $y\in B$, then $x\lor y\in F$.}
+\end{enumerate}
+\end{definition}
+
+A familiar algebraic result follows for Boolean algebra.
+
+\begin{proposition}\label{k=I} The kernel of any Boolean homomorphism is a Boolean ideal.\end{proposition}
+\begin{proof} Let $f:B\to B'$ be a homomorphism for Boolean algebras $B$ and $B'$ and let $I=\ker f$. As discussed in the proof of Proposition~\ref{1.1} we know that $0\in I$. Next suppose that $x, y \in I$, which means that $f(x)=f(y)=0$. Then $$f(x\lor y)=f(x)\lor f(y) = 0\lor 0 = 0,$$ so we have $x\lor y\in I$ as well. Finally if $x\in I$ and $z\in B$, we have $$f(x\land z)=f(x)\land f(z)=0\land f(z)=0,$$ so $x\land z\in I$. Therefore $\ker f$ is an ideal. \end{proof}
+
+\begin{corollary} \label{hull} The hull of any Boolean homomorphism is a Boolean filter.\end{corollary}
+The previous corollary follows directly from Proposition~\ref{k=I} and the principle of duality. We note that if the reader is unsettled by using the principle of duality blindly, one can easily typographically take the dual of the proof above and see that it is a valid proof for the corollary. Of course in taking the dual we replace the word ``kernel" with ``hull," and ``ideal" with ``filter."
+
+We pause to make a few observations of ideals and filters. If $I$ is an ideal and $F$ is a filter, note that condition (iii) implies that whenever $1\in I$, it must be the case that $I=B$, in which case we say $I$ is {\em improper}. Also whenever $0\in F$, we have $F=B$ and $F$ is improper.
+
+Also a very important characterization (from the definition of ideals and filters as given in~\cite{Bell}) is the fact that for ideals, condition (iii) can be replaced by \begin{center}(iii) if $x\in I$ and $y\leq x$, then $y\in I$,\end{center} and similarly for filters, 
+\begin{center}(iii) if $x\in F$ and $x\leq y$, then $y\in F$.\end{center} This is because $$y\leq x\spifff y=y\land x$$ and $$x\leq y \spifff y = x\lor y.$$ This characterization will be used frequently, as it begets a nice picture: in the lattice $B$, ideals are built from the top down while filters are built from the bottom up. One might say that ideals are {\em closed downward} while filters are {\em closed upward}.
+
+One important ingredient before discussing the implications of this deep connection between Boolean algebra and propositional logic is familiarity with the concept of a filter generated by a subset of $B$. Although the algebraist is probably more comfortable working with ideals, we will be working with filters in the Lindenbaum algebra, and the reason will become clear as we go on. We will mainly be interested in proper filters; note that from the reasoning above, we can say that $F$ is a proper filter in $B$ if and only if 
+\begin{enumerate}[(i)]
+\item{$1\in F$,}
+\item{if $x\in F$ and $y\in F$, then $x\land y\in F$,}
+\item{if $x\in F$ and $x\leq y$, then $y\in F$,}
+\item{$0\notin F$.}
+\end{enumerate}
+
+With this characterization we are better equipped to discuss a filter generated by a subset.
+
+\begin{definition} The filter $F$ generated by a subset $X$ of $B$ is the smallest filter containing $X$. If $F$ is generated by a singleton, then $F$ is said to be {\em principal}.\end{definition}
+
+This is a familiar definition, but the construction of this set in the next theorem will be of great importance. The following definition and theorem come from~\cite{Bell}.
+
+\begin{definition} A subset $X$ of $B$ is said to have the {\em finite meet property} if whenever $x_1,x_2,\ldots,x_n \in X$, we have $x_1\land x_2 \land \cdots \land x_n \ne 0$.\end{definition}
+
+To make the following theorem less cluttered, we will adopt a notation for finite joins and meets: $$ \bigvee_{i=1}^n x_i = x_1\lor \cdots\lor x_n$$ and $$ \bigwedge_{i=1}^n x_i = x_1\land \cdots\land x_n.$$
+
+\begin{theorem}\label{fmp} A subset $X$ of a Boolean algebra $B$ is included in some proper filter in $B$ if and only if $X$ has the finite meet property. \end{theorem}
+
+\begin{proof} The following argument closely follows that of~\cite{Bell}.\\
+\forward Suppose $X$ is included in a proper filter $F$. For any $x_1,\ldots,x_n\in X$, we see that by condition (ii) we have $$x_1\land x_2 \in F,$$ $$ (x_1\land x_2) \land x_3 \in F,$$ and inductively we see that $x_1\land\cdots\land x_n \in F$. Since $F$ is proper it must be the case that $x_1\land\cdots\land x_n \ne 0,$ so $X$ does have the finite meet property.
+
+\back Conversely suppose that $X$ has the finite meet property. If $X$ is empty then of course $X$ is contained in every filter of $B$, so suppose $X\ne\emptyset.$ Define %$$X^+=\{y\in B: \text{ there exist } x_1,\ldots x_n \in X \text{ such that } x_1\land\cdots\land x_n \leq y\}.$$
+%$$X^+=\Big\{y\in B:  \bigwedge_{i=1}^n x_i  \leq y \text{ for some } x_1,\ldots x_n \in X\Big\}.$$
+$$X^+=\{y\in B: x_1\land \cdots\land x_n  \leq y \ \text{ for some } \ x_1,\ldots ,x_n \in X\}.$$ Of course $X\subseteq X^+,$ and we will show that $X^+$ is indeed a proper filter, namely the one generated by $X$. Recall the four properties above that determine a proper filter. We have (i) $1\in X^+$ because we are considering $X$ nonempty, so there must exist $x\in X$ and of course $x\leq 1$. To show that (ii) $X^+$ is closed under meet, let $y,y' \in X^+.$ Then there exist $x_1,\ldots,x_n , x_1',\ldots,x_m' \in X$ such that
+ $$\bigwedge_{i=1}^{n} x_i  \leq y \spand \bigwedge_{i=1}^{m} x_i' \leq y'.$$ 
+ Of course this means that 
+ $$\Big(\bigwedge_{i=1}^n x_i\Big)  \land y = \bigwedge_{i=1}^n x_i $$ 
+ and 
+ $$\Big(\bigwedge_{i=1}^m x_i'\Big) \land y'=\bigwedge_{i=1}^m x_i '.$$
+ Therefore
+ \begin{EQA}[cl]
+ \Big(\bigwedge_{i=1}^n x_i \  \land \ \bigwedge_{i=1}^m x_i ' \Big) \ \land\ \Big(y\land y'\Big) &= \Bigg[\Big(\bigwedge_{i=1}^n x_i \Big)  \land y\Bigg] \land \Bigg[\Big(\bigwedge_{i=1}^m x_i '\Big) \land y'\Bigg] \\
+ &= \Big(\bigwedge_{i=1}^n x_i \Big) \land \Big(\bigwedge_{i=1}^m x_i ' \Big)\\
+ &=\bigwedge_{i=1}^n x_i  \ \land\ \bigwedge_{i=1}^m x_i ' ,
+ \end{EQA} which is true if and only if $$\bigwedge_{i=1}^n x_i \  \land \ \bigwedge_{i=1}^m x_i ' \ \leq\ y\land y'.$$ Therefore $y\land y' \in X^+$, so condition (ii) is satisfied. The fact that (iii) is satisfied is immediate from the construction of $X^+$. Finally since $X$ has the finite meet property, we know that $x_1\land\cdots\land x_n \ne 0$ for any $x_1,\ldots,x_n \in X$, so that we always have $0 < x_1\land\cdots\land x_n$. Hence $0\notin X^+$ and therefore $X^+$ is a proper filter containing $X$, which completes the proof. \end{proof}
+
+Of course $X^+$ is the smallest such filter containing $X$. If we consider any filter $F$ such that $X\subseteq F$, recall that filters are closed upward; to be precise, $F$ is closed under meet and contains all elements greater than any given element in $F$. We see from the definition of $X^+$ that since $X\subseteq F$, it must also be the case that $X^+\subseteq F$. Thus we regard $X^+$ as a constructive characterization for the filter generated by a nonempty set $X$. If $X$ is empty then of course the filter generated by $X$, which we recall is defined as the smallest filter containing $X$, is simply the trivial filter $\{1\}$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Ultrafilters}
+
+Those with a knowledge of abstract algebra recognize the importance of a particular type of ideal called a maximal ideal. Just as filters are dual to ideals, an ultrafilter is dual to a maximal ideal. For reasons we will see in the following section, ultrafilters are yet another key component in connecting the propositional calculus to Boolean algebra. The definitions and results in this section are mainly from~\cite{Bell}.
+
+\begin{definition}\label{def_uf} An {\em ultrafilter} is a proper filter $F$ of a Boolean algebra $B$ that is not properly contained in any other proper filter. That is, if $F'$ is a filter and $F\subseteq F'\subset B$, then $F=F'$.\end{definition}
+
+To guarantee the existence of such ultrafilters, we will show that any proper filter $F$ in $B$ is contained in an ultrafilter. This will rely on Zorn's Lemma, which is stated below.\\
+
+\noindent {\bf Zorn's Lemma.} If a nonempty partially ordered set $(P,\leq)$ has the property that every nonempty chain (totally ordered subset) has an upper bound in $P$, then $P$ contains at least one maximal element. That is, $P$ contains an element $m$ such that there is no $x\in P$ for which $m<x$.\\
+
+Zorn's Lemma is equivalent to the axiom of choice, and we will use it freely.
+
+\begin{theorem}\label{ultra_exis} Each proper filter $F$ in a Boolean algebra $B$ is contained in an ultrafilter. \end{theorem}
+\begin{proof} Let $\cF$ be the set of all proper filters containing $F$; then $\cF$ is partially ordered under set inclusion, as in Example~\ref{sets}. Also since $F$ contains itself, $\cF$ is nonempty. Just as in \cite{Bell} and \cite{Fraleigh}, we will invoke Zorn's Lemma on chains in $\cF$. We must show that chains have upper bounds in this setting.
+
+Let $\cC$ be a nonempty chain in $\cF$, and let $M=\bigcup\cC$. We will show that $M$ is a proper filter containing $F$ and thus an upper bound for the chain $\cC$. We already have $1\in M$ because 1 is in every filter and we are considering a nonempty chain. If $x, y\in M$ then we must have $x\in X$ and $y\in Y$ for some filters $X$ and $Y$ in $\cC$. Since $\cC$ is a chain we can assume without loss of generality that $X\subseteq Y$. Then $x,y\in Y$ and since $Y$ is a filter, we have $x\land y \in Y\subseteq M$. Also if $x\leq z$ for some $z\in B$, we have $z\in Y \subseteq M$ since $Y$ is a filter. To be sure that $M$ is proper, note that since every filter $A$ in the chain is proper, we have $0\notin A$ for all $A\in \cC$. Therefore $0\notin M$, which shows that $M$ is a proper filter and $M$ is clearly an upper bound for $\cC$.
+
+By Zorn's Lemma, we conclude that $\cF$ has at least one maximal element $U$, which is a proper filter containing $F$ that is not properly contained by any other proper filter containing $F$. However we cannot immediately conclude that $U$ is an ultrafilter, because we have only shown that $U$ is maximal among those proper filters containing $F$, not among every possible filter in $B$. However, supposing there is a proper filter $U'$ in $B$ such that $U\subseteq U'$, we see  that $U'$ must also contain $F$. Since $U$ is maximal among the proper filters containing $F$, we have $U=U'$. Therefore, by Definition~\ref{def_uf}, we conclude that $U$ is an ultrafilter containing $F$.\end{proof}
+
+\begin{corollary}\label{existence} Every nonzero element $x\in B$ is included in some ultrafilter $U$ of $B$. \end{corollary}
+\begin{proof} Note that for any nonzero $x$, the singleton $\{x\}$ has the finite meet property. Therefore by Theorem~\ref{fmp} we know there is a proper filter $F$ containing $x$ and by Theorem~\ref{ultra_exis} there is an ultrafilter $U$ containing $F$, so that $x\in U$. \end{proof}
+
+\begin{proposition}\label{need} If $F$ is a filter in $B$ and $x\notin F$, then there exists an ultrafilter $U$ such that $F\subseteq U$ and $x\notin U$.\end{proposition}
+\begin{proof} As above suppose $F$ is a filter with $x\notin F$. Then it must be the case that $x^*\land y \ne 0$ for all $y\in F$. To see why, suppose the contrary: if $y\in F$ and $x^*\land y = 0$, then 
+\begin{EQA}[ll] x = x \lor 0 &= x\lor (x^*\land y)\\
+					&= (x\lor x^*) \land (x\lor y)\\
+					&= 1 \land (x\lor y)\\
+					&= x\lor y,
+\end{EQA} which means that $y\leq x$. But filters are closed upward, so this would imply $x\in F$. So it must be the case that $x^*\land y \ne 0$ for all $y\in F$. Thus we extend $F$ to a set $$G=\{z\in B : x^* \land y \leq z \ \text{ for some } \ y\in F\}.$$ Note that $F\subseteq G$ because $x^*\land y \le y$ for any $y\in F$. Furthermore, we will show that this set still has the finite meet property. Consider an arbitrary collection $z_1,z_2,\ldots,z_n\in G$. For each $z_i$ we know that there exists $y_i\in F$ such that $x^*\land y_i \le z_i.$ Then of course $$ \bigwedge_{i=1}^n (x^*\!\land y_i) \ \le \ \bigwedge_{i=1}^n z_i,$$ and we find that
+\begin{EQA}[llr]
+\bigwedge_{i=1}^n (x^*\!\land y_i)  \ &= \ \bigg(\bigwedge_{i=1}^n x^*\bigg) \land \bigg(\bigwedge_{i=1}^n y_i\bigg) \quad\quad\quad& \mbox{by B1 and B2}\\
+&= \ x^* \ \land \ \bigwedge_{i=1}^n y_i
+\end{EQA}
+which is nonzero because $\bigwedge_{i=1}^n y_i \in F$. Thus $$0 \ <  \ x^* \land \bigwedge_{i=1}^n y_i \ \le \ \bigwedge_{i=1}^n z_i,$$ which shows that $G$ has the finite meet property. Thus by Theorem~\ref{fmp} there exists a proper filter $H$ containing $G$ and by Theorem~\ref{ultra_exis} there exists an ultrafilter $U$ containing $H$, such that $F\subseteq G\subseteq H\subseteq U$ for some ultrafilter $U$. However we also have $x^*\in G$ from construction, so that $x^* \in U$ as well. Then it must be the case that $x\notin U$, otherwise $0=x\land x^* \in U$ which would contradict the ultrafilter being proper.\end{proof}
+
+\begin{corollary}\label{int.ult} Every proper filter $F$ in $B$ is precisely the intersection of all the ultrafilters containing $F$.
+\end{corollary}
+\begin{proof} The forward containment is trivial. For the backward containment, let $x$ be in the intersection of all ultrafilters containing $F$. Because $F$ is proper, this intersection is nonempty by Theorem~\ref{ultra_exis}. Well, if $x$ is in every ultrafilter containing $F$, then there does not exist an ultrafilter $U$ such that $F\subseteq U$ and $x\notin U$. Hence by the contrapositive of Proposition~\ref{need}, we must have $x\in F$. Therefore the filter $F$ is precisely the intersection of all ultrafilters containing $F$.\end{proof}
+
+Although these results are dense, we will use all of them in the following section, and they will make many theorems about the propositional calculus much more simple and elegant. This remark is similar to the one made at the end of Section~\ref{intro_ba}, but the machinery here will be used in proving theorems {\em about} the propositional calculus, not the theorems within the propositional calculus from Definition~\ref{def_thm}.\footnote{One might say that these results will be used in proving {\em metatheorems} about $\Lan$, as opposed to proving formal theorems within $\Lan$.} The next lemma and theorem will look very familiar to those who have studied maximal ideals in algebra, as the dualism is transparent.
+
+\begin{lemma}\label{prime} Let $U$ be an ultrafilter in $B$. Then if $x\lor y\in U$, it must be the case that $x\in U$ or $y\in U$. 
+\end{lemma}
+\begin{proof} This proof follows the reasoning in~\cite{Bell}. Let $x,y\in B$ such that $x\lor y\in U$. Suppose that $x\notin U$ and construct the set $$F=\{z\in B : x\lor z \in U\}.$$ First note that since $U$ is a filter, for any $z\in U$ we have $x\lor z \in U$, so we know $U\subseteq F$. If we can show that $F$ is a proper filter, we can conclude $U=F$. There are four conditions to show. First we know that $1\in F$ because $x\lor 1=1\in U$. Next consider any two elements $z_1,z_2\in F$. Since $x\lor z_1$ and $x\lor z_2$ are both in the the filter $U$, we must have $(x\lor z_1) \land (x\lor z_2) \in U$. But by B4 we know that $$x\lor (z_1\land z_2) = (x\lor z_1) \land (x\lor z_2),$$ and therefore $z_1\land z_2 \in F$ as well. Next let $w\in B$ such that $z\le w$ for some $z\in F$. Then $w=z\lor w$ and $x\lor z \in U$. But since $U$ is a filter we know that $(x\lor z) \lor w \in U$, and $$(x\lor z) \lor w = x\lor (z\lor w) = x\lor w.$$ Hence $x\lor w \in U$ so we conclude that $w\in F$. Finally, note that $x\lor 0 = x$ and recall that $x\notin U$. Hence $0\notin F$ and we conclude that $F$ is a proper filter. But $F$ contains the ultrafilter $U$, so it must be the case that $F=U$. Recall that $x\lor y\in U$, from which it follows that $y\in F$. Of course since $F=U$, we have that $y\in U$ as well.
+\end{proof}
+
+\begin{theorem}\label{ult.homo} $F$ is an ultrafilter if and only if $F$ is the hull of a homomorphism $h:B\to {\bf 2}$.\end{theorem}
+
+\begin{proof} \forward Suppose $F$ is an ultrafilter. Then define $h:B\to \{0,1\}$ by $$h(x)=\begin{cases} 0 & \text{ if }x\notin F\\ 
+			1 & \text{ if } x\in F.
+\end{cases}$$ Let $x,y\in B$.  We will show that $h(x\lor y) = h(x)\lor h(y)$ and $h(x\land y)=h(x)\land h(y)$ by considering three cases.\begin{enumerate}
+\item If both $x,y\in F$, then $x\lor y\in F$ and $x\land y\in F$ so that $$h(x\lor y)= 1 = 1 \lor 1 = h(x) \lor h(y)$$ and $$h(x\land y)= 1 = 1\land 1 = h(x)\land h(y).$$
+
+\item If only one of $x$ and $y$ is in $F$, without loss of generality we will suppose $x\in F$ and $y\notin F$. Then $x\lor y \in F$ so that $$h(x\lor y) = 1 = 1 \lor 0 = h(x) \lor h(y).$$ However $x\land y \notin F$, because $x\land y \leq y$, and this would imply $y\in F$. Hence $$h(x\land y) =0 = 1\land 0 = h(x)\land h(y).$$
+
+\item If both $x,y \notin F$, then by the contrapositive of Lemma~\ref{prime} we know that $x\lor y\notin F$. Therefore $$h(x\lor y)= 0 = 0\lor 0 = h(x)\lor h(y).$$ Also we have $x\land y\notin F$, because if $x\land y\in F$, then $x\land y \leq y$ would again imply $y\in F$. Thus $$h(x\land y)=0= 0\land 0 = h(x)\land h(y).$$ 
+\end{enumerate}
+Finally we have that $x\in F$ implies $x^*\notin F$ and $x^*\in F$ implies $x\notin F$; either implication immediately follows from considering the meet, as $x\land x^*=0$ can never be in an ultrafilter $F$. It follows that $h(x^*)=h(x)^*.$ Therefore we conclude that $h$ is a homomorphism and obviously by construction $F$ is the hull of $h$.
+ 
+
+\back Suppose that $F$ is the hull of a homomorphism $h:B\to {\bf 2}$, and let $F'$ be a proper filter such that $F\subseteq F'$. Then if $x\in F'$, we must have $x^*\notin F$, otherwise $x\land x^* =0$ would be in $F'$, and $F'$ would not be proper. Therefore $h(x^*)\ne 1$, so that $h(x)^*=h(x^*)=0$ and hence $h(x)=1$. Since $F$ is the hull of $h$ we have $x\in F$ so that $F=F'$. We conclude that $F$ is indeed an ultrafilter. \end{proof}
+
+
+We now return at last to the Lindenbaum algebra $B$. The next section will start by connecting the concept of a truth valuation to a homomorphism on $B$, and adapting the definition of a deduction to apply to $B$. Afterward we will see the simplification of some very important proofs regarding propositional calculus.
+
+
+\section{Applying Algebra}\label{app_alg}
+For this section, let $B$ denote the Lindenbaum algebra as defined in Example~\ref{lb.ex}. If $h:B \to {\bf 2} $ is a homomorphism, we call it a {\bf 2}-valued homomorphism.
+
+\subsection{Making Connections}
+
+Recall from Definition~\ref{tv} that a truth valuation $v$ is a function mapping each sentence of $\Lan$ into $\{0,1\}$ such that for all sentences $x$ and $y$,
+\begin{EQA}[lcl]
+	v(\neg x) = 1 & \qquad \text{if and only if} \qquad & v(x)=0 \\
+	v(x \imp y) = 1 & \qquad \text{if and only if} \qquad & v(x)=0 \quad\text{ or } \quad v(y)=1.
+\end{EQA} It should be clear from this definition that the following properties are also true:\begin{EQA}[lcl]
+	v(x\lor y) = 1 & \qquad \text{if and only if} \qquad & v(x)=1  \quad\text{ or } \quad v(y)=1\\
+	v(x \land y) = 0 & \qquad \text{if and only if} \qquad & v(x)=0 \quad\text{ or } \quad v(y)=0.
+\end{EQA}
+
+Before we move forward, we will need to show that truth valuations in $\Lan$ correspond to homomorphisms in $B$, specifically that for any truth valuation $v$, $h(|x|) = v(x)$ is a well defined homomorphism onto the minimal algebra, and also that a homomorphism onto the minimal algebra yields a truth valuation. This will rely on the Weak Soundness Theorem, which we will prove by induction. To do so, we need to formally define the length of a deduction.
+
+\begin{definition} If $x$ is a theorem, there exists a deduction of $x$. This is a particular finite sequence of sentences $$(y_1,y_2,\ldots, y_n),$$ where $y_n=x$. We define the {\em length of a deduction} \ as the number of sentences in the deduction, so in this case the length of the deduction is $n$.\end{definition}
+
+Note that there are actually many different deductions of a given theorem; by the definition, any axioms can be added to the deduction (so long as the finite sequence still ends with the given theorem) whether they are necessary for the deduction or not. So there is not a single length assigned for each theorem $x$, but a single length assigned to each deduction of $x$.
+
+\begin{theorem}\label{weak} If $z$ is a sentence, then \ $\vdash z$\  implies \ $\vDash z$.\end{theorem}
+\begin{proof} Let $(y_1,y_2,\ldots, y_n)$ be a deduction of the theorem $z$. We proceed by induction on the length $n$ of this deduction. In the base cases when $n=1$ or $n=2$, the definition of a deduction implies that $z$ is an axiom so it is sufficient to check that each axiom is true in all truth valuations. So let $v$ be any truth valuation.
+\begin{enumerate}
+\item[(A1)]{Suppose $z= y\lor y \imp y$. If $v(y\lor y)=0$ then $v(z)=1$. If instead $v(y\lor y)=1$ we must have $v(y)=1$ so that $v(z) = v(y\lor y \imp y)  =1.$ }
+\item[(A2)]{Suppose $z=x \imp x\lor y$. If $v(x)=0$ then $v(z)=1.$ If instead $v(x)=1$ we also have $v(x\lor y)=1$ so that $v(z)=v(x\imp x\lor y) = 1.$  }
+\item[(A3)]{Suppose $z=(x\lor y) \imp (y\lor x).$ Then if $v(x\lor y)=0$, we have $v(z)=1$. If instead $v(x\lor y)=1$ then we have $v(x)=1$ or $v(y)=1$, so that $v(y\lor x)=1$. Hence $$v(z)=v((x\lor y)\imp (y\lor x))=1$$ as well.} %%%% finish base case in either axiomatic system
+\item[(A4)]{Suppose $z=(x\imp y) \imp (w \lor x \imp w\lor y).$ \ If $v(x\imp y)=0$ then we have $v(z)=1$. If instead $v(x\imp y)=1$ then we have $v(x)=0$ or $v(y)=1$. Consider $w\lor x$; if $v(w\lor x)=0$ then we have $v(w\lor x \imp w\lor y)=1$ so that $$v(z) = v((x\imp y) \imp (w \lor x \imp w\lor y))=1.$$ If instead $v(w\lor x)=1$ then we have $v(w)=1$ or $v(x)=1$. If $v(w)=1$ then $v(w\lor y) =1$ and if $v(x)=1$, from $v(x\imp y)=1$ we must have $v(y)=1$ so that again $v(w\lor y)=1$. Thus $v(w\lor x \imp w\lor y)=1$ so that again we have $$v((x\imp y)\imp(w\lor x \imp w\lor y))=1.$$}
+\end{enumerate} Thus all axioms are tautologies, and this covers the base case.
+
+Next suppose that $n>2$ and for all natural numbers $k< n$, if there exists a deduction of a sentence $y$ of length $k$, then \ $\vDash y$. Now consider the deduction of $z$ which we denoted above as $(y_1,\ldots,y_n)$. Either $z$ is an axiom, which as we proved in the base case will imply that $\vDash z$, or $z$ follows from modus ponens from two sentences earlier in the sequence, say $$y_j \spand y_k=y_j\imp z,$$ where $j<n$ and $k<n$. However the sequences $$(y_1,\ldots, y_j) \spand (y_1,\ldots y_k)$$ are clearly deductions in their own right, with lengths $j$ and $k$ respectively. Hence by the induction hypothesis, we know that $\vDash y_j$ and $\vDash y_k$. Let $v$ be any truth valuation; we know from the previous sentence that $v(y_j)=1$ and $v(y_k)=1$. But $y_k = y_j \imp z,$ and since $v(y_j)=1$, we must have $v(z)=1$. Since $v$ was arbitrary we have $\vDash z$.
+
+Therefore by induction on the length of the deduction of theorem $z$, we have shown that $\vdash z$ implies $\vDash z$.
+\end{proof}
+
+\begin{theorem}\label{tv_homo} If $h:B\to {\bf 2}$ is a homomorphism, then $v(x)=h(|x|)$ is a truth valuation. Furthermore if $v$ is a truth valuation, then $h:B\to {\bf 2}$ defined by $h(|x|)=v(x)$ is a homomorphism.\end{theorem}
+The following proof necessarily conflates the ``truth values" 0 and 1 with the elements of the minimal algebra {\bf 2}, which is not a problem but certainly worth noting. Of course this doesn't imply that the truth values from Section 1 inherently have these algebraic properties, but rather the definition of a truth valuation restricts the function in such a way that the images of sentences in $\{0,1\}$ behave like the minimal algebra.
+\begin{proof}
+\forward Suppose that $h$ is a homomorphism and as above, define $v(x) = h(|x|)$ as a function on the set of sentences of $\Lan$. In this direction it is clear that the function is well defined, because if a sentence $x_1 = x_2$, obviously we have $x_1\equiv x_2$ so that $h(|x_1|)=h(|x_2|).$ So we just need to show that $v$ satisfies the truth valuation properties as in Definition~\ref{tv}. Since $h$ is a homomorphism, we have
+$$v(\neg x) = h ( |\neg x | ) = h( |x|^*) = h(|x|)^*=v(x)^*$$
+in the minimal algebra, which of course means that $v(\neg x) = 1$ if and only if $v(x)=0$. For the second property we also have
+$$v(x\imp y) = h(|x\imp y|) = h(|\neg x \lor y|) = h(|x|)^* \lor h(|y|) = v(x)^* \lor v(y).$$ In this way we see that $v(x\imp y)=1$ if and only if either $v(x)^*=1$ or $ v(y) = 1$, which is true if and only if $v(x)=0$ or $v(y)=1$. Therefore $v$ is a truth valuation. 
+
+\back Conversely, suppose that $v$ is a truth valuation and let $h(|x|)=v(x)$. First let us show that $h$ is well defined. So suppose that $x_1\equiv x_2$; we wish to show that $h(|x_1|)=h(|x_2|)$, and to do so we mush show that $v(x_1)=v(x_2).$ Recall that $x_1\equiv x_2$ means precisely that $\vdash x_1 \ifff x_2$. By Theorem~\ref{weak} we know that $\vDash x_1\ifff x_2,$ so that $v(x_1\ifff x_2) =1$. Then
+\begin{EQA}[ll]
+1&=v(x_1\ifff x_2)\\
+&=v((x_1\imp x_2) \land (x_2\imp x_1)).%\\
+%&=v\big(\neg \big( (x_1\imp x_2)  \imp \neg (x_2 \imp x_1)\big)\big).
+\end{EQA}
+Suppose for contradiction that $v(x_1)\ne v(x_2)$, and without loss of generality we will suppose further that $v(x_1)=1$ and $v(x_2)=0$. Then $v(x_1\imp x_2) = 0$, so that $$v \big( (x_1\imp x_2)  \land (x_2 \imp x_1)\big) = 0,$$ which is a contradiction. Thus we must have $v(x_1) = v(x_2),$ and we conclude that $h(x)$ is well defined.
+
+Next we must show that $h$ is a homomorphism into {\bf 2}. So let $|x|, |y| \in B$. Then 
+\begin{EQA}[ll]
+h\big(|x|\lor |y|\big) =h\big(|x \lor y|\big)& = v(x\lor y) \\
+				    &= \begin{cases} 1 & \text{ if $v(x) =1$ or $v(y)=1$} \\
+								0 & \text{ otherwise}
+					\end{cases}.
+\end{EQA}
+We want the equation $$h\big(|x|\lor |y|\big) = h(|x|)\  \lor \ h(|y|)$$ to hold true. We will consider the cases when $v$ satisfies at least one of these sentences, and when $v$ does not satisfy either of them. In the first case, suppose without loss of generality that $v(x)=1$. Then from above we see that $h\big(|x|\lor |y|\big)  = 1$, and also in {\bf 2} we have $$h(|x|) \lor h(|y|) = v(x) \lor v(y) = 1 \lor v(y) = 1.$$ Otherwise suppose both $v(x)=0$ and $v(y)=0$. Then  from above we have $h\big(|x|\lor |y|\big)  = 0$, and in {\bf 2} we have $$h(|x|) \lor h(|y|) = v(x) \lor v(y) =0\lor 0= 0.$$ Thus in either case we have $$h\big(|x|\lor |y|\big) = h(|x|) \lor h(|y|).$$
+
+Next we have 
+\begin{EQA}[ll]
+h\big(|x|\land |y|\big) =h\big(|x \land y|\big)& = v(x\land y) \\
+				    &= \begin{cases} 0 & \text{ if $v(x) =0$ or $v(y)=0$} \\
+								1 & \text{ otherwise}
+					\end{cases}.
+\end{EQA} Similar to above, we will consider the cases where $v$ satisfies both $x$ and $y$, and where $v$ does not satisfy one or both of them. In the first case, if $v(x)=v(y)=1$, then we have from above that $h\big(|x|\land |y|\big) =1$. Also in {\bf 2} we have $$h(|x|) \land h(|y|) = v(x) \land v(y) = 1\land 1 =  1.$$ In the second case suppose without loss of generality that $v(x)=0$.  Then from above we have $h\big(|x|\land |y|\big) =0$ and in {\bf 2} we have $$h(|x|) \land h(|y|) = v(x) \land v(y) = 0 \land v(y) = 0.$$ Again in either case we find that $$h\big(|x|\land |y|\big) = h(|x|) \land h(|y|).$$
+
+Lastly we consider the preservation of negation. We have
+$$h(|x|^*)=h(|\neg x|) = v(\neg x) = \begin{cases} 0 & \text{ if $v(x)=1$ }\\
+									1 & \text{ if $v(x)=0$ } \end{cases}.$$
+If $v(x)=1$ then $h(|x|^*)= 0$ and also $h(|x|)^* = v(x)^* = 1^* = 0.$ Similarly if $v(x)=0$ then we have $h(|x|^*)=1$ and also $h(|x|)^*=v(x)^*=0^*=1.$ Thus we have $$h(|x|^*) = h(|x|)^*.$$
+Therefore $h(|x|) = v(x)$ is a well defined homomorphism for any truth valuation $v$. We have shown that each truth valuation gives rise to a {\bf 2}-valued homomorphism, and vice versa.
+\end{proof}
+
+Now that we have the concept of truth valuations (as homomorphisms) in $B$, we need to relate the process of deductions to $B$. Then we will have a full arsenal of connecting semantic consequence to syntactic deductions in our algebra, which will of course follow for propositional logic. We extend Definition~\ref{propded} to the Lindenbaum algebra with the following definition. 
+
+\begin{definition}\label{alg_ded} Let $S$ be subset of $B$ and $|x|\in B$. Then an {\em algebraic deduction} of $|x|$ from $S$ is a finite sequence of elements of $B$ such that each element in the sequence is either (i) equal to 1, (ii) in $S$, or (iii) the result of applying modus ponens to two earlier terms of the sequence. Here modus ponens acts the same way: if $|x|$ and $|x\imp y|$ are two preceding terms in the sequence, then $|y|$ can be a subsequent term.\end{definition}
+
+In this setting we will be considering the set of all consequences $\hat{S}$ of $S$.  Note that since 1 is always in $\hat{S}$, and
+\begin{EQA}[ll]
+1 &= |\neg(x\land y) \ \lor\  (x\land y)|\\
+   &= |(x\land y)|^* \ \lor\  |x\land y|\\
+   &= (|x| \land |y|)^* \ \lor  \ |x\land y|\\
+   &= (|x|^* \lor |y|^*) \ \lor \ |x\land y| \\
+   &=|x|^* \ \lor \ (|y|^* \lor |x\land y| )\\
+   &= |x|^* \lor\  |y\imp (x\land y)|\\
+   &=\big|x \imp ( y\imp (x\land y) )\big|,
+\end{EQA}
+we see that if $|x| \in \hat{S}$ and $|y| \in \hat{S}$, then $|x\land y| = |x| \land |y| \in \hat{S}$ as well. Also if for some $|x| \in \hat{S}$ we have $|x| \leq |y|$, by definition this means that $\vdash x\imp y$, which of course means that $|x\imp y| = 1$. Hence $|x \imp y| \in \hat{S}$ and therefore $|y| \in \hat{S}$ by the modus ponens rule. These facts show us that $\hat{S}$ is a filter! Explicitly we have shown \begin{enumerate}[(i)]
+\item $1\in \hat{S}$,
+\item if $|x|\in\hat{S}$ and $|y|\in\hat{S}$ then $|x|\land|y|\in\hat{S}$,
+\item if $|x|\in\hat{S}$ and $|x|\le|y|$ then $|y|\in\hat{S}$.
+\end{enumerate} It is also clear that this is the smallest filter containing $S$, so that $\hat{S}$ is the filter generated by $S$.
+
+For the remainder of this paper, we will consider a set of sentences $A$ in $\Lan$ and define the corresponding subset $S_A=\{|x| : x\in A\}$ of the Lindenbaum algebra $B$.
+
+In the next few theorems we finally present the main results of this paper, but first we need to assure ourselves that the existence of an algebraic deduction in $B$ of $|y|$ from $S_A$ as in Definition~\ref{alg_ded} will imply the existence of a deduction in $\Lan$ of $y$ from $A$, as in Definition~\ref{propded}.  Consider some algebraic deduction $(|x_1|, |x_2|,\ldots, |x_n|)$ of $|y|$, and let us analyze Defintion~\ref{alg_ded}. For any of the $|x_i|$ that are equal to 1, we know that by definition, $\vdash x_i$. Thus a formal deduction in $\Lan$ of $y$ could include the deduction of $x_i$ of some length $l_i$. If $|x_j| \in S_A$ then we have $x_k \in A$ where $x_k\equiv x_j.$ By definition, $\vdash x_k\ifff x_j$, so we could include a formal deduction in $\Lan$ of $x_k\ifff x_j$, and thus with $x_k\in A$, a formal deduction of $x_j$ from $A$ of some length $l_j$ exists and could be included in the deduction of $y$. Furthermore, if any $|x_i|$ followed by modus ponens  from two preceding terms $|x_j|$ and $|x_k|=|x_j \imp x_i|$, by the argument just given we could inductively deduce both $x_j$ and $x_j\imp x_i$ from $A$, resulting in a deduction of $x_i$ from $A$. Therefore, for any formula $|y|$ deduced algebraically from $S_A$, there exists a deduction in $\Lan$ (albeit likely much longer) of $y$ from $A$. It is easy to see the converse is also true, that if there is a formal deduction in $\Lan$ of $y$ from $A$, then there is an algebraic deduction (perhaps a quicker one) in $B$ of $|y|$ from $S_A$. In fact in this direction, we could just modify the terms of a deduction $(y_1,\ldots,y_n)$ simply by taking the equivalence classes $(|y_1|,\ldots,|y_n|)$, which is evidently an algebraic deduction.
+
+With this assertion in hand, we begin to see the connections. A number of familiar concepts in propositional calculus can now be viewed algebraically. From the reasoning above, letting $A$ be a set of sentences of $\Lan$ and again $S_A=\{|x| : x\in A\}$, we see that $A\vdash y$ if and only if $|y|$ is in the filter generated by $S_A$, that is $|y|\in\hat{S}_A$. This is the crux of the connection between Boolean algebra and propositional logic -- the algebraic properties that bring about the closure of a filter in $B$ correspond exactly to the rules by which a theorem can be deduced from a set of sentences in $\Lan$. 
+
+\subsection{Soundness, Completeness, and Compactness}\label{result}
+Readers with a previous knowledge of propositional logic will find the following results familiar, but the proofs are certainly enlightening.
+
+
+\begin{theorem}\label{con_sat} A set of sentences $A$ of $\Lan$ is satisfiable if and only if it is consistent.\end{theorem}
+
+\begin{proof} \forward Suppose $A$ is satisfiable, which means there exists a truth valuation $v$ such that $v[A]=\{1\}.$ Then the corresponding homomorphism $h: B\to {\bf 2}$ defined by $h(|x|)=v(x)$ (which is guaranteed by Theorem~\ref{tv_homo}) will map the equivalence classes of the elements of $A$ to 1 as well. Equivalently, $h[S_A]=\{1\}$. Let $U=\hull h$, so that $S_A\subseteq U$. Then $U$ is an ultrafilter by Theorem~\ref{ult.homo}, so the smallest filter $\hat{S}_A$ containing $S_A$ must also be contained by $U$. Then since $0\notin U$, it must be the case that $0\notin\hat{S}_A.$ Thus for any sentence $x$ of $\Lan$, since $|x\land \neg x|= |x|\land|x|^*=0$, we have $|x\land \neg x| \notin\hat{S}_A$. From above, this means that $A\nvdash x\land \neg x,$ so that $A$ is consistent.
+
+\back The converse is similarly proved. We know $A$ is consistent if and only if for any sentence $x$, $A\nvdash x\land \neg x$. By the assertion above, we know that $A\nvdash x\land\neg x$ if and only if $|x\land\neg x| \notin \hat{S}_A$. But of course, $|x\land\neg x|=|x|\land|x|^* = 0$. Hence this is equivalent to saying that $\hat{S}_A$ is a proper filter, and by Theorem~\ref{ultra_exis} we know there exists an ultrafilter $U$ such that $S_A\subseteq\hat{S}_A\subseteq U$. Then by Theorem~\ref{ult.homo} we know that $U$ is the hull of some {\bf 2}-valued homomorphism $h$, so that $h[S_A]=\{1\}$. Then the truth valuation $v(x)=h(|x|)$ guaranteed by Theorem~\ref{tv_homo} is a truth valuation satisfying $A$. \end{proof}
+
+The theorem above is phrased in a propositional logic setting, but the proof actually covers another equivalent condition for a set of sentences $A$ to be consistent and satisfiable. Note that in both directions we came across the fact that $0\notin\hat{S}_A$, which means that $\hat{S}_A$ is a proper filter. As we saw in Theorem~\ref{fmp}, this is equivalent to $S_A$ having the finite meet property. So we have also shown that a set of sentences $A$ in $\Lan$ is consistent (and thus satisfiable) if and only if the corresponding subset $S_A$ has the finite meet property in $B$.
+
+\begin{corollary} Let $A$ be a set of sentences in $\Lan$. The following are equivalent:
+\begin{enumerate}[(i)]
+\item $A$ is consistent
+\item $A$ is satisfiable
+\item $S_A=\{|x|:x\in A\}$ has the finite meet property in $B$.\end{enumerate}\end{corollary}
+
+\begin{proof} We need only show (i)$\ifff$(iii).  Suppose $S_A$ has the finite meet property in $B$. By Theorem~\ref{fmp} this is true if and only if $\hat{S}_A$ is a proper filter. As stated in Section~\ref{filterintro}, $\hat{S}_A$ is proper if and only if $0\notin\hat{S}_A$. For any sentence $x$, we have $0=|x|\land|x|^*=|x\land\neg x|,$ so this means that $A\nvdash x\land\neg x$ for any sentence $x$. By definition this means that $A$ is consistent.
+\end{proof}A remark was made in Section~\ref{filterintro} that we are mainly interested in proper filters, and this is precisely the reason; an inconsistent set of sentences implies anything and is mathematically dull.
+
+We can now prove a variation of the Deduction Theorem\footnote{This is actually a unique version of this theorem that befits this paper - it is modified from~\cite{Halmos}.} for propositional calculus.
+
+\begin{theorem}\label{ded_thm}$A\vdash y$ if and only if $A$ has a finite subset $\{x_1,\ldots, x_n\}$ such that $\vdash(x_1\land\cdots\land x_n)\imp y$.\end{theorem}
+
+\begin{proof} Again let $S_A = \{ |x| : x\in A\}$ and note that $A\vdash y$ if and only if $|y|\in\hat{S}_A$. As we saw in the constructive characterization in Theorem~\ref{fmp}, $|y|\in\hat{S}_A$ if and only if there exist $|x_1|,\ldots,|x_n| \in S_A$ such that $$|x_1|\land\cdots\land|x_n| \le |y|.$$ Since $$|x_1| \land \cdots \land |x_n| = |x_1\land\cdots \land x_n|,$$ by definition this means that $$\vdash (x_1 \land \cdots \land x_n) \imp y.$$\end{proof}
+
+
+The next theorem combines the Strong Soundness and Strong Completeness Theorems.
+
+\begin{theorem}\label{strong} For any sentence $y$ and set of sentences $A$ in $\Lan$, $A\vdash y$ if and only if $A\vDash y$. \end{theorem}
+
+\begin{proof} Again let $S_A=\{|x|: x\in A\}.$\\
+\forward (Soundness) Suppose $A\vdash y$, which means $|y| \in \hat{S}_A$. If $A$ is not satisfiable, then by Definition~\ref{s_c}, $A\vDash y$ is vacuously true. If $A$ is satisfiable, then let $v$ be any truth valuation satisfying $A$, so that $v[A]=\{1\}$. Then by Theorem~\ref{tv_homo} there is a corresponding {\bf 2}-valued homomorphism $h(|x|)=v(x)$ so that $h[S_A] =\{1\}$. This means that $S_A\subseteq\hull{h}$, and since this hull is a filter and $\hat{S}_A$ is the smallest filter containing $S_A$, we must have $\hat{S}_A\subseteq \hull h$ as well. Thus since $|y|\in\hat{S}_A$, it must be the case that $h(|y|)=1.$ Then of course $v(y)=1$ as well, and since $v$ was arbitrary we conclude $A\vDash y$.
+
+\back (Completeness) Suppose $A\vDash y.$ If $\hat{S}_A$ is improper, then of course $|y|\in\hat{S}_A$ so that $A\vdash y$. Otherwise if $\hat{S}_A$ is proper, let $U$ be any ultrafilter containing $\hat{S}_A$. At least one such ultrafilter exists by Theorem~\ref{ultra_exis}. By Theorem~\ref{ult.homo} we know $U$ is the hull of some {\bf 2}-valued homomorphism $h$. Of course since $S_A\subseteq\hat{S}_A$ we know that $S_A\subseteq U$ as well, so that $h[S_A]=\{1\}$. By Theorem~\ref{tv_homo} there is a corresponding truth valuation $v(x)=h(|x|)$ such that $v[A]=\{1\}$ and since $A\vDash y$, we have $v(y)=1$. Then it must be the case that $h(|y|)=1$ as well, so that $|y|\in U$. Since $U$ was an arbitrary ultrafilter containing $\hat{S}_A$, we have that $|y|$ is in the intersection of all ultrafilters containing $\hat{S}_A$. Therefore by Corollary~\ref{int.ult} we conclude that $y\in\hat{S}_A$. Hence $A\vdash y$. \end{proof}
+
+We can also prove the Compactness Theorem through such algebraic means. There are two equivalent statements of Compactness, and there are enlightening approaches to each proof.
+
+\begin{theorem} For any sentence $y$ and set of sentences $A$ in $\Lan$, we have $A\vDash y$ if and only if there is a finite subset $\{x_1,\ldots,x_n\}$ of $A$ such that $\{x_1,\ldots,x_n\}\vDash y$.\end{theorem}
+
+\begin{proof}\forward Suppose that $A\vDash y$. By the Completeness Theorem we have that $A\vdash y$, which means that $|y|\in \hat{S}_A$. As seen in Theorem~\ref{fmp} there is a finite subset $\{|x_1|,\ldots,|x_n|\}$ of $S_A$ such that $$|x_1|\land\cdots\land |x_n| \le |y|.$$ Of course this implies that $|y|$ is in the filter generated by $\{|x_1|,\ldots,|x_n|\}$, so that $\{x_1,\ldots,x_n\} \vdash y$. By the Soundness Theorem, it follows that $\{x_1,\ldots,x_n\} \vDash y$.
+
+\back Conversely, suppose that there is a finite subset $\{x_1,\ldots,x_n\}$ of $A$ such that $\{x_1,\ldots,x_n\}\vDash y.$ From the Completeness Theorem we know $\{x_1,\ldots,x_n\}\vdash y$ which means $|y|$ is in the filter $F$ generated by $\{|x_1|,\ldots,|x_n|\}.$ Since $\{|x_1|,\ldots,|x_n|\}\subseteq S_A$, it is clear that $F\subseteq \hat{S}_A$ so that $|y|\in\hat{S}_A$. Hence $A\vdash y$ and again from Soundness we conclude $A\vDash y.$\end{proof}
+
+In the context of propositional logic, the previous theorem is easily proven to be equivalent to the following theorem. However again using algebraic techniques, the proof is even simpler.
+
+\begin{theorem} A set of sentences $A$ in $\Lan$ is satisfiable if and only if every finite subset of $A$ is satisfiable.\end{theorem}
+
+\begin{proof} The forward direction is quite obvious; if a truth valuation $v$ satisfies $A$, then $v$ will also satisfy every finite subset of $A$. On the other hand, suppose that every finite subset of $A$ is satisfiable. As we stated at the end of Theorem~\ref{con_sat}, this means that every finite subset of $S_A$ has the finite meet property. Then obviously $S_A$ has the finite meet property as well, because for any finite number of elements $x_1,\ldots,x_n\in S_A$, the subset $\{x_1,\ldots,x_n\}$ has the finite meet property so that $x_1\land\cdots\land x_n \ne 0.$ Therefore we know that $A$ is consistent and satisfiable.
+\end{proof}
+
+\section{Conclusion}
+We have found that many common notions in propositional calculus are just disguised, yet familiar algebraic notions. Although it may seem that the necessary machinery in Boolean algebra is too much trouble for such results that could be proven strictly within propositional calculus, the insight to these connections is certainly enlightening. Furthermore, theorems such as Completeness and Compactness are significantly more difficult in a first-order logic, but the theory of ultrafilters in a Boolean algebra extends quite easily into the first-order logic setting. Thus the main ideas presented in this paper actually have much deeper implications than the few proofs in Section~\ref{result}, and establish a great introduction to further work in Boolean algebra applied to first-order logic.
+
+%%%%%%finish as in outline. write conc. go to weak soundness and show them for HALMOS easy axioms in base case.
+
+
+
+
+%% deduction -> formal proof
+
+%% axioms  from Definition~\ref{alg_ded} 
+
+%%section 2
+
+
+
+
+
+\newpage
+\begin{thebibliography}{99}
+\bibitem{Bell} Bell, J. L., and Moshe Machover. {\em A Course in Mathematical Logic}. Amsterdam: North-Holland Pub. Co., 1977.
+
+\bibitem{Halmos} Halmos, Paul R., and Steven R. Givant. {\em Logic as Algebra}. 21 Vol. Washington, D.C.: Mathematical Association of America, 1998.
+
+\bibitem{Leary} Leary, Christopher. {\em A Friendly Introduction to Mathematical Logic}. 1 ed. Upper Saddle River: Prentice Hall, 1999.
+
+\bibitem{Fraleigh} Fraleigh, John B. {\em A First Course in Abstract Algebra.} 7 ed. Reading, Mass: Addison-Wesley Pub. Co., 1976.
+\bibitem{wiki} ``Lindenbaum-Tarski Algebra." {\em Wikipedia, The Free Encyclopedia}. Wikimedia Foundation, Inc. 11 May 2012.
+\end{thebibliography}
+
+
+\end{document}
+
+
+
+\footnote{I realize that this is relying on the fact that if $y$ is deducible from $A$ then $|y|$ is deducible from $S=\{|x|:x\in A\}$. This is the converse of the argument given directly before the Completeness Theorem, and it is even easier to see. For the final draft I will have a theorem saying that each imply the other.}
+
+
+
+% found easier argument for below
+
+\begin{EQA}[cl]
+0 \land z &= [z\land z^*] \land z\\
+				&=z\land [z^*\land z]\\
+				&=z\land\big[ (z^*\land(z^*\lor z))\land z\big]\\
+				&=z\land \big[z^*\land ((z^*\lor z)\land z)\big]\\
+				&=z\land\Big[z^*\land\big[(z^*\land z) \lor (z\land z)\big]\Big]\\
+				&=\big[z\land z^*\big] \land \big[(z^*\land z) \lor (z\land z)\big]\\
+				&=z\land z*\\
+				&=0,
+\end{EQA} 
+
+
+To do this, it will be easiest to first note that 0, 1 are indeed least and greatest elements, so that we at least know there exist lower and upper bounds for the set $\{x,y\}$. Well if $z$ is any element of $B$, we have \begin{EQA}[cl]
+0 \land z &= [z\land z^*] \land z\\
+				&=z\land [z^*\land z]\\
+				&=z\land\big[ (z^*\land(z^*\lor z))\land z\big]\\
+				&=z\land \big[z^*\land ((z^*\lor z)\land z)\big]\\
+				&=z\land\Big[z^*\land\big[(z^*\land z) \lor (z\land z)\big]\Big]\\
+				&=\big[z\land z^*\big] \land \big[(z^*\land z) \lor (z\land z)\big]\\
+				&=z\land z*\\
+				&=0,
+\end{EQA} so $0\leq z$. A similar argument (switching 0 with 1 and $\land$ with $\lor$) shows that $z\leq 1$ for all $z\in B$. Therefore for any $x,y\in B$ the set $\{x,y\}$ is bounded below and above; 

@@ -1,0 +1,200 @@
+
+\documentclass{article}
+\newenvironment{problem2}[1]{\noindent {\bf (#1}}
+{\medskip}
+
+\newenvironment{problem1}[1]{\noindent {\bf Problem #1:}}
+{\medskip}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,graphicx,url,colordvi}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\makeatletter
+\def\imod#1{\allowbreak\mkern8mu{\operator@font mod}\,\,#1}
+\def\pimod#1{\allowbreak\mkern10mu{(\operator@font mod}\,\,#1)}
+\makeatother
+
+\usepackage{hyperref}
+\usepackage{amssymb}
+%\usepackage{fullpage}
+\hypersetup{pdfborder={0 0 0}}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\ran}{Ran}
+
+
+\title{Math 327: Final Take-home Solutions}
+\author{by Sam Tay}
+\date{\today}
+
+\begin{document}
+%\maketitle
+\begin{flushright}Sam Tay\\ Professor Milnikiel \\ Math 335 \\ Section 15: 10, 12, 16, 33, 40, 41\\ 1/7/11
+\end{flushright}
+
+Well, I'm getting a little worried about this stuff. The winter break is coming to a close and this stuff is starting to seem pretty opaque. I just really want to have some intuition for these computational problems, and in some cases I do, but not with the majority. I have the starred problems all solved, and most of the unstarred. However, I find it very difficult to find homomorphisms with the right kernel for using the Fundamental Homomorphism Theorem. When I can't, I just try to stab in the dark by finding elements (of the factor group) with certain order- although this method can provide a valid proof, it just seems so haphazard. Its not like I can really see why the factor group collapses the way it does, and I feel like I should be able to.\\
+
+\begin{problem1}{10} To compute $(\mathbb{Z}\times\mathbb{Z}\times\mathbb{Z}_8)/\langle (0,4,0)\rangle$, we will use the Fundamental Homomorphism Theorem. Consider the homomorphism $\phi:\mathbb{Z}\times\mathbb{Z}\times\mathbb{Z}_8\to\mathbb{Z}\times\mathbb{Z}_4\times\mathbb{Z}_8$ defined by $$\phi(x,y,z) = (x, y\imod{4}, z).$$ Then $$\ker\phi=\{(0,4n,0) : n\in\mathbb{Z}\}=\langle (0, 4, 0) \rangle,$$ and since $\phi$ is onto, we have $$(\mathbb{Z}\times\mathbb{Z}\times\mathbb{Z}_8)/\langle (0,4,0)\rangle \cong \mathbb{Z}\times\mathbb{Z}_4\times\mathbb{Z}_8.$$
+
+\end{problem1}
+
+
+\begin{problem1}{12} Similarly, to compute $(\mathbb{Z}\times\mathbb{Z}\times\mathbb{Z})/\langle (3,3,3)\rangle$, consider the homomorphism $\phi:\mathbb{Z}\times\mathbb{Z}\times\mathbb{Z}\to\mathbb{Z}_3\times\mathbb{Z}\times\mathbb{Z}$ defined by $$\phi(x,y,z) = (x\imod{3}, y-x, z-x).$$ Then $$\ker\phi=\{(3n,y,z) : n\in\mathbb{Z}\text{ and } 3n=y=z\}=\{(3n,3n,3n) : n\in\mathbb{Z}\}=\langle (3,3,3) \rangle,$$ and since $\phi$ is onto, we have $$(\mathbb{Z}\times\mathbb{Z}\times\mathbb{Z})/\langle (3,3,3)\rangle \cong \mathbb{Z}_3\times\mathbb{Z}\times\mathbb{Z}.$$
+
+\end{problem1}
+
+
+\begin{problem1}{16} The six cyclic subgroups of order 4 of $G=\mathbb{Z}_4\times\mathbb{Z}_4$ are $$H_1=\langle (1,0) \rangle, H_2=\langle (0,1) \rangle, H_3=\langle (1,2) \rangle, H_4=\langle (2,1) \rangle, H_5=\langle (1,3) \rangle, H_6=\langle (1,1) \rangle.$$
+\begin{itemize}
+\item{By Theorem 15.8, $G/H_1\cong G/H_2 \cong \mathbb{Z}_4$.}
+\item{Since $|G/H_3|=|G/H_4|=4$ and in the respective factor groups, $|(1,1)+H_3|=|(1,1)+H_4|=4$, we know that these factor groups must be cyclic and isomorphic to $\mathbb{Z}_4$. We know that those cosets have order 4 because $(1,1)^n$ is an ordered pair of equal elements (of $\mathbb{Z}_4$) for all $n$, and the only element in $H_3,H_4$ that is an ordered pair of equal elements is the identity $(0,0)$, so the order of the coset is just the order of the element $|(1,1)|=4$.}
+\item{Similarly, since $(1,2)^n \in H_5$ only when $(1,2)^n=(0,0)$, we see that the order of the coset $|(1,2)+H_5|$ is equal to the order of the element $|(1,2)|=4$. Since this is exactly the order of the factor group, we know that $G/H_5$ is cyclic and isomorphic to $\mathbb{Z}_4$.}
+\item{We see that the homomorphism $\phi:G\to\mathbb{Z}_4$ given by $\phi(x,y)=y-x$ yields $\ker\phi=H_6$, and since $\phi$ is onto, by the FHT we have $G/H_6\cong\mathbb{Z}_4.$}
+\end{itemize}
+The only subgroup of order 4 that is not cyclic is $$H_7=\{(0,0),(0,2),(2,0),(2,2)\},$$ and the homomorphism from $G$ onto $\mathbb{Z}_2\times\mathbb{Z}_2$ given by $\phi(x,y)=(x\imod{2},y\imod{2})$ has $\ker\phi=H_7$, so again by the FHT we have $G/H_7\cong \mathbb{Z}_2\times\mathbb{Z}_2$.\\
+
+\noindent The three subgroups of order 2 are $$H_8=\langle (0,2) \rangle, H_9=\langle (2,0) \rangle, H_{10}= \langle (2,2)\rangle.$$ Each of these subgroups form a factor group of order 8 and since each element in $G$ has at most order 4, we know that these factor groups are either isomorphic to $\mathbb{Z}_4\times\mathbb{Z}_2$ or $\mathbb{Z}_2\times\mathbb{Z}_2\times\mathbb{Z}_2$.
+\begin{itemize}
+\item{Since $(1,1)^n\in H_8,H_9$ only when $(1,1)^n=(0,0)$, we see that the cosets $(1,1)+H_8$ and $(1,1)+H_9$ have order $|(1,1)|=4$ in each of their respective factor groups. From above, we must have $G/H_8\cong G/H_9 \cong \mathbb{Z}_4\times\mathbb{Z}_2$.}
+\item{Similarly, $(1,2)+H_{10}$ has order 4, so $G/H_{10}\cong  \mathbb{Z}_4\times\mathbb{Z}_2$.}
+\end{itemize}
+\end{problem1}
+
+\begin{problem1}{33} Theorem 15.18 states that $M$ is a maximal normal subgroup of $G$ if and only if $G/M$ is simple. The forward direction is true because for any nontrivial proper normal subgroup $H \lhd G/M$, $\gamma^{-1}[H]$ is a normal subgroup of $G$ by Theorem 15.16 where $M \lhd \gamma^{-1}[H] \lhd G$, such that $M$ is not maximal. Similarly, if $M$ is not maximal then there is a subgroup $N$ such that $M \lhd N \lhd G$, where $\gamma[N] \unlhd G/M$ and $$\gamma[N]\ne G/M\quad \text{and}\quad\gamma[N]\ne \{M\},$$ such that $G/M$ is not simple.
+
+\end{problem1}
+
+
+\begin{problem1}{40} Let $N$ and $H$ be subgroups of $G$ where $N$ is normal. Then the set $$HN=\{hn : h\in H, n\in N\}$$ is also a subgroup of $G$, where $HN$ is the smallest subgroup containing both $N$ and $H$.
+\begin{proof} To see that $HN\le G$, let $x_1=h_1n_1, x_2=h_2n_2 \in HN$. Then $$x_1x_2=h_1n_1h_2n_2$$ where $n_1h_2 \in Nh_2$, and since $Nh_2=h_2N$ we must have $n_1h_2=h_2n_0$ for some $n_0\in N$. Thus $$x_1x_2=h_1(n_1h_2)n_2=h_1(h_2n_0)n_2$$ where $h_1h_2\in H$ and $n_0n_2\in N$. So $x_1x_2\in HN$ and therefore $HN$ is closed. Also note that since $H,N\le G$, we have the identity $e\in H$ and $e\in N$ so that $ee=e\in HN.$ Finally, for $x=hn\in HN$, we know $x^{-1}=n^{-1}h^{-1}$ where $n^{-1}h^{-1}\in Nh^{-1}$. Since $Nh^{-1}=h^{-1}N$, there must exist $n_0\in N$ such that $$x^{-1}=n^{-1}h^{-1}=h^{-1}n_0\in HN,$$ so each element has an inverse in $HN$. Therefore $HN$ is a subgroup of $G$.
+
+Next, suppose that $K\le G$ such that $H\cup N\subseteq K$. Let $x\in HN$ so that $x=hn$ for $h\in H$ and $n\in N$. Then since $h,n\in H\cup N \subseteq K$ and $K$ is a closed subgroup, we have $hn=x\in K$. So $HN \subseteq K$ and this holds for all $K$ containing both $H$ and $K$. We conclude that $HN$ is the smallest such subgroup.
+\end{proof}\end{problem1}
+
+
+\begin{problem1}{41} Let $N$ and $M$ be normal subgroups of $G$. Then $NM$ is also a normal subgroup of $G$.
+\begin{proof} We know from Problem 40 that $NM\le G$; to show that $NM\,\unlhd \,G$, suppose $g\in G$ and $x=nm\in NM.$ By Theorem 14.13, $gng^{-1}\in N$ and $gmg^{-1}\in M$ so we have $$gng^{-1}gmg^{-1}=gnmg^{-1}=gxg^{-1}\in NH.$$ Again by Theorem 14.13, $NM$ is normal.
+
+\end{proof}
+
+\end{problem1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{center}\textbf{Questions from the Unstarred Problems\\ (and some neither starred nor unstarred)}\\\end{center}
+
+\begin{problem1}{1} By Theorem 15.8, $(\mathbb{Z}_2\times\mathbb{Z}_4)/\langle (0,1) \rangle \cong \mathbb{Z}_2$
+\end{problem1}
+
+\begin{problem1}{2} To compute $(\mathbb{Z}_2\times\mathbb{Z}_4)/\langle (0,2) \rangle $, we first see that the factor $\mathbb{Z}_2$ is left alone (identity still 0) and $\mathbb{Z}_4$ is collapsed by a subgroup of order 2 (identity goes to both 0 and 2), so we expect the factor group to be isomorphic to $\mathbb{Z}_2\times\mathbb{Z}_2$. The homomorphism $\phi(x,y)=(x,y\imod{2})$ onto our expected group confirms our suspicions, as $\ker\phi=\langle (0,2)\rangle$.
+\end{problem1}
+
+\begin{problem1}{3} To compute $(\mathbb{Z}_2\times\mathbb{Z}_4)/\langle (1,2) \rangle $, where $$ \langle (1,2) \rangle = \{(0,0), (1,2)\},$$ first note that the factor group must have order 4. We also find that the coset $(1,1)+\langle(1,2)\rangle$ has order 4, so the factor group is cyclic and isomorphic to $\mathbb{Z}_4$. I suppose the homomorphism $\phi:\mathbb{Z}_2\times\mathbb{Z}_4\to \mathbb{Z}_4$ defined by $\phi(x,y)=y-2x$ could also help.
+\end{problem1}
+
+\begin{problem1}{4} To compute $(\mathbb{Z}_4\times\mathbb{Z}_8)/\langle (1,2) \rangle $, where $$ \langle (1,2) \rangle = \{(0,0), (1,2), (2,4), (3,6)\},$$ first note that the factor group must have order 8. We also find that the coset $(1,1)+\langle(1,2)\rangle$ has order 8, so the factor group is cyclic and isomorphic to $\mathbb{Z}_8$. I suppose the homomorphism $\phi:\mathbb{Z}_4\times\mathbb{Z}_8\to \mathbb{Z}_8$ defined by $\phi(x,y)=y-2x$ could also help.
+\end{problem1}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{problem1}{5} The answer to this one is in the back of the book, but it's still driving me nuts! We are computing the factor group $$G/H=(\mathbb{Z}_4\times\mathbb{Z}_4\times\mathbb{Z}_8)/\langle(1,2,4)\rangle$$ where $$\langle(1,2,4)\rangle=\{(0,0,0),(1,2,4),(2,0,0),(3,2,4)\}.$$ Clearly collapsing this subgroup to the identity does not allow for the factors $\mathbb{Z}_4,\mathbb{Z}_4, \mathbb{Z}_8$ to collapse separately. It would be nice to create a homomorphism where we insure that $(x,y,z)$ goes to the identity if $y=2x$ and $z=2y=4x,$ but since we are working in modular arithmetic, this does not seem possible. This factor group has order 32; I'm guessing Fraleigh doesn't expect me to analyze each element to figure it out. Noting that all $(x,y,z)^n\in\mathbb{Z}_4\times\mathbb{Z}_4\times\mathbb{Z}_8$ will go to $(0,0,0)$ at $n=8$, this is the maximum order of any coset in the factor group. We see that the coset $(1,1,1)+\langle(1,2,4)\rangle$ has order 8, which allows us to conclude that this factor group is isomorphic to either $\mathbb{Z}_8\times\mathbb{Z}_4$ or $\mathbb{Z}_8\times\mathbb{Z}_2\times\mathbb{Z}_2$. I was thinking of coming up with a certain number of elements of a certain order, but there's got to be a better way to solve this.
+%% %%%% %%%%%%%%%% %%%%%%%% %%% %% % %
+
+
+\end{problem1}
+
+\begin{problem1}{6} The factor group $(\mathbb{Z}\times\mathbb{Z})/\langle(0,1)\rangle\cong\mathbb{Z}$ can be computed with a direct application of Theorem 15.8. The homomorphism to consider is $\phi:\mathbb{Z}\times\mathbb{Z}\to\mathbb{Z}$ defined by $\phi(x,y)=x$, which has kernel $\langle (0,1)\rangle$.\end{problem1}
+
+\begin{problem1}{7} I believe the factor group $(\mathbb{Z}\times\mathbb{Z})/\langle(1,2)\rangle$ can be visualized similar to Example 15.12, but representatives must be taken off of the $y$-axis. The homomorphism to consider is $\phi:\mathbb{Z}\times\mathbb{Z}\to\mathbb{Z}$ defined by $\phi(x,y)=y-2x$, which has kernel $\langle (1,2)\rangle$.\end{problem1}
+
+\begin{problem1}{8} For the factor group $(\mathbb{Z}\times\mathbb{Z}\times\mathbb{Z})/\langle(1,1,1)\rangle$, we construct $\phi:\mathbb{Z}\times\mathbb{Z}\times\mathbb{Z}\to\mathbb{Z}\times\mathbb{Z}$ by $\phi(x,y,z)=(y-x,z-x)$. Then $\phi(x,y,z)=(0,0)$ exactly when $x=y=z$, which are all of the elements in $\langle(1,1,1)\rangle$. Therefore the factor group is isomorphic to $\mathbb{Z}\times\mathbb{Z}$.
+\end{problem1}
+
+\begin{problem1}{9} For the factor group $(\mathbb{Z}\times\mathbb{Z}\times\mathbb{Z}_4)/\langle(3,0,0)\rangle$, we construct $\phi:\mathbb{Z}\times\mathbb{Z}\times\mathbb{Z}_4\to\mathbb{Z}_3\times\mathbb{Z}\times\mathbb{Z}_4$ by $\phi(x,y,z)=(x\imod{3},y,z)$. Then $\ker\phi=\langle(3,0,0)\rangle$. Therefore the factor group is isomorphic to $\mathbb{Z}_3\times\mathbb{Z}\times\mathbb{Z}_4$.
+\end{problem1}
+
+\begin{problem1}{11} For the factor group $(\mathbb{Z}\times\mathbb{Z})/\langle(2,2)\rangle$, we recall in $\imod \langle(1,1)\rangle$, we found the factor group isomorphic to just $\mathbb{Z}$. This is because $\langle(1,1)\rangle\cong\mathbb{Z}$. But this time we are dividing out by $\langle(2,2)\rangle=2\langle(1,1)\rangle\cong 2\mathbb{Z}$, which is like ``half" of $\mathbb{Z}$. As one might expect, defining the homomorphism $\phi:\mathbb{Z}\times\mathbb{Z}\to\mathbb{Z}_2\times\mathbb{Z}$ by $\phi(x,y)=(x\imod{2},y-x)$ yields $\ker\phi=\langle(2,2)\rangle$. Therefore the factor group is isomorphic to $\mathbb{Z}_2\times\mathbb{Z}$.
+\end{problem1}
+
+
+\begin{problem1}{19}\end{problem1}
+
+\begin{problem2}{a)} True?
+\end{problem2}
+
+\begin{problem2}{b)} False
+\end{problem2}
+
+\begin{problem2}{c)} Well $(\frac{1}{2}+\mathbb{Z})+(\frac{1}{2}+\mathbb{Z})=\mathbb{Z}$, so false.
+\end{problem2}
+
+\begin{problem2}{d)} True, $(\frac{1}{n}+\mathbb{Z})$.
+\end{problem2}
+
+\begin{problem2}{e)} False
+\end{problem2}
+
+\begin{problem2}{f)} True
+\end{problem2}
+
+\begin{problem2}{g)} False, $C\le H$.
+\end{problem2}
+
+\begin{problem2}{h)} False, could be $\{e\}$.
+\end{problem2}
+
+\begin{problem2}{i)} True
+\end{problem2}
+
+\begin{problem2}{g)} False, Theorem 15.15 states that $A_5$ is simple and clearly $5!/2$ is not prime.
+\end{problem2}
+
+\begin{problem1}{20} Let $K\le F$ where $K$ consists of all constant functions. Find $H\le F$ such that $H\cong F/K$.
+
+Well the cosets are just $f+K=\{f+C : C\in\mathbb{R}\}$, which contain all functions that are $f$ just off by a constant. We can choose as representatives those functions that pass through the origin. We have the subgroup $H=\{f\in F: f(0)=0\}.$ In this way, we'd define a homomorphism $\phi:F\to H$ by $\phi(f)=f-f(0).$ (It's very easy to show this is a homomorphism.) We see that $\phi(f)=0$ if $f(x)=f(0)$ for all $x$, which are all constant functions! Thus $F/K\cong H$.
+
+\end{problem1}
+
+\begin{problem1}{26} Define $\zeta_n=\cos(2\pi/n)+i\sin(2\pi/n)$ for $n\in\mathbb{Z}^+$. Consider $U/\langle\zeta_n\rangle$. We see that mapping $\langle\zeta_n\rangle$ to the identity is to create a modular addition, similar to $\mathbb{Z}/n\mathbb{Z}$. We see that each coset $e^x+\langle\zeta_n\rangle$ has a representative $e^0\le e^x < e^{\frac{2\pi}{n}}$, or $0\le x < \frac{2\pi}{n}$. Thus $$U/\langle\zeta_n\rangle \cong \mathbb{R}_{\frac{2\pi}{n}}.$$
+\end{problem1}
+
+
+\begin{problem1}{30} The center of a simple
+
+\end{problem1}
+\begin{problem2}{a)} abelian group is all of the group.
+\end{problem2}
+
+\begin{problem2}{b)} nonabelian group must be the trivial subgroup.
+\end{problem2}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

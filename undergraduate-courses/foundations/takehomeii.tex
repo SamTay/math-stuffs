@@ -1,0 +1,162 @@
+\documentclass[11pt]{hmcpset}
+
+\newenvironment{problem2}[1]{\noindent {\bf (#1}}
+{\medskip}
+
+\newenvironment{problem1}[1]{\noindent {\bf Problem #1}}
+{\medskip}
+
+\newenvironment{theorem}[1]{\noindent {\bf Theorem #1:}}
+{\medskip}
+
+\newenvironment{claim}{\noindent {\bf Claim:}}
+{\medskip}
+
+\newenvironment{lemma}[1]{\noindent {\bf Lemma #1:}}
+{\medskip}
+
+\newenvironment{definition}[1]{\noindent {\bf Definition #1:}}
+{\medskip}
+
+\newenvironment{proof}{\noindent {\bf Proof:} \\}{\hfill
+\rule{1mm}{3mm} \bigskip}
+
+
+%\newenvironment{solution}{\noindent {\bf Solution:} \\}{\hfill
+%\rule{1mm}{3mm} \bigskip}
+
+\usepackage{hyperref}
+\usepackage{amssymb}
+
+\name{Sam Tay}
+\class{Professor Holdener}
+\assignment{Block II Take-Home}
+\duedate{04/20/2011}
+
+
+\begin{document}
+
+
+\begin{problem1}{1. (a)} Let $f:\mathbb{Z}\to\mathbb{Z}$ be defined by $f(n)=3n+5$. We will prove that $f$ is one-to-one, but not onto.
+
+\begin{proof}\indent To prove that $f$ is one-to-one, let's suppose that for some $z_1, z_2 \in \mathbb{Z}$, $f(z_1)=f(z_2)$. Then $$3z_1+5=3z_2+5 \iff 3z_1=3z_2 \iff z_1=z_2.$$ We conclude that $f$ is one-to-one.
+
+To show that $f$ is not onto, consider $1\in\mathbb{Z}$. Suppose there exists $n\in\mathbb{Z}$ such that $f(n)=3n+5=1.$ Then $3n=-4 \iff n=\frac{-4}{3}$. Thus $n\notin\mathbb{Z}$, and we conclude by contradiction that there is no $n\in\mathbb{Z}$ such that $f(n)=1$. Therefore $f$ is not onto.
+\end{proof}
+\end{problem1}
+
+\begin{problem2}{b)} Let $f:\mathbb{N}\to\mathbb{N}$ be defined by $f(n)=n(n+4)$. We will prove that $f$ is one-to-one, but not onto.
+
+\begin{proof}\indent To prove that $f$ is one-to-one, let's suppose that for some $n,m \in \mathbb{N}$, $f(n)=f(m)$. Then $$n(n+4)=m(m+4) \iff n^2+4n=m^2+4m$$ $$\iff n^2+4n+4=m^2+4m+4 \iff (n+2)^2=(m+2)^2\iff n+2=\pm(m+2).$$ This last equation is true if and only if $n=m$ or $n=-m-4$. However, since we know $n,m\in \mathbb{N}$, we disregard the negative solution, and conclude $n=m$. Therefore $f$ is one-to-one.
+
+To prove that $f$ is not onto, consider $1\in \mathbb{N}$. Suppose there is some $n\in\mathbb{N}$ such that $f(n)=n(n+4)=1.$ Then $$n^2+4n=1\iff n^2+4n+4=5$$ $$\iff (n+2)^2=5 \iff n+2=\pm \sqrt{5}.$$ Once again, we are interested only in the positive solution, such that $n=\sqrt{5}-2$. Clearly then $n\notin\mathbb{N}$, and we conclude by contradiction that there is no $n\in\mathbb{N}$ such that $f(n)=1$. Therefore $f$ is not onto.%$$\iff n=m \lor n=-m-4.$$
+\end{proof}
+
+\end{problem2}
+\begin{problem2}{c)} Let $g:\mathbb{N}\to\mathbb{Q}$ be defined by $g(n)=\frac{n}{n+1}$. We will prove that $g$ is one-to-one, but not onto.
+
+\begin{proof}\indent To prove that $g$ is one-to-one, let's suppose $g(n)=g(m)$ for some $n,m\in \mathbb{N}$. Then $$\frac{n}{n+1}=\frac{m}{m+1} \iff \frac{n(m+1)}{(n+1)(m+1)}= \frac{m(n+1)}{(n+1)(m+1)}$$ $$\iff n(m+1)=m(n+1)\iff nm+n=nm+m \iff n=m.$$ Therefore $g$ is one-to-one.
+
+To prove that $g$ is not onto, consider $64\in\mathbb{Q}$. There is no $n\in\mathbb{N}$ such that $f(n)=\frac{n}{n+1}=64$, since $\frac{n}{n+1}<1$ for all $n\in\mathbb{N}$. Therefore $g$ is not onto.
+
+\end{proof}
+\end{problem2}
+
+\begin{problem1}{2.} Let $A=\mathbb{Z}^+\times\mathbb{Z}^+$. Define a relation $\sim$ on $A$ by $(a,b)\sim(c,d)$ if $a^b=c^d$.
+\end{problem1}
+
+\begin{problem2}{a)} We will show that $\sim$ is an equivalence relation on $A$.
+
+\begin{proof}\indent To show that $\sim$ is an equivalence relation, we must show that $\sim$ is reflexive, symmetric, and transitive. To prove that $\sim$ is reflexive, consider $(a,b)\in A$. Clearly $a^b=a^b$, so $(a,b)\sim(a,b)$.
+
+To prove that $\sim$ is symmetric, suppose that for some $(a,b),(c,d)\in A$, $(a,b)\sim(c,d)$. Then $a^b=c^d$, so clearly $c^d=a^b$, and thus $(c,d)\sim(a,b)$. Therefore $\sim$ is symmetric.
+
+To prove that $\sim$ is transitive, suppose that for some $(a,b),(c,d),(e,f)\in A$, $(a,b)\sim(c,d)$ and $(c,d)\sim(e,f)$. Then $a^b=c^d$ and $c^d=e^f$, so we must have $a^b=e^f$. Therefore $(a,b)\sim(e,f)$, and we conclude $\sim$ is transitive.
+
+Therefore, $\sim$ is an equivalence relation.
+\end{proof}
+\end{problem2}
+
+\begin{problem2}{b)} The equivalence class $[(16,1)]$ consists of all $(a,b)\in A$ such that $(16,1)\sim(a,b)$, or equivalently $16^1=a^b$. We find that the set of ordered pairs of positive integers satisfying this equation is $[(16,1)]=\{(2,4),(4,2),(16,1)\}$. Similarly, the equivalence class $[(3,4)]$ consists of ordered pairs of positive integers $(a,b)$ satisfying $3^4=81=a^b$. We find that this set is $[(3,4)]=\{(81,1),(9,2),(3,4)\}$.
+\end{problem2}
+
+\begin{problem2}{c)} One natural number with many nice properties is $64$. We find that the equivalence class $[(64,1)]=\{(64,1),(8,2),(4,3),(2,6)\}$ and thus has exactly four elements.
+\end{problem2}
+
+\begin{problem2}{d)} An equivalence class with infinitely many elements is $[(1,1)]=\{(1,n)\}_{n\in\mathbb{Z}^+}$, since $1^n=1$ for all $n\in\mathbb{Z}^+$.
+\end{problem2}
+
+\begin{problem1}{3. (a)} The set $A$ has a maximal element $k$, and minimal elements $a,b,c$. The greatest element is $k$, and there is no least element.
+\end{problem1}
+
+\begin{problem2}{b)} Consider the subset $\{a,d\}\subseteq A$. An upper bound $x$ of this set satisfies that $x\ge a$ and $x\ge d$. From the diagram we see the set of upper bounds is $U=\{f,g,i,k\}$. However, a least upper bound $y$ must satisfy that $y\in U$ and $y\le x$ for all $x\in U$. We see that $i,k >f$, so we know by antisymmetry that the elements $i,k$ cannot be least upper bounds. This leaves elements $f,g$ as possibilities, but since $f$ is not related to $g$, we cannot claim that $f\le g$ or that $g\le f$. We conclude that $\{a,d\}$ has no least upper bound.
+\end{problem2}
+
+\begin{problem1}{4. (a)} Let $A$ be a partially ordered set. Suppose that $X\subseteq Y\subseteq A$, and that $glb(X),lub(X),glb(Y)$, and $lub(Y)$ all exist. Then $glb(Y)\le glb(X)\le lub(X) \le lub(Y).$
+
+\begin{proof}\indent First we'll show that $glb(Y)\le glb(X)$. Let $y_0=glb(Y)$. Then $y_0\in A$ such that $y_0\le y$ for all $y\in Y$. Since $X\subseteq Y$, $y_0\le x$ for all $x\in X$, which means $y_0$ is a lower bound for $X$. Then by definition, $glb(X)\ge y_0$, and we conclude $glb(Y)\le glb(X)$.
+
+Next we'll show that $glb(X)\le lub(X)$. Let $x\in X$. By definition, $glb(X)\le x$, and $x\le lub(X)$. By transitivity, $glb(X)\le lub(X)$.
+
+Finally, we'll show that $lub(X)\le lub(Y)$. Let $y_0=lub(Y).$ Then $y_0\ge y$ for all $y\in Y$. Since $X\subseteq Y$, $y_0\ge x$ for all $x\in X$, which means $y_0$ is an upper bound for $X$. Then by definition, $lub(X)\le y_0$, and we conclude $lub(X)\le lub(Y)$.
+
+Therefore, by transitivity of the partial order, we have $glb(Y)\le glb(X) \le lub(X)\le lub(Y)$.\end{proof}
+\end{problem1}
+
+\begin{problem2}{b)} Consider the subsets $(0,1),[0,1]\subseteq\mathbb{R}$. We see that $(0,1)\subset[0,1]$, yet $glb((0,1))=glb([0,1])=0$, and $lub((0,1))=lub([0,1])=1$.
+\end{problem2}
+
+\begin{problem1}{5.} Let $f:A\to B$ be a function. Let $X,Y$ be subsets of $A$ and $U,V$ be subsets of $B$.
+\end{problem1}
+
+\begin{problem2}{a)} $f^{-1}(U)\setminus f^{-1}(V)=f^{-1}(U\setminus V)$.
+
+\begin{proof}\indent Let $x\in f^{-1}(U)\setminus f^{-1}(V)$. Then $x\in f^{-1}(U)$ but $x\notin f^{-1}(V)$. This means that $f(x)\in U$ and $f(x)\notin V$, from which it follows that $f(x)\in U\setminus V$. Therefore, $x\in f^{-1}(U\setminus V)$.
+
+Now let $x\in f^{-1}(U\setminus V)$. Then $f(x)\in U\setminus V$, which means $f(x)\in U$ but $f(x)\notin V$. Then $x\in f^{-1}(U)$ but $x\notin f^{-1}(V)$. Therefore, $x\in f^{-1}(U)\setminus f^{-1}(V)$. We conclude that $f^{-1}(U)\setminus f^{-1}(V)=f^{-1}(U\setminus V)$.
+\end{proof}
+\end{problem2}
+
+\begin{problem2}{b)} $f(X)\setminus f(Y)\subseteq f(X\setminus Y)$.
+
+\begin{proof}\indent Let $z\in f(X)\setminus f(Y)$. Then $z\in f(X)$ but $z\notin f(Y)$. Then there is some $x\in X$ such that $f(x)=z$, but for all $y\in Y$, $f(y)\ne z$. Since $f(x)=z$, we know $x\notin Y$. Thus, $x\in X\setminus Y$ such that $f(x)=z$, and we conclude $z\in f(X\setminus Y)$.
+\end{proof}
+\end{problem2}
+
+\begin{problem2}{c)} $f(X)\setminus f(Y)=f(X\setminus Y)$ for all subsets $X,Y$ of $A$ if and only if $f$ is one-to-one.
+
+\begin{proof}\indent We will prove the forward implication by contrapositive, so suppose $f$ is not one-to-one. Then there exist $a_1,a_2 \in A$ such that $f(a_1)=f(a_2)$, yet $a_1\ne a_2$. Let $X=\{a_1\}$ and $Y=\{a_2\}$ such that $X\setminus Y =\{a_1\}$. We know that $f(a_1)\in f(\{a_1\})$, so $f(a_1)\in f(X)$ and $f(a_1)\in f(X\setminus Y)$. However, $f(a_1)=f(a_2)$, and since $f(a_2)\in f(\{a_2\}) =f(Y)$, we must have $f(a_1)\in f(Y).$ Thus, $f(a_1)\in f(X\setminus Y)$ but $f(a_1)\notin f(X)\setminus f(Y).$ We conclude that if $f$ is not one-to-one, then there exist subsets $X,Y$ of $A$ such that $f(X)\setminus f(Y)\ne f(X\setminus Y)$.
+
+Now suppose that $f$ is one-to-one. We know from \textbf{5 (b)} that $f(X)\setminus f(Y)\subseteq f(X\setminus Y)$, since this holds for all functions $f:A\to B$ and subsets $X,Y$ of $A$. So, to prove the other containment, suppose $z\in f(X\setminus Y).$ Then there is some $x\in X\setminus Y$ such that $f(x)=z$. Since $x\in X$, we know that $z\in f(X)$. Suppose that $z\in f(Y).$ Then there exists $y\in Y$ such that $f(y)=z$. Then $f(y)=f(x)$, and since $f$ is one-to-one, $y=x$. This implies $x\in Y$, but we have already said that $x\in X\setminus Y$. Therefore, by contradiction, we know that $z\notin f(Y)$. We have shown that $z\in f(X)$ and $z\notin f(Y)$, so by defintion, $z\in f(X)\setminus f(Y)$. Therefore $ f(X\setminus Y)\subseteq f(X)\setminus f(Y)$.
+
+We have proven that $f(X)\setminus f(Y)=f(X\setminus Y)$ for all subsets $X,Y$ of $A$ if and only if $f$ is one-to-one.
+\end{proof}
+\end{problem2}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

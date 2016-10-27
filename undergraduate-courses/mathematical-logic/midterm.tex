@@ -1,0 +1,331 @@
+\documentclass[11pt]{hmcpset}
+
+\newenvironment{problem2}[1]{\noindent {\bf (#1}}
+{\medskip}
+
+\newenvironment{problem1}[1]{\noindent {\bf Problem #1}}
+{\medskip}
+
+\newenvironment{theorem}[1]{\noindent {\bf Theorem #1:}}
+{\medskip}
+
+\newenvironment{claim}{\noindent {\bf Claim:}}
+{\medskip}
+
+\newenvironment{lemma}[1]{\noindent {\bf Lemma #1:}}
+{\medskip}
+
+\newenvironment{definition}[1]{\noindent {\bf Definition #1:}}
+{\medskip}
+
+\newenvironment{proof}{\noindent {\bf Proof:} \\}{\hfill
+\rule{1mm}{3mm} \bigskip}
+
+%\newenvironment{solution}{\noindent {\bf Solution:} \\}{\hfill
+%\rule{1mm}{3mm} \bigskip}
+
+\usepackage{hyperref}
+\usepackage{amssymb}
+
+\name{Sam Tay}
+\class{Professor Milnikel}
+\assignment{Midterm Take-Home}
+\duedate{04/13/2011}
+
+
+\begin{document}
+
+
+\begin{problem1}{1. (a)} If $s$ and $t$ are terms, then $s$ is not a proper initial segment of $t$.
+
+\begin{proof}\indent We proceed by induction on the complexity of $s$. There are two base cases, when $s$ is either a constant or variable. For both cases, $s$ cannot be a proper initial segment of any term $t$, because by Definition 5.2, there are no terms longer than a single symbol beginning with a constant or variable symbol.
+
+Now assume that $s$ is $ft_1\cdots t_n$, where $f$ is an $n$-place function symbol and each term $t_i$ is not a proper initial segment of any other term, for $1\le i\le n$. Assume further that $s$ is a proper initial segment of some term $t$, such that $t$ is $su = ft_1\cdots t_nu$, for some nonempty finite sequence of symbols $u$. Since $t$ begins with an $n$-place function symbol $f$, we see from Definition 5.2.3 that $f$ must be followed by a collection of exactly $n$ terms, each written immediately after another. Then $t_1\cdots t_nu$ must be $n$ terms. However, since $t_1$ is not a proper initial segment of any other term, the first term must be exactly and only $t_1$. Then similarly the first two terms can be only $t_1t_2$. We see that for $1\le i\le n$, the first $i$ terms must be only $t_1\cdots t_i$, and thus the first $n$ terms must be $t_1\cdots t_n$. Therefore $u$ must be empty and we conclude $s$ is not a proper initial segment of any term $t$.
+
+Therefore, by induction on the complexity of $s$, if $s$ and $t$ are terms, $s$ is not a proper initial segment of $t$.
+\end{proof}
+\end{problem1}
+
+\begin{problem2}{b)}
+If $t_1\cdots t_n$ is a collection of terms $t_i$, each written immediately after another, and the same sequence of symbols can be read as $s_1\cdots s_n$ for terms $s_i$, then $t_1=s_1,\ldots, t_n=s_n$.
+
+\begin{proof}\indent We proceed by induction on $n$. Consider the trivial base case, $n=1$, when the collection of terms is just a single term $t_1$. Clearly if the same term can be read as $s_1$, then $s_1=t_1$.
+
+Next, assume that if any sequence of symbols is read as both terms $t_1\cdots t_{k-1}$ and $s_1\cdots s_{k-1}$, then $t_i=s_i$ for $1\le i\le k-1$. Now consider a collection of $k$ terms $t_1\cdots t_k$ which is also read as $s_1\cdots s_k$. Since each $t_i$ is not a proper initial segment of any other term, the first $k-1$ terms in each sequence can only be read as $t_1\cdots t_{k-1}$ and $s_1\cdots s_{k-1}$, so by our induction hypothesis, $t_i=s_i$ for $1\le i\le k-1$. Then the rest of the sequence is both $t_k$ and $s_k$, and just as trivially as the base case, $t_k=s_k$.
+
+Thus, by induction on $n$, if a collection of terms $t_1\cdots t_n$ is also read as $s_1\cdots s_n$, then $t_i=s_n$ for $1\le i\le n$.
+\end{proof}
+\end{problem2}
+
+\begin{problem2}{c)} If term $t$ is $ft_1\cdots t_n$ for function symbol $f$ and terms $t_1,\dots ,t_n$ and $t$ is also $gs_1\cdots s_k$ for function symbol $g$ and terms $s_1,\ldots ,s_k$, then $f$ is $g$, $n=k$, and for each $i$, $1\le i\le n$, $t_i$ is $s_i$.
+
+\begin{proof}\indent Suppose a term $t$ is both $ft_1\cdots t_n$ and $gs_1\cdots s_k$ for function symbols $f,g$ and terms $t_i$ for $1\le i\le n$, and $s_j$ for $1\le j \le k$. Since $t$ begins with both $f$ and $g$, it follows immediately that $f$ is $g$, and since $f$ is followed by $n$ terms, $f$ is an $n$-place function. Since $f$ is $g$, $g$ is an $n$-place function also. By Definition 5.2.3, $g$ must be followed by $n$ terms, so it must be the case that $s_1\cdots s_k$ is a sequence of $n$ terms. Since no term is a proper initial segment of another, we must have that $n=k$. We now have that $t$ is both $ft_1\cdots t_n$ and $fs_1\cdots s_n$. Then $t_1\cdots t_n$ is $s_1\cdots s_n$, and by Problem 1(b), we know $t_i$ is $s_i$, for $1\le i\le n$.
+\end{proof}
+\end{problem2}
+
+
+
+\begin{problem2}{d)}
+If $\alpha$ and $\beta$ are formulas, then $\alpha$ is not a proper initial segment of $\beta$.
+\end{problem2}
+\begin{proof}\indent We proceed by induction on the depth of $\alpha$. Consider the base cases, when $depth(\alpha) =1$. Then $\alpha$ is either $Pt_1\cdots t_k$ for some $k$-place function $P$ and terms $t_1,\ldots, t_k$, or $=t_1t_2$ for terms $t_1, t_2$.
+
+\indent Suppose $\alpha$ is $Pt_1\cdots t_k$. If $\alpha$ is a proper initial segment of $\beta$, then $\beta$ is $Pt_1\cdots t_ku$ for some nonempty finite sequence of symbols $u$. By Definition 5.3.1, if $\beta$ begins with a $k$-place function $P$, then $P$ is followed by exactly and only $k$ terms. Then $\beta$ can only be a formula if $t_1\cdots t_ku$ is a sequence of $k$ terms. However, since no term is a proper initial segment of any other term, the first $k$ terms must be only $t_1\cdots t_k$, and thus $u$ must be empty. We conclude that $\alpha$ is not a proper initial segment of any formula $\beta$.
+
+Suppose $\alpha$ is $=t_1t_2$. If $\alpha$ is a proper initial segment of $\beta$, then $\beta$ is $=t_1t_2u$, for some nonempty finite sequence of symbols $u$. By Definition 5.3.2, if $\beta$ is a formula beginning with symbol $=$, then $=$ is followed by exactly and only two terms. Thus $t_1t_2u$ must be a sequence of only two terms. Since no term is a proper initial segment of any other term, the first two terms must be only $t_1t_2$, and thus $u$ must be empty. We conclude that $\alpha$ is not a proper initial segment of any formula $\beta$.
+
+Next, assume that any formula of depth less than $n$ is not a proper initial segment of any other formula, and let $\alpha$ have depth $n$. We have three inductive cases.
+
+Suppose $\alpha$ is $(\lnot\varphi)$, and suppose further that $\alpha$ is a proper initial segment of some formula $\beta$, such that $\beta$ is $(\lnot\varphi)u$. Since $($ is the first symbol of $\beta$, by Definition 5.3, $\beta$ must be either $(\lnot\psi)$ or $(\psi\to\delta)$, for some formulas $\psi,\delta$. However, the second symbol of $\beta$ is $\lnot$, and the second symbol of $(\psi\to\delta)$ is the first symbol of $\psi$. Since no formula begins with $\lnot$, we conclude $\beta$ is $(\lnot\psi)$. So, typographically, $\beta$ is both $(\lnot\varphi)u$ and $(\lnot\psi)$. Then $\varphi)u$ is the same sequence of symbols as $\psi)$. Since the initial sequence of symbols is interpreted as formulas $\varphi$ and $\psi$, it must be the case that one is a proper initial segment of the other, or they are equal. However, by construction of $\alpha$, we know $depth(\varphi) < n$, and by induction hypothesis, $\varphi$ is not a proper initial segment of $\psi$. If $\psi$ were a proper initial segment of $\varphi$, then clearly $depth(\psi) < depth(\varphi) < n$, which implies $\psi$ is not a proper initial segment of $\varphi$, so this case is impossible. Thus, of $\varphi$ and $\psi$, none can be a proper initial segment of another. Then $\varphi$ must be $\psi$, and it follows that $)u$ is the sequence $)$. Therefore $u$ must be empty and we conclude $\alpha$ is not a proper initial segment of any formula $\beta$.
+
+Next, suppose $\alpha$ is $(\varphi\to\gamma)$, and suppose further that $\alpha$ is a proper initial segment of some formula $\beta$, such that $\beta$ is $(\varphi\to\gamma)u$. By Definition 5.3, since $\beta$ begins with the symbol $($, $\beta$ must be $(\lnot\psi)$ or $(\psi\to\delta)$ for some formulas $\psi,\delta$. However, since the second symbol of $\beta$ is the first symbol of $\varphi$, and no formula begins with $\lnot$, we conclude $\beta$ is $(\psi\to\delta)$. So $\beta$ is both $(\varphi\to\gamma)u$ and $(\psi\to\delta)$. Then the sequence of symbols $\varphi\to\gamma)u$ is $\psi\to\delta)$. Since the initial sequence of symbols can be interpreted as both $\varphi$ and $\psi$, it must be the case that one is a proper initial segment of the other, or they are equal. From construction of $\alpha$, we know that $\varphi$ has depth less than $n$,  and by the same argument given in the previous case, neither can be a proper initial segment of the other. Then they must be equal, such that the sequence $\varphi\to\gamma)u$ is $\varphi\to\delta)$. It follows then that $\gamma)u$ is $\delta)$. So, the initial sequence of symbols can be read as both formulas $\gamma$ and $\delta$, and again we know from construction of $\alpha$ that $depth(\gamma) < n$ and, as in the arguments above, we conclude neither of them is a proper initial segment of the other. We then conclude, as before, that $\gamma$ is $\delta$. Therefore the sequence $)u$ is $)$, from which it is is clear that $u$ must be empty, and thus $\alpha$ is not a proper initial segment of any formula $\beta$.
+
+Finally, suppose $\alpha$ is $\forall x\varphi$, and suppose further that $\alpha$ is a proper initial segment of some formula $\beta$, such that $\beta$ is $\forall x\varphi u$, for some nonempty finite sequence of symbols $u$. By Definition 5.3.5, since $\beta$ begins with $\forall$, $\beta$ must be $\forall x\psi$ for some formula $\psi$. Then typographically, the sequence $\varphi u$ must be the sequence $\psi$. By construction of $\alpha$, $depth(\varphi) < n$, so by the induction hypothesis, $\varphi$ is not a proper initial segment of any formula. Then $\varphi u$ cannot be $\psi$, and we conclude by contradiction that $\alpha$ is not a proper initial segment of any formula $\beta$.
+
+Therefore, by induction on the depth of $\alpha$, we conclude that if $\alpha$ and $\beta$ are formulas, $\alpha$ is not a proper initial segment of $\beta$.
+\end{proof}
+
+\begin{problem2}{e)} 
+\begin{itemize}
+\item{If $\varphi$ is $=t_1t_2$ and the same sequence of symbols that constitutes $\varphi$ can also be read as $=s_1s_2$, then $t_1$ is identical to $s_1$ and $t_2$ is identical to $s_2$.}
+\begin{proof}Assume $\varphi$ is read as both $=t_1t_2$ and $=s_1s_2$. The first symbol of the sequence is $=$, so we must have that the sequence $t_1t_2$ is identical to $s_1s_2$. By Problem 1(b), we know that $t_1$ is $s_1$ and $t_2$ is $s_2$.
+\end{proof}
+\item{If $\varphi$ is $Rt_1\cdots t_n$ for $n$-ary relation symbol $R$ and $\varphi$ is also $Qs_1\cdots s_k$ for $k$-ary relation symbol $Q$, then $R$ and $Q$ are identical, $n=k$, and for each $1 \le i\le n$, $t_i=s_i$.}\\
+\begin{proof}Assume $\varphi$ is both $Rt_1\cdots t_n$ and $Qs_1\cdots s_k$. Since the first symbol of $\varphi$ is both the symbol $R$ and the symbol $Q$, it must be the case that $R$ is identical to $Q$. Since $R$ is an $n$-ary relation symbol, $Q$ must be an $n$-ary relation symbol, so we must have $n=k$. Now, we have that the sequence $t_1\cdots t_n$ is the sequence $s_1\cdots s_n$, and by Problem 1(b), we know that $t_i=s_i$ for $1\le i\le n$.
+\end{proof}
+\item{If $\varphi$ is $(\neg\alpha)$ and $\varphi$ is also $(\neg\beta)$, then $\alpha$ and $\beta$ are identical.}\\
+\begin{proof} If $\varphi$ is both $(\neg\alpha)$ and $(\neg\beta)$, these must be the same sequence of symbols. We see that the first two symbols of each are $(\neg$ and the last symbol of each is $)$. Then for the whole sequences to be identical, it must be the case that $\alpha$ is identical to $\beta$.
+\end{proof}
+\item{If $\varphi$ is $(\alpha\to\beta)$ and $\varphi$ is also $(\gamma\to\delta)$, then $\alpha$ and $\gamma$ are identical and $\beta$ and $\delta$ are identical.}\\
+\begin{proof} If $\varphi$ is both $(\alpha\to\beta)$ and $(\gamma\to\delta)$, then these must be the same sequence of symbols. We see that the first and last symbols match, $($ and $)$ respectively. Then it must be the case that $\alpha\to\beta$ and $\gamma\to\delta$ are the same sequence. Since the initial sequence of symbols can be read as both $\alpha$ and $\gamma$, it must be the case that one is a proper initial segment of another, or that they are identical. By Problem 1(d), no formula is a proper initial segment of another, so we must have $\alpha$ is identical to $\gamma$. Then we have $\alpha\to\beta$ is the same sequence as $\alpha\to\delta$, from which it follows that $\beta$ is identical to $\delta$.
+\end{proof}
+\item{If $\varphi$ is $\forall v_n\alpha$ and $\varphi$ is $\forall v_m\beta$, then $v_n$ and $v_m$ are identical and $\alpha$ and $\beta$ are identical.}\\
+\begin{proof} If $\varphi$ is both $\forall v_n\alpha$ and $\forall v_m\beta$, then these must be the same sequence of symbols. We see that the first symbol $\forall$ matches. Then we must have that $v_n\alpha$ is the same sequence as $v_m\beta$. Clearly, since the sequence begins with the symbol $v_n$ and the symbol $v_m$, we must have that $v_n$ is identical to $v_m$. Then we have that the sequence $v_n\alpha$ is $v_n\beta$, from which it follows that $\alpha$ must be identical to $\beta$.
+\end{proof}
+\end{itemize}
+
+\end{problem2}
+\begin{problem1}{2. (a)} If $\mathfrak{A}$ and $\mathfrak{B}$ are structures of a language $\mathcal{L}$ such that $\mathfrak{A}\cong\mathfrak{B}$, then $Th(\mathfrak{A})=Th(\mathfrak{B})$.
+
+\begin{proof}\indent Suppose $\mathfrak{A}\cong\mathfrak{B}$, where $\mathfrak{A}$ has universe A and $\mathfrak{B}$ has universe B. Then there exists a one-to-one correspondence $i:A\to B$ such that:
+\begin{itemize}
+\item{For each constant symbol $c $ of $ \mathcal{L}$, $i(c^{\mathfrak{A}})=c^{\mathfrak{B}}$.}
+\item{For each $n$-ary function symbol $f$ in $\mathcal{L}$, and all $a_1,\ldots,a_n \in A$, $i(f^{\mathfrak{A}}(a_1,\ldots,a_n))=f^{\mathfrak{B}}(i(a_1),\ldots,i(a_n))$.}
+\item{For each $n$-ary relation symbol R in $\mathcal{L}$ and all $a_1,\ldots,a_n \in A$, $R^{\mathfrak{A}}(a_1,\ldots,a_n)$ if and only if $R^{\mathfrak{B}}(i(a_1),\ldots,i(a_n)).$}
+\end{itemize}
+To show that $Th(\mathfrak{A})=Th(\mathfrak{B})$ we need to prove for all sentences $\varphi$, $\mathfrak{A}\vDash\varphi$ if and only if $\mathfrak{B}\vDash\varphi$. We will prove the stronger claim that this holds for all formulas $\varphi$, from which it follows immediately that this holds for all sentences $\varphi$.  By Definition 6.5, we know that $\mathfrak{A}\vDash\varphi$ if and only if for all assignments $s:Vars\to A$, $\mathfrak{A}\vDash\varphi [s]$. Similarly, $\mathfrak{B}\vDash\varphi$ if and only if for all assignments $r:Vars\to B$, $\mathfrak{B}\vDash\varphi [r]$. However, since $i$ is a one-to-one correspondence, every assignment $r:Vars\to B$ can be written as $i \circ s: Vars \to B$, for $s:Vars\to A$. Thus, we have to show that, for all $s:Vars\to A$, $\mathfrak{A}\vDash\varphi [s]$ if and only if for all $s:Vars\to A$, $\mathfrak{B}\vDash\varphi [i \circ s]$. We will prove a stronger statement, which is that for all $s:Vars\to A$, $\mathfrak{A}\vDash\varphi [s]$ if and only if $\mathfrak{B}\vDash\varphi [i \circ s]$. (If the difference seems ambiguous in our English language, I encourage the reader to look at Bilaniuk's Axiom 5, which is analogous to these two statements, and also shows why this is a stronger and sufficient statement to prove.) We proceed by induction on the construction of $\varphi$. First consider the two base cases, when $\varphi$ is atomic. Let $s:Vars\to A$ be any variable assignment for $\mathfrak{A}$. 
+
+If $\varphi$ is $t_1=t_2$ for some terms $t_1, t_2$, then $\mathfrak{A}\vDash\varphi [s]$ if and only if $\overline{s}(t_1)=\overline{s}(t_2)$, by Definition 6.4.1. Similarly $\mathfrak{B}\vDash\varphi [i\circ s]$ if and only if  $\overline{i \circ s}(t_1)=\overline{i \circ s}(t_2)$. So, we have to show $\overline{s}(t_1)=\overline{s}(t_2)$ if and only if $\overline{i \circ s}(t_1)=\overline{i \circ s}(t_2)$. However, since $i$ has no extended assignment, this is just $(i \circ\overline{ s})(t_1)=(i \circ \overline{s})(t_2)$. The forward direction is true because $i$ is a function: if $\overline{s}(t_1), \overline{s}(t_2) \in A$ such that $\overline{s}(t_1)=\overline{s}(t_2)$, then $i(\overline{s}(t_1))=i(\overline{s}(t_2))$. The other direction follows from $i$ being one-to-one. If $i(\overline{s}(t_1))=i(\overline{s}(t_2))$, then $\overline{s}(t_1)=\overline{s}(t_2)$. Thus, $\mathfrak{A}\vDash t_1=t_2 [s]$ if and only if $\mathfrak{B}\vDash t_1=t_2[i\circ s]$.
+
+If $\varphi$ is $Rt_1\cdots t_n$ for some $n$-ary relation symbol $R$, then by Definition 6.4.2, $\mathfrak{A}\vDash\varphi [s]$ if and only if $R^{\mathfrak{A}}(\overline{s}(t_1),\ldots,\overline{s}(t_n))$. Similarly, $\mathfrak{B}\vDash\varphi [i\circ s]$ if and only if $R^{\mathfrak{B}}((i\circ\overline{s})(t_1),\ldots,(i\circ\overline{s})(t_n))$. Since $\overline{s}(t_1),\ldots,\overline{s}(t_n) \in A$, we know that $R^{\mathfrak{A}}(\overline{s}(t_1),\ldots,\overline{s}(t_n))$ if and only if $R^{\mathfrak{B}}(i(\overline{s}(t_1)),\ldots,i(\overline{s}(t_n)))$, which is exactly what we needed to show. Thus, $\mathfrak{A}\vDash Rt_1\cdots t_n[s]$ if and only if $\mathfrak{B}\vDash Rt_1\cdots t_n[i\circ s]$.
+
+Next, assume that for formulas $\alpha$ and $\beta$, for all variable assignments $s:Vars\to A$, $\mathfrak{A}\vDash\alpha [s]$ if and only if $\mathfrak{B}\vDash\alpha [i \circ s]$, and $\mathfrak{A}\vDash\beta [s]$ if and only if $\mathfrak{B}\vDash\beta [i\circ s]$. There are three inductive cases. Again, let $s:Vars\to A$ be any variable assignment for $\mathfrak{A}$.
+
+Suppose $\varphi$ is $(\neg\alpha)$. By Definition 6.4.3, $\mathfrak{A}\vDash(\neg\alpha) [s]$ if and only if it is not the case that $\mathfrak{A}\vDash\alpha [s]$. By the equivalence in the induction hypothesis, we know this is true if and only if it is not the case that $\mathfrak{B}\vDash\alpha [i\circ s]$, which again by Definition 6.4.3 means that $\mathfrak{B}\vDash (\neg\alpha ) [i \circ s]$. Thus $\mathfrak{A}\vDash(\neg\alpha) [s]$ if and only if $\mathfrak{B}\vDash(\neg\alpha) [i \circ s]$.
+
+Next, suppose $\varphi$ is $(\alpha\to\beta)$. For clarity, we will consider each implication separately. So suppose $\mathfrak{A}\vDash (\alpha\to\beta)[s]$. By Definition 6.4.4, this is true if and only if  $\mathfrak{A}\vDash\beta [s]$ whenever $\mathfrak{A}\vDash\alpha [s]$. Similarly, $\mathfrak{B}\vDash (\alpha\to\beta) [i \circ s]$ if and only if $\mathfrak{B}\vDash\beta [i \circ s]$ whenever $\mathfrak{B}\vDash\alpha [i\circ s]$. So suppose $\mathfrak{B}\vDash\alpha [i\circ s]$. By the induction hypothesis, we must have $\mathfrak{A}\vDash\alpha [s]$. Then, as stated above, we must have that $\mathfrak{A}\vDash\beta [s]$. By the induction hypothesis, we conclude $\mathfrak{B}\vDash\beta [i\circ s]$. This proves the implication needed to conclude that $\mathfrak{B}\vDash (\alpha\to\beta)[i\circ s]$. The other direction is identical, but we will show it nonetheless. Suppose now that $\mathfrak{B}\vDash (\alpha\to\beta)[i\circ s]$. Then by Definition 6.4.4, $\mathfrak{B}\vDash\beta [i\circ s]$ whenever $\mathfrak{B}\vDash\alpha [i\circ s]$. To show that $\mathfrak{A}\vDash (\alpha\to\beta)[s]$, we must prove the implication that $\mathfrak{A}\vDash\beta [s]$ whenever $\mathfrak{A}\vDash\alpha [s]$. So, suppose $\mathfrak{A}\vDash\alpha[s]$. By the induction hypothesis, we must have $\mathfrak{B}\vDash\alpha[i\circ s]$. Then, as stated above, we must have that $\mathfrak{B}\vDash\beta [i\circ s]$. Again by the induction hypothesis, we must have $\mathfrak{A}\vDash\beta [s]$, which proves the implication needed to conclude that $\mathfrak{A}\vDash (\alpha\to\beta) [s]$. Therefore, $\mathfrak{A}\vDash (\alpha\to\beta) [s]$ if and only if $\mathfrak{B}\vDash (\alpha\to\beta) [i\circ s]$.
+
+Finally, suppose $\varphi$ is $\forall x\alpha$ and that $\mathfrak{A}\vDash\forall x\alpha[s]$. By Definition 6.4.5, this is true if and only if for all $a\in A$, $\mathfrak{A}\vDash\alpha [s(x|a)]$. However, "for all $a\in A$, $s(x|a)$'' are just various assignments from $Vars$ to $A$, particularly varying the assignment for variable $x$. So we see that $\mathfrak{A}\vDash\forall x\alpha[s]$ if and only if we have $\mathfrak{A}\vDash\alpha [r]$, where $r:Vars\to A$ is any assignment that satisfies $r(v)=s(v)$, for all $v\ne x$, and $r(x)=a$ for any $a\in A$. The induction hypothesis holds for all assignments $s:Vars\to A$, so we know this is true if and only if $\mathfrak{B}\vDash\alpha[i\circ r]$. Now $i\circ r:Vars\to B$ is any assignment such that $(i\circ r)(v)=(i( r(v))=i(s(v))=(i\circ s)(v)$ for all $v\ne x$, and $(i\circ r)(x)=i(r(x))=i(a)$, for any $a\in A$. Since $i$ is a one-to-one correspondence, as $a$ ranges over $A$, $i(a)$ ranges over $B$. Then $(i\circ r)(x) =b$ for any $b\in B$, and by the same reasoning above, since $r$ varies its assignment for variable $x$ over all of $B$, we know that $\mathfrak{B}\vDash\forall x\alpha[i\circ s]$. Thus $\mathfrak{A}\vDash\forall x\alpha[s]$ if and only if $\mathfrak{B}\vDash\forall x\alpha[i\circ s]$.
+
+Therefore, by induction on the construction of $\varphi$, for any variable assignment $s:Vars\to A$ and all formulas $\varphi$, $\mathfrak{A}\vDash\varphi [s]$ if and only if $\mathfrak{B}\vDash\varphi [i\circ s]$. From this we can conclude that $\mathfrak{A}\vDash\varphi$ if and only if $\mathfrak{B}\vDash\varphi$ for all formulas $\varphi$ and then certainly for all sentences $\varphi$. Therefore, if $\mathfrak{A}\cong\mathfrak{B}$, then $Th(\mathfrak{A})=Th(\mathfrak{B})$.
+\end{proof}
+\end{problem1}
+
+\begin{problem2}{b)} The converse of Problem 2 (a), however, is not true.\\
+\begin{proof}For a counterexample, consider $\mathfrak{N}$, the standard model of $\mathcal{L_N}$. Let $\Sigma = Th(\mathfrak{N})$. We will build a model $\mathfrak{M}$ for $\Sigma$, such that $Th(\mathfrak{M})=Th(\mathfrak{N})$, but $\mathfrak{M}\ncong\mathfrak{N}$. First we define the extended language $\mathcal{L} = \mathcal{L_N} \cup c$, where $c \notin \mathcal{L_N}$. Now, let $$\Theta =\Sigma \cup \{0<c, S0<c,\ldots ,SS\cdots S0<c,\ldots \},$$ or in our informal notation, we can think of this as $$\Theta =\Sigma \cup \{0<c, \overline{1}<c,\ldots ,\overline{n}<c,\ldots \}.$$  By the Compactness Theorem, $\Theta$ has a model if and only if every finite subset of $\Theta$ has a model. So, let $\Theta_0$ be any finite subset of $\Theta$. This will contain finitely many sentences from $\Sigma$, and finitely many sentences from $\Theta$, such that $$\Theta_0 \subseteq \Sigma \cup \{0<c, \overline{1}<c,\ldots ,\overline{n}<c\},$$
+for some natural number $n$. Clearly this subset has a model, which we'll call $\mathfrak{N}_n$, which is identical to $\mathfrak{N}$ of $\mathcal{L_N}$ except that $c^{\mathfrak{N}_n}=n+1.$ Therefore, by the Compactness Theorem, $\Theta$ has a model $\mathfrak{M'}$.
+
+Now let $\mathfrak{M}$ be a structure for $\mathcal{L_N}$, such that $\mathfrak{M}$ is identical to $\mathfrak{M'}$, but without the constant $c$. Certainly $\mathfrak{M}$ is still a model for $\Sigma$ by construction, as we have not lost any sentences of $\Sigma$ when restricting to $\mathcal{L_N}$ since $c\notin \Sigma$, and thus $Th(\mathfrak{N})\subseteq Th(\mathfrak{M})$. To see that $Th(\mathfrak{M})\subseteq Th(\mathfrak{N})$, suppose that $\gamma\in Th(\mathfrak{M})$ and $\gamma\notin Th(\mathfrak{N})$, for some sentence $\gamma$. By Proposition 8.6, $Th(\mathfrak{M})$ and $Th(\mathfrak{N})$ are maximally consistent sets of sentences. Since $\gamma\notin\ Th(\mathfrak{N})$, by Proposition 8.8, $\neg\gamma\in Th(\mathfrak{N})$. Since $Th(\mathfrak{N})\subseteq Th(\mathfrak{M})$, it must be the case that $\neg\gamma\in Th(\mathfrak{M})$. Thus, $Th(\mathfrak{M})\vdash\gamma\land\neg\gamma.$ However, this contradicts $Th(\mathfrak{M})$ being a consistent set of sentences, so we conclude that $Th(\mathfrak{M})\subseteq Th(\mathfrak{N})$. Therefore $Th(\mathfrak{M})=Th(\mathfrak{N})$. However,  $\mathfrak{M}\ncong\mathfrak{N}$ because there is some infinite element in the universe $|\mathfrak{M}|$ such that the element is greater than all natural numbers. Although the formulas containing $c$ are gone, this does not change the universe that we constructed, which still satisfies those formulas for some unnamed element in the universe. If we could state this fact within the formal language, then we could not have the elementary equivalence; however, since $\mathfrak{M}$ is restricted to $\mathcal{L_N}$ and we have removed the constant $c$, we have no way to refer to the infinite element within formulas of $\mathcal{L_N}$.
+\end{proof}
+
+%Note: we could also show this with another, perhaps more enlightening train of thought. If $Th(\mathfrak{N})\subseteq Th(\mathfrak{M})$, and as above there is a sentence $\gamma$ such that $\gamma\in Th(\mathfrak{M})$ and $\neg\gamma\in Th(\mathfrak{N})$, then certainly $Th(\mathfrak{M})\vDash\gamma$ and $Th(\mathfrak{N})\vDash\neg\gamma$. Then, making use of the Soundness and Completeness Theorems that we worked so hard for, we know that $Th(\mathfrak{M})\vdash\gamma$ and $Th(\mathfrak{N})\vdash\neg\gamma$.
+\end{problem2}
+
+\begin{problem1}{3. (a)} Any TPCEEs without a list of their own are proved straight from definitions. The list immediately following Theorem 8.17 are only those TPCEEs used directly in the proof, and the same goes for all other enumerated lists; since everything stems from Theorem 8.17, every single TPCEE cited in all the lists was used directly or indirectly in proving Theorem 8.17. In total, I count 31 distinct TPCEEs plus the 8 axioms. When an axiom has an exponent, the exponent indicates the number of times the axiom was called on within that particular proof. I consider Theorem 7.10 as the Deduction Theorem for both propositional logic and first-order logic.\\
+
+\noindent Theorem 8.17
+\begin{enumerate}
+\item{Problem 6.14}
+\item{Theorem 8.16}
+\item{Proposition 6.15.2}
+\item{Problem 6.13}
+\item{Proposition 6.11}
+\item{Theorem 7.10}
+\item{Problem 3.9.3}
+\item{Example 3.1}
+\item{Proposition 7.9}\\
+\end{enumerate}
+
+\noindent Theorem 8.16
+\begin{enumerate}
+\item{Corollary 8.15}
+\item{Theorem 8.1}\\
+\end{enumerate}
+
+\noindent Theorem 7.10
+\begin{enumerate}
+\item{A$1^2$, A$2$}
+\item{Proposition 7.7}
+\item{Example 3.1}\\
+\end{enumerate}
+
+\noindent Example 3.1
+\begin{enumerate}
+\item{A$1^2$, A2}\\
+\end{enumerate}
+
+\noindent Problem 3.9.3
+\begin{enumerate}
+\item{Theorem 7.10}
+\item{A1, A3}\\
+\end{enumerate}
+
+\noindent Corollary 8.15
+\begin{enumerate}
+\item{Proposition 6.17}
+\item{Theorem 8.13}
+\item{Theorem 8.14}\\
+\end{enumerate}
+
+\noindent Theorem 8.1
+\begin{enumerate}
+\item{Proposition 7.4}\\
+\end{enumerate}
+
+\noindent Theorem 8.13
+\begin{enumerate}
+\item{Theorem 7.12}
+\item{Theorem 7.10}
+\item{Problem 3.9.5}
+\item{Problem 3.9.9}\\
+\end{enumerate}
+
+\noindent Theorem 8.14
+\begin{enumerate}
+\item{Problem 3.9.5}
+\item{Problem 7.13.1}
+\item{Problem 7.5.4}
+\item{A$8^3$, A$4^{13}$, A7}
+\item{Proposition 8.7}
+\item{Proposition 8.8}
+\item{Proposition 8.9}
+\item{Proposition 6.15.1}
+\item{Proposition 6.5}\\
+\end{enumerate}
+
+\noindent Proposition 7.4
+\begin{enumerate}
+\item{A1, A2, A3, A4, A5, A6, A7, A8}\\
+\end{enumerate}
+
+\noindent Theorem 7.12
+\begin{enumerate}
+\item{A1, A2, A3, A4, A$5^2$, A$6^2$, A7, A8}\\
+\end{enumerate}
+
+\noindent Problem 3.9.5
+\begin{enumerate}
+\item{Theorem 7.10}
+\item{Example 3.2}
+\item{Example 3.4}
+\item{Problem 3.9.3}\\
+\end{enumerate}
+
+\noindent Problem 3.9.9
+\begin{enumerate}
+\item{Theorem 7.10}
+\item{Problem 3.9.1}
+\item{A$1^2$, A3}\\
+\end{enumerate}
+
+\noindent Problem 7.13.1
+\begin{enumerate}
+\item{Theorem 7.10}
+\item{Theorem 7.11}
+\item{Problem 7.5.4}
+\item{A8}\\
+\end{enumerate}
+
+\noindent Problem 7.5.4
+\begin{enumerate}
+\item{A1, A2, A7, A8}\\
+\end{enumerate}
+
+\noindent Example 3.2
+\begin{enumerate}
+\item{A1, A2}\\
+\end{enumerate}
+
+\noindent Example 3.4
+\begin{enumerate}
+\item{Example 3.1}
+\item{Example 3.2}
+\item{A1, A3}
+\item{Problem 3.3.1}\\
+\end{enumerate}
+
+\noindent Problem 3.9.1
+\begin{enumerate}
+\item{A$1^2$, A3}\\
+\end{enumerate}
+
+\noindent Theorem 7.11
+\begin{enumerate}
+\item{A5, A6}\\
+\end{enumerate}
+
+\noindent Problem 3.3.1
+\begin{enumerate}
+\item{A1, A2}\\
+\end{enumerate}
+\end{problem1}
+
+\begin{problem2}{b)}
+
+One direct use of Axiom 1 was in proving Theorem 7.10 (Deduction Theorem). In proving the backward implication, we assumed $\Sigma \cup \{\alpha\}\vdash\beta$, and proved by induction on the length of this deduction that $\Sigma\vdash(\alpha\to\beta)$. In the base case of length one, we had three cases: $\beta$ is an axiom, $\beta\in\Sigma$, and $\beta=\alpha$. In the first two base cases, the first line is $\beta$ by assumption, and the second line is an instance of A1: $\beta\to(\alpha\to\beta)$. Then by Modus Ponens we deduced $\alpha\to\beta$ from $\Sigma$, which is what we needed to prove.
+
+One direct use of Axoim 2 was in Example 3.1. This was the deduction $\vdash\varphi\to\varphi$. The first line of the deduction is an instance of A2: $$(\varphi\to((\varphi\to\varphi)\to\varphi))\to((\varphi\to(\varphi\to\varphi))\to(\varphi\to\varphi)).$$ We see that the hypothesis is an instance of A1, and then by MP we have the conclusion $$((\varphi\to(\varphi\to\varphi))\to(\varphi\to\varphi)).$$ We see again, the hypothesis of this implication is another instance of A1, and this gives us the conclusion $\varphi\to\varphi$.
+
+One direct use of Axiom 3 was in Problem 3.9.3. This was the deduction $\vdash(\neg\beta\to\neg\alpha)\to(\alpha\to\beta)$. We apply the Deduction Theorem twice to prove the equivalent deduction $\{(\neg\beta\to\neg\alpha),\alpha\}\vdash\beta$. The first line of this deduction is an instance of A3: $(\neg\beta\to\neg\alpha)\to((\neg\beta\to\alpha)\to\beta)$. From here, we have the hypothesis as a premiss. Then by MP we have $((\neg\beta\to\alpha)\to\beta)$. The hypothesis of this implication follows by MP from an instance of A1 and our premiss $\alpha$. Then again by MP we obtain $\beta$, which completes the deduction.
+
+One direct use of Axiom 4 was in proving Theorem 8.14. In fact, in just proving the base cases there were 12 uses of this axiom, with almost all of them for the same purpose. We have that for some terms $t_i$ and constants $a_i$,  $t_i=a_i$ for $1\le i\le n$, and must prove things such as $\Sigma\vdash Rt_1\cdots t_n\leftrightarrow Ra_1\cdots Ra_n$, or $\Sigma\vdash ft_1\cdots t_n = fa_1\cdots a_n$. Whenever we need to prove something like this, we need generalizations of A8 to utilize equality of variables, and then applications of A4 to get meaningful formulas utilizing the equality of terms which are substituted for the variables.
+
+One direct use of Axiom 5 was in proving Theorem 7.11. We proved this theorem by induction on the length of the deduction $\Gamma\vdash\varphi$, and used this axiom explicitly in the inductive case when $\varphi$ is the $n^{th}$ line, which follows by MP from $\varphi_i$ and $\varphi_i\to\varphi$. By the induction hypothesis, since the length of the deduction to both $\varphi_i$ and $\varphi_i\to\varphi$ is less than $n$, we know that $\Gamma\vdash\forall x\varphi_i$ and $\Gamma\vdash\forall x(\varphi_i\to\varphi)$. Then we use an instance of A5: $\forall x(\varphi_i\to\varphi)\to(\forall x\varphi_i\to\forall x\varphi)$. From here, two applications of MP give $\Gamma\vdash\forall x\varphi$, and the proof is complete.
+
+One direct use of Axiom 6 was in proving Theorem 7.12. We proved this theorem by induction on the length of the deduction $\Gamma\vdash\varphi$, and used this axiom explicitly in the base case when $\varphi$ is a premiss. Since $\varphi \in \Gamma$, constant $c$ does not occur in $\varphi$, so $\varphi_x^c$ is just $\varphi$. Since we are assuming $x$ does not occur in $\varphi$, $x$ does not occur in $\varphi_x^c$. Then we apply an instance of A6: $\varphi_x^c\to\forall x\varphi_x^c$, from which $\forall x\varphi_x^c$ follows by MP, and this completes the base case when $\varphi$ is a premiss.
+
+One direct use of Axiom 7 was in Problem 7.5.4. This is just a deduction $\vdash x=y\to y=x$. The deduction I constructed has an instance of A1, A7, A8, and a long instance of A2. The purpose of A7 was to obtain the conclusion of an instance of A1: $x=x\to(x=y\to x=x)$. After A7, which is $x=x$, by MP we have $(x=y\to x=x)$. The instance of A8 is exactly the hypothesis of A2, and the conclusion which follows by MP is $((x=y\to x=x)\to(x=y\to y=x))$. Clearly, obtaining the conclusion of A1 is cruicial to the conclusion $x=y\to y=x$.
+
+One direct use of Axiom 8 was in proving Theorem 8.14. In proving the base cases, as said above for uses of Axiom 4, we used generalizations of A8 quite a bit. Whenever we have terms that are equal and need to show that the same properties are true of them, we need these generalizations. For a specific example, to prove the base case of Theorem 8.14, we need to show that $\mathfrak{M}\vDash Rt_1t_2\cdots t_k$ if and only if $Rt_1t_2\cdots t_k \in \Sigma$. To do this, we need the witnesses such that $a_i=t_i$ for $1\le i\le k$, to satisfy $Rt_1t_2\cdots t_k\in\Sigma$ if and only if $Ra_1a_2\cdots a_k\in\Sigma$. The first step in showing this is a generalization of A8: $\forall x\forall yx=y\to(Rx\to Ry)$. After applying A4 and MP a few times, we can obtain $Rt\leftrightarrow Ra\in\Sigma$, from which it follows that $Rt\in\Sigma$ if and only if $Ra\in\Sigma$. This is only for 1-place relation symbols, but an induction proof can give us $Rt_1t_2\cdots t_k\in\Sigma$ if and only if $Ra_1a_2\cdots a_k\in\Sigma$, which is crucial to the base case.
+\end{problem2}
+
+By my count, this is a list of the axioms in order of descending direct uses:
+\begin{enumerate}
+\item{A4 with 14 uses}
+\item{A1 with 14 uses}
+\item{A2 with 7 uses}
+\item{A3 with 6 uses}
+\item{A8 with 6 uses}
+\item{A5 with 4 uses}
+\item{A6 with 4 uses}
+\item{A7 with 3 uses}
+\end{enumerate}
+
+Note that this count includes Proposition 7.4 and Theorem 7.12, which almost trivially rely on all axioms. This count also includes multiple direct calls within one proof. For example, 13 of the uses of A4 are within proof of Theorem 8.14.
+
+\end{document}
+%\overline
+%CROSSLEY
+%Similarly, $\mathfrak{B}\vDash(\neg\alpha)$ if and only if for all assignments $s:Vars\to A$, it is not the case that $\mathfrak{A}\vDash(\alpha)$
+
+
+%We know that $\mathfrak{A}\vDash\varphi$ if and only if for all assignments $s:Vars\to A$, $\mathfrak{A}\vDash\varphi [s]$. Similarly, $\mathfrak{B}\vDash\varphi$ if and only if for all assignments $r:Vars\to B$, $\mathfrak{B}\vDash\varphi [r]$. However, since $i$ is a one-to-one correspondence, every assignment $r:Vars\to B$ can be written as $i \circ s: Vars \to B$, for $s:Vars\to A$. Thus, we have to show that, for all $s:Vars\to A$, $\mathfrak{A}\vDash\varphi [s]$ if and only if for all $s:Vars\to A$, $\mathfrak{B}\vDash\varphi [i \circ s]$. In all but the last inductive case, we will prove a stronger statement, which is that for all $s:Vars\to A$, $\mathfrak{A}\vDash\varphi [s]$ if and only if $\mathfrak{B}\vDash\varphi [i \circ s]$. (If the difference seems ambiguous in our English language, I encourage the reader to look at Bilaniuk's Axiom 5, which is analogous to these two statements, and also shows why this is a stronger and sufficient statement to prove.) We proceed by induction on the construction of $\varphi$. First consider the two base cases, when $\varphi$ is atomic. Let $s:Vars\to A$ be any variable assignment for $\mathfrak{A}$. 
+
+
+
+
+
+
+
+
+

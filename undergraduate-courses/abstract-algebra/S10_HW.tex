@@ -1,0 +1,166 @@
+\documentclass[11pt]{hmcpset}
+
+\newenvironment{problem2}[1]{\noindent {\bf (#1}}
+{\medskip}
+
+\newenvironment{problem1}[1]{\noindent {\bf Problem #1:}}
+{\medskip}
+
+\newenvironment{theorem}[1]{\noindent {\bf Theorem #1:}}
+{\medskip}
+
+\newenvironment{claim}{\noindent {\bf Claim:}}
+{\medskip}
+
+\newenvironment{lemma}[1]{\noindent {\bf Lemma #1:}}
+{\medskip}
+
+\newenvironment{definition}[1]{\noindent {\bf Definition #1:}}
+{\medskip}
+
+\newenvironment{proof}{\noindent {\bf Proof:} \\}{\hfill
+\rule{1mm}{3mm} \bigskip}
+
+%\newenvironment{solution}{\noindent {\bf Solution:} \\}{\hfill
+%\rule{1mm}{3mm} \bigskip}
+
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\hypersetup{pdfborder={0 0 0}}
+\name{Sam Tay}
+\class{Professor Milnikel}
+\assignment{Section 10: 6, 7, 9-11, 25, 28, 29, 34}
+\duedate{12/23/2011}
+
+
+\begin{document}
+
+
+
+\begin{problem1}{6} \\
+All left cosets of $\{\rho_0, \mu_2\}\le D_4$ are $$\{\rho_0, \mu_2\},\{\rho_1, \delta_2\},\{\rho_2, \mu_1\},\{\rho_3, \delta_1\}.$$
+\end{problem1}
+
+\begin{problem1}{7} \\
+All right cosets of $\{\rho_0, \mu_2\}\le D_4$ are $$\{\rho_0, \mu_2\},\{\rho_1, \delta_1\},\{\rho_2, \mu_1\},\{\rho_3, \delta_2\},$$ which are \emph{not} the same as the left cosets because $D_4$ is nonabelian.
+\end{problem1}\\
+
+
+
+\begin{problem1}{9} \\
+All left cosets of $\{\rho_0, \rho_2\}\le D_4$ are $$\{\rho_0, \rho_2\},\{\rho_1, \rho_3\},\{\mu_1, \mu_2\},\{\delta_1, \delta_2\}.$$
+\end{problem1}
+
+
+\begin{problem1}{10} \\
+All right cosets of $\{\rho_0, \rho_2\}\le D_4$ are $$\{\rho_0, \rho_2\},\{\rho_1, \rho_3\},\{\mu_1, \mu_2\},\{\delta_1, \delta_2\},$$ which are the same as the left cosets because $\rho_0, \rho_2$ commute with all elements of $D_4$.
+\end{problem1}\\
+
+\begin{problem1}{11}\\
+%\begin{tabular}{ |l | *{8}{|c|} r | }
+We can rearrange Table 8.12 in an order corresponding to the above cosets to find:
+\begin{center}
+  \begin{tabular}{  l || c|c || c|c || c|c || c|c }
+     &$ \rho_0 $&$ \rho_2 $&$ \rho_1 $&$ \rho_3 $&$ \mu_1 $&$ \mu_2 $&$ \delta_1 $&$ \delta_2$\\ \hline\hline
+    $\rho_0$ &$ \rho_0 $&$ \rho_2 $&$ \rho_1 $&$ \rho_3 $&$ \mu_1 $&$ \mu_2 $&$ \delta_1 $&$ \delta_2$\\
+    \hline
+     $\rho_2$ &$ \rho_2 $&$ \rho_0 $&$ \rho_3 $&$ \rho_1 $&$ \mu_2 $&$ \mu_1 $&$ \delta_2 $&$ \delta_1$\\
+      \hline\hline
+     $\rho_1$ & $\rho_1$ & $ \rho_3$ & $\rho_2$ & $\rho_0$ & $\delta_1$ & $\delta_2$ & $\mu_2$ & $\mu_1$\\
+     \hline
+      $\rho_3$ & $\rho_3$ & $ \rho_1$ & $\rho_0$ & $\rho_2$ & $\delta_2$ & $\delta_1$ & $\mu_1$ & $\mu_2$\\
+      \hline\hline
+      $\mu_1$ & $\mu_1$ & $\mu_2$ & $\delta_2$ & $\delta_1$ & $\rho_0$ & $\rho_2$ & $\rho_3$ & $\rho_1$\\
+      \hline
+        $\mu_2$ & $\mu_2$ & $\mu_1$ & $\delta_1$ & $\delta_2$ & $\rho_2$ & $\rho_0$ & $\rho_1$ & $\rho_3$\\
+        \hline\hline
+        $\delta_1$ & $\delta_1$ & $\delta_2$ & $\mu_1$ & $\mu_2$ & $\rho_1$ & $\rho_3$ & $\rho_0$ & $\rho_2$\\
+        \hline
+        $\delta_2$ & $\delta_2$ & $\delta_1$ & $\mu_2$ & $\mu_1$ & $\rho_3$ & $\rho_1$ & $\rho_2$ & $\rho_0$\\
+
+
+  \end{tabular}
+\end{center}
+\vspace{.45cm}
+If we assign the letters $A=\{\rho_0,\rho_2\}, B=\{\rho_1,\rho_3\}, C=\{\mu_1, \mu_2\}, D=\{\delta_1,\delta_2\}$, we see that this table becomes
+
+\begin{center}
+\begin{tabular}{ l | c  c   c  r }
+& A & B & C & D\\\hline
+A & A & B & C & D \\
+B & B & A & D & C \\
+C & C & D & A & B \\
+D & D & C & B & A \\
+
+\end{tabular}
+\end{center}
+from which it is clear that these cosets form a group isomorphic to the Klein-4.\\
+
+\end{problem1}
+
+
+
+\begin{problem1}{25}\\
+To see that $|H| \big\vert |G|$, simply note that each coset of $H$ has $|H|$ elements and for some $r$, the left cosets of $H$ partition $G$ into $r$ cells such that $|G|=r|H|$.\\
+\end{problem1}
+
+
+
+
+\begin{problem1}{28} Let $H$ be a subgroup of $G$ such that $g^{-1}hg\in H$ for all $g\in G$ and all $h\in H$. Then every left coset $gH$ is the same as the right coset $Hg$.\\
+\begin{proof}
+\indent Let $H\le G$ such that $g^{-1}hg\in H$ for all $h\in H$ and all $g\in G$. Then let $g\in G$ and $x\in gH$. Then $x=gh_1$ for some $h_1\in H$. Since $G$ is a group, $h_1=g^{-1}x$. By our previous assumption, since $g^{-1}\in G$ and $h_1\in H$, we must have that $(g^{-1})^{-1}h_1g^{-1}=gh_1g^{-1}=h_2$ for some $h_2\in H$. Recalling that $h_1=g^{-1}x$, we find $h_2=gg^{-1}xg^{-1}=xg^{-1}$, from which it follows that $x=h_2g$. Therefore $x\in Hg$, so $gH\subseteq Hg.$
+
+Similarly if $x\in Hg$ then $x=h_1g$ for some $h_1\in H$. Then $h_1=xg^{-1}$ and again since $g\in G$ we have $g^{-1}h_1g\in H$ where $g^{-1}h_1g=g^{-1}xg^{-1}g=g^{-1}x.$ Therefore we have $g^{-1}x=h_2$ for some $h_2\in H$, and since $G$ is a group, $x=gh_2.$ Thus $x\in gH$, so $Hg\subseteq gH$ and we conclude $gH=Hg.$
+\end{proof}\\
+\end{problem1}
+
+
+
+
+\begin{problem1}{29} If $H$ is a subgroup of $G$ such that the partition of $G$ into left cosets of $H$ is the same as the partition into right cosets of $H$,\footnote{Couldn't we have a situation where this antecedent holds true,  where the sets $\{gH : g\in G\}=\{Hg : g\in G\}$ and yet $g_0H\ne Hg_0$ for some $g_0\in G$?} then $g^{-1}hg\in H$ for all $g\in G$ and all $h\in H$.
+
+\begin{proof} Let $G$ be a group with subgroup $H$ such that $gH=Hg$ for all $g\in G$. Then $x\in Hg$ if and only if $x\in gH$ as well. This means that for any $h_1\in H$, $x=h_1g$ if and only if $x=gh_2$ for some $h_2\in H$. Since $G$ is a group, we have $h_2=g^{-1}x=g^{-1}h_1g.$ Therefore for any $g\in G$ and any $h_1\in H$, we have $g^{-1}h_1g\in H$ as well.
+\end{proof}
+
+\end{problem1}
+
+
+\begin{problem1}{34} Let $G$ be a group of order $pq$ where $p$ and $q$ are primes. Then every proper subgroup of $G$ is cyclic.
+
+\begin{proof} Let $G$ be a group of order $pq$ where $p$ and $q$ are primes. For any proper subgroup $H< G$, we must have $1\le |H| < G$. We know from the Theorem of Lagrange that $|H| \big\vert pq$ and since $p,q$ are primes, it must be the case that $|H|=1, |H|=p,$ or $|H|=q$. Clearly if $|H|=1$ such that $H$ is trivial, $H$ is cyclic. By Corollary 10.11, in the latter two cases $H$ is cyclic as well. We conclude that all proper subgroups of $G$ are cyclic.
+\end{proof}
+\end{problem1}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+%\overline

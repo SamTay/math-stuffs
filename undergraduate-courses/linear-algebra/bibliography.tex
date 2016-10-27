@@ -1,0 +1,204 @@
+%%%%%%%%%%%%%%
+% BASIC FORMATTING %
+%%%%%%%%%%%%%%
+
+\documentclass[11 pt]{article}
+%\documentclass[10 pt]{amsart}
+
+%LOAD VARIOUS PACKAGES
+\usepackage{amsmath,amssymb,amsthm,amsfonts,graphicx,url,colordvi}
+\usepackage{graphics,graphics,latexsym,multicol}
+\usepackage{enumerate}
+
+%SET MARGINS
+\usepackage[margin = 1 in]{geometry} 
+%\usepackage[left=1.5in,top=1.5in,right=1.5in,nohead,bottom=1.5in]{geometry}
+
+%SET SPACING
+\renewcommand{\baselinestretch}{1}
+
+
+%%%%%%%%%%%%%%%%%%%%
+% BUILD YOUR OWN SHORTCUTS %
+%%%%%%%%%%%%%%%%%%%%
+
+
+%MATH CHARACTER COMMANDS
+\newcommand{\R}{\mathbb R} %REALS
+\newcommand{\C}{\mathbb C} %COMPLEX
+\newcommand{\N}{\mathbb N} %NATURAL NUMBERS
+\newcommand{\Q}{\mathbb Q} %RATIONALS
+\newcommand{\Z}{\mathbb Z} %INTEGERS
+
+%LOWER CASE VECTORS v, x, AND b IN BOLDFACE
+\newcommand{\vecv}{\mathbf v} 
+\newcommand{\vecx}{\mathbf x}
+\newcommand{\vecb}{\mathbf b}
+
+%SYMBOL TAU IN BOLD
+\newcommand{\tor}{\boldsymbol{\tau}}
+
+%FORMAT THEOREMS
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{problemma}[theorem]{Problemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{claim}{Claim}
+
+
+%DEFINE NEW NAMED FUNCTIONS
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\conv}{conv}
+
+
+
+
+%%%%%%%%%%%%%%%%
+% MATH  ENVIRONMENTS %
+%%%%%%%%%%%%%%%%
+
+
+%INLINE EQUATION
+% $f(x) = x^2$
+% $\displaystyle f(x)=x^2$
+
+%CENTERED EQUATION
+% $$ f(x)=x^2 $$
+
+%LABELED EQUATION. 
+%(TO REFER TO THE EQUATION LATER IN TEXT TYPE "(\ref{quadratic})".)
+%begin{equation}\label{quadratic}
+% f(x)=x^2
+%\end{equation}
+
+%ALIGNED FORMULA WITHOUT LABELLING
+%\begin{align*}
+%f(x)&=x^2-2x+1 \\
+%   &=(x-1)^2 \\
+% 	&< 5.
+%\end{align*}
+
+
+%%%%%%%%%
+% EXAMPLES %
+%%%%%%%%%
+ 
+
+%1. FRACTIONS AND RADICALS
+
+% $\frac{x-1}{x+1}$
+% $\sqrt[n]{x^2+1}$ 
+
+%2. MATRIX COMMANDS
+
+% $\begin{matrix}a & b \\ c & d \end{matrix}$
+% $\begin{bmatrix}a & b \\ c & d \end{bmatrix}$
+% $\begin{pmatrix}a & b \\ c & d \end{pmatrix}$
+
+%3. INTEGRAL
+
+% $\int_{x=0}{x=1}x^2 \ dx$
+
+%4. PIECEWISE DEFINED FUNCTION
+
+% $p(t)=\begin{cases} \frac{1}{2}, &\text{if $t \in [-1,1]$}; \\ 0, &\text{otherwise,} \end{cases}$
+
+
+%%%%%%%%%%%%%%%
+% FIGURES AND TABLES %
+%%%%%%%%%%%%%%%
+
+
+%FIGURES
+
+%\begin{figure}[h]
+%\hfil \scalebox{.5}{ \rotatebox{0}{ \includegraphics{c:/images/sampleimage.eps} }}  \hfil 
+%\caption{ Sample figure }
+%\end{figure}
+
+%TABLE COMMANDS 
+
+%\begin{tabular}{c|c} $x$ & $y$ \\ \hline a & b \\ c & d \\ e & f \ \end{tabular}
+
+%MULTICOLUMN TABLE
+
+%\begin{table}[h]
+%\begin{center}
+%\begin{tabular}{|c|c|c|c|c|c|c|} 
+%\hline
+%& \multicolumn{6}{c|}{Genotype of Parents}\\ \hline
+%Genotype of Offspring & AA-AA & AA-Aa & AA-aa & Aa-Aa & Aa-aa & aa-aa \\ \hline 
+%AA &  &  &  & &  &    \\ \hline
+%Aa &  &  &  & &  &    \\ \hline
+%aa &  &  &  & &  &    \\ \hline
+%\end{tabular}
+%\end{center}
+%\end{table}
+
+
+%%%%%%%%%%%%%
+%  MISCELLANEOUS  %
+%%%%%%%%%%%%%
+
+  
+%WEB URL
+%\texttt{http://www.phy.syr.edu/courses/java-suite/crosspro.html} 
+
+%TWO ALIGNED FORMULA COLUMNS
+%\begin{alignat}{2}
+%P_0(x)&=1, & \qquad P_1(x)&=x \notag \\
+%P_2(x)&=\frac{1}{2}(3x^2-1), & \qquad P_3(x)&=\frac{1}{2}(5x^3-3x) \notag 
+ % \end{alignat} 
+
+%VARIABLE SPACED COLUMNS IN A TABLE
+%\begin{tabular}{p{2.5in} p{2.5in}}
+%	$\det(BA)$ &   $\det(A^{-1})$ \vspace{2in} \\
+%	$\det(3B)$ &   $\displaystyle \det \left( \begin{bmatrix} 1 & 2 & 4 \\ 2 & 0 & -2 \\ 1 & 2 & 2 \end{bmatrix} \right)$ 
+%	\end{tabular}
+
+
+
+%%%%%%%%%%%%%%%
+% START OF DOCUMENT %
+%%%%%%%%%%%%%%%
+
+
+\title{Bibliography}
+
+
+\begin{document}
+
+
+\maketitle
+
+\noindent1. Aboufadel, Edward and Schlicker, Steven. \emph{Discovering Wavelets}.\\
+2. Tay, Samuel and Smith, Elin. \emph{Math 324 Notes and Lectures}.\\
+
+
+
+\end{document}
+
+%% modify matlab code for any vectors to v=zeros(1,n)
+
+%as up above, ask if matrix representation conversion is correct
+
+%ask if the paper is awkward having the search engine ideas before results
+
+%% ask if there's too much information about image box construction
+ %=====> ask if i need to say more about change of basis P
+ %=====> ask if the whole transposed j-hh stuff is too much
+
+
+
+
+
+
+
+
+

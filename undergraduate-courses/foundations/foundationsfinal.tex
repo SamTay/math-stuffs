@@ -1,0 +1,129 @@
+\documentclass[11pt]{hmcpset}
+
+\newenvironment{problem2}[1]{\noindent {\bf (#1}}
+{\medskip}
+
+\newenvironment{problem1}[1]{\noindent {\bf Problem #1}}
+{\medskip}
+
+\newenvironment{theorem}[1]{\noindent {\bf Theorem #1:}}
+{\medskip}
+
+\newenvironment{claim}{\noindent {\bf Claim:}}
+{\medskip}
+
+\newenvironment{lemma}[1]{\noindent {\bf Lemma #1:}}
+{\medskip}
+
+\newenvironment{definition}[1]{\noindent {\bf Definition #1:}}
+{\medskip}
+
+\newenvironment{proof}{\noindent {\bf Proof:} \\}{\hfill
+\rule{1mm}{3mm} \bigskip}
+
+%\newenvironment{solution}{\noindent {\bf Solution:} \\}{\hfill
+%\rule{1mm}{3mm} \bigskip}
+
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\name{Sam Tay}
+\class{Professor Holdener}
+\assignment{Final Exam}
+\duedate{05/9/2011}
+
+
+\begin{document}
+
+
+\begin{problem1}{1} \\
+\indent\indent\indent\indent If I don't dive to the bottom or if I come back up at some point,\\
+\indent\indent\indent\indent then the river isn't whiskey or I'm not a duck.\\
+\indent\indent\indent\indent Since I don't play jack o diamonds or I don't trust my luck,\\
+\indent\indent\indent\indent the river is whiskey or I'm a duck.
+\end{problem1}\\
+
+\begin{problem1}{2} Let $A$, $B$, and $C$ be sets. Then $A\times (B\cup C)=(A\times B)\cup(A\times C).$\\
+\begin{proof}
+\indent Let $A,B,$ and $C$ be sets and let $(x,y)\in A\times(B\cup C)$. Then $x\in A$ and $y\in B\cup C$, which means $y\in B$ or $y\in C$. If $y\in B$, then $(x,y)\in A\times B$, so certainly $(x,y)\in (A\times B) \cup (A\times C)$. Similarly if $y\in C$, then $(x,y)\in A\times C$, so certainly $(x,y)\in (A\times B) \cup (A\times C)$. Therefore $A\times (B\cup C)\subseteq(A\times B)\cup(A\times C).$
+
+Let $(x,y)\in (A\times B)\cup(A\times C)$. Then $(x,y)\in (A\times B)$ or $x\in(A\times C)$. If $(x,y)\in A\times B$, then $x\in A$ and $y\in B$, so certainly $y\in B \cup C$. Then $(x,y)\in A\times (B\cup C).$ If $(x,y)\in A\times C$, then $x\in A$ and $y\in C$, so certainly $y\in B\cup C$. Then $(x,y)\in A\times (B \cup C)$. We've shown that in either case $(A\times B)\cup(A\times C)\subseteq A\times(B\cup C).$
+
+Therefore $ A\times(B\cup C)=(A\times B)\cup(A\times C).$
+\end{proof}
+\end{problem1}
+
+\begin{problem1}{3 (a)} Let $A$ be a set. Then the relation $\sim$ on $A$ is an equivalence relation if and only if $\sim$ is reflexive and circular.\\
+\begin{proof}
+\indent Suppose $\sim$ is an equivalence relation on $A$. Then $\sim$ is reflexive, symmetric, and transitive. Suppose $x\sim y$ and $y\sim z$ for some $x,y,z\in A$. By transitivity, $x\sim z$, and then by symmetry, $z\sim x$. Thus $\sim$ is circular and $\sim$ is reflexive.
+
+Suppose $\sim$ is reflexive and circular, and suppose further that $x\sim y$. Then since $\sim$ is reflexive, $y\sim y$, and since $\sim$ is circular, $y\sim x$. Thus $\sim$ is symmetric. Now suppose $x\sim y$ and $y\sim z$. Then since $\sim$ is circular, $z\sim x$, and we've already proved $\sim$ is symmetric, so $x\sim z$. We have now shown that $\sim$ is transitive, symmetric, and reflexive, and conclude that $\sim$ is an equivalence relation.
+
+Therefore $\sim$ is an equivalence relation if and only if $\sim$ is reflexive and circular.
+\end{proof}
+\end{problem1}
+
+\begin{problem2}{b)} Consider the set $A=\{a,b,c\}$ and the relation $\sim$ on $A$ where $$\sim=\{(a,b),(b,c),(c,a)\}.$$ We see that $\sim$ is circular, but clearly not an equivalence relation, as $\sim$ is not reflexive.
+
+\end{problem2}
+
+\begin{problem1}{4} Define $g:\mathbb{Z}\to\mathbb{N}\cup\{0\}$ by $g(x)=\begin{cases} 2x & \text{if $x\ge0$}\\ -2x-1 & \text{if $x<0$}\end{cases}$. Then $g$ is a bijection.\\
+\begin{proof}\indent To prove that $g$ is one-to-one we suppose that for some $x,y\in \mathbb{Z}$, $g(x)=g(y)$. By definition of $g$, there are three cases: both $x,y\ge 0$, or $x\ge 0$ and $y< 0$, or both $x,y< 0$ (the case when $x<0$ and $y\ge 0$ is identical to $x\ge 0$ and $y<0$). We'll consider each case separately.
+
+Suppose $x,y\ge 0$. Then $2x=2y$ by definition of $g$, from which it follows immediately that $x=y$. Next suppose $x\ge 0$ and $y<0$. Then $2x=-2y-1.$ We see that $$-2y-1=-2y-2+1=2(-y-1)+1.$$ Since $-y-1$ is an integer, $g(y)$ is odd. However we have claimed that $g(x)=2x=g(y)$, and since $x$ is an integer, $g(x)$ is even. By Exercise 1.14.1, no number can be both even and odd, so we conclude by contradiction that this case is impossible. Finally, suppose $x,y<0$. Then $-2x-1=-2y-1$, so $-2x=-2y$, from which it follows that $x=y$. In all possible cases we have shown that $g(x)=g(y)$ implies $x=y$, and conclude $g$ is one-to-one.
+
+To prove that $g$ is onto, let $n\in\mathbb{N}\cup\{0\}$. Then $n$ is even or $n$ is odd. If $n$ is even, $n=2x$ for some nonnegative integer $x$. Then $g(x)=2x=n.$ If $n$ is odd, $n=2x+1$ for some nonnegative integer $x$. Then $n=2x+2-1$. Equivalently, we can let $y=-x$ which implies $2y=-2x$, such that $n=-2y+2-1=-2(y-1)-1.$ Since $x$ is nonnegative, $y-1=-x-1$ is negative. Thus by definition of $g$, $g(y-1)=-2(y-1)-1=n$. Therefore $g$ is onto.
+
+We conclude that $g$ is a bijection.
+\end{proof}
+\end{problem1}
+
+\begin{problem1}{5} If $A$ is a denumerable set, then $A\cup\{x\}$ is denumerable as well.\\
+\begin{proof}\indent Suppose $A$ is a denumerable set. Then we know there exists a bijection $g:N\to A$, and we can let $g(n)$ be denoted by $a_n$ for $n\in\mathbb{N}$. Since $g$ is onto, all elements of $A$ can be expressed as $a_n$ for some $n\in\mathbb{N}$. Since $g$ is one-to-one, these will be distinct labels for each of the elements. Thus, we can label the elements of $A$ as $a_1,a_2,\ldots, a_n,\ldots$, for $n\in \mathbb{N}.$ If $x\in A$, then $A\cup\{x\}=A$ and is clearly denumerable. So let's consider the more interesting case when $x\notin A$. Let $f:A\cup\{x\}\to\mathbb{N}$ be defined by $$f(a)=\begin{cases}1 & \text{if $a=x$}\\ 2 & \text{if $a=a_1$}\\ 3 & \text{if $a=a_2$}\\ \vdots \\n+1 & \text{if $a=a_n$ for $n\in\mathbb{N}$} \end{cases}$$.
+
+To see that $f$ is one-to-one, suppose $f(a)=f(b)$, for some $a,b\in A\cup\{x\}$. Then since $f$ maps to the naturals, $f(a)=f(b)=n$ for some $n\in\mathbb{N}$. If $n=1$, then by definition of $f$, $a=x$ and $b=x$, so $a=b$. If $n>1$, then $a=a_{n-1}$ and $b=a_{n-1}$, so $a=b$. Therefore $f$ is one-to-one.
+
+To see that $f$ is onto, consider any $n\in\mathbb{N}$. If $n=1$, then $f(x)=n$. If $n>1$, then $f(a_{n-1})=n$. Thus $f$ is onto.
+
+We conclude that $f:A\cup\{x\}\to\mathbb{N}$ is a bijection, and thus $A\cup\{x\}$ is a denumerable set. 
+\end{proof}
+\end{problem1}
+
+\begin{problem1}{6(a)} The set $\mathcal{M}=\{3x+5y : \text{$x$ and $y$ are nonnegative integers}\}$ contains all natural numbers greater than 7.\\
+\begin{proof}\indent We proceed by induction on $n$ where $n\in\mathbb{N}$ such that $n>7$. We will prove three base cases for $n\in\{8,9,10\}$ to make the inductive step simpler. If $n=8$ then $n=3(1)+5(1)$, where 1 is a nonnegative integer. If $n=9$ then $n=3(3)+5(0)$, where 3 and 0 are nonnegative integers. If $n=10$ then $n=3(0)+5(2),$ where 0 and 2 are nonnegative integers. Thus for the base cases $n\in \{8,9,10\}$, $n\in \mathcal{M}$.
+
+Now assume that some $k\in\mathbb{N}$ such that $k>7$ satisfies $k\in\mathcal{M}$. Then $k=3x+5y$ for some nonnegative integers $x$ and $y$. We see then that $k+3=3x+3+5y=3(x+1)+5y$, where $x+1$ and $y$ are nonnegative integers. Therefore $k+3\in\mathcal{M}$.
+
+As we showed in class, the integers can be partitioned into the sets $Z_0=\{3n:n\in\mathbb{Z}\}$, $Z_1=\{3n+1:n\in\mathbb{Z}\}$, and $Z_2=\{3n+2:n\in\mathbb{Z}\}$. Clearly this partition will still exhaust a subset of the integers (namely the natural numbers), and we have effectively proved by induction within each of these sets that for all natural numbers $n\in Z_i$ such that $n$ is greater than 7, $n\in\mathcal{M}$. Therefore, since $\mathbb{N}\subseteq\bigcup_{i\in\{1,2,3\}} Z_i$, we have proved that $n\in\mathcal{M}$ for all natural numbers $n$ such that $n>7$. (This is just a complicated way of saying that we have proved induction on every third integer, with three consecutive base cases, so $8,11,14,\ldots,9,12,15,\ldots,10,13,16,\ldots,$ captures the natural numbers greater than 7.)
+%ask judy if i should just do strong induction for this method%
+
+\end{proof}
+\end{problem1}
+
+\begin{problem1}{7 (a)} Let $A$ be the set of all finite sequences in $S=\{a,b\}$. Then $A$ is denumerable.\\
+\begin{proof}\indent We begin by partitioning $A$ into subsets $A_k$ where $s\in A_k$ if $s$ has length $k$. This partition is rather obvious, but for a quick proof we'll just show that $\sim$ is an equivalence relation on $A$, where $s \sim t$ holds if and only if the sequence $s$ is the same length as the sequence $t$. Let $s,t,v$ be sequences in $A$. Clearly $s$ has the same length as itself, so $\sim$ is reflexive. If $s$ has the same length as $t$, then $t$ has the same length as $s$, so $\sim$ is symmetric. If $s$ has the same length as $t$ and $t$ has the same length as $v$, then $s$ has the same length as $v$, so $\sim$ is transitive. Thus $\sim$ is an equivalence relation, and the equivalence classes yield the partition $A=\bigcup_{k\in\mathbb{N}}A_k$.
+
+Now consider a finite sequence of length $k$ in $S$. There are two possibilities for each of the $k$ terms, which means that there are $2^k$ distinct possible orderings. Thus each $A_k$ contains exactly $2^k$ elements, so we know that there exist bijections $f_k:A_k\to\{1,\ldots,2^k\}$. Thus by definition, $A_k$ is finite. Since $A$ is the denumerable union of $A_k$'s, where the $A_k$'s are finite and nonempty, we have by Theorem 7.3.10(2) that $A$ is denumerable. (As I pointed out in class, this also relies on the fact that each $A_k$ is a distinct set, i.e. no trivial union of equal sets to make $A$ a finite set.)
+\end{proof}
+\end{problem1}
+
+\begin{problem2}{b)} Let $B$ be the set of all infinite sequences $a_1a_2a_3\cdots$ such that each $a_i\in \{a,b\}$. Then $B$ is uncountable.\\
+\begin{proof}\indent Suppose there is a well defined function $g:\mathbb{N}\to B$. We will show that $g$ cannot be onto to prove that $B$ is uncountable. Let $a_{1n}a_{2n}a_{3n}\cdots$ denote the sequence $g(n)$ for any natural number $n$. Now define a sequence $$s=s_1s_2s_3\cdots\text{ where } s_i=\begin{cases}a & \text{if $a_{ii} = b$}\\ b & \text{if $a_{ii}=a$}\end{cases}.$$
+
+Now suppose for contradiction that there exists some $n\in\mathbb{N}$ such that $g(n)=s$. Then $a_{1n}a_{2n}\cdots = s_1s_2\cdots$, or equivalently $a_{in}=s_i$ for all $i\in\mathbb{N}$. However, we explicitly defined $s$ such that $s_n=a$ if $a_{nn}=b$ and $s_n=b$ if $a_{nn}=a$. Thus $s_n\ne a_{nn}$, so by contradiction we conclude $s\ne g(n)$ for all $n\in\mathbb{N}$, which means that $s\notin Ran(g)$. Therefore, $g$ is not onto and $B$ is uncountable.
+\end{proof}
+\end{problem2}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+%\overline

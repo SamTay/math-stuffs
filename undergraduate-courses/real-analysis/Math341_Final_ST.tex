@@ -1,0 +1,244 @@
+%%This is a standard LaTeX2e article document template. personal version 12/5/200%%
+
+\documentclass[12pt,twoside]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%packages%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsthm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%formatting%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{plain}
+\setlength{\topmargin}{0in}        %%%  This sets all the spacing stuff to use the page more
+\setlength{\oddsidemargin}{0in}    %%%  efficiently than the normal "article" setup would.
+\setlength{\evensidemargin}{0in}   %%%  It's OK to play with these some.
+\setlength{\textheight}{8.5in}     %%%
+\setlength{\textwidth}{6.25in}     %%%
+\setlength{\headsep}{0in}          %%%
+\setlength{\headheight}{0in}       %%%
+%\setlength{\footskip}{0in}        %%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%new commands%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Int}[1]{{\cal I}nt( #1)}
+\newcommand{\spifff}{\qquad\text{iff}\qquad}
+\newcommand{\spand}{\qquad\text{ and }\qquad}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\ifff}{\Leftrightarrow}
+%\newcommand{\ker}{\text{ker}}
+\newcommand{\hull}{\text{hull}\,}
+\newcommand{\Lan}{\mathcal{L}}
+\makeatletter
+\def\imod#1{\allowbreak\mkern10mu({\operator@font mod}\,\,#1)}
+\makeatother
+
+\newcommand{\forward}{\noindent ($\Longrightarrow$) \,\,}
+\newcommand{\back}{\noindent ($\Longleftarrow$) \,\,}
+\newcommand{\R}{\mathbb R} %REALS
+\newcommand{\C}{\mathbb C} %COMPLEX
+\newcommand{\N}{\mathbb N} %NATURAL NUMBERS
+\newcommand{\Q}{\mathbb Q} %RATIONALS
+\newcommand{\Z}{\mathbb Z} %INTEGERS
+
+
+%\theoremstyle{definition}
+
+\newenvironment{cexample}{\noindent {\em Counterexample:}}{\bigskip}
+\newenvironment{example}{\noindent {\em Example:} }{\bigskip}
+\newenvironment{solution}{\noindent {\em Solution:} \\}{\hfill
+\rule{1mm}{3mm}\bigskip}
+\DeclareMathOperator*{\diam}{diam}
+
+
+\pagestyle{empty}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\begin{center}
+Sam Chong Tay\\
+Math 341: Real Analysis\\
+Take-home Final Exam\\
+December 19, 2012\\
+\end{center}
+
+\begin{enumerate}
+\item (15 pts) Let $A$ and $B$  be non-empty subsets of $\R$ with $A\subseteq B$.  Suppose that $\inf A$, $\inf B$, and $\sup B$ all exist.
+
+\begin{itemize}
+\item[(a)] Prove that $\sup A$ exists.
+
+\begin{proof} We know $A$ is non-empty by hypothesis, so we only need to show that $A$ is bounded above. Considering any $a\in A$, we see that $a\in B$ as well because $A\subseteq B$. Thus $a \le \sup B$, and since $a$ was arbitrary we have shown that $A$ is bounded above by $\sup B$. Hence by Axiom III, $\sup A$ exists.
+\end{proof}
+
+\item[(b)] Prove that $$ \inf(B)\leq\inf(A)\leq\sup(A)\leq\sup(B). $$
+
+\begin{proof} For the first inequality, it suffices to show that $\inf(B)$ is a lower bound for $A$. So, similar to part (a), we note that for any $a\in A$, $a$ is also in $B$ and therefore $\inf(B) \le a$. Hence $\inf(B)$ is a lower bound for $A$ and since $\inf(A)$ is the greatest lower bound, we have $$\inf(B) \le \inf(A).$$ The next inequality is quite trivial; since $A$ is non-empty there exists $a\in A$ and by definition of infimum and supremum we have immediately that $$\inf(A)\le a \le \sup(A).$$ Finally, note that we showed in part (a) that $\sup(B)$ is an upper bound for $A$. Therefore just as in the infimum case, since $\sup(A)$ is the least upper bound, we have $\sup(A)\le\sup(B)$. Altogether we have shown that $$ \inf(B)\leq\inf(A)\leq\sup(A)\leq\sup(B).$$\end{proof}
+
+\item[(c)] Show by giving a counterexample that $$\inf(B)=\inf(A)\qquad\textrm{and}\qquad \sup(A)=\sup(B)$$ need not imply that $A=B$.\\
+
+\begin{cexample} If we define $$A=\{0,1\} \spand B=[0,1]$$
+we see that $$ \inf(A)=\inf(B)=0 \spand \sup(A)=\sup(B)=1,$$ but of course $A\ne B$.
+\end{cexample}
+
+\end{itemize}
+
+
+\item (15 pts) Prove that every non-convergent bounded sequence of real numbers has at least two limit points.
+
+\begin{proof} Let $(s_n)$ be a non-convergent bounded sequence in $\R$. Because $(s_n)$ is bounded we know from Theorem 3.4.9 that $(s_n)$ has at least one convergent subsequence, and hence at least one limit point $x$. Consider an arbitrary subsequence $(s_{n_k})$ of $(s_n)$. This subsequence must also be bounded and thus by the same theorem has a convergent subsequence $(s_{n_{k_i}})$. Well $(s_{n_{k_i}})$ is evidently also a subsequence of $(s_n)$ in its own right, so we see that if $x$ was the only limit point, this would imply $s_{n_{k_i}}\to x$. But we chose an arbitrary subsequence, so we have shown that if $x$ is the only limit point of $(s_n)$ then every subsequence of $(s_n)$ has a subsequence converging to $x$. By Problem 3.3.6 this would imply $s_n \to x$, which is a contradiction because we are assuming $(s_n)$ is non-convergent. We have shown that $(s_n)$ must have a limit point $x$ and that $x$ cannot be the only limit point, and therefore the only possibility is that $(s_n)$ has at least two limit points.
+\end{proof}
+
+
+\item (20 pts) \begin{itemize}
+\item[(a)] Define $h:\R\to\R$ by $h(x)=x^3-2x^2+3x-6$. Carefully prove that the limit $\lim_{x\to 2}
+h(x)$ exists.  (Your solution should also indicate the
+limit!)
+
+\begin{proof} Carefully, and cleverly, we will first prove results about the identity function and constant function.  Define the function $i:\R\to\R$ by $i(x)=x.$ First note that we have previously shown every $x\in\R$ is a limit point of $\R$, so we know $2\in\R$ is a limit point of the domain $\R$. To see that $\lim_{x\to 2} i(x) = 2,$ let $\epsilon>0.$ Then for $\delta=\epsilon$, if $0<|x-2|<\delta,$
+$$|i(x)-2| = |x-2| <\delta = \epsilon.$$ Therefore $$\lim_{x\to 2} i(x) = 2.$$ Next fix $k\in\R$ and define $c_k:\R\to\R$ by $c_k(x)=k$. Let $\epsilon>0$ and pick $\delta=64.$ Then for $0<|x-2|<\delta,$ we have
+$$|c_k(x)-k| = |k - k| = 0 < \epsilon.$$ Therefore $$\lim_{x\to 2} c_k(x) = k.$$ Next recall the function $h$ from above and observe that
+\begin{align*} h(x) &= x^3-2x^2+3x-6\\
+			        &= (i(x))^3 + c_{-2}(x)(i(x))^2 + c_3(x)i(x) + c_{-6}(x).
+\end{align*} Apply Theorem 5.3.1 parts (1) and (3) a total of eight times (if you want me to be {\em really} careful, we apply part (1) three times and part (3) five times) to obtain
+\begin{align*} \lim_{x\to 2} h(x) &=\lim_{x\to 2} \bigg((i(x))^3 + c_{-2}(x)(i(x))^2 + c_3(x)i(x) + c_{-6}(x)\bigg)\\
+						&=(2)^3 + (-2)(2)^2 + (3)(2) + (-6)\\
+						&=8-8 +6-6\\
+						&=0.
+\end{align*} Of course applying Theorem 5.3.1 guarantees that the limit does exist, and that it is equal to 0. \end{proof}
+
+\item[(b)] Carefully prove that the limit $\lim_{x\to 0}\cos\frac{1}{x}$ fails to exist.
+
+\begin{proof} We need to be quite careful indeed; the problem is actually stated quite ambiguously because it is not clear over which domain we are to consider this function. I think it is safe to assume that we are considering a function $f:\R^*\to \R$ defined by $f(x)=\cos\frac{1}{x}$, where $0\in\R$ is a limit point of the subset $\R^*$. To show $\lim_{x\to 0} f(x)$ does not exist, we will show that it is not equal to any candidate $L\in\R$. First consider $L=0$ and pick $\epsilon=\frac{1}{2}.$ Let $\delta>0$ and choose $n\in\N$ such that $n>\frac{1}{\delta}.$ Then $$0 < \Big|\frac{1}{2n\pi}-0\Big| <\frac{1}{n} < \delta,$$ yet
+$$\left| f\left( \frac{1}{2n\pi}\right) - L \right| = \big| \cos(2n\pi) - 0 \big| = |1-0|
+															= 1
+															 > \epsilon.$$
+This shows that $\lim_{x\to 0}f(x) \ne 0$. Now consider any $L\ne 0$, and pick $\epsilon=|L|.$ As before, for any $\delta>0$ choose $n\in\N$ such that $n>\frac{1}{\delta}.$ Then
+$$0 < \Big|\frac{1}{2n\pi+\frac{\pi}{2}}-0\Big| <\frac{1}{n} < \delta,$$ yet
+$$\left| f\left( \frac{1}{2n\pi+\frac{\pi}{2}}\right) - L \right| = \left| \cos\left(2n\pi+\frac{\pi}{2}\right) - L \right| = |0-L|=|L|=\epsilon.$$ Therefore $\lim_{x\to 0} f(x) \ne L$. So in considering the cases when $L=0$ and $L\ne0$, we have shown that the limit of $f$ as $x$ goes to 0 is not $L$ for any $L$ in the codomain $\R$. Therefore the limit does not exist.\end{proof}
+
+\end{itemize}
+
+
+\item  (15 pts) Let $(X,d)$ be a metric space.  Show that the
+following statements about $X$ are equivalent.
+
+\begin{description}
+\item[i.]  $(X,d)$ is discrete. \item[ii.]  All functions on $X$
+are continuous.  (The range can be {\em any} metric space!)
+\end{description}
+
+\begin{proof} \forward Suppose $(X,d)$ is discrete. Consider any $a\in X$. Since $\{a\}$ is open, there exists $r>0$ such that $B_r(a)\subseteq\{a\}$, from which it follows that $B_r(a)=\{a\}$. Then obviously $B_r(a)$ does not contain infinitely many points of $X$, so by the characterization in Theorem 3.5.1.3 we conclude that $a$ is not a limit point of $X$. Thus for any metric space $Y$ and any function $f:X\to Y$, $f$ is continuous at $a$ by definition. Since $a$ was arbitrary we conclude that all functions on X are continuous.
+
+\back Conversely suppose that all functions on $X$ are continuous. Let $a\in X$ and define the function $f_a:X\to\R$ by
+$$f_a(x) = \begin{cases} 64 & \text{ if } x=a\\
+					0 & \text{ if }  x\ne a \end{cases} $$
+Note that the open interval $(63,65) = B_1(64)$ is an open subset of $\R$. Since $f_a$ is continuous by hypothesis, Theorem 4.3.5 guarantees that the inverse image of $(63,65)$ is open in $X$. By the construction above we have $$f_a^{-1}\left((63,65)\right) = \{a\},$$ so the previous sentence implies that $\{a\}$ is open in $X$. Since $a$ was arbitrary, we conclude $X$ is a discrete metric space.
+\end{proof}
+
+
+\item (15 pts) Let $(a_n)$ and $(b_n)$ be Cauchy sequences in a metric space $(X,d)$.  Show that the sequence $(d(a_n, b_n))$ converges.  (Note that $X$ need not be complete, but $\R$ is complete!)
+
+\begin{proof} As hinted above, we will show that $(d(a_n, b_n))$ is a Cauchy sequence and invoke the completeness of $\R$ to complete the proof. Let $\epsilon>0$. Since $(a_n)$ and $(b_n)$ are Cauchy sequences, we can choose $N_1\in\N$ and $N_2\in\N$ so that 
+$$d(a_n,a_m)<\frac{\epsilon}{2}\quad\text{ for all}\; n,m>N_1$$
+$$d(b_n,b_m)<\frac{\epsilon}{2}\quad\text{ for all}\; n,m>N_2.$$ Let $N=\max\{N_1,N_2\}$ and $n,m>N$. Supposing without loss of generality that $d(a_n,b_n)\ge d(a_m,b_m)$,
+\begin{align*} \left| d(a_n,b_n) - d(a_m,b_m)\right| &= d(a_n,b_n) - d(a_m,b_m)\\
+										&\le  d(a_n,a_m) + d(a_m,b_n) - d(a_m,b_m)\\
+							&\le d(a_n,a_m) + d(b_n,b_m) +d(b_m,a_m) - d(a_m,b_m)\\
+									&=d(a_n,a_m) + d(b_n,b_m) \\
+									&<\frac{\epsilon}{2}+\frac{\epsilon}{2} = \epsilon.\end{align*} Therefore $(d(a_n,b_n))$ is a Cauchy sequence in $\R$ and since $\R$ is complete, $(d(a_n,b_n))$ converges.\end{proof}
+
+\item (20 pts)
+\begin{itemize}
+\item[(a)] Let $(f_n)$ be a sequence of real-valued continuous
+functions on a metric space $X$.  Suppose that $(f_n)$ converges
+uniformly to a function $f$.  Prove that if all terms (i.e. all
+functions) of the sequence $(f_n)$ are bounded, then $f$ is
+bounded.
+
+\begin{proof} Let $X$ be a metric space and $f_n: X\to\R$ be a sequence of bounded functions that converges uniformly to $f$. To show that $f$ is bounded we need to show that the range $f(X)=\{f(x): x\in X\}$ is bounded in $\R$, and to do so we will use the characterization given in Corollary 3.1.14. Explicitly, we will show that there exists $M\in\R$ such that $|f(x)|\le M$ for all elements $f(x)\in f(X).$ We will need to use the uniform convergence assumption, so let $\epsilon=64$. Since $(f_n)$ converges uniformly to $f$, we can choose $N\in\N$ so that for all $n>N$ and all $x\in X$, $ |f_n(x)-f(x)| < 64$. Now fix an $n>N$. Since $f_n$ is bounded, by Corollary 3.1.14 there exists $K\in\R$ such that $|f_n(x)|\le K$ for all $x\in X$. Then for any $x\in X$,
+\begin{align*} |f(x)| = |f(x)-0| &\le |f(x)-f_n(x)| + |f_n(x) - 0|\\
+					&<64+|f_n(x)|\\
+					&\le 64+K.
+\end{align*} Therefore $|f(x)| \le 64+K$ for all $x\in X$, so $f(X)$ is bounded in $\R$. By definition, $f$ is bounded.
+\end{proof}
+
+\item[(b)] Recall that a function $f:X\to Y$ is said to be
+\textbf{bounded} if its range $f(X)$ is a bounded subset of $Y$.
+Give an example to show that the pointwise limit of real-valued
+bounded functions on a metric space $X$ need not be a bounded
+function.  Hint: consider piecewise defined functions on
+$\mathbb{R}$.\\
+
+\begin{example} Consider $\N$ under the Euclidean metric and the sequence of functions $f_n:\N\to\R$ defined by
+$$f_n(m) = \begin{cases} m & \text{ if } m\le n\\
+					0 & \text{ if } m>n. \end{cases}$$
+Now each $f_n$ is bounded by $n$:
+\begin{align*} f_n(\N) &= \{1, 2, 3, \ldots, n, 0 , 0,0,...\}\\ &= \{0,1,2,\ldots,n\}.\end{align*}
+However, it is clear that $(f_n)$ converges pointwise to the function $f(m)=m.$ To show this rigorously, let $m\in\N$ (as a point in the domain!) and $\epsilon>0$. Then for all $n>m$ (as a sequence index!),
+$$|f_n(m)- f(m)| = |m-m| = 0 < \epsilon.$$
+Therefore $f_n(m) \to f(m)$ at the point $m$, and since $m$ was arbitrary we have shown that $(f_n)$ converges pointwise to $f$. But obviously $f(\N)=\N$ is unbounded! Therefore uniform convergence is in fact a necessary condition for part (a).\\
+
+Of course, using the same idea I could have constructed $f_n:\R\to\R$ as
+$$f_n(x) = \begin{cases} |x| & \text{ if } x\le n\\
+					0 & \text{ if } x>n \end{cases}$$
+and gotten the same result. This would have even avoided confusion with regards to choosing $m\in\N$ in the domain and shortly thereafter using $N=m$ for the sequence index that we need in showing a sequence converges. However, I like the way I did it because $\N$ is 1-separated under the Euclidean metric and thus has no limit points. So the sequence functions $f_n$, while piecewise, are actually continuous.\end{example}
+
+\end{itemize}
+
+\end{enumerate}
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+\noindent \textbf{Directions:}\\
+
+\noindent This test is due at \textbf{5:00pm on Wednesday December
+19,
+2012.}\\
+
+\noindent On this exam, you are not to use any resources besides
+your textbook and your class notes.  This means, among other
+things, you may not consult any other books, any online sources,
+or any people besides your instructor.  You may ask me clarifying
+questions at any point.\\
+
+\noindent You are also responsible for taking reasonable
+precautions to make sure your notes, drafts, and scratchwork are
+not accessible to anyone besides you \textbf{until 5 pm Friday,
+December 21}.  This means, among other things, that you should not
+work on any whiteboards in public areas, that you should not leave
+paper with your work in cubbies or on tables in public areas, that
+you should not leave drafts on unattended computer screens or
+printouts unattended on public printers, and that you should not
+discard paper with your notes or draft work in public
+trash/recycle bins until after the
+exam has been collected.\\
+
+\noindent There is no time limit for this exam.\\
+
+\noindent You are required to typeset your solutions in some
+format that appropriately displays the mathematics at hand. For
+your convenience I will place a file with the LaTeX code for this
+exam on the P drive.\\
+
+\noindent Note: these problems are not necessarily ordered by
+level of difficulty, and you should work on them ``in
+parallel.''\\
+
+\noindent Good luck, and have fun!
+
+\newpage

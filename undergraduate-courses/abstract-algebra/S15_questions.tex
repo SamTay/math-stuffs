@@ -1,0 +1,77 @@
+
+\documentclass{article}
+\newenvironment{problem2}[1]{\noindent {\bf (#1}}
+{\medskip}
+
+\newenvironment{problem1}[1]{\noindent {\bf Problem #1:}}
+{\medskip}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,graphicx,url,colordvi}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\makeatletter
+\def\imod#1{\allowbreak\mkern10mu({\operator@font mod}\,\,#1)}
+\makeatother
+
+\newenvironment{theorem}[1]{\noindent {\bf Theorem #1:}}
+{\medskip}
+
+\usepackage{hyperref}
+\usepackage{amssymb}
+%\usepackage{fullpage}
+\hypersetup{pdfborder={0 0 0}}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\ran}{Ran}
+
+
+\title{Math 327: Final Take-home Solutions}
+\author{by Sam Tay}
+\date{\today}
+
+\begin{document}
+%\maketitle
+\begin{flushright}Sam Tay\\ Professor Milnikiel \\ Math 335 \\ Questions on S15\\ 1/5/11
+\end{flushright}
+
+\begin{theorem}{15.18} $M$ is a maximal normal subgroup of $G$ if and only if $G/M$ is simple.\end{theorem}
+\begin{proof} $(\Rightarrow)$ His forward direction is pretty straightforward. Let $M$ be a maximal normal subgroup of $G$ and $X$ be a nontrivial proper normal subgroup of $G/M$. We know first that $\gamma^{-1}[X]$ must contain $M$, because if $m\in M$, then $\gamma(m)=mM=M$, which is the identity of $G/M$ and therefore is in the subgroup $X$. Since $X$ is nontrivial, it also contains an element $aM=\gamma(a)$ where $a\notin M$ and therefore $M\subset \gamma^{-1}[X] $. We also know $\gamma^{-1}[X]\subset G$ because since $X$ is a proper subgroup of $G/M$, there exists an element $gM=\gamma(g)\notin X$, such that $g\notin \gamma^{-1}[X]$ where $g\in G$. Thus $M\subset\gamma^{-1}[X]\subset G$, and since $\gamma^{-1}[X]$ is normal by Theorem 15.16, this contradicts $M$ being maximal. Therefore there is no nontrivial proper normal subgroups of $G/M$, which must then be simple.
+
+$(\Leftarrow)$ On the other hand, I have trouble understanding his proof of the converse. If $N$ is a normal subgroup of $G$ properly containing $M$, then $\gamma[N]$ is normal in $G/M$ by Theorem 15.16. He then claims that if $N\ne G$, then $$\gamma[N]\ne G/M \quad\quad\text{ and }\quad\quad \gamma[N]\ne \{M\}.$$ The second statement is clear from the reasoning in the the forward direction: since $N$ properly contains $M$, there exists $n\in N\setminus M$ such that $\gamma(n)=nM\ne M$, so $\{M\}\subset \gamma[N]$. However I do not see how the first statement follows; just because there exists $g\in G\setminus N$ doesn't mean that $\gamma(g)\notin \gamma[N]$, because we can easily have $gM=nM$ for some $n\in N$ can't we? In other words, how do we know that  a proper subgroup $N$ of $G$ can't generate the cosets of $M$ such that $$\{nM : n\in N\}=G/M.$$ It only takes $(G:M)$ elements of $N$ to do it, so... am I missing something?
+\end{proof}
+
+\begin{theorem}{15.20} Let $G$ be a group. The set of all commutators $aba^{-1}b^{-1}$ for $a,b\in G$ generates a subgroup $C$ (the commutator subgroup) of $G$. This subgroup $C$ is a normal subgroup of $G$. Furthermore, if $N$ is a normal subgroup of $G$, then $G/N$ is abelian if and only if $C\le N$.\end{theorem}
+
+\begin{proof} ``The commutators certainly generate a subgroup $C$." Well, I'd argue it's not so certain. I have trouble showing that $C$ is closed. If we let two elements of $C$ be denoted by $aba^{-1}b^{-1}$ and $cdc^{-1}d^{-1}$ for $a,b,c,d\in G$, their product $$aba^{-1}b^{-1}cdc^{-1}d^{-1}$$ is not easily reduced into the form $wxw^{-1}x^{-1}$. Or maybe it is and I don't see it. But certainly ``certainly" is a strong word here.
+
+Luckily, as Fraleigh says ``the rest of the theorem is obvious if we have acquired the proper feeling for factor groups," I felt that way too. If $C\le N$ then we know that \emph{at least} the commutators are sent to the identity in the factor group, which allows for at the very least commutativity between all of the elements.
+\end{proof}
+
+I'm going to go ahead and start the homework for this section; while these uncertainties bother me, I'm sure it won't interfere too much with the problems.
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
