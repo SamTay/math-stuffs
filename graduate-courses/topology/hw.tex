@@ -1,72 +1,415 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Welcome to the MAT320 Homework template on Overleaf -- just edit your
-% LaTeX on the left, and we'll compile it for you on the right.
+% Math 601 Template
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% --------------------------------------------------------------
-% Based on a homework template by Dana Ernst.
-% --------------------------------------------------------------
-% This is all preamble stuff that you don't have to worry about.
-% Head down to where it says "Start here"
-% --------------------------------------------------------------
 
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 
-\usepackage[margin=1in]{geometry} 
-\usepackage{verbatim,amsmath,amsthm,amssymb}
+\usepackage[]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathrsfs}
+\usepackage{chngcntr}
+\usepackage{enumerate}
+\usepackage{color}
 
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\phantombackup}[1]{{\textcolor{white}{#1}}}
 
-\newenvironment{ex}[2][Exercise]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{ex}[2][Exercise]{
+  \begin{trivlist}
+    \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}
+  {\end{trivlist}}
+\newenvironment{p}[1]{
+  \begin{trivlist}
+\item[\hskip \labelsep {\bfseries (#1)}]}
+  {\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{
+  \begin{trivlist}
+    \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}
+  {\end{trivlist}}
+\newenvironment{question}[2][Question]
+  {\begin{trivlist}
+    \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}
+  {\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]
+  {\begin{trivlist}
+    \item[\hskip \labelsep{\bfseries #1}\hskip \labelsep{\bfseries #2.}]}
+  {\end{trivlist}}
+\newenvironment{ex'}[1][Exercise]{
+  \begin{trivlist}
+    \item[\hskip \labelsep {\bfseries #1.}]}
+  {\end{trivlist}}
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
 
-\newenvironment{sol}[1][Solution]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1:}]}{\end{trivlist}}
-
-\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-\newenvironment{problem}[2][Problem]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-\newenvironment{question}[2][Question]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
-\item[\hskip \labelsep{\bfseries #1}\hskip \labelsep{\bfseries #2.}]}{\end{trivlist}}
 
 \begin{document}
 
 % --------------------------------------------------------------
-%                         Start here
+%                         Header
 % --------------------------------------------------------------
 
 \noindent Sam Tay \hfill {\large Math 601: Homework \#1} \hfill \today
 \vspace{2em}
-\begin{ex}{3.2} 
-  What is an example of a proof with mathematical content? Perhaps something like $ \emptyset \subseteq B \forall sets B $.
+
+% --------------------------------------------------------------
+%                         Exercises
+% --------------------------------------------------------------
+
+\noindent {\Large \bf{Part 1}}
+\vspace{.8em}
+
+\begin{ex}{2.1}
+  Let $f:A \to B$. Let $A_0 \subset A$ and $B_0 \subset B$.
 \end{ex}
 
-\begin{sol}\
-well let
-\begin{proof}
-  Let $\sigma$ = 1 and blah blah.
-If you want to include math in a sentence, you use \$. For example (see latex file), $\int x = \frac{1}{2}x^2 + C$.  If you want to display math (centered on a new line), use \$\$. For example (see latex file), $$\sum_{i=1}^{100} i = 5050.$$ Next is an example of the \texttt{align} environment:
-%Note 1: The * tells LaTeX not to number the lines.  If you remove the *, be sure to remove it below, too.
-%Note 2: Inside the align environment, you do not want to use $-signs.  The reason for this is that this is already a math environment. This is why we have to include \text{} around any text inside the align environment.
-\begin{align*}
-\sum_{i=1}^{k+1}i & = \left(\sum_{i=1}^{k}i\right) +(k+1)\\ 
-& = \frac{k(k+1)}{2}+k+1 & (\text{by inductive hypothesis})\\
-& = \frac{k(k+1)+2(k+1)}{2}\\
-& = \frac{(k+1)(k+2)}{2}\\
-& = \frac{(k+1)((k+1)+1)}{2}.
-\end{align*}
-\end{proof}
-\end{sol}
+\begin{p}{a}
+  Show that $A_0 \subset f^{-1}(f(A_0))$ and that equality holds if $f$ is injective.
+\end{p}
 
-% --------------------------------------------------------------
-%     You don't have to mess with anything below this line.
-% --------------------------------------------------------------
+\begin{proof}
+$(\subset)$ Notice that
+  \begin{align}
+    a \in A_0
+      &\implies f(a) \in f(A_0) \label{im0} \\
+      &\implies a \in f^{-1}(f(A_0)) \label{pre0}
+  \end{align}
+  where \eqref{im0} follows from the definition of image and \eqref{pre0}
+  follows from the definition of preimage. Therefore $A \subset
+  f^{-1}(f(A_0))$.
+
+  $(\supset)$ Suppose further that $f$ is injective. Then
+  \begin{align}
+    a \in f^{-1}(f(A_0))
+      &\implies f(a) \in f(A_0) \label{pre-1} \\
+      &\implies f(x) = f(a) \text{ for some } x \in A_0 \label{im-1} \\
+      &\implies a = x \in A_0 \label{inj-0}
+  \end{align}
+  where \eqref{pre-1} and \eqref{im-1} are simply from the definitions of
+  preimage and image respectively, while \eqref{inj-0} follows from the
+  injectivity of $f$. Therefore $f^{-1}(f(A_0)) \subset A_0$. Of
+  course, since we've already shown that $A_0 \subset f^{-1}(f(A_0))$ in
+  general, we conclude that injectivity of $f$ implies $A_0 = f^{-1}(f(A_0))$.
+
+  % ORIGINAL PROOF
+  %$(\subset)$ Let $x \in A_0$. By definition of image, $f(x) \in f(A_0)$. By
+  %definition of preimage, $f^{-1}(f(A_0)) = \{ a \mid f(a) \in f(A_0)$, and it
+  %follows immediately that $x \in f^{-1}(f(A_0))$. Therefore $A \subset f^{-1}(f(A_0))$.
+
+  %$(\supset)$ Suppose further that $f$ is injective and let $x \in
+  %f^{-1}(f(A_0))$. By definition of preimage, this means that $f(x) \in
+  %f(A_0)$, and by definition of image it follows that there exists $a \in A_0$
+  %such that $f(x) = f(a)$.  Since $f$ is injective, it must be the case that $x
+  %= a$, and thus $x \in A_0$. Therefore $f^{-1}(f(A_0)) \subset A_0$. Of
+  %course, since we've already shown that $A_0 \subset f^{-1}(f(A_0))$ in
+  %general, we conclude that injectivity of $f$ implies $A_0 = f^{-1}(f(A_0))$.
+  % ORIGINAL PROOF
+
+\end{proof}
+
+\begin{p}{b}
+  Show that $f(f^{-1}(B_0)) \subset B_0$ and that equality holds if $f$ is surjective.
+\end{p}
+
+\begin{proof}
+  $(\subset)$ Let $b \in f(f^{-1}(B_0))$. By definition of image,
+  $$f(f^{-1}(B_0)) = \{ y \mid y = f(x) \text{ for at least one } x \in f^{-1}(B_0)\}$$
+  so there must exist some $a \in f^{-1}(B_0)$ such that $b = f(a)$.
+  By definition of preimage,
+  $$ f^{-1}(B_0) = \{ x \mid f(x) \in B_0 \}.$$
+  Thus, since $ a \in f^{-1}(B_0)$, we have $f(a) \in B_0$, and recalling that
+  $b = f(a)$, we have $b \in B_0$. Therefore $f(f^{-1}(B_0)) \subset B_0$.
+
+  $(\supset)$ Suppose further that $f$ is surjective and let $b \in B_0$. Since
+  $f$ is surjective, there exists $a \in A$ such that $f(a) = b$. By definition
+  of preimage, $f^{-1}(B_0) = \{ x \mid f(x) \in B_0 \}$, and since $f(a) \in
+  B_0$, it is clear that $a \in f^{-1}(B_0)$. By definition of image,
+  $$ f(f^{-1}(B_0)) = \{ y \mid y = f(x) \text{ for at least one } x \in f^{-1}(B_0) \}.$$
+  Since $b = f(a)$ and $a \in f^{-1}(B_0)$, it is evident that $b \in
+  f(f^{-1}(B_0))$. Therefore $B_0 \subset f(f^{-1}(B_0))$. Since we've already
+  shown that $f(f^{-1}(B_0)) \subset B_0$ in general, we conclude that
+  surjectivity of $f$ implies $f(f^{-1}(B_0)) = B_0$.
+
+\end{proof}
+
+\begin{ex}{2.2}
+  Let $f: A \to B$ and let $A_i \subset A$ and $B_i \subset B$ for $i=0$ and $i=1$.
+\end{ex}
+
+\begin{p}{c}
+  Show that $f^{-1}(B_0 \cap B_1) = f^{-1}(B_0) \cap f^{-1}(B_1)$.
+\end{p}
+
+\begin{proof}
+  We can deduce rather mechanically that
+  \begin{align}
+    a \in f^{-1}(B_0 \cap B_1)
+      &\iff f(a) \in B_0 \cap B_1 \label{pre1} \\
+      &\iff f(a) \in B_0 \text{ and } f(a) \in B_1 \label{int1} \\
+      &\iff a \in f^{-1}(B_0) \text{ and } a \in f^{-1}(B_1) \label{pre2} \\
+      &\iff a \in f^{-1}(B_0) \cap f^{-1}(B_1) \label{int2}
+  \end{align}
+  where \eqref{pre1} and \eqref{pre2} follow from the definition of preimage and
+  \eqref{int1} and \eqref{int2} follow from the definition of intersection. Therefore
+  $f^{-1}(B_0 \cap B_1) = f^{-1}(B_0) \cap f^{-1}(B_1)$.
+\end{proof}
+
+\begin{p}{d}
+  Show that $f^{-1}(B_0 - B_1) = f^{-1}(B_0) - f^{-1}(B_1)$.
+\end{p}
+
+\begin{proof}
+  Observe that
+  \begin{align}
+    a \in f^{-1}(B_0 \cap B_1)
+      &\iff f(a) \in B_0 - B_1 \label{pre3} \\
+      &\iff f(a) \in B_0 \text{ and } f(a) \notin B_1 \label{min1} \\
+      &\iff a \in f^{-1}(B_0) \text{ and } a \notin f^{-1}(B_1) \label{pre4} \\
+      &\iff a \in f^{-1}(B_0) - f^{-1}(B_1) \label{min2}
+  \end{align}
+  where \eqref{pre3} and \eqref{pre4} follow from the definition of preimage and
+  \eqref{min1} and \eqref{min2} follow from the definition of set difference. Therefore
+  $f^{-1}(B_0 - B_1) = f^{-1}(B_0) - f^{-1}(B_1)$.
+\end{proof}
+
+\begin{p}{f}
+  Show that $f(A_0 \cup A_1) = f(A_0) \cup f(A_1)$.
+\end{p}
+
+\begin{proof}
+  Again, we construct equivalences:
+  \begin{align}
+    b \in f(A_0 \cup A_1)
+      &\iff b = f(a) \text{ for some } a \in A_0 \cup A_1 \label{im1} \\
+      &\iff b = f(a) \text{ for some } a \in A_0 \text{ or } a \in A_1 \label{un1} \\
+      &\iff b \in f(A_0) \text{ or } b \in f(A_1) \label{im2} \\
+      &\iff b \in f(A_0) \cup f(A_1) \label{un2}
+  \end{align}
+  where \eqref{im1} and \eqref{im2} follow from the definition of image and
+  \eqref{un1} and \eqref{un2} follow from the definition of union. Therefore
+  $f(A_0 \cup A_1) = f(A_0) \cup f(A_1)$.
+\end{proof}
+
+\begin{p}{g}
+  Show that $f(A_0 \cap A_1) \subset f(A_0) \cap f(A_1)$ and that equality
+  holds if $f$ is injective.
+\end{p}
+
+\begin{proof}
+  $(\subset)$ First note that
+  \begin{align}
+    b \in f(A_0 \cap A_1)
+      &\implies b = f(a) \text{ for some } a \in A_0 \cap A_1 \label{im3} \\
+      &\implies b = f(a) \text{ for some } a \in A_0 \text{ and } a \in A_1 \label{in1} \\
+      &\implies b \in f(A_0) \text{ and } b \in f(A_1) \label{im4} \\
+      &\implies b \in f(A_0) \cap f(A_1) \label{in2}
+  \end{align}
+  and therefore $f(A_0 \cap A_1) \subset f(A_0) \cap f(A_1)$.
+
+  $(\supset)$ Suppose further that $f$ is injective. Then
+  \begin{align}
+    b \in f(A_0) \cap f(A_1)
+      &\implies b \in f(A_0) \text{ and } b \in f(A_1) \nonumber \\
+      &\implies
+        \exists\; a_0 \in A_0 \mid f(a_0) = b
+        \quad \text{ and } \quad
+        \exists a_1 \in A_1 \mid f(a_1) = b \nonumber \\
+      &\implies b = f(a) \text{ for some } a \in A_0 \cap A_1 \label{inj3} \\
+      &\implies b \in f(A_0 \cap A_1) \label{im6} \nonumber
+  \end{align}
+  where \eqref{inj3} follows from the injectivity of $f$, since we must have
+  $a_0 = a_1$. Therefore when $f$ is injective we have $f(A_0 \cap A_1) =
+  f(A_0) \cap f(A_1)$.
+\end{proof}
+
+\begin{p}{h}
+  Show that $f(A_0 - A_1) \supset f(A_0) - f(A_1)$ and that equality holds when
+  $f$ is injective.
+\end{p}
+
+\begin{proof}
+  $(\supset)$ Let $b \in f(A_0) - f(A_1)$. Then there exists $a_0 \in A_0$ such that $f(a_0) = b$, but $f(a_1) \neq b$ for all $a_1 \in A_1$. Hence $a_0 \notin A_1$, so we have $f(a_0) = b$ for $a_0 \in A_0 - A_1$. Thus $b \in f(A_0 - A_1)$ and we conclude that $f(A_0 - A_1) \supset f(A_0) - f(A_1)$.
+
+  $(\subset)$ Suppose further that $f$ is injective and let $b \in f(A_0 -
+  A_1)$. Then there exists $a \in A_0 - A_1$ such that $f(a) = b$. Note that,
+  since $a \in A_0$ and $a \notin A_1$, the injectivity of $f$ implies that
+  there can be no $a_1 \in A_1$ such that $f(a_1) = b$. Therefore $b \in
+  f(A_0)$ and $b \notin f(A_1)$, or equivalently, $b \in f(A_0) - f(A_1)$. Thus
+  $f(A_0 - A_1) \subset f(A_0) - f(A_1)$, and we conclude that when $f$ is
+  injective, $f(A_0 - A_1) = f(A_0) - f(A_1)$.
+\end{proof}
+
+\begin{ex}{3.12}
+  Let $\mathbb{Z}_+$ denote the positive integers. Consider the following order relations on $\mathbb{Z}_+ \times \mathbb{Z}_+$:
+  \begin{enumerate}[(i)]
+    \item The dictionary order
+    \item $(x_0 \times y_0) < (x_1 \times y_1)$ if either $x_0 - y_0 < x_1 -
+      y_1$, or $x_0 - y_0 = x_1 - y_1$ and $y_0 < y_1$
+    \item $(x_0 \times y_0) < (x_1 \times y_1)$ if either $x_0 + y_0 < x_1 +
+      y_1$, or $x_0 + y_0 = x_1 + y_1$ and $y_0 < y_1$
+  \end{enumerate}
+  In these order relations, which elements have immediate predecessors? Does the set have a smallest element? Show that all three order types are different.
+\end{ex}
+
+\begin{solution}
+
+  \phantombackup{what}
+
+  \begin{enumerate}[(i)]
+    \item All elements in $\{ (n \times m) \in \mathbb{Z}_+ \times \mathbb{Z}_+
+      \mid m > 1 \}$, i.e. elements above the ``first row", have immediate
+      predecessors. The smallest element is $(1 \times 1)$.
+    \item All elements in $\{ (n \times m) \in \mathbb{Z}_+ \times \mathbb{Z}_+
+      \mid n > 1, m > 1 \}$, i.e. elements other than the ``first row" and
+      ``first column", have immediate predecessors. There is no smallest
+      element.
+    \item All elements other than $(1 \times 1)$ have immediate predecessors.
+      The smallest element is $(1 \times 1)$.
+  \end{enumerate}
+
+  To show that all three order types are different, it suffices to point
+  out their different order type characteristics. For example, we know that
+  (ii) is different from (i) and (iii) because (ii) has no smallest element,
+  while (i) and (iii) do. But (i) and (iii) are also different from each other
+  because there are infinitely many elements without immediate predecessors in
+  (i), and only one such element in (iii).
+
+  Of course, to be pedantic, we could assume for contradiction that there
+  exists an order preserving bijection $f$ between these order relations. It
+  then becomes clear that $f$ preserves the differing characteristics just
+  mentioned -- hence the contradiction.
+\end{solution}
+
+\begin{ex}{3.15 (b)}
+  Assume $\mathbb{R}$ has the least upper bound property. Does $[0, 1] \times [0, 1]$ in the dictionary order have the least upper bound property? What about $[0, 1] \times [0, 1)$? What about $[0,1) \times [0, 1]$?
+\end{ex}
+
+\begin{solution}
+  Both $[0, 1] \times [0, 1]$ and $[0,1) \times [0, 1]$ have the least upper bound
+  property, however $[0, 1] \times [0, 1)$ does not. We will prove each of these in turn.
+  First, let us define
+  \mbox{$\pi_1, \pi_2 : \mathbb{R} \times \mathbb{R} \to \mathbb{R}$}
+  by $\pi_1(x \times y) = x$ and $\pi_2(x \times y) = y.$
+
+  Let $A = [0, 1] \times [0, 1]$ and $B \subset A$ be nonempty and bounded above by $z \in
+  A$. Notice that $\pi_1(B)$ is a nonempty subset of $[0,1]$ that is bounded above by
+  $\pi_1(z) \in [0, 1]$. By part (a), $[0,1]$ has the least upper bound
+  property,\footnote{I am using the lemma proven in 3.15(a), as it declutters these
+  arguments in 3.15(b).}
+  so there exists $n
+  = \text{lub } \pi_1(B) \in [0, 1]$. Next, consider the subset $C = \{
+  (x \times y \in B \mid x = n\}$.
+  \begin{description}
+    \item[Case 1: $C = \varnothing$.]
+      In this case, there is no element in $B$ with first coordinate equal to $n$. It
+      follows that $(n \times 0)$ is an upper bound for $B$. To see that $(n \times 0)$ is
+      the least such upper bound, suppose $(x \times y) \in A$ is another upper bound for $B$.
+      Then $x \in [0, 1]$ is an upper bound for $\pi_1(B)$, and
+      since $n = \text{lub}\, \pi_1(B)$, we have $n \leq x$. Of course this implies
+      that $(n \times 0) \leq (x \times y)$. Therefore, in this case, $B$ has a least
+      upper bound.
+    \item[Case 2: $C \ne \varnothing$.]
+      Similar to what we did for the first coordinate, notice that $\pi_2(C)$ is a nonempty
+      subset of $[0, 1]$ that is bounded above by $1 \in [0, 1]$, and by part (a) we know
+      that $m = \text{lub } \pi_2(C)$ exists. It is evident that $(n, m)$ is an upper
+      bound for $B$. To see that $(n \times m)$ is the least upper bound, suppose $(x \times
+      y)$ is another upper bound for $B$. Then, as reasoned in Case 1, $n \leq x$. If $n
+      < x$ then we immediately have $(n \times m) < (x \times y)$. If $n = x$, then $(x
+      \times y) = (n \times y)$, and since ($x \times y$) is an upper bound for $C$, which
+      only has first coordinates equal to $n$, it is clear that
+      $y$ must be an upper bound for $\pi_2(C)$. Of course, since $m = \text{lub
+      }\pi_2(C)$, it follows that $m \le y$
+      and hence $(n \times m) \le (x \times y)$. Therefore, in this case, $B$ has a least
+      upper bound.
+  \end{description}
+  We have shown that in all cases, an arbitrary nonempty subset of $[0, 1] \times [0,
+  1]$ that is bounded above has a least upper bound. We conclude that $[0, 1] \times [0,
+  1]$ has the least upper bound property.
+
+  Instead of repeating myself, I'll note that the proof for $[0,1) \times [0, 1]$ is
+  identical; just notice that when using part (a), we leverage the fact that $[0,1)$ has
+  the least upper bound property instead of $[0,1]$, so that $n = \text{lub } \pi_1(B) \in
+  [0, 1)$ and $m = \text{lub } \pi_2(C) \in [0, 1)$.
+
+  To see that $A = [0, 1] \times [0, 1)$ does not have the least upper bound property,
+  consider the nonempty subset $B = \{ (0 \times y) \mid y \in [0, 1) \}$, which is
+  bounded above by $(1 \times 0) \in A$. Let
+  $(n \times m) \in A$ be an upper bound for $B$. Then it
+  must be the case that $0 < n$. This is because the second coordinate in $[0, 1)$ is not
+  bounded above.  That is, for any potential upper bound $(0 \times m) \in A$, we can pick
+  some $y \in [0, 1)$ such that $m < y < 1$. Then $(0 \times m) < (0 \times y)$, so $(0
+  \times m)$ is not an upper bound for $B$. Now since $0 < n \le 1$, there exists $\frac{n}{2}
+  \in [0, 1]$ such that $0 < \frac{n}{2} < n$. Now $(\frac{n}{2} \times 0)$ is
+  an upper bound for $B$ and yet $(\frac{n}{2} \times 0) < (n \times m)$. We have shown
+  that, given any upper bound for $B$, there exists a lesser upper bound for $B$, and
+  therefore $B$ has no least upper bound.
+\end{solution}
+
+\vspace{.8em}
+\noindent {\Large \bf{Part 2}}
+\vspace{.8em}
+
+\begin{ex'}
+  Let $B$ be a set that isn't the empty set. Define a function
+  $$f : (\mathscr{P}(\mathscr{P}(B)) - \{\varnothing\}) \to \mathscr{P}(B)
+  \;\text{ by }\;
+  f(\mathcal{A}) = \bigcap_{A \in \mathcal{A}} A.$$
+\end{ex'}
+
+\begin{p}{a}
+  Is $f$ injective? surjective?
+\end{p}
+
+\begin{solution}
+  No, $f$ is not injective. Since $B$ is nonempty, there exist at least two
+  subsets $\varnothing, \{b\} \in \mathscr{P}(B).$ These two subsets give rise
+  to two distinct collections $\{\varnothing\}, \{\varnothing, \{b\}\}$ in the domain of
+  $f$, however
+  \[
+    f(\{\varnothing\}) \;= \bigcap_{A \in \{\varnothing\}} A \;=\; \varnothing \label{eq1}
+  \]
+  and
+  \[
+  f(\{\varnothing, \{b\}\})
+    \;= \bigcap_{A \in \{\varnothing, \{b\}\}} A
+    \;=\; \varnothing \cap \{b\} \;=\; \varnothing \label{eq2}
+  \]
+  and therefore $f$ is not injective.
+
+  Yes, $f$ is surjective. Let $C \in \mathscr{P}(B)$ be any subset of $B$. Then
+  the collection $\{C\}$ exists in the domain $\mathscr{P}(\mathscr{P}(B)) -
+  \{\varnothing\}$ such that
+  $$ f(\{C\}) \;= \bigcap_{A \in \{C\}} A \;=\; C $$
+  and therefore $f$ is surjective.
+\end{solution}
+
+\begin{p}{b}
+  For $\mathcal{A}_1, \mathcal{A}_2 \in (\mathscr{P}(\mathscr{P}(B)) -
+  \{\varnothing\})$, is it true that $f(\mathcal{A}_1) \cup f(\mathcal{A}_2) =
+  f(\mathcal{A}_1 \cup \mathcal{A}_2)$? Notice this is different than Exercise
+  2.2(f). There, $f$ is being applied to subsets of the domain, while here it's
+  being applied to elements of the domain.
+\end{p}
+
+\begin{solution}
+  No, this statement is not true in general. For any nonempty set $B$, there
+  exists $b \in B$ such that $\varnothing, \{b\} \in \mathscr{P}(B)$ and
+  $$\{\varnothing\}, \{\{b\}\} \;\in\; \mathscr{P}(\mathscr{P}(B)) -
+  \{\varnothing\}.$$
+  However, notice that
+  \begin{align*}
+    f\big(\{\varnothing\}\big) \cup f\big(\{\{b\}\}\big)
+      &= \varnothing \cup \{b\} \\
+      &= \{b\}
+  \end{align*}
+  and yet
+  \begin{align*}
+    f\big(\{\varnothing\} \cup \{\{b\}\}\big)
+      &= f\big(\{\varnothing, \{b\}\}\big) \\
+      &= \varnothing \cap \{b\} \\
+      &= \varnothing.
+  \end{align*}
+  Therefore for any nonempty set $B$ there will exist $\mathcal{A}_1,
+  \mathcal{A}_2 \in (\mathscr{P}(\mathscr{P}(B)) -
+  \{\varnothing\})$ such that $f(\mathcal{A}_1) \cup f(\mathcal{A}_2) \neq
+  f(\mathcal{A}_1 \cup \mathcal{A}_2)$.
+\end{solution}
 
 \end{document}
