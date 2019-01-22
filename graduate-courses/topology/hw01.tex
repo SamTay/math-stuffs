@@ -1,60 +1,14 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Math 601 Template
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \documentclass[11pt]{article}
-
-\usepackage[]{geometry}
-\usepackage{amsmath,amsthm,amssymb}
-\usepackage{mathrsfs}
-\usepackage{chngcntr}
-\usepackage{enumerate}
-\usepackage{color}
-
-\newcommand{\phantombackup}[1]{{\textcolor{white}{#1}}}
-
-\newenvironment{ex}[2][Exercise]{
-  \begin{trivlist}
-    \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}
-  {\end{trivlist}}
-\newenvironment{p}[1]{
-  \begin{trivlist}
-\item[\hskip \labelsep {\bfseries (#1)}]}
-  {\end{trivlist}}
-\newenvironment{lemma}[2][Lemma]{
-  \begin{trivlist}
-    \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}
-  {\end{trivlist}}
-\newenvironment{question}[2][Question]
-  {\begin{trivlist}
-    \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}
-  {\end{trivlist}}
-\newenvironment{corollary}[2][Corollary]
-  {\begin{trivlist}
-    \item[\hskip \labelsep{\bfseries #1}\hskip \labelsep{\bfseries #2.}]}
-  {\end{trivlist}}
-\newenvironment{ex'}[1][Exercise]{
-  \begin{trivlist}
-    \item[\hskip \labelsep {\bfseries #1.}]}
-  {\end{trivlist}}
-\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
-
+\usepackage{common}
 
 \begin{document}
-
-% --------------------------------------------------------------
-%                         Header
-% --------------------------------------------------------------
-
-\noindent Sam Tay \hfill {\large Math 601: Homework \#1} \hfill \today
-\vspace{2em}
+\header{2}
 
 % --------------------------------------------------------------
 %                         Exercises
 % --------------------------------------------------------------
 
-\noindent {\Large \bf{Part 1}}
-\vspace{.8em}
+\hwpart{1}
 
 \begin{ex}{2.1}
   Let $f:A \to B$. Let $A_0 \subset A$ and $B_0 \subset B$.
@@ -342,9 +296,7 @@ $(\subset)$ Notice that
   therefore $B$ has no least upper bound.
 \end{solution}
 
-\vspace{.8em}
-\noindent {\Large \bf{Part 2}}
-\vspace{.8em}
+\hwpart{2}
 
 \begin{ex'}
   Let $B$ be a set that isn't the empty set. Define a function

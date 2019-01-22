@@ -1,0 +1,57 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Math 601 Template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathrsfs}
+\usepackage{chngcntr}
+\usepackage{enumerate}
+\usepackage{color}
+
+\newcommand{\phantombackup}[1]{{
+  \textcolor{white}{#1}
+}}
+
+\newcommand{\header}[1]{{
+  \noindent Sam Tay \hfill {\large Math 601: Homework \##1} \hfill \today
+  \vspace{2em}
+}}
+
+\newcommand{\hwpart}[1]{{
+  \vspace{.8em}
+  \noindent {\Large \bf{Part #1}}
+  \vspace{.8em}
+}}
+
+\newenvironment{ex}[2][Exercise]{
+  \begin{trivlist}
+    \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}
+  {\end{trivlist}}
+
+\newenvironment{ex'}[1][Exercise]{
+  \begin{trivlist}
+    \item[\hskip \labelsep {\bfseries #1.}]}
+  {\end{trivlist}}
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+\newenvironment{p}[1]{
+  \begin{trivlist}
+    \item[\hskip \labelsep {\bfseries (#1)}]}
+  {\end{trivlist}}
+
+\newenvironment{lemma}[2][Lemma]{
+  \begin{trivlist}
+    \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}
+  {\end{trivlist}}
+
+\newenvironment{question}[2][Question]
+  {\begin{trivlist}
+    \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}
+  {\end{trivlist}}
+
+\newenvironment{corollary}[2][Corollary]
+  {\begin{trivlist}
+    \item[\hskip \labelsep{\bfseries #1}\hskip \labelsep{\bfseries #2.}]}
+  {\end{trivlist}}
+
