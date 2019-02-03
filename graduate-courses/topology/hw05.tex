@@ -1,0 +1,164 @@
+\documentclass[11pt]{article}
+\usepackage{common}
+\usepackage{upgreek}
+
+\begin{document}
+\header{5}
+
+% --------------------------------------------------------------
+%                         Exercises
+% --------------------------------------------------------------
+
+\hwpart{1}
+
+\begin{ex}{8}
+  Let $A, B, A_\alpha$ denote subsets of a space $X$. Determine whether the
+  following equations hold; if an equality fails, determine whether one of the
+  inclusions $\supset$ or $\subset$ holds.
+\end{ex}
+
+\begin{p}{a}
+  $\cl{A \cap B} = \cl A \cap \cl B$.
+\end{p}
+
+\begin{proof}
+  Equality does not hold, however $\subset$ does hold. Suppose $x \in \cl{A \cap
+  B}.$ Then for all neighborhoods $U$ of $x$, $U \cap (A \cap B) \neq
+  \varnothing$, which implies that both $U \cap A \neq \varnothing$ and $U \cap
+  B \neq \varnothing$. Therefore $x \in \cl A$ and $x \in \cl B$. Hence $\cl{A
+  \cap B} \subset \cl A \cap \cl B$.
+\end{proof}
+
+\begin{p}{c}
+  $\cl{A - B} = \cl A - \cl B$.
+\end{p}
+\begin{proof}
+  Equality does not hold, however $\supset$ does hold. Suppose $x \in \cl A -
+  \cl B$, so every neighborhood of $x$ intersects $A$ but there exists a
+  neighborhood $V$ of $x$ disjoint from $B$. Suppose for contradiction that
+  there exists a neighborhood $U$ of $x$ such that $U \cap (A - B) =
+  \varnothing$. Then since $U \cap V \subset U$, we have $(U \cap V) \cap (A -
+  B) = \varnothing$. Notice $U \cap V$ is also a neighborhood of $x$ and since $x \in \cl A$, we know $(U
+  \cap V) \cap A \neq \varnothing$, so it must be the case that $(U \cap V) \cap
+  B \neq \varnothing$. However, this implies $V \cap B \neq \varnothing$, which
+  contradicts the assumption that $V$ is disjoint from $B$. Therefore all
+  neighborhoods $U$ of $x$ intersect $A - B$, so that $x \in \cl{A - B}$.
+\end{proof}
+
+\begin{ex}{13}
+  Show that $X$ is Hausdorff if and only if the \emph{diagonal} $\Delta = \{x
+  \times x : x \in X\}$ is closed in $X \times X$.
+\end{ex}
+\begin{proof}
+  $(\Rightarrow)$ Suppose $X$ is Hausdorff and let $x\times y$ be in the complement of
+  the diagonal: $x\times y \in X \times X - \Delta$. Then $x \neq y$, so there
+  exist disjoint neighborhoods $U$ of $x$ and $V$ of $y$. Note that because $U$
+  and $V$ are disjoint, they share no equal elements, hence $U \times V$ does
+  not intersect $\Delta$. Therefore $x \times y \in U \times V \subset X \times
+  X - \Delta$. Since we have shown that arbitrary elements of the complement of
+  the diagonal are elements of open sets contained within the complement of the
+  diagonal, the complement of the diagonal is open. Hence the diagonal is
+  closed.
+
+  $(\Leftarrow)$ Suppose $\Delta$ is closed in $X \times X$. Let $x,y$ be
+  distinct elements of $X$. Then $x \times y \notin \Delta$, so $x \times y \in
+  X \times X - \Delta$ which is open. Thus there exists some basis element $U
+  \times V$ such that $x \times y \in U \times V \subset X \times X - \Delta$,
+  where $U, V$ are open in $X$. However, since $U \times V$ is contained in the
+  complement of the diagonal, we see that $U$ and $V$ must be disjoint. We have
+  shown that we can find disjoint neighborhoods around any two distinct elements
+  in $X$, therefore $X$ is Hausdorff.
+\end{proof}
+
+\begin{ex}{16.b}
+  Consider the five topologies on $\mathbb{R}$ given in Exercise 13.7. Which of
+  these topologies satisfy the Hausdorff axiom? the $T_1$ axiom?
+\end{ex}
+\begin{solution}
+  Recall these are
+  \begin{align*}
+    \mathcal{T}_1 &= \text{ the standard topology } \\
+    \mathcal{T}_2 &= \text{ the topology of } \mathbb{R}_K \\
+    \mathcal{T}_3 &= \text{ the finite complement topology } \\
+    \mathcal{T}_4 &= \text{ the upper limit topology, having all sets }
+                (a, b]
+                \text { as basis} \\
+    \mathcal{T}_5 &= \text{ the topology having all sets }
+                (-\infty, a) = \{x : x < a\}
+                \text { as basis}.
+  \end{align*}
+
+  $\mathcal{T}_1, \mathcal{T}_2, \mathcal{T}_3, \mathcal{T}_4$ satisfy the $T_1$
+  axiom and $\mathcal{T}_1, \mathcal{T}_2, \mathcal{T}_4$ satisfy the Hausdorff
+  axiom.
+\end{solution}
+
+\begin{ex}{18}
+  Determine the closures of the following subsets of the ordered square:
+  \begin{align*}
+    A &= \{(\frac{1}{n}) \times 0 : n \in \mathbb{Z}_+\} \\
+    B &= \{(1 - \frac{1}{n}) \times \frac{1}{2} : n \in \mathbb{Z}_+\} \\
+    C &= \{x \times 0 : 0 < x < 1\} \\
+    D &= \{x \times \frac{1}{2} : 0 < x < 1\} \\
+    E &= \{\frac{1}{2} \times y : 0 < y < 1\}
+  \end{align*}
+\end{ex}
+
+\begin{solution}
+  \begin{align*}
+    \cl A &= A \cup \{0\times1\} \\
+    \cl B &= B \cup \{1 \times 0\} \\
+    \cl C &= \{x \times 1 : 0 \le x < 1\} \cup \{x \times 0 : 0 < x \le 1\}\\
+    \cl D &= D \cup \cl C \\
+    \cl E &= \Big[\frac{1}{2} \times 0, \frac{1}{2} \times 1\Big]
+  \end{align*}
+\end{solution}
+
+\hwpart{2}
+
+\noindent Let $X$ be a topological space. Let $A \subset X$ be a subset.
+
+\begin{p}{a}
+  Show that $\bd (\bd A) \subset \bd A$.
+\end{p}
+\begin{proof}
+  Notice that
+  \[ \bd (\bd A) \;=\; \cl{\bd A} \cap \cl{X - \bd A} \;\subset\; \cl{\bd A}
+  \;=\; \bd A.\]
+\end{proof}
+
+\begin{p}{b}
+  Find an example in which $\bd (\bd A) \neq \bd A$.
+\end{p}
+\begin{solution}
+  When $A = \mathbb{Q} \subset \mathbb{R}$, we have $\bd \mathbb{Q} = \mathbb{R}$ and
+  $\bd (\bd \mathbb{Q}) = \bd \mathbb{R} = \varnothing$.
+\end{solution}
+
+\begin{p}{c}
+  Show that $\bd (\bd (\bd A)) = \bd (\bd A)$.
+\end{p}
+\begin{proof}
+  First note that considering $\bd A$ as a subset of $X$, part (a) immediately
+  tells us that $\bd (\bd (\bd A)) \subset \bd (\bd A)$. For the reverse
+  direction, suppose $x \in \bd (\bd A)$. To show that $x \in \bd (\bd (\bd
+  A))$, we will simply rule out the alternative possibilities that
+  $x \in \intr (\bd (\bd A))$ or $x \in \extr (\bd (\bd A))$.
+
+  So suppose for contradiction that $x \in \intr (\bd (\bd A))$. Then there
+  exists a neighborhood $U$ of $x$ such that $U \subset \bd (\bd A)$. Since
+  \[ \bd (\bd A) \;=\; \cl{\bd A} \cap \cl{X - \bd A} \;=\; \bd A \cap \cl{X - \bd
+  A} \;\subset\; \bd A,\]
+  we see that $U \subset \bd A$. Thus $x \in \intr (\bd A)$, which contradicts
+  our assumption that $x \in \bd (\bd A)$.
+
+  Next suppose for contradiction that $x \in \extr (\bd (\bd A))$. Then there
+  exists a neighborhood $U$ of $x$ such that $U \subset X - \bd (\bd A)$. But
+  then $x \in X - \bd (\bd A)$ which contradicts our assumption that $x \in \bd
+  (\bd A)$.
+
+  Therefore the only possibility is that $x \in \bd (\bd (\bd A))$, and we
+  conclude that \\ $\bd (\bd (\bd A)) = \bd (\bd A)$.
+\end{proof}
+
+\end{document}

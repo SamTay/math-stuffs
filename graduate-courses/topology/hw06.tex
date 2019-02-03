@@ -1,0 +1,249 @@
+\documentclass[11pt]{article}
+\usepackage{common}
+\usepackage{upgreek}
+\usepackage{physics}
+
+\begin{document}
+\header{6}
+
+% --------------------------------------------------------------
+%                         Exercises
+% --------------------------------------------------------------
+
+\hwpart{1}
+
+\begin{ex}{18.2}
+  Suppose that $f: X \to Y$ is continuous. If $x$ is a limit point of the subset
+  $A$ of $X$, is it necessarily true that $f(x)$ is a limit point of $f(A)$?
+\end{ex}
+
+\begin{solution}
+  No. Define $f:\mathbb{R} \to \mathbb{R}$ by $f(x) = 64$, which is a constant
+  and hence continuous function. Notice $0$ is a limit point of $(0, 1)$,
+  however $f(0) = 64$ is not a limit point of the image $f((0, 1)) = \{64 \}$.
+\end{solution}
+
+\begin{ex}{18.4}
+  Given $x_0 \in X$ and $y_0 \in Y$, show that the maps $f: X \to X \times Y$
+  and $g: Y \to X \times Y$ defined by
+  \[ f(x) = x \times y_0 \quad \text{ and } \quad g(y) = x_0 \times y \]
+  are embeddings.
+\end{ex}
+
+\begin{proof}
+  Let $c_X: X \to Y$ and $c_Y: Y \to X$ be the constant functions $c_X(x) = y_0$
+  and $c_Y(y) = x_0$. Then let $f': X \to X \times \{y_0\}$ and $g': Y \to \{x_0\}
+  \times Y$ be the functions $f,g$ with ranges restricted to their respective
+  images. These restricted functions are obviously bijective, and furthermore
+  \[ f' = i_X \times c_1 \quad \text{ and } \quad g' = c_2 \times i_Y. \]
+  Now we have written $f'$ and $g'$ as products of the constant and identity
+  functions, so by Theorems 18.2 and 18.4 we conclude $f'$ and $g'$ are
+  continuous.
+
+  Next we must show $(f')^{-1}$ and $(g')^{-1}$ are continuous. So let $U
+  \subset X$ and $V \subset Y$ be open sets. Then $f'(U) = U \times \{y_0\}$ and
+  $g'(V) = \{x_0\} \times V$, which are each open in the respective topologies
+  $X \times \{y_0\}$ and $\{x_0\} \times Y$. Hence $(f')^{-1}$ and $(g')^{-1}$
+  are both continuous, so that $f'$ and $g'$ are indeed homeomorphisms.
+  Therefore $f$ and $g$ are embeddings.
+\end{proof}
+
+\begin{ex}{18.7a}
+  Suppose that $f:\mathbb{R} \to \mathbb{R}$ is ``continuous from the right,"
+  that is,
+  \[ \lim_{x \to a^+} f(x) = f(a), \]
+  for each $a \in \mathbb{R}$. Show that $f$ is continuous when considered as a
+  function from $\mathbb{R}_\ell$ to $\mathbb{R}$.
+\end{ex}
+
+\begin{proof}
+  I take our hypothesis to mean that ``for each $a \in \mathbb{R}$, for all
+  $\epsilon > 0$, there exists $\delta > 0$ such that $x \in [a, a + \delta)$
+  implies $f(x) \in (f(a) - \epsilon, f(a) + \epsilon).$" To show $f:
+  \mathbb{R}_\ell \to \mathbb{R}$ is continuous, let $a \in \mathbb{R}_\ell$ and $V$
+  be any neighborhood of $f(a)$. Then there is a basis interval $(\epsilon_1,
+  \epsilon_2)$ such that $f(x) \in (\epsilon_1, \epsilon_2) \subset V$. Choosing
+  $\epsilon = \min\{f(a) - \epsilon_1, \epsilon_2 - f(a)\}$, we have $(f(a) -
+  \epsilon, f(a) + \epsilon) \subset V$. Now there must exist $\delta >
+  0$ such that $x \in [a, a + \delta)$ implies $f(x) \in (f(a) - \epsilon, f(a)
+  + \epsilon) \subset V.$ But $[a, a + \delta)$ is open in $\mathbb{R}_\ell$. Thus we have
+  found an open set $[a, a + \delta)$ in $X$ such that $a \in [a, a + \delta)
+  \subset f^{-1}(V)$. Therefore $f:\mathbb{R}_\ell \to \mathbb{R}$ is
+  continuous.
+\end{proof}
+
+\begin{ex}{18.8}
+  Let $Y$ be an ordered set in the order topology. Let $f, g : X \to Y$ be
+  continuous.
+\end{ex}
+
+\begin{p}{a}
+  Show that the set $\{x : f(x) \leq g(x)\}$ is closed in $X$.
+\end{p}
+
+\begin{proof}
+  Let $A = \{x : f(x) \leq g(x)\}$ and $C = X - A = \{x : f(x) > g(x)\}$. Let $x
+  \in C$. Then $g(x) < f(x)$, and recalling that the ordered set $Y$ is
+  Hausdorff, we know there exist disjoint open sets and hence basis
+  intervals $(a, b)$ and $(c, d)$ such that $g(x) \in (a, b)$ and $f(x) \in (c,
+  d)$. Note that this means
+  \[ a \;<\; g(x) \;<\; b \;\leq\; c \;<\; f(x) \;<\; d. \]
+  Now since $f, g$ are continuous, $f^{-1}(c, d)$ and $g^{-1}(a, b)$ are open
+  and their intersection $U = f^{-1}(c, d) \cap g^{-1}(a, b)$ is open with $x
+  \in U$. Next we will show that $U \subset C,$ so let $y \in U$. Then $f(y) \in
+  (c, d)$ and $g(y) \in (a, b)$, so that $g(y) < b \leq c < f(y)$. Therefore $y
+  \in C$ and $U \subset C$. We have shown that for any $x \in C$ there is an
+  open set $U$ such that $x \in U \subset C$. Thus $C$ is open and $A$ is closed.
+\end{proof}
+
+\begin{p}{b}
+  Let $h : X \to Y$ be the function
+  \[ h(x) = \min\{f(x), g(x)\}, \]
+  Show that $h$ is continuous.
+\end{p}
+
+\begin{proof}
+  Notice that for each $x \in X$, we have $f(x) \leq g(x)$ or $f(x) \geq g(x)$.
+  Thus, letting $A = \{x: f(x) \leq g(x)\}$ and $B = \{x: f(x) \geq g(x)\}$,
+  we have $X = A \cup B$ and $f(x) = g(x)$ for all $x \in A \cap B$. Now it is
+  clear that
+  \[
+    h(x) = \min\{f(x), g(x)\} =
+      \begin{cases}
+        f(x) \text{ if } x \in A \\
+        g(x) \text{ if } x \in B
+      \end{cases}
+  \]
+  and by the Pasting Lemma, $h$ is continuous.
+\end{proof}
+
+\begin{ex}{18.10}
+  Let $f: A \to B$ and $g: C \to D$ be continuous functions. Let us define a map
+  $f \times g : A \times C \to B \times D$ by the equation
+  \[ (f \times g)(a \times c) = f(a) \times g(c). \]
+  Show that $f \times g$ is continuous.
+\end{ex}
+
+\begin{proof}
+  Define $f': A \times C \to B$ and $g': A \times C \to D$ by $f'(a \times c) =
+  f(a)$ and $g'(a \times c) = g(c)$. Clearly $f', g'$ are continuous because for
+  any open sets $U \subset B$, $V \subset D$, we have $(f')^{-1}(U) = f^{-1}(U)
+  \times C$ and $(g')^{-1}(V) = A \times g^{-1}(V)$, which are both open sets in
+  $A \times C$. Now
+  \[ (f \times g)(a \times c) = f(a) \times g(c) = f' \]
+  and by Theorem 18.4 we know $f \times g$ is continuous.
+\end{proof}
+
+\begin{ex}{18.13}
+  Let $A \subset X$; let $f : A \to Y$ be continuous; let $Y$ be Hausdorff. Show
+  that if $f$ may be extended to a continuous function $g : \cl A \to Y$, then
+  $g$ is uniquely determined by $f$.
+\end{ex}
+
+\begin{proof}
+  Let $g, h: \cl A \to Y$ be continuous functions and let $x$ be a limit point
+  of $A$ such that $g(x) \neq h(x)$. Since $Y$ is Hausdorff, there exist
+  disjoint neighborhoods $U$ of $g(x)$ and $V$ of $h(x)$. Then $x \in g^{-1}(U)
+  \cap h^{-1}(V)$ and since $g, h$ are continuous, this is an open set. Since
+  $x$ is a limit point, there exists some $y \in A$ such that $y \in g^{-1}(U)
+  \cap h^{-1}(V)$. But this means that $g(y) \in U$ and $h(y) \in V$, and since
+  $U, V$ are disjoint sets, we have $g(y) \neq h(y)$.
+
+  We have shown by contrapositive that if $h(x) = g(x)$ for all $x \in A$,
+  then $h(x) = g(x)$ for all $x \in \cl A$.
+\end{proof}
+
+\hwpart{2}
+
+A \emph{variety} in $\mathbb{R}^n$ is the set of common zeroes of one or more
+$n$-variable polynomials. For example, in $\mathbb{R}^2$, the unit circle is a
+variety because it's the set of zeroes of the polynomial $x^2 + y^2 - 1$. The
+set $\{2 \times 3, (-2) \times (-5)\}$ is also a variety as it's the set of
+common zeroes of the polynomials $x^2 -4$  and $xy + x - 8$. Algebraic geometry
+is the study of varieties.
+
+Algebraic geometers often use a non-Hausdorff topology called the Zariski
+topology. The Zariski topology on $\mathbb{R}^n$ is defined by saying that a set
+is closed if and only if it is a variety, and thus that a set is open if and
+only if it is the complement of a variety. It's possible to prove that this
+really is a topology, but the proof is mostly abstract algebra.
+
+\begin{p}{a}
+  Show that on $\mathbb{R}^n$, the Zariski topology is:
+  \begin{itemize}
+    \item the finite complement topology if $n = 1$.
+    \item strictly finer than the finite complement topology if $n > 1$.
+  \end{itemize}
+\end{p}
+
+\begin{proof}
+  Let $Z$ be the Zariski topology on $\mathbb{R}^n$ and $\mathcal{T}$ be the
+  finite complement topology on $\mathbb{R}^n$. First we will show that
+  $Z$ is finer than $\mathcal{T}$. So let $U \in \mathcal{T}$. Then
+  $\mathbb{R}^n - U$ is either $\mathbb{R}^n$ or a finite set $\{\vb
+  x_1,\ldots,\vb x_m\}.$ Of course if $\mathbb{R}^n - U$ is the entire space,
+  this is precisely the variety corresponding to the single zero polynomial. So
+  suppose the latter, and let us denote
+  \begin{align*}
+    \vb x_1 &= (x_{1,1}, x_{1,2}, \ldots, x_{1,n}) \\
+            & \vdots \\
+    \vb x_m &= (x_{m,1}, x_{m,2}, \ldots, x_{m,n})
+  \end{align*}
+  Then it should be clear that $\{\vb x_1, \ldots \vb x_m\}$ is precisely the
+  variety corresponding to the polynomials
+  \[ (x_1 - x_{1,1})(x_1 - x_{2,1}) \cdots (x_1 - x_{m,1}) \]
+  \[ \vdots \]
+  \[ (x_n - x_{1,n})(x_n - x_{2,n}) \cdots (x_n - x_{m,1}) \]
+  where, the $x_i$'s are the polynomial placeholders corresponding to the $i$th
+  coordinate, for each $i = 1,\ldots n$. Thus $\mathbb{R}^n - U$ is closed in
+  $Z$, so $U \in Z$ and $Z$ is finer than $\mathcal{T}$.
+
+  Next we'll argue that when $n = 1$, $Z = \mathcal{T}$. In this case, it is
+  easy to see that every polynomial over $\mathbb{R}$ is either zero or of
+  finite dimension, and so the set of common zeros of one or more polynomials is
+  an intersection of sets that are either $\mathbb{R}$ or finite. Of course,
+  such an intersection is also either $\mathbb{R}$ or finite, and hence must be
+  closed in the finite complement topology. Thus when $n = 1$, $Z =
+  \mathcal{T}$.
+
+  Lastly, we must show that when $n > 1$, $Z$ is strictly finer than
+  $\mathcal{T}$. Consider the polynomial $x_1 - 1$ over $\mathbb{R}^n$. Clearly
+  the variety is the set $\{(1,x_2, \ldots, x_n) : x_2, \ldots, x_n \in
+  \mathbb{R}\}$, which is neither finite nor $\mathbb{R}^n$, so its complement
+  is open in $Z$ but not in $\mathcal{T}$.
+\end{proof}
+
+\begin{p}{b}
+  Prove that if $p: \mathbb{R}^n \to \mathbb{R}$ is an $n$-variable polynomial,
+  and both spaces are given the Zariski topology, then $p$ is continuous.
+\end{p}
+
+\begin{proof}
+  Let $A \subset \mathbb{R}$ be closed in the Zariski topology. Then as shown
+  above, $A$ is either $\mathbb{R}$ or a finite set $\{c_1, \ldots, c_m\}$. If
+  $A = \mathbb{R}$ then obviously $p^{-1}(A) = \mathbb{R}^n$ which is also
+  closed, so suppose the latter. Then consider a ``vector" in $p^{-1}(A)$. These
+  are precisely the zeros of the polynomials $p - c_1, \ldots, p - c_m$. Thus
+  $p^{-1}(A)$ is the variety corresponding to their product, the
+  single polynomial $(p - c_1) \cdots (p - c_m)$, and is therefore closed. Thus
+  $p$ is continuous.
+\end{proof}
+
+\begin{p}{c}
+  What is the closure of the set $\{\frac{1}{n} : n \in \mathbb{Z}_+\} \times
+  \{0\}$ in the Zariski topology on $\mathbb{R}^2$? Which polynomials correspond
+  to the closure?
+\end{p}
+
+\begin{solution}
+  I think the closure is $\mathbb{R} \times \{0\}$, but I'm not positive and
+  incapable of a proof. My reasoning is simply that, if there are an infinite
+  number of first coordinate $x$'s that lead to polynomial zeros, we would need
+  something more than $0$ in the second coordinate $y$ to ``balance" them out.
+
+  If I am correct, then the polynomials corresponding to this variety are
+  polynomials where each term is a positive multiple of $y$. For example, $y$,
+  $xy$, $x^2y$, $xy^2 + y$, etc.
+\end{solution}
+
+\end{document}

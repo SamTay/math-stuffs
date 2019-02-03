@@ -1,0 +1,265 @@
+\documentclass[11pt]{article}
+\usepackage{common}
+
+\begin{document}
+\header{10}
+
+% --------------------------------------------------------------
+%                         Exercises
+% --------------------------------------------------------------
+
+\hwpart{1}
+
+\begin{ex}{26.1(a)}
+  Let $\mathcal{T}$ and $\mathcal{T}'$ be two topologies on the set $X$; suppose
+  that $\mathcal{T} \subset \mathcal{T}'$. What does compactness of $X$ under
+  one of these topologies imply about compactness under the other?
+\end{ex}
+
+\begin{solution}
+  Compactness in $\mathcal{T}$ does not guarantee compactness in $\mathcal{T}'$;
+  consider the interval $[0, 1]$ closed as a subspace of the usual topology on
+  $\mathbb{R}$, however $[0, 1]$ is obviously not closed in the discrete
+  topology.
+
+  On the other hand, compactness in $\mathcal{T}'$ does guarantee compactness in
+  $\mathcal{T}$, since a covering $\mathcal{A}$ of sets open in $\mathcal{T}$
+  are also open in $\mathcal{T}'$, hence a finite subcover exists in
+  $\mathcal{T}$ as well.
+\end{solution}
+
+\begin{ex}{26.1(b)}
+  Show that if $X$ is compact Hausdorff under both $\mathcal{T}$ and
+  $\mathcal{T}'$, then either $\mathcal{T}$ and $\mathcal{T}'$ are equal or they
+  are not comparable.
+\end{ex}
+
+\begin{proof}
+  Suppose for contradiction that one topology strictly contains the other,
+  without loss of generality, $\mathcal{T} \subsetneq \mathcal{T}'$. Let $id: X
+  \to X$ be the identity map from $\mathcal{T}'$ into $\mathcal{T}$. Then $id$
+  is bijective and for any $U \in \mathcal{T}$, $id^{-1}(U) = U \in
+  \mathcal{T}'$, so $id$ is continuous as well. By Theorem 26.6, $id$ is a
+  homeomorphism. But this implies that for any $V \in \mathcal{T}'$, $id(V) = V
+  \in \mathcal{T}$ as well, contradicting our assumption that $\mathcal{T}
+  \subsetneq \mathcal{T}'$. Thus one topology cannot strictly contain the other,
+  so it must be the case that either $\mathcal{T} = \mathcal{T}'$ or they are
+  not comparable.
+\end{proof}
+
+\begin{ex}{26.3}
+  Show that a finite union of compact subspaces of $X$ is compact.
+\end{ex}
+
+\begin{proof}
+  Let $Y_1,\ldots,Y_n$ be a finite number of compact subspaces of $X$. Let
+  $\mathcal{A}$ be a covering of the union $\cup_{i=1}^n Y_i$ of sets open in
+  $X$. Then $\mathcal{A}$ obviously covers each subspace $Y_i$, and by Lemma
+  26.1 there is a finite subcollection $\mathcal{A}_i \subset \mathcal{A}$ that
+  covers $Y_i$, for each $i=1,\ldots,n$. Then $\cup_{i=1}^n \mathcal{A}_i$ is a
+  finite subcollection of $\mathcal{A}$ that covers $\cup_{i=1}^n Y_i$;
+  again by Lemma 26.1, $\cup_{i=1}^n Y_i$ is compact.
+\end{proof}
+
+\begin{ex}{26.7}
+  Show that if $Y$ is compact, then the projection $\pi_1 : X \times Y \to X$ is
+  a closed map.
+\end{ex}
+
+\begin{proof}
+  Let $U$ be closed in $X \times Y$. Then we wish to show that $\pi_1(U)$ is
+  closed in $X$, so pick $x_0 \in X - \pi_1(U)$; we will find an open set $W$
+  such that $x_0 \in W \subset X - \pi_1(U)$. Notice that $(X \times Y) - U$ is
+  open and contains $\{x_0\} \times Y$. By the Tube Lemma, there is a
+  neighborhood $W$ of $x_0$ such that
+  \[ \{x_0\} \times Y \subset W \times Y \subset (X \times Y) - U. \]
+  Thus, for any $y \in Y$, there is no $x \in W$ such that $x \times y \in U$.
+  Hence $x_0 \in W \subset X - \pi_1(U)$, so $X - \pi_1(U)$ is open and
+  $\pi_1(U)$ is closed.
+\end{proof}
+
+\begin{ex}{26.8}
+  Let $f: X \to Y$; let $Y$ be compact Hausdorff. Then $f$ is continuous if and
+  only if the \emph{graph} of $f$,
+  \[ G_f = \{x \times f(x) : x \in X\},\]
+  is closed in $X \times Y$.
+  % Hint: if G_f is closed and V is a neighborhood of f(x_0), then the
+  % intersection of G_f and X \times (Y - V) is closed. Apply Exercise 7.
+\end{ex}
+
+\begin{proof}
+  $(\Longrightarrow)$ Suppose $f$ is continuous. Let $x \times y \in (X \times
+  Y) - G_f$. Then $y \neq f(x)$ and since $Y$ is Hausdorff we can find disjoint open
+  neighborhoods $U$ of $y$ and $V$ of $f(x)$. Then $x \in f^{-1}(V)$ so
+  $x \times y$ is in $f^{-1}(V) \times U$, which is open because $f$ is
+  continuous. Furthermore, for any $z \in f^{-1}(V),$ $f(z) \in V$ and thus
+  $f(z) \not\in U$, so $f^{-1}(V) \times U \subset (X \times Y) - G_f.$
+  Therefore $G_f$ is closed.
+
+  $(\Longleftarrow)$ Suppose $G_f$ is closed. To show $f$ is continuous, let $U$
+  be open in $Y$. Then $X \times U$ is open, so the complement
+  \[(X \times Y) - (X \times U) = X \times (Y - U) \]
+  is closed. Then the intersection
+  \[ (X \times (Y-U)) \cap G_f = \{x \times f(x): f(x) \not\in U\} \]
+  is also closed. Since $Y$ is compact we know from Exercise 26.7 that $\pi_1$ is a
+  closed map, so
+  \[ \pi_1(\{x \times f(x): f(x) \not\in U\}) = X - f^{-1}(U) \]
+  is closed in $X$. Hence $f^{-1}(U)$ is open and $f$ is continuous.
+
+\end{proof}
+
+\begin{ex}{27.1}
+  Prove that if $X$ is an ordered set in which every closed interval is compact,
+  then $X$ has the least upper bound property.
+\end{ex}
+
+\begin{proof}
+  We proceed by contrapositive. Let $A \subset X$ be a nonempty set that is
+  bounded above without a least upper bound. Let $B$ be the (nonempty) set of
+  upper bounds for $A$. A couple things to
+  note initially: $A$ cannot have a maximum element, as it would be the least
+  upper bound; $B$ cannot have a least element, as it would be the least upper
+  bound; $A$ and $B$ are disjoint, otherwise they would intersect at the
+  least upper bound.
+
+  Let $a_0 \in A$ and $b_0 \in B$. Since $A$ has no maximum and $B$ has no
+  minimum, we can find $c \in A$ and $d \in B$ such that $a_0 < c$ and
+  $d < b_0$. We will show that
+  \[ \mathcal{A}
+        = \{(a_0, a): a \in A \text{ and } a > a_0\}
+          \cup \{(b, b_0): b \in B \text{ and } b < b_0\}
+        \]
+  is a covering of $[c, d]$.
+
+  Let $x \in [c, d]$. If $x \in B$ then there must exist $b \in B$ with $b < x$ so
+  that $x \in (b, d] \subset (b, b_0).$ If $x \not\in B$ then $x$ is not
+  an upper bound for $A$, so there exists an $a > x$ so that $x \in [c, a)
+  \subset (a_0, a).$ Therefore $\mathcal{A}$ covers $[c, d]$.
+
+  Notice $\mathcal{A}$ is a union of two sets which each consist of nested intervals.
+  Any finite subcollection will have the form
+  \begin{align*}
+    \mathcal{C} &= \bigcup_{i=1}^n \{(a_0, a_i)\} \cup \bigcup_{j=1}^m \{(b_j,
+    b_0)\}
+  \end{align*}
+  and
+  \begin{align*}
+    \bigcup \mathcal{C} &= (a_0, a_N) \cup (b_M, b_0)
+  \end{align*}
+  where $a_N = \max\{a_i\}$ and $b_M = \min\{b_j\}$. Then $a_N, b_M \in [c, d]$,
+  but $a_N, b_M \not\in \bigcup \mathcal{C}$, as we stated
+  earlier that $A$ and $B$ are disjoint. Thus no finite subcollection of
+  $\mathcal{A}$ can still cover $[c, d]$, and we have found a closed interval
+  that is not compact.
+\end{proof}
+
+\hwpart{2}
+
+Let $C$ be the Cantor set. % p178 for definition
+Also, give $\{0, 1\}$ the discrete topology and $\{0, 1\}^\omega$ the product
+topology. Note $\{0, 1\}^\omega$ can be regarded as the space of all sequences
+of zeroes and ones.
+
+Munkres defines the Cantor set by constructing a sequence of sets $A_n$ each of
+which is a union of disjoint closed intervals of length $\frac{1}{3^n}$. Define
+a function $f: C \to \{0, 1\}^\omega$ by saying that the $n^{\text{th}}$ term in
+the sequence $f(x)$ is $0$ if for any $k \in \mathbb{Z}$, $x \in
+\qty[\frac{3k}{3^n}, \frac{1 + 3k}{3^n}] \subset A_n$ and the $n^{\text{th}}$ term
+of $f(x)$ is $1$ if for any $k \in \mathbb{Z}$, $x \in \qty[\frac{2 + 3k}{3^n}, \frac{3
++ 3k}{3^n}] \subset A_n$.
+
+The way we construct the Cantor set is by removing the middle third of an
+interval, then removing the middle third of the remaining left and right
+intervals, and so on. What $f$ does is record, at each step of the iteration,
+whether $x$ was in an interval just left of or just right of a middle third that
+was removed. For example, for $x = \frac{7}{27}$, when we remove the middle
+third from $[0, 1]$, $\frac{7}{27}$ lies in the left third $[0, \frac{1}{3}]$,
+and then when we remove the middle thid from $[0, \frac{1}{3}]$, $\frac{7}{27}$
+lies in the right third $[\frac{2}{9}, \frac{1}{3}]$, and then when we remove
+the middle third from $[\frac{2}{9}, \frac{1}{3}]$, $\frac{7}{27}$ lies in the
+left third $[\frac{2}{9}, \frac{7}{27}]$, and then after that, it's always in
+the right third. Thus, ``directions" for finding $\frac{7}{27}$ within the
+Cantor set are left, right, left, right, right, right, $\ldots$, which gets
+represented as $f\qty(\frac{7}{27}) = (0, 1, 0, 1, 1, 1, \ldots).$
+
+\begin{p}{a}
+  Show that $C$ is compact Hausdorff.
+\end{p}
+
+\begin{proof}
+  Recall that closed subspaces of compact spaces are compact, and subspaces of
+  Hausdorff spaces are Hausdorff; since $C \subset [0, 1]$ and $[0, 1]$ is
+  compact Hausdorff, it suffices to show that $C$ is closed. But $C$ is defined
+  as an intersection $\bigcap_{n \in \mathbb{Z}_+} A_n$ where each $A_n$ is a
+  finite union of closed intervals; hence $C$ is closed. Therefore $C$ is
+  compact Hausdorff.
+\end{proof}
+
+\begin{p}{b}
+  Show that $f$ is bijective.
+\end{p}
+
+\begin{proof}
+  First we'll show that $f$ is surjective. Let $\vb x \in \{0, 1\}^\omega$.
+  Define
+  \begin{align*}
+    B_1 &=
+    \begin{cases}
+      \qty[0, \frac{1}{3}] &\text{ if } x_1 = 0 \\
+      \qty[\frac{2}{3}, 1] &\text{ if } x_1 = 1
+    \end{cases} \\
+    B_n &= B_{n-1} \cap
+    \begin{cases}
+      \bigcup_{k = 0}^\infty \qty[\frac{3k}{3^n}, \frac{1 + 3k}{3^n}] &\text{ if } x_n = 0 \\
+      \bigcup_{k = 0}^\infty \qty[\frac{2 + 3k}{3^n}, \frac{3 + 3k}{3^n}] &\text{ if } x_n = 1
+    \end{cases}
+  \end{align*}
+  where each $B_i$ is defined as interval subsets of $C$. By construction
+  $\mathcal{B} = \{B_n\}_{n=1}^\infty$ has the finite
+  intersection property, and since $C$ is compact, we know that $B =
+  \bigcap_{n=1}^\infty B_n$ is nonempty and for $b \in B$, $f(b) = \vb x$.
+  Therefore $f$ is surjective.
+
+  Next let $a, b \in C$ such that $a \neq b$. Let $n$ be the least positive
+  integer so that $\frac{1}{3^n} < \abs{a - b}$ Then $a, b$ end up in different
+  thirds at the $n^{\text{th}}$ iteration, such that $\pi_n(f(a)) \neq
+  \pi_n(f(b))$, hence $f(a) \neq f(b)$. Therefore $f$ is injective.
+\end{proof}
+
+\begin{p}{c}
+  Show that $f$ is continuous.
+\end{p}
+
+\begin{proof}
+  Let $c \in C$ and $V$ be a basis neighborhood of $f(c)$. Then $V = \prod_{n \in
+  \mathbb{Z}_+} V_n$ where only finitely many $V_n \neq \{0, 1\}$. So there
+  exists $N$ such that $V_n = \{0, 1\}$ for all $n > N$. Then we can define
+  \[ U = \prod_{n \in \mathbb{Z}_+}
+    \begin{cases}
+      \{\pi_n(f(c))\} &\text{ if } n \leq N \\
+      \{0, 1\} &\text{ if } n > N
+    \end{cases}
+  \]
+  so that $f(c) \in U \subset V$. We want to find a neighborhood of $c$ whose
+  image is contained in $U$; this amounts to making sure that the neighborhood
+  agrees with $c$ on the directions of the first $N$ iterations of the recursive
+  Cantor definition. We can do this by choosing a suitably small open ball
+  around $c$, namely $B(c, \frac{1}{3^N})$. For any $x \in B(c, \frac{1}{3^N})$ the
+  distance between $x$ and $c$ is less than $\frac{1}{3^N}$ so for $n \leq N$,
+  $x$ and $c$ fall into the same third of the interval of length $\frac{1}{3^n}$. Thus
+  $f\qty(B(c, \frac{1}{3^N})) \subset U \subset V$, and $f$ is continuous.
+\end{proof}
+
+\begin{p}{d}
+  Show that $f$ is a homeomorphism.
+\end{p}
+
+\begin{proof}
+  Since $\{0, 1\}$ is discrete, it is Hausdorff, and we know that $\{0,
+  1\}^\omega$ is Hausdorff as well by Theorem 19.4. We showed that $C$ is
+  compact in part (a) and that $f$ is bijective and continuous in parts (b) and
+  (c). By Theorem 26.6, $f$ is a homeomorphism.
+\end{proof}
+
+
+\end{document}

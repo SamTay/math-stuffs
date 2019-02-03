@@ -1,0 +1,300 @@
+\documentclass[11pt]{article}
+\usepackage{common}
+\usepackage{upgreek}
+
+\begin{document}
+\header{4}
+
+% --------------------------------------------------------------
+%                         Exercises
+% --------------------------------------------------------------
+
+\hwpart{1}
+
+\begin{ex}{16.2}
+  If $\mathcal{T}$ and $\mathcal{T}'$ are topologies on $X$ and $\mathcal{T}'$
+  is strictly finer than $\mathcal{T}$, what can you say about the corresponding
+  subspace topologies on the subset $Y$ of $X$?
+\end{ex}
+
+\begin{solution}
+  We can say that the subspace topology $\mathcal{T}_Y'$ that $Y$ inherits from
+  $\mathcal{T}'$ is finer but possibly not strictly finer than the subspace
+  topology $\mathcal{T}_Y$ that $Y$ inherits from $\mathcal{T}$. Suppose $U \in
+  \mathcal{T}_Y$. Then $U = Y \cap V$ for some $V \in \mathcal{T}$. Since
+  $\mathcal{T} \subset \mathcal{T}'$, we have $V \in \mathcal{T}'$ so that $U =
+  Y \cap V \in \mathcal{T}_Y'$ as well. Therefore $\mathcal{T}_Y \subset
+  \mathcal{T}_Y'$.
+
+  For an example where the inherited subspace topologies are equal, consider
+  when $\mathcal{T} = \mathbb{R}, \mathcal{T}' = \mathbb{R}_K,$ and $Y = (-2,
+  -1).$ Let $\mathcal{B}_K$ be the standard basis for $\mathbb{R}_K$ and
+  $\mathcal{B}$ be the standard basis for $\mathbb{R}$. Next let $B_K
+  \cap Y$ be any basis element of the inherited subspace topology
+  $\mathcal{T}_Y'$, as given in Lemma 16.1, where $B_K \in \mathcal{B}_K.$
+  Notice that due to our choice of $Y$ there is always an interval $B \in
+  \mathcal{B}$ such that $B_K \cap Y = B \cap Y$. Thus by Lemma 13.3 we have
+  $\mathcal{T}' \subset \mathcal{T}.$ So in this case, $\mathcal{T}'$ is not
+  strictly finer than $\mathcal{T}$.
+\end{solution}
+
+\begin{ex}{16.8}
+  If $L$ is a straight line in the plane, describe the topology $L$ inherits as
+  a subspace of $\mathbb{R}_\ell \times \mathbb{R}$ and as a subspace of
+  \(\mathbb{R}_\ell \times \mathbb{R}_\ell\). In each case it is a familiar
+  topology.
+\end{ex}
+
+\begin{solution}
+  The topology $L$ inherits depends on its slope. When inherited from
+  $\mathbb{R}_\ell \times \mathbb{R}$:
+
+  \vspace{3in}
+
+  $m = \infty$
+    \hfill $m = 0$
+    \hfill $m > 0$
+    \hfill $m < 0$
+
+  $L \longleftrightarrow \mathbb{R}$
+    \hfill $L \longleftrightarrow \mathbb{R}_\ell$
+    \hfill $L \longleftrightarrow \mathbb{R}_\ell$
+    \hfill $L \longleftrightarrow \mathbb{R}_\ell$
+
+  \newpage
+
+  When inherited from $\mathbb{R}_\ell \times \mathbb{R}_\ell$:
+
+  \vspace{3in}
+  $m = \infty$ \phantombackup{hi th}
+    \hfill $m = 0$ \phantombackup{hi }
+    \hfill $m > 0$ \phantombackup{hi the}
+    \hfill $m < 0$
+
+  $L \longleftrightarrow \mathbb{R}_\ell$
+    \hfill $L \longleftrightarrow \mathbb{R}_\ell$
+    \hfill $L \longleftrightarrow \mathbb{R}_\ell$
+    \hfill $L \longleftrightarrow \mathcal{P}(\mathbb{R})$
+
+  Note that since the lower limit and upper limit topologies are isomorphic,
+  these $\mathbb{R}_\ell$'s could also be considered naturally as
+  $\mathbb{R}_u$'s. For example, it would be reasonable to say that the topology
+  $L$ inherits as a subspace of $\mathbb{R}_\ell \times \mathbb{R}$ when its
+  slope is positive is isomorphic to $\mathbb{R}_u$ if you consider the order of
+  the points on $L$ to increase as its $y$-coordinate increases.
+  But the answers above are consistent if you treat the order
+  topology on $L$ as inheriting the dictionary order from $\mathbb{R} \times
+  \mathbb{R}$, that is, defining $(x_1, mx_1 + b) < (x_2, mx_2 + b)$ as long as $x_1 <
+  x_2$ for points on the line $L = \{(x, mx + b) : x \in \mathbb{R}\}$.
+\end{solution}
+
+
+\begin{ex}{16.10}
+  Let $I = [0, 1]$. Compare the product topology on $I \times I$, the dictionary
+  order topology on $I \times I$, and the topology $I \times I$ inherits as a
+  subspace of $\mathbb{R} \times \mathbb{R}$ in the dictionary order topology.
+\end{ex}
+
+\begin{solution}
+  I assume the product topology is referring to the product of each $I$ under
+  the order topology. Let us denote
+  \begin{align*}
+    \mathcal{T} \;&= \text{ the order topology on } I \\
+    \mathcal{T}_\times &= \text{ the product topology on } I \times I \\
+    \mathcal{T}_< &= \text{ the dictionary order topology on } I \times I \\
+    \mathcal{T}_s \;&= \text{ the subspace topology on } I \times I \\
+    \mathcal{B} \;\;&= \text{ the usual basis for the order topology } \mathcal{T} \\
+    \mathcal{B}_\times &= \{U \times V : U, V \in \mathcal{T} \} \\
+    \mathcal{B}_< &= \text{ the usual basis for the dictionary order topology on } I \times I \\
+    \mathcal{B}_s \;&= \{B \cap I \times I : B \in \mathcal{C} \} \\
+    \mathcal{C} \;\;&= \text{ the usual basis for the dictionary order topology on }
+      \mathbb{R} \times \mathbb{R}
+  \end{align*}
+
+  I argue that $\mathcal{T}_s$ is finer than both $\mathcal{T}_\times$ and
+  $\mathcal{T}_<$, but that $\mathcal{T}_\times$ and $\mathcal{T}_<$ are
+  incomparable with each other.
+  First, I'll show incomparability using Lemma 13.3.
+  Let
+  \[ B_\times = \Big(\frac{1}{4}, \frac{1}{2}\Big) \times \Big[0, \frac{1}{2}\Big)
+    \text{ and } x = \frac{1}{3} \times 0.
+  \]
+  Since $(\frac{1}{4}, \frac{1}{2})$ and $[0, \frac{1}{2})$ are both open in
+  $\mathcal{T}$, we have $B_\times  \in \mathcal{B}_\times.$
+  However, notice that $x \in B_\times$ but there is no $B \in \mathcal{B}_<$
+  such that $x \in B \subset B_\times.$ This is easy to see
+  geometrically: any basis element $B \in \mathcal{B}_<$ that contains
+  $x$ will have to spill over and contain an element $a \times 1$ where
+  $a < \frac{1}{3}$, but all the elements of $B_\times$ have
+  $y$-coordinate less than $\frac{1}{2}$. By Lemma 13.3 we know that
+  $\mathcal{T}_\times \not\subset \mathcal{T}_<$. Next let
+  \[ B_< = \Big[0 \times 0, 0 \times \frac{1}{4}\Big)
+    \text{ and } x = 0 \times 0.
+  \]
+  Notice that $B_< \in \mathcal{B}_<$ and $x \in B_<$. However, if we try to
+  find subsets $U, V$ such that $x \in U \times V \subset B_<$, this will force
+  $U = \{0\}.$ Of course, $\{0\}$ is not open in $\mathcal{T}$, and therefore
+  there is no basis element $B \in \mathcal{B}_\times$ such that $x \in B
+  \subset B_<$. By Lemma 13.3, $\mathcal{T}_< \not\subset \mathcal{T}_\times$.
+  Therefore $\mathcal{T}_\times$ and $\mathcal{T}_<$ are incomparable.
+
+  Next we show that $\mathcal{T}_\times \subset \mathcal{T}_s$; to this end, let
+  $B_\times \in \mathcal{B}_\times$ and $x \in B_\times$. Then $B_\times = U \times V$ for some open
+  sets $U, V \in \mathcal{T}$ and $x = u \times v$ for some $u \in U$ and $v \in
+  V$. Now there exists $B_v \in \mathcal{B}$ such that $v \in B_v \subset V$. We
+  can construct an interval $(a,b) \subset \mathbb{R}$ such that $v \in (a,
+  b) \cap I \subset B_v$; specifically, if $B_v = [0, d)$ then choose
+  $(a, b) = (-1, d)$, if $B_v = (c, d)$ then choose $(a, b) = (c, d)$, and if
+  $B_v = (c, 1]$ then choose $(a, b) = (c, 2)$. Now $v \in (a, b) \cap I
+  \subset B_v$. Finally, let
+  \begin{align*}
+    B_s &= (u \times a, u \times b) \cap (I \times I).\\
+        &= \{u\} \times ((a, b) \cap I) \\
+        &\subset B_u \times B_v \\
+        &\subset U \times V = B_\times
+  \end{align*}
+  Now it is clear that $B_s \in \mathcal{B}_s$ and $x \in B_s \subset B_\times$.
+  Therefore by Lemma 13.3 $\mathcal{T}_\times \subset \mathcal{T}_s$.
+
+  Finally, we'll show that $\mathcal{T}_< \subset \mathcal{T}_s$. Unfortunately, I've only just
+  realized that Lemma 13.3 is a bit of a roundabout way to show containment.
+  Instead, note that if $\mathcal{T}_1, \mathcal{T}_2$ are topologies on a space
+  $X$ and $\mathcal{S}$ is a subbasis for $\mathcal{T}_1$, then $\mathcal{S}
+  \subset \mathcal{T}_2$ implies $\mathcal{T}_1 \subset \mathcal{T}_2$. This is
+  because $T_1$ is made up of arbitrary unions of finite intersections of
+  elements of $\mathcal{S}$, and $\mathcal{T}_2$ is closed under arbitrary
+  unions and finite intersections; it's rather obvious in hindsight. We know
+  that the open rays $[0 \times
+  0, a \times b)$ and $(a \times b, 1 \times 1]$ form a subbasis for
+  $\mathcal{T}_<$. It is easy to see that
+  \begin{align*}
+    [0 \times 0, a \times b) &= (-\infty, a \times b) \;\cap\; I \times I \\
+    [a \times b, 1 \times 1) &= (a \times b, \infty) \;\cap\; I \times I
+  \end{align*}
+  It is now clear that these open rays are open in the subspace topology, and
+  as reasoned above, we conclude $\mathcal{T}_< \subset \mathcal{T}_s$.
+
+\end{solution}
+
+\begin{ex}{17.2}
+  Show that if $A$ is closed in $Y$ and $Y$ is closed in $X$, then $A$ is closed
+  in $X$.
+\end{ex}
+
+\begin{proof}
+  Let $A$ be closed in $Y$ and $Y$ be closed in $X$. Then by Theorem 17.2 $A = Y
+  \cap C$  for some closed set $C$ in $X$. Notice that $A$ is an intersection of two
+  closed sets in $X$, so $A$ is also closed in $X$.
+\end{proof}
+
+\begin{ex}{17.3}
+  Show that if $A$ is closed in $X$ and $B$ is closed in $Y$, then $A \times B$
+  is closed in $X \times Y$.
+\end{ex}
+
+\begin{proof}
+  Suppose $A$ is closed in $X$ and $B$ is closed in $Y$, which means that $X-A$
+  is open in $X$ and $Y - B$ is open in $Y$. Then $(X-A) \times Y$ and $X \times
+  (Y-B)$ are both open in $X \times Y$, so their union
+  \[ (X - A) \times Y \;\cup\; X \times (Y-B) \;=\; X \times Y - A \times B \]
+  is open in $X \times Y$. Therefore $A \times B$ is closed in $X \times Y$.
+\end{proof}
+
+\begin{ex}{17.4}
+  Show that if $U$ is open in $X$ and $A$ is closed in $X$, then $U - A$ is open
+  in $X$, and $A - U$ is closed in $X$.
+\end{ex}
+
+\begin{proof}
+  Suppose $U$ is open in $X$ and $A$ is closed in $X$. Then $X - U$ is closed
+  and $X - A$ is open. Notice that $U - A = U \cap (X - A)$ is an intersection
+  of open sets and $A - U = A \cap (X - U)$ is an intersection of closed sets,
+  so $U - A$ is open and $A - U$ is closed.
+\end{proof}
+
+\begin{ex}{17.6}
+  Let $A, B,$ and $A_\alpha$ denote subsets of a space $X$. Prove the following:
+\end{ex}
+
+\begin{p}{a}
+  If $A \subset B$, then $\cl{A} \subset \cl{B}.$
+\end{p}
+
+\begin{proof}
+  Suppose $A \subset B$ and let $x \in \cl A$. By Theorem 17.5, all
+  neighborhoods of $x$ intersect $A$, and since $A \subset B$, these
+  neighborhoods intersect $B$ as well. By the same theorem, $x \in \cl B$. Thus
+  $\cl A \subset \cl B$.
+\end{proof}
+
+\begin{p}{b}
+  \(\cl{A \cup B} = \cl{A} \cup \cl{B}\).
+\end{p}
+
+\begin{proof}
+  $(\subset)$ Suppose $x \not\in \cl A \cup \cl B$. Then
+  \[ x \in X - (\cl A \cup \cl B) = (X - \cl A) \cap (X - \cl
+  B),\]
+  where $(X - \cl A) \cap (X - \cl B)$ is an open set containing $x$
+  disjoint from $A \cup B$. Thus by Theorem 17.5, $x \not\in \cl{A \cup
+  B}$.
+
+  $(\supset)$ Suppose $x \in \cl A \cup \cl B$. Then all neighborhoods
+  of $x$ intersect $A$ or all neighborhoods of $x$ intersect $B$. Then of
+  course, all neighborhoods of $x$ intersect $A \cup B$, so that $x \in \cl{A \cup
+  B}$.
+\end{proof}
+
+\begin{p}{c}
+  \(\cl{\bigcup A_\alpha} \supset \bigcup \cl{A_\alpha}\); give an
+  example where equality fails.
+\end{p}
+
+\begin{proof}
+  Let $x \in \bigcup \cl A_\alpha$, so that $x \in \cl A_\alpha$ for
+  some $\alpha$. Then all neighborhoods of $x$ intersect $A_\alpha$, and hence
+  intersect $\bigcup A_\alpha$. Thus $x \in \cl{\bigcup A_\alpha}$ and
+  therefore
+  $\bigcup \cl A_\alpha \subset \cl{\bigcup A_\alpha}$.
+
+  For an example where equality fails, consider the collection of singleton sets
+  $\{\frac{1}{n}\}_{n \in \mathbb{Z}_+}$ in the context of the order topology on
+  $\mathbb{R}$. For each $n$, $\cl{\{\frac{1}{n}\}} = \{\frac{1}{n}\}$ since
+  singleton sets are closed, so $\bigcup \cl{\{\frac{1}{n}\}} = \bigcup
+  \{\frac{1}{n}\}$. However as shown in class, $\cl{\bigcup
+  \{\frac{1}{n}\}} = \{0\} \cup \bigcup \{\frac{1}{n}\}.$
+\end{proof}
+
+\hwpart{2}
+
+\noindent Show that if $X$ is an ordered set for which the order topology is the discrete
+topology, then every element of $X$ except the largest one (if there is a largest
+one) has an immediate successor. Through a practically identical proof, it's also
+possible to show that every element except the smallest one (if there is a
+smallest one) has an immediate predecessor.
+
+\begin{proof}
+  We proceed by contrapositive. Suppose there exists $x \in X$ such that $x$ is
+  not the largest element and $x$ does not have an immediate successor. We will
+  show that $(x, \infty)$ is not closed. Let $U$
+  be any neighborhood of $x$. Then there is a basis interval $B$
+  such that $x \in B \subset U$. We need to find an element $c$ in the
+  intersection of $U$ and $(x, \infty)$. There are a few cases for the shape of $B$:
+  \begin{description}
+    \item[Case 1: $B = (a, b)$.]
+      In this case, $x < b$ and since $x$ does not have an immediate successor,
+      there must exist $c$ such that $x < c < b$. Now $c \in (a, b) \cap (x, \infty)$.
+    \item[{Case 2: $B = [a, b)$.}]
+      Just as in Case 1, since $x < b$ with no immediate successor, we choose
+      $c$ such that $x < c < b$. Now $c \in [a, b) \cap (x, \infty)$.
+    \item[{Case 3: $B = (a, b]$.}]
+      In this case, recall $x$ is assumed not the largest element, so $x < b$ and
+      we can choose $c = b$. Then $c \in (a, b] = (a, b] \cap (x, \infty).$
+  \end{description}
+  In all cases we have shown that $B$ (and hence $U$) intersects $(x, \infty)$ at a point $c
+  \neq x$. This shows that $x$ is a limit point of $(x, \infty)$, however
+  clearly $x \not\in (x, \infty)$. By Corollary 17.7, $(x, \infty)$ is not
+  closed, so this is not the discrete topology.
+\end{proof}
+
+\end{document}

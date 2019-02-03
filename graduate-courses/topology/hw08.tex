@@ -1,0 +1,177 @@
+\documentclass[11pt]{article}
+\usepackage{common}
+
+\begin{document}
+\header{8}
+
+% --------------------------------------------------------------
+%                         Exercises
+% --------------------------------------------------------------
+
+\hwpart{1}
+
+\begin{ex}{20.2}
+  Show that $\mathbb{R} \times \mathbb{R}$ in the dictionary order is
+  metrizable.
+\end{ex}
+
+\begin{proof}
+  We define a metric
+  \[ d(x_1 \times x_2, y_1 \times y_2)
+    = \begin{cases}
+        1 + \abs{x_2 - y_2} &\text{ if } x_1 \neq y_1 \\
+        \min\{\abs{x_2 - y_2}, 1\} &\text{ if } x_1 = y_1
+      \end{cases}
+  \]
+  and it is tedious but routine to show that $d$ is a metric. Let
+  $\mathcal{T}_d$ denote the topology induced by $d$ and $\mathcal{T}$ be the
+  dictionary order topology.
+
+  Let $\vb x \in \mathbb{R} \times \mathbb{R}$ and $\vb x \in B(\vb x,
+  \epsilon)$ for some $\epsilon > 0$. Let $\delta = \min\{\frac{\epsilon}{2},
+  1\}$ and
+  \[B = (x_1 \times (x_2 - \delta), x_1 \times (x_2 + \delta)) \]
+  be a basis element in $\mathcal{T}$. Then $\vb x \in B$ and for any $\vb y \in B$,
+  we have $y_1 = x_1$ and
+  \[ d(\vb x, \vb y) = \min\{1, \abs{x_2 - y_2}\} \leq \min\{1, \delta\} \leq
+  \delta \leq \frac{\epsilon}{2} < \epsilon \]
+  so $\vb y \in B(\vb x, \epsilon)$ as well. Thus $\mathcal{T}_d \subset
+  \mathcal{T}$.
+
+  Next let $B$ be a basis interval in $\mathcal{T}$ with $\vb x \in B$. Let us
+  denote $B = (a_1 \times a_2, b_1 \times b_2)$.
+  \begin{description}
+    \item[Case 1: $x_1 = a_1$.]
+      Let
+      \[ \epsilon =
+        \begin{cases}
+          \min\{\frac{1}{2}, \abs{x_2 - a_2}\} &\text{ if } x_2 = b_2 \\
+          \min\{\frac{1}{2}, \abs{x_2 - a_2}, \abs{x_2 - b_2}\} &\text{ if } x_2 \neq b_2
+        \end{cases}
+      \]
+      Then $\vb x \in B(\vb x, \epsilon)$ and $B(\vb x, \epsilon) \subset B$.
+    \item[Case 2: $a_1 < x_1 < b_1$.]
+      Simply choose $\epsilon = \frac{1}{2}$.  Then $\vb x \in B(\vb x,
+      \epsilon)$ and $B(\vb x, \epsilon) \subset B$.
+    \item[Case 3: $x_1 = b_1$.] Similar to Case 1, let
+      \[ \epsilon =
+        \begin{cases}
+          \min\{\frac{1}{2}, \abs{x_2 - b_2}\} &\text{ if } x_2 = a_2 \\
+          \min\{\frac{1}{2}, \abs{x_2 - a_2}, \abs{x_2 - b_2}\} &\text{ if } x_2 \neq a_2
+        \end{cases}
+      \]
+      Then $\vb x \in B(\vb x, \epsilon)$ and $B(\vb x, \epsilon) \subset B$.
+  \end{description}
+  In all cases we have shown that $\mathcal{T} \subset \mathcal{T}_d$. We
+  conclude that $\mathcal{T} = \mathcal{T}_d$.
+\end{proof}
+
+\begin{ex}{20.4}
+  Consider the product, uniform, and box topologies on $\mathbb{R}_\omega$.
+\end{ex}
+
+\begin{p}{a}
+  In which topologies are the following functions from $\mathbb{R}$ to
+  $\mathbb{R}^\omega$ continuous?
+  \begin{align*}
+    f(t) &= \qty(t, 2t, 3t, \ldots) \\
+    g(t) &= \qty(t, t, t, \ldots) \\
+    h(t) &= \qty(t, \frac{1}{2}t, \frac{1}{3}t, \ldots)
+  \end{align*}
+\end{p}
+
+\begin{itemize}
+  \item $f$ is not continuous in box nor uniform, but is continuous in product
+    topology
+  \item $g$ is not continuous in box, but is continuous in uniform and product
+    topologies.
+  \item $h$ is not continuous in box, but is continuous in uniform and product
+    topologies.
+\end{itemize}
+
+\begin{p}{b}
+  In which topologies do the following sequences converge?
+  \begin{align*}
+    &\vb w_1 = (1, 1, 1, \ldots), \; \vb w_2 = (0, 2, 2, \ldots) \; \vb w_3 =
+      (0, 0, 3, \ldots) \\
+    &\vb x_1 = \qty(1,1,1,\ldots), \; \vb x_2 = \qty(0, \frac{1}{2}, \frac{1}{2},
+      \ldots), \; \vb x_3 = \qty(0, 0, \frac{1}{3}, \ldots) \\
+    &\vb y_1 = (1,0,0,\ldots), \; \vb y_2 = \qty(\frac{1}{2}, \frac{1}{2}, 0), \;
+      \vb y_3 = \qty(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}, \ldots) \\
+    &\vb z_1 = (1, 1, 0, \ldots), \; \vb z_2 = \qty(\frac{1}{2}, \frac{1}{2},
+      0), \; \vb z_3 = \qty(\frac{1}{3}, \frac{1}{3}, 0, \ldots)
+  \end{align*}
+\end{p}
+
+\begin{itemize}
+  \item $\vb w$ converges in the product topology
+  \item $\vb x$ converges in the product and uniform topologies
+  \item $\vb y$ converges in the product and uniform topologies
+  \item $\vb z$ converges in the product, uniform, and box topologies
+\end{itemize}
+
+\begin{ex}{20.5}
+  Let $\mathbb{R}^\infty \subset \mathbb{R}^\omega$ be sequences that are
+  eventually zero. What is the closure of $\mathbb{R}^\infty$ in
+  $\mathbb{R}^\omega$ in the uniform topology?
+\end{ex}
+
+\begin{solution}
+  Suppose every open ball $B(\vb x, \epsilon)$ intersects $\mathbb{R}^\infty$
+  for some $\vb x \in \mathbb{R}^\omega$. Notice this is equivalent to the
+  statement that for every $\epsilon > 0$ there exists $N$ such that for all $n
+  > N$, $\abs{x_n} < \epsilon$. Therefore the closure of $\mathbb{R}^\infty$ is
+  precisely the set of sequences which converge to $0$ in $\mathbb{R}$.
+\end{solution}
+
+\hwpart{2}
+
+\noindent Give $\{0,1\}$ the discrete topology and then put the product
+topology on $\{0,1\}^\omega$. Construct a function $f:\{0,1\}^\omega \to [0, 1]
+\subset \mathbb{R}$ defined by $f(a_1, a_2, a_3, \ldots) = \sum_{k = 1}^\infty
+\frac{a_k}{2^k}$.
+
+\begin{p}{a} Prove that $f$ is well-defined, i.e.
+that the series does converge and results in a number in $[0,1]$. $f$ happens to
+be surjective, but you don]t have to prove that.
+\end{p}
+
+\begin{proof}
+  We know that the geometric series $\sum_{k=1}^\infty \frac{1}{2^k} = 1$ and
+  $\sum_{k=1}^\infty 0 = 0$. For any $x \in \{0, 1\}^\omega$, we know that for
+  each term $k$, $0 \leq f(x)_k \leq \frac{1}{2^k}$ so $f(x)$ converges as well and
+  $0 \leq f(x) \leq 1$.
+\end{proof}
+
+\begin{p}{b} Show that $f$ is continuous.
+\end{p}
+
+\begin{proof}
+  It will make things a bit easier to prove that $g: \{0, 1\}^\omega \to
+  \mathbb{R}$ defined by $g(x) = f(x)$ is continuous, and then recall that
+  restricting the range to the subspace $[0, 1]$ (which contains the image of
+  $g$) results in $f$ being continuous.
+
+  Let $U$ be open in $\mathbb{R}$. If $f^{-1}(U)$ is empty, it's open, so suppose
+  otherwise and let $\vb x \in f^{-1}(U)$. Since $U$ is open we can find an
+  $\epsilon$ small enough so that $0 < \epsilon < 1$ and
+  \[ f(\vb x) \in (f(\vb x) - \epsilon, f(\vb x) + \epsilon) \subset U \]
+  Now choose $n$ large enough so that $\sum_{k=1}^n \frac{1}{2^k} > 1 - \epsilon$. Notice
+  we can find such an $n$ because $0 < 1 - \epsilon < 1$ and as $n \to \infty$,
+  $\sum_{k=1}^n \frac{1}{2^k} \to 1$. Consequently,
+  \[ \sum_{k = n + 1}^\infty \frac{1}{2^k}
+    = 1 - \sum_{k=1}^n \frac{1}{2^k} < \epsilon.
+  \]
+  Now construct the basis element
+  \[ B = \prod_{k=1}^\infty
+    \begin{cases}
+      \{x_k\} &\text{ if } k \leq n \\
+      \{0, 1\} &\text{ if } k > n
+    \end{cases}
+  \]
+  and notice $\vb x \in B \subset f^{-1}\qty((f(\vb x) - \epsilon, f(\vb x) +
+  \epsilon)) \subset f^{-1}(U)$. Therefore $f^{-1}(U)$ is open and $f$ is
+  continuous.
+\end{proof}
+
+\end{document}

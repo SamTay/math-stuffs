@@ -1,0 +1,243 @@
+\documentclass[11pt]{article}
+\usepackage{common}
+
+\begin{document}
+\header{11}
+
+% --------------------------------------------------------------
+%                         Exercises
+% --------------------------------------------------------------
+
+\hwpart{1}
+
+\begin{ex}{28.3}
+  Let $X$ be limit point compact.
+\end{ex}
+
+\begin{p}{a}
+  If $f: X \to Y$ is continuous, does it follow that $f(X)$ is limit point
+  compact?
+\end{p}
+
+\begin{solution}
+  No. As seen in Example 28.1, the space $X = \mathbb{Z}_+ \times \{0, 1\}$ with
+  $\{0, 1\}$ indiscrete is limit point compact. However the projection $\pi_1: X
+  \to \mathbb{Z}_+$ is continuous, while the image $f(X) = \mathbb{Z}_+$ is not limit point
+  compact because it is discrete.
+\end{solution}
+
+\begin{p}{b}
+  If $A$ is a closed subset of $X$, does it follow that $A$ is limit point
+  compact?
+\end{p}
+\begin{solution}
+  Yes. Suppose $B \subset A$ is infinite. Then $B$ has a limit point $x \in X$.
+  Since $A$ is closed, $x \in \cl B \subset \cl A = A$, so $B$ has a limit point
+  in $A$. Therefore $A$ is limit point compact.
+\end{solution}
+
+\begin{p}{c}
+  If $X$ is a subspace of the Hausdorff space $Z$, does it follow that $X$ is
+  closed in $Z$?
+\end{p}
+\begin{solution}
+  No. As seen in Example 28.2, $S_\Omega$ is limit point compact, and it is a
+  subspace of the Hausdorff space $\cl S_\Omega$, but of course $S_\Omega$ is
+  not closed in $\cl S_\Omega$, particularly because it does not contain the
+  limit point $\Omega$.
+\end{solution}
+
+\begin{ex}{28.4}
+  A space $X$ is said to be \emph{countably compact} if every countable open
+  covering of $X$ has a finite subcollection that covers $X$. Show that for a
+  $T_1$ space $X$, countable compactness is equivalent to limit point
+  compactness.
+\end{ex}
+\begin{proof}
+  Suppose $X$ is T1.
+
+  $(\Longrightarrow)$ Suppose $X$ is not limit point compact and let $A$ be an
+  infinite subset of $X$ with no limit points. Let $B$ be a countably infinite
+  subset of $A$; notice $B$ still has no limit points, otherwise they would be
+  limit points of $A$. Thus $B$ is closed and $X - B$ is open. Since $B$ has no
+  limit points, for each $x_i \in B$ we can find a neighborhood $U_i$ of $x_i$
+  that does not intersect $B - \{x_i\}$. Then
+  \[ \mathcal{A} = (X - B) \cup \{U_i\}_{x_i \in B} \]
+  is a countable open covering of $X$ with no finite subcover. This is because a
+  finite subcollection of $\mathcal{A}$ would only have finitely many $U_i$'s
+  and $B \cap U_i = \{x_i\}$, hence the subcollection would only contain
+  finitely many elements from $B$. Therefore $X$ is not countably compact.
+
+  $(\Longleftarrow)$ Suppose $X$ is not countably compact, so that there exists
+  a countable open covering $\mathcal{C} = \{U_n\}_{n \in \mathbb{Z}_+}$ with no
+  finite subcover. Then for any $n$, $\cup_{i = 1}^n U_i \neq X$. Furthermore,
+  if the difference were finite, so that $X - \cup_{i = 1}^n U_i =
+  \{x_1,\ldots,x_m\}$, then we could find $U_{x_i} \in \mathcal{C}$ so $x_i \in
+  U_{x_i}$ and $X = (\cup_{i = 1}^n U_i) \cup (\cup_{i = 1}^m U_{x_i})$, which
+  contradicts $\mathcal{C}$ lacking a finite subcover. Hence $X - \cup_{i = 1}^n
+  U_i$ is infinite for any $n \in \mathbb{Z}_+$, so we can construct a sequence
+  \begin{align*}
+    a_1 &\in X - U_1 \\
+    a_2 &\in X - (U_1 \cup U_2) - \{a_1\} \\
+        &\vdots \\
+    a_n &\in X - (U_1 \cup \cdots \cup U_n) - \{a_1, \ldots, a_{n-1}\}
+  \end{align*}
+  of distinct terms. Then the set $A = \{a_n\}_{n \in \mathbb{Z}_+}$ is
+  infinite. Let $x \in X$. Let $n$ be the least integer such that $x \in U_n$.
+  By construction, $a_m \not\in U_n$ for any $m \geq n$, so $A$ intersects $U_n$
+  in at most a finite number of places. By Theorem 17.9, $x$ is not a limit
+  point of $A$. Since $x$ was arbitrary, we conclude $A$ has no limit points.
+  Therefore $X$ is not limit point compact.
+\end{proof}
+
+\begin{ex}{29.3}
+  Let $X$ be a locally compact space. If $f: X \to Y$ is continuous, does it
+  follow that $f(X)$ is locally compact? What if $f$ is both continuous and
+  open?
+\end{ex}
+\begin{solution}
+  No, continuity alone is not enough to preserve local compactness.
+  First note that every infinite discrete space $X$ is locally compact but not
+  compact; it is locally compact because for any $x \in X$, $x \in \{x\}$ where
+  $\{x\}$ is both open and compact (finite spaces
+  are always compact), but it is not compact because $\{\{x\}: x \in X\}$ is a
+  covering with no finite subcover. To construct a counter example we look for a space $X$ is
+  that is locally compact, but not compact, and a function $f$ which is
+  continuous but not open. Let's choose $f: \mathbb{R}^\omega \to
+  \mathbb{R}^\omega$ as the identity function which maps from the discrete
+  topology to the product topology. Since $f$ is the identity, we have
+  $f(\mathbb{R}^\omega) = \mathbb{R}^\omega$, and since the domain is discrete,
+  we have $f$ is continuous, and by the argument above, the domain is locally compact.
+  However, as seen in Example 29.2, the image $\mathbb{R}^\omega$ is not locally compact
+  in the product topology.
+
+  If $f$ is both continuous and open, then $f(X)$ is locally compact. For any
+  $f(x) \in f(X)$, there exists $U$ open and $C$ compact in $X$ so that $x \in U
+  \subset C$, so $f(x) \in f(U) \subset f(C)$. Since $f$ is open, $f(U)$ is
+  open, and since $f$ is continuous, $f(C)$ is compact. Hence $f(X)$ is locally
+  compact.
+\end{solution}
+
+\begin{ex}{29.4}
+  Show that $[0, 1]^\omega$ is not locally compact in the uniform topology.
+\end{ex}
+\begin{proof}
+  Notice $\vb 0 \in [0, 1]^\omega$ but for any neighborhood $U$ of $\vb 0$, there is
+  a basis element $\vb 0 \in B(\vb 0, \epsilon) \subset U$ and
+  \[ \cl B = \cl{B(\vb 0, \epsilon)} = \cl{\Pi [0, \epsilon)} = \Pi \cl{[0,
+  \epsilon)} = \Pi [0, \epsilon]. \]
+  But if there were a compact set $C$ containing $U$, then $\cl B$ would have to
+  be compact. To see why it is not, consider the covering $\{B(\vb x,
+  \frac{\epsilon}{2}): \vb x \in \cl B\}.$ Notice $\cl B$ contains an infinite number of
+  sequences consisting of $0$'s and $\epsilon$'s, each of which is a distance of
+  $\epsilon$ from the others. Thus the covering above which consists of balls of
+  radius $\frac{\epsilon}{2}$ must contain different balls for each of the
+  sequences, and thus cannot have a finite subcover.
+\end{proof}
+
+\begin{ex}{30.5(b)}
+  Show that every metrizable Lindel{\"o}f space has a countable basis.
+\end{ex}
+
+\begin{proof}
+  Let $\mathcal{A}_n = \{B(x, \frac{1}{n}) : x \in X\}$. For every $n$ the
+  collection $\mathcal{A}_n$ covers $X$ and thus has a countable subcover
+  $\mathcal{A}'_n$. Now let $\mathcal{B} = \cup \mathcal{A}'_n$, which is also
+  countable. To show $\mathcal{B}$ is a basis for $X$, first note that it
+  consists of open sets, and let $U$ be open with $x \in U$. Pick $n$ big enough
+  that $B(x, \frac{1}{n}) \subset U$. Since $\mathcal{A}'_{2n}$ covers $X$, there
+  exists $B(y, \frac{1}{2n}) \in \mathcal{B}$ containing $x$. Also for any $z
+  \in B(y, \frac{1}{2n})$,
+  \[ d(z, x) \leq d(z, y) + d(y, x) < \frac{1}{2n} + \frac{1}{2n} = \frac{1}{n},
+  \]
+  hence $x \in B(y, \frac{1}{2n}) \subset B(x, \frac{1}{n}) \subset U$.
+  Therefore $\mathcal{B}$ is a basis.
+\end{proof}
+
+\begin{ex}{30.8}
+  Which of the four countability axioms does $\mathbb{R}^\omega$ in the uniform
+  topology satisfy?
+\end{ex}
+
+\begin{solution}
+  Since the uniform topology is metrizable, we know immediately that it
+  is first-countable. Also the other three axioms are equivalent in a metrizable
+  space, so we can just consider one of them; we will show that the uniform
+  topology is not second-countable.
+
+  Let $\mathcal{B}$ be a basis for $\mathbb{R}^\omega$, and let
+  $A \subset \mathbb{R}^\omega$ be the set of all sequences of zeroes and ones.
+  Then $A$ is uncountable and every element in $A$ is a distance of 1 from every
+  other element in $A$. Thus for each $a \in A$ and open set $B(a,
+  \frac{1}{2})$, there must be a basis element $B_a \in \mathcal{B}$ such that
+  $x \in B_a \subset B(a, \frac{1}{2})$. Given the distance constraints, notice
+  that when $a \neq b$, $B_a \neq B_b$. Thus $\mathcal{B}$ must contain an
+  an uncountable number of basis elements, and we conclude the uniform topology
+  is not second-countable.
+\end{solution}
+
+\begin{ex}{30.9}
+  Let $A$ be a closed subset of $X$. Show that if $X$ is Lindel{\"o}f, then $A$
+  is Lindel{\"o}f. Show by example that if $X$ has a countable dense subset, $A$
+  need not have a countable dense subset.
+\end{ex}
+
+\begin{proof}
+  Let $\mathcal{A}$ be an open covering of $A$. Then $X - A$ is open, so
+  $\mathcal{A} \cup \{X - A\}$ is an open covering of $X$. Since $X$ is Lindel{\"o}f there exists a
+  countable subcover $\mathcal{A}' \subset \mathcal{A} \cup \{X - A\}$. Then of
+  course $\mathcal{A} \cap \mathcal{A}'$ is a countable subcover of $A$.
+  Therefore $A$ is Lindel{\"o}f.
+
+  The set $I^2 = [0,1]\times[0,1]$ in dictionary order has a countable dense
+  subset $\mathbb{Q}^2 \cap I^2$, but the subspace $I \times \{\frac{1}{2}\}$ is
+  discrete and uncountable, so it cannot have a countable dense subset.
+\end{proof}
+
+\hwpart{2}
+
+\noindent We say that a function $f : X \to Y$ is \emph{sequentially continuous}
+if for every convergent sequence $(x_n)$ in $X$, $\lim f(x_n) = f(\lim x_n)$.
+Every continuous function is automatically sequentially continuous and, if $X$
+is first-countable, all sequentially continuous functions are continuous.
+
+\begin{p}{a}
+  $S_\Omega$ has a smallest element; call it $0$. Define a function $f: \cl
+  S_\Omega \to S_\Omega$ by $f(x) = x$ for $x \in S_\Omega$ and $f(\Omega) = 0.$
+  Show that $f$ is sequentially continuous, but not continuous.
+\end{p}
+\begin{proof}
+  Suppose $(x_n)$ is convergent in $\cl S_\Omega$. As explained in Example 28.3,
+  $\lim x_n \neq
+  \Omega$ because $\{x_n\}$ is countable and must have an upper bound in
+  $S_\Omega$. Thus we can choose a subsequence $(y_n)$ of $(x_n)$ that simply
+  removes any elements equal to $\Omega$. Then $(f(y_n))$ is a subsequence of
+  $(f(x_n))$ and
+  \[ \lim f(x_n) = \lim f(y_n) = \lim y_n = \lim x_n = f(\lim x_n).\]
+
+  Of course $f$ is not continuous because $\{0\}$ is open in $S_\Omega$ but
+  $f^{-1}(\{0\}) = \{\Omega\}$ is not open in $\cl S_\Omega$.
+\end{proof}
+
+\begin{p}{b}
+  Show that if $X$ is sequentially compact and $f: X \to Y$ is sequentially
+  continuous, then $f(X)$ is sequentially compact.
+\end{p}
+\begin{proof}
+  Let $(y_n)$ be a sequence in $f(X)$. For each $y_n$ pick $x_n \in X$ so that
+  $f(x_n) = y_n$. Now $(x_n)$ has a convergent subsequence $(x_{n_i})$ and $\lim
+  f(x_{n_i}) = f(\lim x_{n_i})$, so $(f(x_{n_i}))$ is convergent as well, where
+  $(f(x_{n_i}))$ is a subsequence of $(y_n)$. Therefore $f(X)$ is sequentially
+  compact.
+\end{proof}
+
+\begin{p}{c}
+  If $X$ is compact and $f: X \to Y$ is sequentially continuous, then is $f(X)$
+  necessarily compact?
+\end{p}
+\begin{proof}
+  Evidently not; as seen in part (a), $\cl S_\Omega$ is compact, $f:\cl S_\Omega
+  \to S_\Omega$ is sequentially continuous, but $f(X) = S_\Omega$ is not
+  compact.
+\end{proof}
+\end{document}

@@ -1,0 +1,286 @@
+\documentclass[11pt]{article}
+\usepackage{common}
+
+\begin{document}
+\header{9}
+
+% --------------------------------------------------------------
+%                         Exercises
+% --------------------------------------------------------------
+
+\hwpart{1}
+
+\begin{ex}{10.2}
+\end{ex}
+
+\begin{p}{a}
+  Show that in a well-ordered set, every element except the largest (if one
+  exists) has an immediate successor.
+\end{p}
+
+\begin{proof}
+  Let $X$ be a well-ordered set and $x \in X$ not be the largest element. Then
+  the set $\{y \in X : y > x\}$ is nonempty and has a smallest element, which is
+  clearly the immediate successor of $x$.
+\end{proof}
+
+\begin{p}{b}
+  Find a set in which every element has an immediate successor that is not
+  well-ordered.
+\end{p}
+
+\begin{solution}
+  The integers $\mathbb{Z}$.
+\end{solution}
+
+\begin{ex}{10.4}
+\end{ex}
+
+\begin{p}{a}
+  Let $\mathbb{Z}_-$ denote the set of negative integers in the usual order.
+  Show that a simply ordered set $A$ fails to be well-ordered if and only if it
+  contains a subset having the same order type as $\mathbb{Z}_-$.
+\end{p}
+
+\begin{proof}
+  $(\Longrightarrow)$ Suppose $A$ has a simple order $<$ that is not
+  well-ordered. Let $B$ be a nonempty subset of $A$ with no least element and
+  pick some $b_1 \in B$. For any $k \geq 1$ choose $b_{k+1} < b_k$, which will
+  always exist since $B$ has no least element. Then $\{b_n\} \subset A$ and $f:
+  \{b_n\} \to \mathbb{Z}_-$ defined by
+  \[ f(b_n) = -n \]
+  is clearly an order preserving bijection.
+
+  $(\Longleftarrow)$ Suppose $A$ has a subset $B$ with the same order type as
+  $\mathbb{Z}_-$. Then clearly $B$ has no least element because, letting $f:
+  \mathbb{Z}_- \to B$ denote an order preserving bijection, for any $b \in B$ we
+  have some $n \in \mathbb{Z}_-$ such that $f(n) = b$ and some $f(n-1) \in B$
+  such that $f(n-1) < b$. Therefore $A$ is not well-ordered.
+\end{proof}
+
+\begin{p}{b}
+  Show that if $A$ is simply ordered and every countable subset of $A$ is
+  well-ordered, then $A$ is well-ordered.
+\end{p}
+
+\begin{proof}
+  Suppose $A$ is not well-ordered. By part (a), there exists a subset $B$ of
+  $A$ that has the same order type as $\mathbb{Z}_-$, so $B$ is a countable
+  subset of $A$ that is not well-ordered.
+\end{proof}
+
+\begin{ex}{23.2}
+  Let $\{A_n\}$ be a sequence of connected subspaces of $X$, such that $A_n \cap
+  A_{n+1} \neq \varnothing$ for all $n$. Show that $\bigcup A_n$ is connected.
+\end{ex}
+
+\begin{proof}
+  Suppose $\bigcup A_n = C \cup D$ is a separation of $\bigcup A_n$. Since each
+  $A_n$ is a subset of the union $\bigcup A_n$, by Lemma 23.2, each $A_n$ lies
+  entirely within $C$ or $D$. For $n=1$, without loss of generality suppose
+  $A_1$ lies entirely within $C$. Notice that if $A_n$ lies within $C$ for all
+  $n>1,$ then $\bigcup A_n = C$ and $D = \varnothing$, contradicting $C,D$ being
+  a separation. So let $m$ be the least integer such that $A_m$ lies within $D$.
+  Our hypothesis indicates that there exists $a \in A_{m-1} \cap A_m$, but this
+  is a contradiction, since $A_{m-1}$ lies entirely in $C$ and $A_m$ lies
+  entirely in $D$, where $C$ and $D$ are disjoint. Therefore $\bigcup A_n$ must
+  be connected.
+\end{proof}
+
+\begin{ex}{23.5}
+  A space is \emph{totally disconnected} if its only connected subspaces are
+  one-point sets. Show that if $X$ has the discrete topology, then $X$ is
+  totally disconnected. Does the converse hold?
+\end{ex}
+
+\begin{proof}
+  Let $X$ have the discrete topology and $A$ be a connected subspace of $X$.
+  Notice that if $A$ is empty it cannot be connected. So let $x \in A$. If $A -
+  \{x\}$ is nonempty then $\{x\}, A - \{x\}$ forms a separation of $A$,
+  so it must be the case that $A - \{x\}$ is empty and $A = \{x\}$. Hence all
+  connected subspaces of $X$ are singleton sets.
+
+  No, the converse does not hold. The rational numbers as the subspace of the
+  usual topology on $\mathbb{R}$ are totally disconnected but not discrete.
+\end{proof}
+
+\begin{ex}{23.8}
+  Determine whether or not $\mathbb{R}^\omega$ is connected in the uniform
+  topology.
+\end{ex}
+
+\begin{solution}
+  $\mathbb{R}^\omega$ is not connected in the uniform topology, for an argument
+  identical to the one given for the box topology in Example 23.6. Specifically,
+  we separate $\mathbb{R}^\omega$ into bounded and unbounded sequences of real
+  numbers. These are clearly nonempty disjoint sets, and they are open, since
+  for any $\vb a \in \mathbb{R}^\omega$ the ball
+  \[ B(\vb a, 1) = (a_1 - 1, a_1 + 1) \times (a_2 - 1, a_2 + 1) \times \cdots \]
+  consists entirely of bounded sequences if $\vb a$ is bounded and unbounded
+  sequences if $\vb a$ is unbounded. Therefore $\mathbb{R}^\omega$ is not
+  connected.
+\end{solution}
+
+\begin{ex}{24.4}
+  Let $X$ be an ordered set in the order topology. Show that if $X$ is
+  connected, then $X$ is a linear continuum.
+\end{ex}
+
+\begin{proof}
+  Suppose $x < y$ for some $x,y \in X$. Then $(-\infty, y)$ and $(x, \infty)$
+  are open, nonempty, and their union is all of $X$. Thus they cannot be
+  disjoint, so there exists $z \in (-\infty, y) \cap (x, \infty)$ so that $x < z
+  < y$.
+
+  Next suppose for contradiction that there is a nonempty subset $A$ of $X$ that
+  is bounded above without a least upper bound. Let $B$ be the (nonempty) set of
+  upper bounds for $A$. Notice that if there was an upper bound $a_u \in A$ then
+  for any upper bound $b \in B$, $a_u \leq b$, hence $a_u$ would be a least
+  upper bound of $A$. Therefore $A$ and $B$ are disjoint nonempty sets. Define
+  the open sets
+  \[U = \bigcup_{a \in A} (-\infty, a) \quad\quad V = \bigcup_{b \in B} (b,
+    \infty) \]
+  Note that $V$ is actually just equal to
+  the set of upper bounds $B$. This is because there is no least bound, so for
+  any $b \in B$ there will exist another $b_0 \in B$ so that $b \in (b_0, \infty)$. Also, it
+  is worth noting that $A \subset U$ which follows by similar reasoning, since
+  there is no maximum within $A$.
+
+  Now $U, V$ are nonempty disjoint open sets. Also for any $x \in X$, if $x$ is an
+  upper bound for $A$ then $x \in V$ and if $x$ is not an upper bound for $A$
+  then there exists $a \in A$ so that $x < a$, hence $x \in U$. Thus $X = U \cup
+  V$ and $U,V$ form a separation of $X$. By contradiction, it must be the case
+  that $X$ has the least upper bound property.
+\end{proof}
+
+\begin{ex}{24.5}
+  Consider the following sets in the dictionary order. Which are linear
+  continua?
+  \begin{enumerate}[(a)]
+    \item $\mathbb{Z}_+ \times [0, 1)$ \\ Yes.
+    \item $[0, 1) \times \mathbb{Z}_+$ \\ No. There is no element between $0
+      \times 1$ and $0 \times 2$.
+    \item $[0, 1) \times [0, 1]$ \\ Yes.
+    \item $[0, 1) \times [0, 1)$ \\ No. There is no least upper bound for
+      $A = (-\infty, \frac{1}{2} \times 1)$ but $A$ is nonempty and bounded
+      above by $\frac{3}{4} \times 0$.
+  \end{enumerate}
+\end{ex}
+
+\begin{ex}{24.8 (a)}
+  Is a product of path-connected spaces necessarily path connected?
+\end{ex}
+
+\begin{solution}
+  In the product topology, yes. Let $\{X_\alpha\}_{\alpha \in J}$ be a
+  collection of path-connected spaces and give $\prod X_\alpha$ the product
+  topology. Let $\vb x, \vb y \in \prod X_\alpha$. Since each $X_\alpha$ is
+  path connected, there exists a continuous map $f_\alpha: [a_\alpha, b_\alpha]
+  \to X_\alpha$ such that $f_\alpha(a_\alpha) = \pi_\alpha(\vb x)$ and
+  $f_\alpha(b_\alpha) = \pi_\alpha(\vb y).$ Define
+  \[ g_\alpha : [0, 1] \to [a_\alpha, b_\alpha] \quad\text{ by }\quad g(x) =
+    a_\alpha + (b_\alpha - a_\alpha)x \]
+  which is clearly continuous (when $a_\alpha < b_\alpha$ this acts as
+  expected, when $a_\alpha = b_\alpha$ this is just the constant function which
+  is also continuous). Then define $f : [0, 1] \to \prod X_\alpha$ by
+  \[ f(x) = (f_\alpha \circ g_\alpha (x))_{\alpha \in J} \]
+  which is also continuous by Theorem 19.6. It is also evident that $f(0) = \vb
+  x$ and $f(1) = \vb y$. Hence $\prod X_\alpha$ is path connected.
+\end{solution}
+
+\hwpart{2}
+
+\begin{p}{a}
+  Let $X$ be an uncountable subset of $S_\Omega$. Prove that $X$ and $S_\Omega$
+  have the same order type. Hint: let $f : X \to S_\Omega$ be $f(x) =
+  \min(S_\Omega - f((-\infty, x) \cap X)).$
+\end{p}
+
+\begin{proof}
+  First, let us define some notation for sections:
+  \[ X_a = (-\infty, a) \cap X \]
+  \[ S_a = (-\infty, a) \]
+  so that $f$ defined above can be rewritten as
+  \[ f(x) = \min(S_\Omega - f(X_x)) \]
+
+  We begin by proving a lemma: images of sections in $X$ are sections in
+  $S_\Omega$. Suppose for contradiction that this is not the case, and let $y$
+  be the least element of $X$ such that $f(X_y)$ is not a section of $S_\Omega$.
+  Then there exists $a < b$ such that $b \in f(X_y)$ and $a \not\in f(X_y)$.
+  Let $x \in X_y$ such that $f(x) = b$, so
+  \[ b = f(x) = \min(S_\Omega - f(X_x)). \]
+  However, $x < y$ so we know that $f(X_x)$ is a section of $S_\Omega$. Then it
+  is clear that
+  \[ f(X_x) \cup \{ \min(S_\Omega - f(X_x)) \}  = f(X_x) \cup \{ b \}\]
+  is also a section of $S_\Omega$. Since $a < b$, it must be the case
+  that $a \in f(X_x)$, but of course $X_x \subset X_y$ and $f(X_x) \subset
+  f(X_y)$, so this contradicts $a \not\in f(X_y)$. We conclude that for all $y
+  \in X$, $f(X_y)$ is a section of $S_\Omega$.
+
+  Next we show $f$ is order preserving. Let $x, y \in X$ such that $x < y$. Then
+  $f(X_y)$ is a section of $S_\Omega$ which contains $f(x)$. Therefore $S_\Omega
+  - f(X_y)$ contains elements that are all strictly greater than $f(x)$. Hence
+  \[ f(y) = \min(S_\Omega - f(X_y)) \]
+  must be strictly greater than $f(x)$. We conclude $f$ is order preserving and also
+  injective.
+
+  Next suppose for contradiction that $f$ is not surjective. Let $a$ be the
+  least element of $S_\Omega$ such that $a \not\in f(X)$. Then the section $S_a
+  \subset f(X)$. We've already shown that $f$ is injective, and since $S_a$ is
+  countable, it cannot be the case that $f(X) = S_a$ as this would contradict
+  $X$ being uncountable. So $f(X)$ must contain some elements greater than $a$.
+  Let $b$ be the least element such that $b \in f(X)$ and $a < b$. Let $x \in X$
+  such that $f(x) = b$. Now there must exist a $y \in X$ such that $x < y$,
+  because $X_x \cup \{x\}$ is countable and $X$ is uncountable.
+  Then $f(X_y)$ is a section containing $f(x)$ and since $a < f(x)$, $f(X_y)$
+  must also contain $a$. This contradicts $a \not\in f(X)$. We conclude $f$ is
+  surjective.
+
+  We have shown $f$ is an order preserving bijection, and therefore $X$ and
+  $S_\Omega$ have the same order types.
+
+
+\end{proof}
+
+\begin{p}{b}
+  Is it possible for a well-ordered set to have the same cardinality as
+  $S_\Omega$, but not the same order type?
+\end{p}
+
+\begin{solution}
+  %No, this is not possible, but I am unsure how I would argue this just from the
+  %content in Section 10 and the associated exercises there. I scrounged the book
+  %for more information and found that in the Supplementary Exercises:
+  %Well-Ordering, Exercise 4(a) explains that given two well-ordered sets $A$ and
+  %$B$, exactly one of the following holds:
+  %\begin{itemize}
+    %\item $A$ and $B$ have the same order type
+    %\item $A$ has the order type of a section of $B$
+    %\item $B$ has the order type of a section of $A$
+  %\end{itemize}
+  %From here, suppose that a set $A$ is well-ordered and has the same cardinality
+  %as $S_\Omega$, but without the same order type. $A$ cannot have the order type
+  %of a section of $S_\Omega$ because such sections are countable. However... a
+  %section of $A$ could have the order type of $S_\Omega$. Maybe the answer is
+  %yes.
+
+  %Let's try finding one. Let's map $f: S_\Omega \to \{1, 2\} \times S_\Omega$ by
+  %\[ f(x) = \begin{cases}
+      %1 \times x \text{ if $x$ has no immediate predecessor }
+      %2 \times x \text{ if $x$
+  Yes. Consider the set $A = S_\Omega \cup \{\Omega\}$ from Lemma 10.2. This set
+  has a different order type than $S_\Omega$, as every section of $S_\Omega$ is
+  countable, but the section of $A$ by $\Omega$ is uncountable. We can construct
+  a bijection fairly easily however: let $s$ denote the immediate successor
+  function and define $f: A \to S_\Omega$ by
+  \[ f(x) =
+    \begin{cases}
+      s(x)           &\text{ if $x \neq \Omega$} \\
+      \min(S_\Omega) &\text{ if $x = \Omega$}.
+    \end{cases}
+  \]
+  Then $f$ is well defined by Exercise 10.2(a) and clearly a bijection.
+
+\end{solution}
+
+\end{document}

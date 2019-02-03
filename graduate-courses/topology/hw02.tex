@@ -11,53 +11,224 @@
 \hwpart{1}
 
 \begin{ex}{5.4 (d)}
+  Let $m,n \in \mathbb{Z}_+$ and $X \neq \varnothing$. Find a bijective map $k: X^n \times X^\omega \to X^\omega$.
+\end{ex}
+
+\begin{solution}
+   Define $k: X^n \times X^\omega \to X^\omega$ by
+   \[k((z_1,\ldots,z_n) \times (x_1,x_2,\ldots)) = (z_1,\ldots,z_n,x_1,x_2,\ldots)\]
+   then $k$ is easily seen to be bijective.
+\end{solution}
+
+\begin{ex}{7.5}
+  Determine for each of the following sets whether or not it is countable. Justify your answers.
+\end{ex}
+
+\begin{p}{a}
+  The set $A$ of all functions $f: \{0, 1\} \to \mathbb{Z}_+$.
+\end{p}
+
+\begin{solution}
+  $A$ is countable because $\mathbb{Z}_+ \times \mathbb{Z}_+$ is countable by Corollary 7.4, and
+  \[ A \;=\; \big\{ f: \{0, 1\} \to \mathbb{Z}_+ \big\}
+       \;= \prod_{i \in \{0, 1\}} \mathbb{Z}_+
+       \;\longleftrightarrow\; \mathbb{Z}_+ \times \mathbb{Z}_+.
+  \]
+\end{solution}
+
+\begin{p}{c}
+  The set $C = \bigcup_{n \in \mathbb{Z}_+} B_n$, where $B_n$ is the set of all
+  functions $f:\{1,\ldots,n\} \to \mathbb{Z}_+$.
+\end{p}
+
+\begin{solution}
+  $C$ is indeed countable. To see why, first note that each $B_n$ is countable;
+  by the same reasoning in part (a), we see that $B_n \longleftrightarrow
+  Z_+^n$, and by Theorem 7.6, this finite product of countable sets is
+  countable. Now $C$ is a countable union of countable sets, which is itself
+  countable by Theorem 7.5.
+\end{solution}
+
+\begin{p}{d}
+  The set $D$ of all functions $f: \mathbb{Z}_+ \to \mathbb{Z}_+$.
+\end{p}
+
+\begin{solution}
+  $D$ is uncountable. We can define an injection $i: \{0,1\}^\omega \to D$ by
+  \[ (i(f))(n) =
+    \begin{cases}
+      f(0) &\text{ if } n = 1 \\
+      f(1) &\text{ if } n = 2 \\
+      1    &\text{ if } n > 2
+    \end{cases}
+  \]
+  This shows that $|\{0, 1\}^\omega| \leq |D|$, and $\{0, 1\}^\omega$ is
+  uncountable by Theorem 7.7.
+\end{solution}
+
+\begin{p}{f}
+  The set $F$ of all functions $f : \mathbb{Z}_+ \to \{0, 1\}$ that are
+  ``eventually zero".
+\end{p}
+
+\begin{solution}
+  We can partition $F = \bigcup_{n \in \mathbb{Z}_+} F_n$ where
+  \[ F_n =
+    \{ f \in F : n \text{ is the least integer such that } f(m) = 0 \text{ for
+    all } m \geq n\}.
+  \]
+  Notice that $|F_1| = 1$, $|F_2| = 1$, and for $n > 2$ it is easy to see the
+  bijection between each $F_n$ and
+  \[ \{g : \{1,\ldots,n-2\} \to \{0, 1\}\} \]
+  which is clearly finite.
+  \footnote{Our definition implies that for $f \in F_n$,
+    $f(n) = 0$ and $f(n-1) = 1$ are fixed; this is why $F_n$ is isomorphic to
+  the functions with domain $\{1,\ldots,n-2\}$.}
+  Thus $F$ is a countable union of finite sets, so $F$ itself is countable.
+\end{solution}
+
+\begin{p}{h}
+  The set $H$ of all functions $f: \mathbb{Z}_+ \to \mathbb{Z}_+$ that are
+  eventually constant.
+\end{p}
+
+\begin{solution}
+  Similar to part (f), for $h \in H$ let $n$ be the least integer such that $h$
+  is constant for all $m > n$. Partition $H$ into $\bigcup_{n \in \mathbb{Z}_+}
+  H_n$. Then each $H_n$ is bijective to
+  \[ \{g : \{1,\ldots,n\} \to \mathbb{Z}_+\} \]
+  which of course is the finite product of positive intgers $\mathbb{Z}_+^n$.
+  Thus $H$ is the countable union of countable sets, which is itself countable.
+\end{solution}
+
+\begin{p}{j}
+  The set $J$ of all finite subsets of $\mathbb{Z}_+$.
+\end{p}
+
+\begin{solution}
+  Let $B_n$ denote the set of all subsets of $\mathbb{Z}_+$ of size $n$. Then
+  clearly $J = \bigcup_{n \in \{0,\ldots\}} B_n$. But each $B_n$ is finite, so
+  this is a countable union of finite sets. Therefore $J$ is countable.
+\end{solution}
+
+\begin{ex}{13.1}
+  Let $X$ be a topological space; let $A \subset X$. Suppose that for each $x
+  \in A$ there is an open set $U$ containing $x$ such that $U \subset A$. Show
+  that $A$ is open in $X$.
 \end{ex}
 
 \begin{proof}
+  For each $x \in A$, let $U_x$ denote the open set such that $x \in U_x$ and
+  $U_x \subset A$. We will show that $A = \bigcup_{x \in A} U_x$. Of course, if
+  $a \in A$, then $a \in U_a \subset \bigcup_{x \in A} U_x$. Conversely if $a \in
+  \bigcup_{x \in A} U_x$ then $a \in U_x$ for some $x \in A$, and since $U_x
+  \subset A$, we have $a \in A$. Therefore $A = \bigcup_{x \in A} U_x$. Since $A$
+  is a union of open sets, $A$ is itself open by definition.
 \end{proof}
 
-\begin{ex}{7.5}
+\begin{ex}{13.4 (a)}
+  If $\{ \tau_\alpha \}$ is a family of topologies on $X$, show that $\bigcap
+  \tau_\alpha$ is a topology on $X$. Is $\bigcup \tau_\alpha$ a topology on $X$?
 \end{ex}
 
-\begin{p}{a}
-\end{p}
+\begin{proof}
+  Since each $\tau_\alpha$ is a topology, $\varnothing, X \in \tau_\alpha$ for
+  all $\alpha$ in the collection, hence
+  \[\varnothing, X \in \bigcap \tau_\alpha.\]
+  Next let $U_1,\ldots,U_n \in \bigcap \tau_\alpha$. Since each
+  $\tau_\alpha$ is a topology, the finite intersection $\bigcap_{i = 1}^n U_i
+  \in \tau_\alpha$ for all $\alpha$ in the collection, hence
+  \[ \bigcap_{i = 1}^n U_i \in \bigcap \tau_\alpha. \]
+  Similarly for any arbitrary collection of open sets $U_\beta \in \bigcap
+  \tau_\alpha$, since each $\tau_\alpha$ is a topology, the union $\bigcup U_\beta \in
+  \tau_\alpha$ for all $\alpha$ in the collection, hence
+  \[ \bigcup U_\beta \in \bigcap \tau_\alpha. \]
+  Therefore $\bigcap \tau_\alpha$ is a topology.
 
-\begin{p}{c}
-\end{p}
+  On the other hand $\bigcup \tau_\alpha$ is not necessarily a topology. One
+  such counterexample is encountered in the very next problem, since the
+  smallest topology containing $\tau_1$ and $\tau_2$ is not their union. Another
+  example is to consider the union of the lower limit and upper limit topologies
+  on $\mathbb{R}$: the intervals $[0, 1)$ and $(0, 1]$ are in the union of these
+  topologies, however the union of the intervals $[0, 1]$ is not in the union of
+  these topologies.
+\end{proof}
 
-\begin{p}{d}
-\end{p}
-
-\begin{p}{f}
-\end{p}
-
-\begin{p}{h}
-\end{p}
-
-\begin{p}{j}
-\end{p}
-
-\begin{ex}{13.1}
+\begin{ex}{13.4 (c)}
+  If $X = \{a, b, c\}$ let
+  \[ \tau_1 = \{\varnothing, X, \{a\}, \{a, b\}\}\]
+  \[\tau_2 = \{\varnothing, X, \{a\}, \{b, c\}\}.\]
+  Find the smallest topology
+  containing $\tau_1, \tau_2$, and the largest topology contained in $\tau_1,
+  \tau_2$.
 \end{ex}
 
-\begin{ex}{13.4}
-\end{ex}
-
-\begin{p}{a}
-\end{p}
-
-\begin{p}{c}
-\end{p}
+\begin{solution}
+  To find the smallest topology containing both $\tau_1$ and $\tau_2$, we'll
+  start with $\tau_1 \cup \tau_2$ and ensure it is closed under finite
+  intersections and arbitrary unions:
+  \[ \{\varnothing, X, \{a\}, \{a,b\}, \{b,c\},\{b\} \} \]
+  Of course, by Exercise 13.4(a), the largest topology contained in both
+  $\tau_1$ and $\tau_2$ is simply their intersection:
+  \[ \{\varnothing, X, \{a\} \} \]
+\end{solution}
 
 \hwpart{2}
 
 \begin{p}{a}
+  Produce an example of a topology on $\mathbb{R}$ which has only finitely many
+  open sets.
 \end{p}
+
+\begin{solution}
+  \[ \{\varnothing, \mathbb{R}, \{0\} \} \]
+\end{solution}
+
 \begin{p}{b}
+  Produce an example of a topology on $\mathbb{R}$ which has a countably
+  infinite number of open sets.
 \end{p}
+
+\begin{solution}
+  \[ \{\varnothing, \mathbb{R} \} \cup \{ (-n, n) : n \in \mathbb{Z}_+ \} \]
+\end{solution}
+
 \begin{p}{c}
+  Produce an example of a topology on $\mathbb{R}$ which has an uncountable
+  number of open sets.
 \end{p}
+
+\begin{solution}
+  I could choose $\mathcal{P}(\mathbb{R})$ but that's boring. Instead consider
+  the topology generated by the basis
+  \[ \mathcal{B} = \{\varnothing, \mathbb{R}\} \cup \{n : n \in \mathbb{Z}_+\}. \]
+  It's easy to verify that $\mathcal{B}$ is a basis and since the topology it
+  generates is closed under unions, it is also easy to see that
+  $\mathcal{P}(\mathbb{Z}_+) \subset \tau$, hence $\tau$ is uncountably
+  infinite.
+\end{solution}
+
 \begin{p}{d}
+  Produce an example of a topology on $\mathbb{R}$ which has a cardinality
+  strictly greater than that of $\mathbb{R}$. Prove that the cardinality really is
+  greater.
 \end{p}
+
+\begin{solution}
+  The obvious answer is the discrete topology $\mathcal{P}(\mathbb{R}).$ To show
+  that the cardinality is strictly greater, we will use the
+  definition\footnote{I don't believe we have defined this in class, nor is
+  there a specific definition in the book. This is a reasonable definition however.}
+  that, for nonempty sets $A$ and $B$, $|A| < |B|$ if there exists an injection
+  from $A$ to $B$, but no bijection from $A$ to $B$.
+
+  We have an easy injection $f: \mathbb{R} \to \mathcal{P}(\mathbb{R})$ defined
+  by
+  \[ f(x) = \{x\} \]
+  however there can be no such bijection, because we proved in class that for
+  any set $A$, there is no surjection from $A$ to $\mathcal{P}(A)$. Therefore
+  $\mathcal{P}(\mathbb{R})$ has cardinality strictly greater than the
+  cardinality of $\mathbb{R}$.
+\end{solution}
 
 \end{document}

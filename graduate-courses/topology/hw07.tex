@@ -1,0 +1,350 @@
+\documentclass[11pt]{article}
+\usepackage{common}
+\usepackage{upgreek}
+\usepackage{physics}
+
+\begin{document}
+\header{7}
+
+% --------------------------------------------------------------
+%                         Exercises
+% --------------------------------------------------------------
+
+\hwpart{1}
+
+\begin{ex}{19.2}
+  Let $A_\alpha$ be a subspace of $X_\alpha$ for each $\alpha \in J$. Then $\Pi
+  A_\alpha$ is a subspace of $\Pi X_\alpha$ if both products are given the box
+  topology or if both products are given the product topology.
+\end{ex}
+
+\begin{proof}
+  We wish to show that the box, product topologies on $\Pi A_\alpha$ are the same as
+  the subspace topologies that the subset $\Pi A_\alpha$ inherits from the box,
+  product topologies on $\Pi X_\alpha$. To do so we will use Lemmas 13.2 and
+  16.1.
+
+  Let $\mathcal{B}_b$ denote the usual basis for the box topology on $\Pi
+  A_\alpha$, $\mathcal{C}_b$ denote the usual basis for the box topology on
+  $\Pi X_\alpha$, and $\mathcal{B}_s$ denote the usual basis for the subspace
+  topology that $\Pi A_\alpha$ inherits from the box topology on $\Pi X_\alpha$.
+  Notice that
+  \begin{align*}
+    B \in \mathcal{B}_b
+      \iff B &= \prod_{\alpha \in J} U_\alpha \text{ where
+                $U_\alpha$ is open in $A_\alpha$} \\
+             &= \prod_{\alpha \in J} A_\alpha \cap V_\alpha \text{ where
+                $V_\alpha$ is open in $X_\alpha$} \\
+             &= \prod_{\alpha \in J} A_\alpha \;\bigcap \;\prod_{\alpha
+                \in J} V_\alpha \\
+             &= \prod_{\alpha \in J} A_\alpha \; \bigcap \;C \text{ for some $C \in
+                \mathcal{C}_b$} \\
+        \iff B &\in \mathcal{B}_s
+  \end{align*}
+  Thus, $\mathcal{B}_b = \mathcal{B}_s$ and they must generate the same
+  topologies. We have shown that the box topology on $\Pi A_\alpha$
+  is the same as its subspace topology inherited from the box topology on $\Pi
+  X_\alpha$.
+
+  Let $\mathcal{B}_p$ denote the usual basis for the product topology on $\Pi
+  A_\alpha$, $\mathcal{C}_p$ denote the usual basis for the product topology on
+  $\Pi X_\alpha$, and $\mathcal{B}_s$ denote the usual basis for the subspace
+  topology that $\Pi A_\alpha$ inherits from the product topology on $\Pi X_\alpha$.
+  Notice that
+  \begin{align*}
+    B \in \mathcal{B}_p
+      \iff
+        B &= \prod_{\alpha \in J} U_\alpha \text{ where
+            $U_\alpha$ is open in $A_\alpha$, only finitely many $U_\alpha \neq
+            A_\alpha$} \\
+          &= \prod_{\alpha \in J} A_\alpha \cap V_\alpha \text{ where
+          $V_\alpha$ is open in $X_\alpha$, only finitely many $A_\alpha \cap
+        V_\alpha \neq A_\alpha$} \\
+          &= \prod_{\alpha \in J} A_\alpha \cap V_\alpha \text{ where
+          $V_\alpha$ is open in $X_\alpha$, only finitely many $V_\alpha \neq X_\alpha$} \\
+          &= \prod_{\alpha \in J} A_\alpha \;\bigcap \;\prod_{\alpha
+                \in J} V_\alpha \\
+          &= \prod_{\alpha \in J} A_\alpha \; \bigcap \;C \text{ for some $C \in
+                \mathcal{C}_p$} \\
+        \iff B &\in \mathcal{B}_s
+  \end{align*}
+  Thus, $\mathcal{B}_b = \mathcal{B}_s$ and they must generate the same
+  topologies. We have shown that the product topology on $\Pi A_\alpha$
+  is the same as its subspace topology inherited from the product topology on $\Pi
+  X_\alpha$.
+
+  (I also think it's worth elaborating on the implication that only finitely many
+  $\alpha$ such that $A_\alpha \cap V_\alpha \neq A_\alpha$ leads to only
+  finitely many $\alpha$ such that $V_\alpha \neq X_\alpha$. One might consider
+  the case where we have chosen a basis element such that $A_\alpha \not\subset
+  V_\alpha$for only finitely many
+  $\alpha \in J$, and otherwise $A_\beta \subset V_\beta \subsetneq X_\beta$.
+  In this case, simply notice that such terms $A_\beta \cap V_\beta$ can be
+  replaced with $A_\beta \cap X_\beta$ and the equality still holds.)
+\end{proof}
+
+\begin{ex}{19.6}
+  Let $\vb x_1, \vb x_2, \ldots$ be a sequence of the points of the product
+  space $\Pi X_\alpha$. Show that this sequence converges to the point $\vb x$
+  if and only if the sequence $\pi_\alpha(\vb x_1), \pi_\alpha(\vb x_2), \ldots$
+  converges to $\pi_\alpha(\vb x)$ for each $\alpha$. Is this fact true if one
+  uses the box topology instead of the product topology?
+\end{ex}
+
+\begin{proof}
+  First recall that Munkres defines convergence of a sequence $x_1,x_2,\ldots$ to $x$ as
+  the statement that for all neighborhoods $U$ of $x$, there exists $N$ such
+  that for all $n > N$, $x_n \in U$. Clearly, the statement is equivalent when
+  we replace neighborhood $U$ with a basis element $B$.
+
+  $(\Longrightarrow)$ Suppose $\vb x_1, \vb x_2, \ldots$ converges to $\vb x$ in
+  $\Pi X_\alpha$. Let $\beta \in J$ and $U_\beta$ be an arbitrary open
+  neighborhood of $\pi_\beta(\vb x)$. We can choose the open set
+  \[ B = \prod_{\alpha \in J} \begin{cases}
+      U_\beta \text{ if } \alpha = \beta \\
+      X_\alpha \text{ if } \alpha \neq \beta
+  \end{cases}\]
+  in $X_\alpha$ so that $\vb x \in B$, and now there exists $N$ such that for
+  all $n > N$, $\vb x_n \in
+  B$, which also implies that $\pi_\beta(\vb x_n) \in U_\beta$. Therefore
+  $\pi_\beta(\vb x_1), \pi_\beta(\vb x_2), \ldots$ converges to $\pi_\beta(\vb
+  x)$ in $X_\beta$. Since $\beta$ was arbitrary, this holds for each
+  $\beta \in J$.
+
+  $(\Longleftarrow)$ The converse is similarly proven. Suppose that
+  $\pi_\beta(\vb x_1), \pi_\beta(\vb x_2), \ldots$ converges to $\pi_\beta(\vb
+  x)$ in $X_\beta$ for each $\beta \in J$. Then let $B$ be a basis element with
+  $\vb x \in B$. We know that
+  \[ B = \prod_{\alpha \in J} U_\alpha \]
+  where each $U_\alpha$ is an open set in $X_\alpha$ and only finitely many $U_\alpha \neq
+  X_\alpha.$ But for each $\alpha$
+  there exists $N_\alpha$ such that for all $n > N_\alpha$, $\pi_\alpha(\vb x_n)
+  \in U_\alpha$. So let
+  \[ N = \max\{N_\alpha : \alpha \in J \text{ and } U_\alpha \neq X_\alpha\} \]
+  and notice that $N$ exists because there are only finitely many
+  such $N_\alpha$'s. Furthermore, for every $\alpha \in J$, whenever $n > N$ we
+  have $\pi_\alpha(\vb x_n) \in U_\alpha$; this is trivial when $U_\alpha =
+  X_\alpha$, otherwise this is by construction of $N$. Therefore for all $n >
+  N$, $\vb x_n \in B$, so that $\vb x_1, \vb x_2, \ldots$ converges to $\vb
+  x$.
+
+  This statement does  not hold for the box topology, however, because we are
+  not guaranteed that we can construct the necessary $N$ as above. If there are
+  infinitely many $N_\alpha$, they may be unbounded.
+\end{proof}
+
+\begin{ex}{19.7}
+  Let $\mathbb{R}^\infty$ be the subset of $\mathbb{R}^\omega$ consisting of all
+  sequences that are ``eventually zero," that is, all sequences $(x_1, x_2,
+  \ldots)$ such that $x_i \neq 0$ for only finitely many values of $i$. What is
+  the closure of $\mathbb{R}^\infty$ in $\mathbb{R}^\omega$ in the box and
+  product topologies? Justify your answer.
+\end{ex}
+
+\begin{solution}
+  In the box topology, $\cl{\mathbb{R}^\infty} = \mathbb{R}^\infty$. To see why,
+  consider the complement $\mathbb{R}^\omega - \mathbb{R}^\infty$ which consists
+  of all sequences that are \emph{not} eventually zero, in other words for any
+  $i \in \mathbb{Z}_+$ there exists $k > i$ such that $x_k \neq 0$. Let $(x_1,
+  x_2, \ldots) \in \mathbb{R}^\omega - \mathbb{R}^\infty.$ Then let
+  \[ B = \prod_{n \in \mathbb{Z}_+}
+    \begin{cases}
+      (0, x_n + 1) &\text{ if $ x_n > 0 $ } \\
+      (x_n - 1, 0) &\text{ if $ x_n < 0 $ } \\
+      (x_n - 1, x_n + 1) &\text{ if $ x_n = 0 $ }
+    \end{cases}
+  \]
+  Now $B$ is a basis element of the box topology and $x \in B \subset
+  \mathbb{R}^\omega - \mathbb{R}^\infty$. Thus $\mathbb{R}^\infty$ is closed.
+
+  However, $\mathbb{R}^\infty$ is not closed in the product topology. Because
+  there can only be finitely many proper subsets $U_n$ in the basis element $B = \prod U_n$,
+  there will exist an $N$ such that $U_n = \mathbb{R}$ for all $n > N$. Of
+  course, this makes it difficult to find such a $B$ contained by
+  $\mathbb{R}^\omega - \cl{\mathbb{R}^\infty}$. I conjecture that
+  $\cl{\mathbb{R}^\infty} = \mathbb{R}^\omega$. To this end, let $(x_1, x_2, \ldots) \in
+  \mathbb{R}^\omega$ and $B = \prod U_n$ be a basis element with $x \in B$. As
+  just mentioned, there exists $N$ such that for all $n>N$, $U_n = \mathbb{R}$;
+  hence, for all $n>N$ we have $0 \in U_n$. Thus $B$ contains sequences that are
+  eventually zero, and therefore intersects $\mathbb{R}^\infty$. By Thereom 17.5
+  we conclude that $\cl{\mathbb{R}^\infty} = \mathbb{R}^\omega.$
+\end{solution}
+
+\hwpart{2}
+
+\noindent Let $\{0, 1\}$ have the discrete topology, and let $\{0, 1\}^\omega$
+have the product topology. Define a function $f: \{0, 1\}^\omega \to \mathbb{R}$
+by
+  \[ f(\vb x) =
+    \begin{cases}
+      \frac{1}{\min\{i \mid x_i = 1\}} &\text{ if } \vb x \neq \vb 0 \\
+      0 &\text{ if } \vb x = \vb 0
+    \end{cases}
+  \]
+  Is $f$ continuous? (Notation: $\vb 0 = (0, 0, 0, \ldots)$ and $x_i$ is the
+  $i^{\text{th}}$ coordinate of the point $\vb x = (x_1, x_2, \ldots)$.)
+
+\begin{solution}
+  Yes, $f$ is continuous. Let $U$ be an open set in $\mathbb{R}$ and consider
+  $f^{-1}(U)$. First, if $f^{-1}(U)$ is empty, then trivially it is open, so
+  suppose otherwise and let $\vb x \in f^{-1}(U)$. We have two cases: $\vb x
+  \neq \vb 0$ or $\vb x = \vb 0.$
+
+  If $\vb x \neq \vb 0$, then $f(\vb x) = \frac{1}{n}$ for some $n \in
+  \mathbb{Z}_+$, where $n$ is the first nonzero coordinate of $\vb x$. Let $B$
+  be the basis element of $\{0, 1\}^\omega$ such that
+  \[ \pi_k(B) = \begin{cases}
+      \{0\} &\text{ if $k < n$ } \\
+      \{1\} &\text{ if $k = n$ } \\
+      \{0, 1\} &\text{ if $k > n$ }
+  \end{cases} \]
+  Now $\vb x \in B = f^{-1}(\{f(\vb x)\}) \subset f^{-1}(U)$.
+
+  If $\vb x = \vb 0$, then $f(\vb x) = 0 \in U$. Let $I$ be a basis interval
+  such that $0 \in I \subset U$, and notice that there must be (infinitely many)
+  $\frac{1}{n} \in I$. Choose the least such $n \in \mathbb{Z}_+$ and note that
+  $\frac{1}{k} \in I$ for all $k \geq n$. Let $B$ be the basis element of $\{0,
+  1\}^\omega$ such that
+  \[ \pi_k(B) = \begin{cases}
+      \{0\} &\text{ if $k < n$ } \\
+      \{0, 1\} &\text{ if $k \geq n$ }
+  \end{cases} \]
+  Now $\vb x \in B = f^{-1}(I) \subset f^{-1}(U)$.
+
+  We have shown in all cases that for any $\vb x \in f^{-1}(U)$ we can find a
+  basis element $B$ such that $\vb x \in B \subset f^{-1}(U)$. Therefore $f^{-1}(U)$
+  is open and $f$ is continuous.
+\end{solution}
+
+%% PROOFREAD UP UNTIL HERE
+\hwpart{3}
+
+\noindent Let $X$ be a topological space. Let $J$ and $K$ be index sets.
+
+\begin{p}{a}
+  For $j \in J$, let $\pi_j: X^j \to X$ be the $j^\text{th}$ projection
+  function. For $k \in K$, let $\phi_k: (X^J)^K \to X^J$ be the $k$th projection
+  function. Define $F: (X^J)^K \to X^{J \times K}$ to be $F(\vb y) =
+  (\pi_j(\phi_k(\vb y)))_{j \times k \in J \times K}.$ Show that $F$ is a
+  homeomorphism.
+\end{p}
+
+\begin{proof}
+  First we show that $F$ is a bijection. Suppose $\vb x \neq \vb y$. Then for
+  some $k \in K$, $\phi_k(\vb x) \neq \phi_k(\vb y)$. Thus in the $k$th
+  coordinate there exists some $j \in J$ such that $\pi_j(\phi_k(\vb x)) \neq
+  \pi_j(\phi_k(\vb y)).$ This means that $F(\vb x)$ and $F(\vb y)$
+  differ in the $j \times k$ coordinate. Hence $F$ is injective.
+
+  To show $F$ is surjective, let $\vb x \in X^{J\times K}$ and consider $\vb x$
+  as the function $\vb x: J \times K \to X$. Now let $\vb y \in (X^J)^K$ be
+  the function $\vb y: K \to X^J$ defined by $\vb y(k) : J \to X$ defined by
+  \[ \vb y(k)(j) = \vb x(j \times k).\]
+  Then for all $j \times k \in J \times K$,
+  \begin{align*}
+    F(\vb y)(j \times k) &= \pi_j(\phi_k(\vb y)) \\
+      &= \pi_j(\vb y(k)) \\
+      &= \vb y(k)(j) \\
+      &= \vb x(j \times k)
+  \end{align*}
+  Hence $\vb x = F(\vb y)$ and $F$ is surjective.
+
+  Next we must show $F$ is continuous. So let $\vb x \in (X^J)^K$ and $V$ be a
+  neighborhood of $f(\vb x)$. We will find a neighborhood $B$ of $\vb x$ such that $f(B)
+  \subset V$. Since $V$ is open there exists a basis element $\prod U_{j \times
+  k}$ where only finitely many $U_{j \times k} \neq X$ such that
+  \[ f(\vb x) \in \prod_{j\times k \in J \times K} U_{j \times k} \subset V\]
+  Define the set $B \subset (X^J)^K$ such that
+  \[ \phi_k(B) = V \subset X^J \text{ such that } \pi_j(V) = U_{j \times k} \]
+  Notice that since there are only finitely many $j \times k$ such that $U_{j
+  \times k} \neq X$, there are only finitely many $j$ such that $\pi_j(V) \neq
+  X$, and thus each $V$ is open in $X^J$. Also, since there are only finitely
+  many $j \times k$ such that $U_{j \times k} \neq X$, there are only finitely
+  many $k$ such that $\phi_k(B) \neq X^J$. Therefore $B$ is open in $(X^J)^K$,
+  and we know $\vb x \in B$ by construction (and the fact that $f$ is
+  injective). Also for any $\vb y \in B$,
+  \[ F(\vb y) = \pi_j(\phi_k(\vb y))_{j \times k \in J \times K} \]
+  but for any $j \times k \in J \times K$ we have
+  \[ \pi_j(\phi_k(\vb y)) \in \pi_j(\phi_k(B)) = U_{j \times k}\]
+  and hence $F(\vb y) \in \prod U_{j \times k} \subset V.$ This shows that $F(B)
+  \subset V$, so we conclude that $F$ is continuous.
+
+  Next we must show $F^{-1}$ is continuous, so let $y\in X^{J\times K}$ and $V$
+  be a neighborhood of $F^{-1}(\vb y)$. Next we need to find a neighborhood $U$
+  of $\vb y$ such that $F^{-1}(U) \subset V$. Choose a basis element $B$ such
+  that $F^{-1}(\vb y) \in B \subset V$. Define $U$ such that
+  \[ U = \prod_{j \times k} \pi_j(\phi_k(B)). \]
+  Because $B$ is a basis element, there are only finitely many $k$ such that
+  $\phi_k(B) \neq X^J$ and of these $k$s only finitely many $j$ such that
+  $\pi_j(\phi_k(B)) \neq X$, so there are only finitely many $j \times k$ such that
+  $\pi_j(\phi_k(B)) \neq X$. So $U$ is open, $\vb y \in U$, and for any $\vb x \in F^{-1}(U),$
+  we have $\vb x \in B$ by construction. Therefore $F^{-1}$ is continuous.
+
+  We conclude that $F$ is a homeomorphism.
+\end{proof}
+
+\begin{p}{b}
+  Suppose that there's a bijection between $J$ and $K$. Show that $X^J$ and
+  $X^K$ are homeomorphic.
+\end{p}
+
+\begin{proof}
+  Let $f: K \to J$ be a bijection. Simply define $g: X^J \to X^K$ by
+  \[ g(\vb x) = \vb y \;\text{ such that }\;
+  \pi_k(\vb y) = \pi_{f(k)}(\vb x) \text { for all } k \in K. \]
+  Then $g$ is routinely shown to be a homeomorphism.
+
+  Note we can also consider $x: J \to X$ mapped to $g(x) : K \to X$ defined as
+  the composition $g(x) = x \circ f$.
+\end{proof}
+
+\begin{p}{c}
+  Show that $(X^\omega)^\omega$ is homeomorphic to $X^\omega$.
+\end{p}
+
+\begin{proof}
+  Recall that $\omega = \mathbb{Z}_+$ and $\mathbb{Z}_+$ is isomorphic to
+  $\mathbb{Z}_+ \times \mathbb{Z}_+$. By part (a) there exists a homeomorphism
+  \[ f : (X^\omega)^\omega \to X^{\omega \times \omega} \]
+  and by part (b) there exists a homeomorphism
+  \[ g : X^{\omega \times \omega} \to X^\omega. \]
+  Hence $g \circ f$ is a homeomorphism from $(X^\omega)^\omega$ to $X^\omega$.
+
+\end{proof}
+
+\begin{p}{d}
+  Show that if there is a continuous surjective function from $X^\omega$ to some
+  space $Z$, then there's also a continuous surjective function from $X^\omega$
+  to $Z^\omega$. (Hint: $X^\omega \to (X^\omega)^\omega \to Z^\omega)$
+\end{p}
+
+\begin{proof}
+  Let $f: X^\omega \to Z$ be a continuous surjective function. Define $g:
+  (X^\omega)^\omega \to Z^\omega$ to map each projection according to $f$, that
+  is, such that
+  \[ \pi_n(g(\vb x)) = f (\pi_n(\vb x)) \text{ for all } n \in \mathbb{Z}_+ \]
+  Next let $h: X^\omega \to (X^\omega)^\omega$ be the homeomorphism guaranteed
+  by part (c). Then $F: X^\omega \to Z^\omega$ defined by $F = g \circ h$ is a
+  continuous surjection.
+
+  To prove this, we need only show that $g$ is both continuous and surjective.
+  First let $\vb z \in Z^\omega$. Then let $\vb x \in (X^\omega)^\omega$ such
+  that for each $n \in \mathbb{Z}_+$, $\pi_n(\vb x)$ is such that $f(\pi_n(\vb
+  x)) = \pi_n(\vb z),$ which exists because $f$ is surjective. Then clearly
+  $g(\vb x) = \vb z$, so $g$ is surjective.
+
+  Next let $\vb x \in (X^\omega)^\omega$ and $V$ be a neighborhood of $g(\vb
+  x)$, and choose a basis element $B$ such that $g(\vb x) \in B \subset V$. Then
+  \[ B = \prod_{n \in \mathbb{Z}_+} U_n \text{ only finitely many $U_n \neq Z$}\]
+  Next construct
+  \[ C = \prod_{n \in \mathbb{Z}_+} f^{-1}(U_n). \]
+  Clearly only finitely many $f^{-1}(U_n) \neq X^\omega$,
+  so $C$ is open, $\vb x \in C$, and $g(C) \subset B \subset V$. Thus $g$ is
+  continuous.
+
+  Since $g, h$ are both continuous and surjective, $F$ is also continuous and
+  surjective.
+
+\end{proof}
+
+\end{document}
