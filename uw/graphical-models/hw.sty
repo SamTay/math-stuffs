@@ -1,0 +1,48 @@
+\usepackage{../../homework}
+\usepackage{xargs}
+
+\renewcommand{\hmwkDueTime}{11:59pm}
+\renewcommand{\hmwkClass}{CSE 515}
+\renewcommand{\hmwkClassInstructor}{Professor Sewoong Oh}
+
+\chead{\hmwkClass: \hmwkTitle}
+
+%
+% Create Problem Sections
+%
+
+\renewcommand{\enterProblemHeader}[2]{
+    \nobreak\extramarks{}{Problem \arabic{#1}.\arabic{#2} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1}.\arabic{#2} (continued)}{Problem \arabic{#1}.\arabic{#2} continued on next page\ldots}\nobreak{}
+}
+
+\renewcommand{\exitProblemHeader}[2]{
+    \nobreak\extramarks{Problem \arabic{#1}.\arabic{#2} (continued)}{Problem \arabic{#1}.\arabic{#2} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}.\arabic{#2}}{}\nobreak{}
+}
+
+\newcounter{homeworkSectionCounter}
+\setcounter{homeworkSectionCounter}{1}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\renewenvironmentx{homeworkProblem}[2][1=-1,2=-1]{
+    \ifnum#1>0
+        \setcounter{homeworkSectionCounter}{#1}
+    \fi
+    \ifnum#2>0
+        \setcounter{homeworkProblemCounter}{#2}
+    \fi
+    \section{Problem \arabic{homeworkSectionCounter}.\arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkSectionCounter}{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkSectionCounter}{homeworkProblemCounter}
+}
