@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amsfonts}
+\usepackage{amssymb}
 \usepackage{tikz}
 \usepackage[plain]{algorithm}
 \usepackage{algpseudocode}
@@ -107,17 +108,19 @@
 \author{\hmwkAuthorName}
 \date{}
 
-\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+\renewcommand{\part}[1]{\vspace{0.1in}\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
 
 %
 % Various Helper Commands
 %
 
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
 % Useful for algorithms
 \newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
 
 % Alias for the Solution section header
-\newcommand{\solution}{\textbf{\large Solution}}
+\newcommand{\solution}{\vspace{0.1in}\textbf{\large Solution}}
 
 % Probability commands: Expectation, Variance, Covariance, Bias
 \newcommand{\E}{\mathop{{}\mathbb{E}}}
