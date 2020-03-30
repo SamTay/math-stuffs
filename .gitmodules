@@ -1,0 +1,3 @@
+[submodule "uw/graphical-models"]
+	path = uw/graphical-models
+	url = git@github.com:samtay/cse515.git
